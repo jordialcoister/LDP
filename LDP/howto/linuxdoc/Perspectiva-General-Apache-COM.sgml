@@ -1,0 +1,1123 @@
+<!doctype linuxdoc system>
+<article>
+
+<!-- Title Information -->
+
+<title>COM de perspectiva general d'Apache
+<author>Daniel Lopez Ridruejo, <tt/ridruejo@apache.org/ 
+<date>v0.9, 2002-10-10
+
+<!-- Abstract -->
+<abstract>
+Este document li ofereix una perspectiva general dels diferents
+projectes Apache, com el servidor HTTP Apache i el motor de Servlets i
+JSP Tomcat.  Proporciona enllaços per a informació addicional i
+detalls d'implementació.
+</abstract>
+
+<!-- Table of Contents -->
+<toc>
+<sect>Introducció
+<p>
+Aquest document li ofereix un resum del món Apache, incloent projectes
+de l'Apache Software Foundation com el servidor web Apache i
+programari comercial de codi obert de tercers.  Apache és
+el <url name="servidor més popular a Internet"
+url="http://www.netcraft.com/survey/">. Els nous usuaris d'Apache,
+especialment aquells que vinguen d'un Windows background, sovint no
+estan al corrent de les possibilitats d'Apache, els seus útils
+complements i, de manera més general, com funciona tot junt. Este
+document té com a objectiu mostrar una foto general d'eixes
+possibilitats amb una breu descripció de cadascuna i enllaços a
+informació addicional. La informació ha sigut reunida de moltes fonts,
+incloent planes web de projectes, conferències, llistes de correu,
+llocs web Apache i la meua pròpia experiència. Tot el crèdit és per a
+aquests autors. Sense ells i la seua feina, este document no hauria
+sigut possible o necessari.
+
+<p>Copyright 2002 Daniel Lopez Ridruejo
+
+Permisos de copia, distribució i/o modificació d'aquest document
+garantits baix els termes de la Open Content Open Publication License,
+Versió 1.1. Una còpia (en anglés) de la llicència està inclosa a
+l'apèndix titulat "Open Content Open Publication License", o a
+www.opencontent.org/openpub/.
+
+<sect1>L'Apache Software Foundation
+<p>
+<em>L'Apache Software Foundation proporciona suport per a la comunitat
+Apache de projectes de programari de codi obert. Els projectes Apache
+es caracteritzen per un procés de desenvolupament basat en un consens
+col·laboratori, una llicència de programari oberta i pragmàtica, i el
+desig de crear programari d'alta qualitat que marque el camí a seguir
+en els seu camp. Nosaltres no ens considerem a nosaltres mateixos un
+simple grup de projectes compartint un servidor, sinó més bé una
+comunitat de desenvolupadors i usuaris.</em>
+<p>L'ASF és la llar de molts projectes de codi obert reeixits, tal i
+com el motor de Servlets/JSP Tomcat i l'eina de construcció ANT.
+<p>Vostè pot aprendre més sobre la fundació <url name="ací"
+url="http://www.apache.org/foundation/">.
+
+<sect1>Estructura d'aquest document
+<p>La primera part d'este document tracta de l'Apache Web Server (el
+Servidor Web Apache) i els mòduls relacionats. Cobreix la història,
+arquitectura i capacitats del servidor i descriu maneres en què vostè
+pot estendre'l i personalitzar-lo.
+<p>La segona part d'este document cobreix projectes de l'Apache
+Software Foundation, com els de les comunitats Jakarta i Java
+XML. Enlloc d'organitzar els projectes segons una cert llenguatge de
+programació o tecnologia, estan organitzats segons la funcionalitat
+que proporcionen.
+
+<sect>Apache
+<p>Apache és el servidor web líder a Internet, amb més del 60% de
+quota de mercat, segons la <url name="enquesta Netcraft"
+url="http://www.netcraft.com/survey">.  Diversos factors clau han
+contribuït a l'èxit d'Apache:
+<itemize>
+<item>La <url name="llicència Apache"
+url="http://www.apache.org/LICENSE.txt">. És una llicència de codi
+obert, tipus BSD que permet tant l'ús comercial com el no comercial.
+<item>Una talentosa comunitat de <url name="desenvolupadors"
+url="http://www.apache.org/foundation/members.html"> amb gran varietat
+de bagatges i un procés de desenvolupament obert basat en els mèrits
+tècnics.
+<item>Arquitectura modular. Els usuaris d'Apache poden afegir
+funcionalitat fàcilment o adaptar-lo al seu entorn específic.
+<item>Portable: Apache corre en pràcticament tots els sabors de Unix
+(i Linux), Windows, BeOs, mainframes...
+<item>Robustesa i seguretat.
+</itemize>
+Molts proveïdors comercials han adoptat solucions basades en Apache
+per als seus productes, incloent <url name="Oracle"
+url="http://www.oracle.com">, <url name="Red Hat"
+url="http://www.redhat.com"> i <url name="IBM"
+url="http://www.ibm.com">.  Addicionalment, <url name="Covalent"
+url="http://www.covalent.net"> proporciona mòduls de complements i
+suport 24x7 per a Apache.
+<p>El següents llocs web utilitzen Apache o derivats. És molt probable
+que si Apache és suficientment bo per a ells, ho siga també per a
+vostè :)
+<itemize>
+<item><url name="Amazon.com" url="http://www.amazon.com">
+<item><url name="Yahoo!" url="http://www.yahoo.com">
+<item><url name="W3 Consortium" url="http://www.w3c.org">
+<item><url name="Financial Times" url="http://www.ft.com">
+<item><url name="Apple" url="http://www.apple.com">
+<item><url name="MP3.com" url="http://www.mp3.com"
+<item><url name="Stanford" url="http://www.stanford.edu">
+</itemize>
+<p>
+>Del <url name="lloc web d'Apache" url="http://httpd.apache.org">:
+<p>
+<em>L'Apache HTTP Server Project és un esforç per desenvolupar i
+mantindre un servidor HTTP de codi obert per a sistemes operatius
+moderns incloent UNIX i Windows NT. L'objectiu d'aquest projecte és
+proporcionar un servidor segur, eficient i ampliable que proporcione
+serveis HTTP en sintonia amb els estàndards HTTP actuals.</em>
+<p>Apache va nàixer com unes modificacions del servidor Web NCSA, un dels
+primers servidors HTTP. Vostè pot aprendre més sobre la història
+d'Apache
+<url name="ací" url="http://httpd.apache.org/ABOUT_APACHE.html">:
+<p>
+El projecte Apache ha crescut més enllà de la construcció només d'un
+servidor web fins a desenvolupar altres tecnologies crítiques del
+costat servidor. L'Apache Software Foundation, descrita en una secció
+més avant, serveix de paraigües per a estos projectes.
+
+<sect1>Arquitectura
+<p>Hi ha dos versions principals d'Apache, la serie 1.3 i la
+2.0. Malgrat que ambdues versions són considerades productes de
+qualitat, es diferencien en l'arquitectura i les capacitats.
+<p>
+<sect2>2.1.1 Apache 1.3
+<p>Apache 1.3 s'ha portat a una gran varietat de plataformes Unix i és
+el servidor web més amplament desplegat a la Internet.
+
+<sect3>Servidor web basat en Processos
+<p>
+Apache 1.3 és Unix un servidor Web basat en processos. El programa
+Apache program bifurca varis fills al iniciar-se. Bifurcar significa
+que un procés pare crea còpies idèntiques d'ell mateix,
+anomenades <em>fills</em>. Cadascun dels fills pot servir una
+sol·licitud independentment dels altres. Esta aproximació té
+l'avantatge d'una millor estabilitat: Si un dels fills té un mal
+comportament (està fora de control o té fuites de memòria) pot ser
+finalitzat sense afectar als altres.  La estabilitat comporta una
+penalització en el rendiment. En la majoria de sistemes operatius
+Unix, la creació de processos i el canvi de context (assignació de
+temps de processador per a cada procés) són operacions costoses. Com
+el processos estan aïllats els uns dels altres, no poden compartir
+codi i dades fàcilment, consumint recursos del sistema.
+
+<sect3>Suport per a Windows
+<p>
+Apache 1.3 és la primera versió d'Apache en suportar Windows, malgrat
+que el port no es considera tan estable com els seus homòlegs
+Unix. Açò és degut al fet que el servidor va ser dissenyat amb Unix en
+ment i el port a Windows va ser un afegit posterior que no es va
+integrar massa bé.
+
+<sect3>Modular
+<p>Apache 1.3 té una arquitectura modular. Vostè pot habilitar o
+deshabilitar mòduls per a afegir o eliminar funcionalitats al servidor
+Web. Vostè pot personalitzar Apache per a millorar el rendiment i la
+seguretat. A més del mòduls que venen amb el servidor, hi ha un gran
+nombre de mòduls de tercers, que proporcionen funcionalitats esteses.
+
+<sect2>2.1.2 Apache 2.0
+<p>Apache 2.0 és la última i millor versió del servidor
+Apache. L'arquitectura conté millores significatives sobre la sèrie
+1.3. Les següents són algunes d'elles.
+
+
+<sect3>Multi Processing Modules (Mòduls Multi Procés)
+<p>Apache 2.0 abstrau l'arquitectura de processament de peticions en
+mòduls especials de servidor, anomenats Multi Processing modules
+(MPMs). Açò significa que Apache pot ser configurat per a ser un
+servidor pur basat en processos, un servidor purament basat en fils o
+una mescla dels dos models. Els fils estan continguts en processos i
+funcionen simultàniament. A diferència dels processos, els fils poden
+compartir dades i codi. Els fils són, per tant, molt més "lleugers"
+què els processos, i en molts casos els servidors basats en fils
+escalen millor que els basats en processos. L'inconvenient és què el
+servidor és menys confiable, ja que si un fil té un mal comportament,
+pot corrompre dades o codi pertanyent a altres fils.
+
+<sect3>Mòduls de Protocol
+<p>El maneig de protocols s'ha encapsulat en la seua pròpia capa
+d'Apache 2.0. Això significa que és possible escriure mòduls per a
+servir protocols que no siguen HTTP, com POP3 per a correu o FTP per a
+transferència de fitxers. Estos mòduls de protocol poden es beneficiar
+d'un sòlid entorn de treball de servidor i de la funcionalitat dels
+mòduls, com l'autenticació i la generació de continguts dinàmics. Açò
+significa que, per exemple, vostè pot autenticar els seus usuaris POP3
+contra la mateixa base de dades d'usuaris que utilitza Apache per a
+les sol·licituds web i que es pot generar contingut FTP dinàmic
+utilitzant PHP, CGI o qualsevol altra tecnologia explicada després en
+aquest document.
+
+<sect3>Arquitectura modular i de filtres <!--Module and filter architecture.-->
+<p>Apache 2.0 mainté l'arquitectura modular de la versió 1.3 i afig un
+mecanisme d'estensions addicional: els filtres. Els filtres permeten
+als mòduls modificar el contingut generat per altres mòduls. Poden
+xifrar, escanejar en busca de virus o comprimir no només fitxers
+estàtics sinó continguts generats dinàmicament.
+
+<sect3>Problemes de compatibilitat <!--Compatibility issues-->
+<p>Desgraciadament, malgrat que l'API de mòduls és similar entre
+versions, no són idèntics i els mòduls d'Apache 1.3 necessiten ser
+portats a la nova arquitectura. El mòduls més mainstream com PHP i
+mod_perl ja tenen versions Apache 2.0 i altres, com mod_dav i mod_ssl,
+ara formen part de la distribució del servidor. Els mòduls en execució
+en una arquitectura basada en fils requereixen canvis específics en
+els mòduls. Els mòduls distribuïts amb Apache han sofert eixos canvis
+i són considerats `thread-safe', però els mòduls de tercers o
+llibreries podria ser que no. Si vostè en necessita un d'aquests,
+estarà limitat a utilitzar Apache com a un servidor pur basat en
+processos.
+
+<sect3>Portable
+<p>Apache ara corre igualment bé sobre plataformes Windows i Unix
+gràcies a la llibreria Apache Portable Runtime (APR). Aquesta abstreu
+les diferències entres sistemes operatius, tal i com les API d'accés a
+fitxers o a la xarxa. Portar Apache a una nova plataforma és sovint
+tan simple com portar l'Apache Portable Runtime.  Esta capa
+d'abstracció proporciona, a més, afinament i optimització específics
+per a la plataforma.
+
+
+<sect1>Seguretat
+<p>Apache proporciona varis mòduls relacionats amb la seguretat per a
+assegurar i restringir l'accés al servidor.
+
+<sect2>Autenticació
+<p>Els mòduls d'autenticació li permeten determinar la identitat del
+client, normalment mitjançant la verificació d'un usuari i contrasenya
+contra una base de dades backend.  Apache inclou mòduls per a
+autenticar contra fitxers de text pla i de base de dades.  Existeixen
+mòduls d'autenticació addicionals que connecten Apache a frameworks de
+seguretat o bases de dades, incloent: controlador de domini NT Domain,
+Oracle, mySQL, PostgresSQL i així successivament.<p> Els mòsuls d'LDAP
+són especialment interessants, perquè permeten la integració amb
+serveis de directori amplament existents en empreses.  Vostè pot
+trobar aquests mòduls a <htmlurl url="http://modules.apache.org">.  Un
+mòdul LDAP d'Apache 2.0 es pot trobar <url name="al lloc web d'Apache"
+url="http://httpd.apache.org/docs-2.0/mod/mod_auth_ldap.html">.
+
+
+<sect2>Control d'Accés
+<p>Apache proporciona el mòdul mod_access que pot restringir l'accés a
+recursos basant-se en paràmetres de la petició del client, com la
+presència d'una capçalera específica o l'adreça IP o el nom de màquina
+del client. Els mòduls de tercers li permeten restringit l'accés a
+clients que no es comporten adequadament, com s'explica en seccions
+posteriors sobre rendiment i control d'ample de banda.
+
+<sect2>SSL/TLS
+<p>Els protocols Secure Sockets Layer/Transport Layer Security
+permeten que les dades entre el servidor Web i el client siguen
+xifrades. En Apache 1.3, els protocols estan implementats mitjançant
+mod_ssl, què es distribueix separadament des d'el
+<url name="lloc web de mod_ssl" url="http://www.modssl.org"> i
+requereix l'aplicació de pegats al servidor. Açò era necessari per les
+regulacions d'exportació en xifratge. La majoria d'aquestes
+restriccions hui en dia s'han alçat, i a partir d'Apache 2.0, mod_ssl
+està inclòs com a mòdul base amb Apache.
+
+<sect1>Proxy
+<p>Un proxy és un programa que realitza sol·licituds en representació
+d'un altre. Hi ha distints tipus de proxy. Un proxy HTTP tradicional,
+també anomenat un <em>proxy de reenviament</em>, accepta peticions de
+clients (normalment navegadors Web), contacta amb el servidor remot, i
+retorna les contestacions.
+<p>Un proxy invertit (reverse proxy) és un servidor Web que està
+situat davant d'altres servidors, proporcionant una part davantera
+(front end) unificada i descarregant de certes tasques, com
+processament SSL, als servidors Web que hi ha darrere.
+<p>Apache suporta ambdós tipus de proxy, el `caching' del contingut
+que passa pel proxy i distints proxy backends com FTP.
+
+<sect1>Rendiment i escalabilitat<label id="performance">
+<p>El rendiment brut és només un dels factors a considerar en un
+servidor web (la flexibilitat i la estabilitat solen vindre abans).<p>
+Dit això, hi ha solucions per a millorar el rendiment a servidors web
+amb alta càrrega servint contingut estàtic. Si vostè està en el negoci
+del hosting, Apache també proporciona mecanismes pels quals vostè pot
+mesurar i controlar la utilització de l'ample de banda.  Regular en
+aquest contexte normalment significa alentir la entrega de continguts
+basats en el fitxer sol·licitat, una adreça IP de client específica, i
+així successivament... Açò es fa per a prevenir els abusos.
+<itemize>
+<item><bf>mod_mmap</bf>: Inclòs als alliberaments actuals d'Apache
+1.3, mapeja en memòria un llista de fitxers configurada de manera
+estàtica que són freqüentment sol·licitats però rarament
+canviats. Aquesta funcionalitat està inclosa a mod_file_cache en
+Apache 2.
+<item><bf><url name="Mod_bandwidth"
+url="http://www.cohprog.com/mod_bandwidth.html"></bf>: Aquets mòdul
+d'Apache 1.3 habilita la definició de limits d'ample de banda a tot un
+servidor o per connexió, basats en el directori específic, la mida del
+fitxer i IP/dominiand remot.
+<item><bf><url name="Bandwidth share module"
+url="http://www.topology.org/src/bwshare/README.html"></bf>:
+proporciona regulació d'ample de banda i equilibri per adreça IP
+client. Suporta Apache 1.3 i les primeres versions d'Apache 2.
+<item><bf><url name="Mod_throttle"
+url="http://www.snert.com/Software/Throttle/index.shtml"></bf>:Regula l'ample de banda per host virtual o usuari. Per a Apache 1.3
+</itemize>
+<sect2>Equilibri de càrrega (load balancing)
+<p>Utilitzant el proxy invertit d'Apache i mod_rewrite vostè pot
+tindre un procés Apache distribuint peticions entre una varietat de
+servidors web de backend.  Vostè pot trobar més informació a
+<htmlurl url="http://httpd.apache.org/docs/2.0/misc/rewriteguide.html">
+<p>Addicionalment, mod_backhand és un mòdul d'Apache 1.3 que permet la
+redirecció seamless (sense costures) de peticions HTTP des d'un
+servidor web a un altre. Aquesta redirecció pot utilitzar-se per a
+màquina objectiu amb recursos infrautilitzats, proporcinant per tant
+equilibri de càrrega de sol·licituds web per sol·licitud i de manera
+molt afinada. Vostè pot trobar més informació
+a <htmlurl url="http://www.backhand.org/">.
+
+<sect2>Compressió
+<p>Apache 2.0 inclou mod_deflate, un mòdul de filtratge que comprimeix
+continguts abans d'entregar-los als clients. Açò estalvia ample de
+banda, però pot tindre un impacte en el
+rendiment. El <url name="mod_gzip module"
+url="http://www.schroepl.net/projekte/mod_gzip/">
+proporciona esta funcionalitat per a Apache 1.3
+
+<sect1>Guions CGI
+<p>
+CGI és l'acrònim de Common Gateway Interface. Els programes CGI són
+programes externs què són cridats quan l'usuari sol·licita certa
+plana. El programa CGI rep informació del servidor web (des de valors
+de variables, tipus de navegador, adreça IP del client i així
+successivament) i utilitza aquesta informació per a generar-li una
+plana web al client.
+<p>Apache té suport per a CGIs i hi ha un mòdul d'Apache 1.3 de
+tercers que proporciona suport per al protocol FastCGI. Aquest evita
+les penalitzacions en el rendiment associats amb l'inici i la parada
+d'un programa CGI amb cada sol·licitud. Vostè pot trobar-lo
+a <htmlurl url="http://fastcgi.com/">
+
+<sect1>Development Platform Integration
+<p>Les aplicacions web estan escrites en llenguatge d'alt nivell com
+Java, Perl, C# etcètera i Apache té diversos mòduls que els integren
+amb el servidor. En molt casos els mòduls exposen l'API d'Apache pel
+que mòduls complets d'Apache poden ser escrits en eixos llenguatges.
+<sect2>Perl<label id="mod_perl">
+<p>
+<url name="mod_perl" url="http://perl.apache.org/"> és un dels
+projectes Apache més veterans i de més èxit. Incrusta un intèrpret de
+Perl en Apache i permet l'accés a les interioritats del servidor web
+des de Perl. Açò permet que mòduls sencers siguen escrits amb Perl o
+una mescla de Perl i codi C.  A les versions 1.3 d'Apache, un
+intèrpret s'ha d'incrustar en cada fill, ja que el servidor està basat
+en multiprocés.  En llocs dinàmics amb molt de trànsit, l'increment en
+la mida por marcar una diferència.  En versions de fils d'Apache 2.0
+mod_perl permet compartir el codi, dades i estat de la sessió entre
+intèrprets. Açò resulta en una solució ràpida i més lleugera.
+<p>mod_perl és en si mateix una altra plataforma, amb una gran
+varietat de mòduls disponibles com <url name="Mason"
+url="http://www.masonhq.com"> i
+<url name="Embperl" url="http://perl.apache.org/embperl/"> per a
+incrustar Perl en pàgines HTML i <url name="AxKit" url="axkit.org">
+per a plantilles impulsades amb XML.
+
+<sect2>PHP<label id="php">
+<p>Del lloc web de <url name="PHP" url="http://www.php.net">:
+<em>PHP és un llenguatge de guions de la banda del servidor i
+multi-plataforma, que s'incrusta en HTML</em>. És el <url name="mòdul
+per a Apache més popular"
+url="http://www.securityspace.com/s_survey/data/man.200209/apachemods.html">
+i açò es deu a una varietat de raons:
+<itemize>
+<item>La corba d'aprenentatge és bastant baixa
+<item>Gran documentació
+<item>Extens suport de bases de dades
+<item>Modularitat
+</itemize>
+PHP té un disseny modular. Entre altres coses, hi ha mòduls que
+proporcionen suport per a:
+<itemize>
+<item>Connectivitat amb les bases de dades populars com Oracle, MS-SQL
+Server, interfície ODBC, MySQL, mSQL, PostgreSQL etcètera.
+<item>Suport d'XML
+<item>Transferència de fitxers: FTP
+<item>HTTP
+<item>Suport de directori: LDAP
+<item>Suport de Correu: IMAP, POP3, NNTP
+<item>Generació de documents PDF
+<item>CORBA
+<item>SNMP
+</itemize>
+Vostè només necessita compilar/utilitzar els mòduls que necessite. PHP
+pot ser utilitzat per Apache com un CGI extern o amb altres servidors
+web.  És multi-plataforma i funciona en la majoria de sabors de Unix i
+Windows. Si vostè ve del món Windows, probablement haja utilitzat
+Internet Information Server amb Active Server Pages i MS-SQL
+Server. Un substitut típic d'aquest trio és Apache amb PHP i MySQL.
+Com PHP funciona:
+<itemize>
+<item>amb Apache i amb Microsoft IIS
+<item>amb MySQL i amb MS-SQL server
+<item>a Unix i a Windows
+</itemize>
+vostè té una bonic i gradual camí de migració d'una solució centrada
+en Microsoft a un solució basada en Unix.
+
+<sect2>Python
+<p>
+Python és un popular llenguatge de guions orientat a objectes.
+<url name="Mod_Python" url="http://www.modpython.org">, què ara és un
+projecte oficial d'Apache, li permet integrar Python en el servidor
+web Apache. Vostè pot desenvolupar complexes aplicacions web o
+accelerar guions CGI Python existents. Les versions recents funcionen
+en Apache 2.0.
+
+<sect2>Tcl
+<p>El <url name="Tcl Apache project" url="http://tcl.apache.org">
+integra Tcl amb el servidor web Apache. Tcl és un llenguatge de guions
+lleuger i extensible. Vostè pot aprendre més sobre
+Tcl <url url="http://tcl.activestate.com/" name="ací">.  Hi ha
+diversos mòduls sota el paraigües d'Apache TCL:
+<itemize>
+<item>Ambdós <url name="Mod_dtcl" url="http://tcl.apache.org/mod_dtcl/"> i 
+<url name="Neowebscript" url="http://tcl.apache.org/neowebscript/">
+permeten incrustar Tcl en pàgines HTML. <url name="Rivet"
+url="http://tcl.apache.org/rivet/"> combina el millor dels dos mòduls.
+<item><url name="Mod_tcl"
+url="http://tcl.apache.org/mod_tcl/mod_tcl.html"> fa(take) una aproximació
+similar a mod_perl, exposant l'API d'Apache.
+<item><url name="WebSH" url="http://tcl.apache.org/websh/"> proporciona un entorn d'aplicació Web Tcl.
+</itemize>
+
+<sect2>Tecnologies Microsoft
+<p>Varis mòduls permeten la integració amb llenguatges i tecnologies
+de Microsoft, com el .Net framework o Active Server Pages.
+<sect3>.Net
+<p><url name="mod_haydn" url="http://haydn.sourceforge.net/"> integra
+<url name="Mono" url="http://www.go-mono.com"> amb Apache i exposa
+l'API d'Apache al .Net framework, permetent-li escriure mòduls en C#,
+per exemple. <url name="Covalent" url="http://www.covalent.net">
+proporciona mod_asp.net, un mòdul comercial per a Windows que permet a
+Apache executar aplicacions ASP.Net, permetent-li a vostè substituir
+Microsoft IIS.
+<sect3>ASP
+<p>ASP són les sigles d'Active Server Pages i és una tecnologia de
+Microsoft que li permet incrustar codi, normalment Visual Basic, en
+planes HTML. Varies empreses, com <url name="ChilliSoft"
+url="http://www.chilisoft.com/"> i <url name="Stryon"
+url="http://www.stryon.com/"> proporcionen productes que poden
+executar aplicacions ASP en entorns Unix.
+<sect3>ISAPI
+<p>ISAPI és una API que vostè pot utilitzar per a estendre Microsoft
+IIS, de manera similar a com vostè utilitzaria l'API d'Apache. Apache
+inclou un mòdul mod_isapi que emmiralla (mirrors) esta funcionalitat i
+li permet executar mòduls ISAPI.
+
+<sect2>Java
+<p>La majoria de servidor d'aplicacions, com els d'Oracle, IBM i BEA
+proporcionen mòduls per a integrar-se amb el servidor web
+Apache. Addicionalment, diversos mòduls com l'as mod_jk i mod_webapp
+li permeten connectar-se a Tomcat, un contenedor de Servlet i
+JavaServer Pages que tambés forma part de la Apache Software
+Foundation.
+
+<sect2>Mòduls per a altres llenguatges
+<p>Aquest document ha descrit els mòduls per a llenguatges popular de
+la banda ddel servidor com Perl, Python i PHP. Vostè pot trobar mòduls
+per a llenguatges addicional (JavaScript, Haskell, Ruby i altres)
+al <url name="Directori de mòduls d'Apache"
+url="http://modules.apache.org">.
+
+<sect1>Gestió
+<p>Una part important de l'administració de servidors Web inclou la
+construcció, configuració i monitorització de diferents servidors.
+
+<sect2>Build tools
+<p>Apache pot ser estés i personalitzat de moltes maneres
+diferents. La integratió de mòduls distints amb el servidor de vegades
+pot ser una tasca difícil.  Eines com l' <url name="Apache Toolbox"
+url="http://www.apachetoolbox.com"> poden facilitar esta tasca,
+proporcionant un framework de construcció basada en menús.
+
+<sect2>Interfícies d'Usuari per a Apache
+<p>Apache és configurat mitjançant fitxers de configuració en text
+pla, i això en ocasions pot ser difícil, especialment per a gent que
+ve del món Windows.  Hi ha eines gràfics de font oberta que faciliten
+aquesta tasca:
+<itemize>
+<item><url name="Comanche" url="http://www.comanche.org">, by yours truly,
+és multi-plataforma i s'executa a Unix/Linux, Windows i Mac.
+<item><url name="Webmin" url="http://www.webmin.com/webmin/">: Una
+bonica interfície web.
+<item><url name="gui.apache.org" url="http://gui.apache.org">:
+Interfícies Gràfiques d'Usuari (GUI) per al projecte Apache. Els
+programes estan en diversos graus de desenvolupament.
+</itemize>
+
+<sect2>SNMP
+<p>SNMP són les sigles de Simple Network Management Protocol. Permet
+la gestió i monitorització de servidors de xarxa, equips,
+etcètera. Els mòduls SNMP per a Apache ajuden a gestionar grans
+desplegaments de servidors web, mesurar la qualitat del servei ofert i
+la integració d'Apache amb els frameworks de monitorització existents.
+<itemize>
+<item>Font Oberta <url name="Mod SNMP"
+url="http://www.simpleweb.org/software/packages/mod-snmp/"> per a
+Apache 1.3.
+<item><url name="Covalent SNMP" url="http://www.covalent.net">
+proporciona un mòdul SNMP comercial, suport per a l'últim estàndard
+SNMPv3, integració amb HP-Openview, Tivoli, etcètera.
+</itemize>
+
+<sect1>Publicar
+<p>Els autors de contingut Web requereixen medis per a gestionar eixe
+contingut i carregar-lo en el servidor. Un dels protocols utilitzats
+per a aquest propòsit és DAV (Distributed Authoring and
+Versioning). DAV és una extensió del protocol HTTP que habilita als
+usuaris i aplicacions a publicar i modificar contingut Web. La
+tecnologia DAV està àmpliament implementada, Microsoft la suporta a
+nivell de sistema operatiu (WebFolders) i a la seua suite Office. El
+mateix va per a Apple OS-X i a diversos productes d'Adobe, Oracle i
+demés. Així que vostè pot obtindre el mòdul  mod_dav per a Apache 1.3 a
+<htmlurl url="http://www.webdav.org/mod_dav/">. En Apache 2.0, mod_dav
+està inclosa amb la distribució base.
+<p>Abans de DAV, Microsoft tenia el seu propi protocol de publicació,
+integrat amb l'eina Microsoft FrontPage. Vostè pot afegir suport de la
+banda de servidor per a Frontpage utilitzant els mòduls
+a <htmlurl url="http://www.rtr.com/Ready-to-Run_Software/">, malgrat
+que per la manera d'integrar-se amb Apache se'ls considera segurs.
+
+<sect1>Mòduls de protocol
+<p>Apache 2.0 va introduir el concepte de mòduls de protocol. Això
+significa que els desenvolupadors poden reutilitzar el framework del
+servidor Apache per a implementar nous protocols com els que dealing
+amb el correu i la transferència de fitxers. mod_ftp és un mòdul
+comercial d'FTP basat en Apache de <url name="Covalent"
+url="http://www.covalent.net">. <url name="mod_pop3"
+url="http://cvs.apache.org/viewcvs.cgi/httpd-pop3/"> és un mòdul de
+codi obert que implementa el protocol POP3, utilitzat típicament per
+els lector de correu per a recuperar missatges dels servidors de
+correu.
+
+<sect1>Virtual Hosting
+<p>
+Apache proporciona suport extens de virtual hosting, el que significa
+que vostè pot servir múltiples llocs web des d'un únic servidor. A
+Apache 2.0, amb el MPM per fill vostè pot tindre múltiples fills,
+cadascun servint un domini distint baix diferents user ids de
+Unix. Açò és molt important per a la seguretat en escenaris de hosting
+compartit, perquè li permet aïllar a uns clients dels altres. Els
+següents són mòduls alternatius i addicionals de virtual hosting.
+<itemize>
+<item><url name="mod_dynvhost" url="http://funkcity.com/0101/">
+<item><url name="mod_pweb" url="http://www.joytec.de/mod_pweb.html">
+<item><url name="mod_v2h" url="http://www.fractal.net/mod_v2h.tm">
+</itemize>
+<p>
+
+<sect1>Suport comercial
+<p>Apache és el servidor web triat per moltes entitats comercials,
+incloent gran empreses. Aquestes empreses tenen certs requeriments al
+adoptar una tecnologia, especialment una situada a l'ànima de la seua
+estratègia d'Internet, com són els servidors Web. Eixos requeriments
+inclouen rendiment, estabilitat, capacitats de gestió, suport, serveis
+professionals i integració amb sistemes llegats. Un nombre d'empreses
+comercials, com són
+<url name="IBM" url="http://www.ibm.com">, <url name="Red Hat"
+url="http://www.redhat.com"> i <url name="Covalent"
+url="http://www.covalent.net">, proporcionen els productes i serveis
+necessaris per a fer que Apache complisca (meet) les necessitats dels
+clients d'empresa.
+<p>A més a més, moltes altres empreses i OEMs remeten Apache com a
+servidor web amb els seus productes.  In addition, many other
+companies and OEMs ship Apache as a bundled web server with their
+products.
+
+
+<sect>Projectes ASF
+<p>Malgrat que Apache és probablement el més popular, l'Apache
+Software Foundation és la llar de molt altres projectes. Aquesta
+secció proporciona una visió general dels més rellevants, organitzats
+lògicament. La majoria d'ells pertanyen o bé al projecte Jakarta o al
+projecte XML. El projecte Jakarta acull projectes basats en Java i el projecte
+XML acull, sorpresa!, projectes relacionats amb XML.
+
+<sect1>Aplicacions i Frameworks
+<p>The following are application and development frameworks that are part
+of the ASF. 
+
+<sect2>3.1.1 Servidors
+<p>Els següents són alguns dels projectes de servidor ASF.
+<sect3>Tomcat<label id="tomcat">
+<p>Tomcat és el producte insígnia del projecte Jakarta.  És la
+implementació oficial de referència per a les tecnologies Java Servlet
+i JavaServer Pages.
+<p>Vostè pot aprendre més al <url name="lloc web de Tomcat"
+url="http://jakarta.apache.org/tomcat/">. <!-- tomcat.jakarta.org -->
+
+<sect3>JAMES (Java Apache Mail Enterprise Server)
+<p>Complementàriament a les altres tecnologies de la banda de servidor
+d'Apache, JAMES proporciona <em>un servidor 100% Java dissenyat per a
+ser una solució completa i portable de motor de correu empresarial
+basada en els protocols oberts actualment disponibles (SMTP, POP3,
+IMAP, HTTP)</em>
+<p>Es pot trobar més informació <url name="ací"
+url="http://jakarta.apache.org/james/">. <!-- james.jakarta.org-->
+
+<sect3>Lucene
+<p>Jakarta Lucene és un motor de cerca de text complet d'alt
+rendiment, escrit en Java i part del projecte Jakarta. Vostè pot
+trobar més informació
+a <htmlurl url="http://jakarta.apache.org/lucene/"> <!-- lucene.jakarta.org-->
+
+<sect3>Jetspeed
+<p><url name="Jetspeed" url="http://jakarta.apache.org/jetspeed/"> és
+un portal basat en web escrit en Java. Té una API modular que permet
+l'agregació de diferents fonts de dades (XML, SMTP, iCalendar)
+
+<!-- La URL està malament -->
+
+
+<sect2>3.1.2 Gestió de continguts
+<p>Els següents són projectes relacionats amb la gestió de continguts
+
+<sect3>Slide
+<p>Slide és un framework de gestió de continguts.  Conceptualment,
+proporciona organització jerarquica de continguts binaris que ser
+emmagatzemat en en magatzems de dades arbitraris, heterogenis i
+distribuits. A més, Slide integra seguretat, bloqueig i serveis de
+versionat. També proporciona una implementació de servidor i
+client <url name="WebDAV" url="http://www.webdav.org">.  Vostè pot
+aprendre més a la <url name="pàgina llar de Slide"
+url="http://jakarta.apache.org/slide/index.html">.
+<!-- Retirat el 03-11-2007 -->
+
+<sect3>Alexandria
+<p>Alexandria is an integrated documentation management system. It brings
+together technologies common to many open source projects like CVS and JavaDoc.
+The goal is to integrate source code and documentation to encourage code
+documentation and sharing. More information at <htmlurl 
+url="http://jakarta.apache.org/alexandria/index.html">  <!-- projecte abandonat, es pot accedir a informació sobre el tema i alternatives, a la url de dalt, sene l'index.html la pàgina de legacy data del 2001 --> 
+
+<sect2>3.1.3 Frameworks
+<p>El que segueix són frameworks de desenvolupament d'aplicacions.
+
+<sect3>Turbine<label id="turbine">
+<p>Turbine és un framework basat en servlets que permet a programadors
+experimentats de Java construir ràpidament aplicacions web
+segures. Turbine combina una plataforma per a executar codi Java i
+components reutilitzables. Algunes de les seues característiques
+inclouen: Integració amb sistemes de plantilles, desenvolupament estil
+MVC (Model Vista Controlador), Access Control Lists (Llistes de
+Control d'Accés), suport de localització etcètera. Vostè pot trobar
+més informació al <url name="lloc web de Turbine"
+url="http://java.apache.org/turbine">.
+
+<sect3>Avalon
+<p>Si vostè està familiaritzat amb Perl o sistemes BSD, Avalon és
+roughly l'equivalent de <url name="CPAN" url="http://www.cpan.org"> o
+la col·lecció de Ports per a les tecnologies Java d'Apache. No només
+proporciona guidelines per un repositori de codi comú, va un pas més
+enllà: <em>és un esforç per crear, dissenyar, desenvolupar i mantindre
+un framework comú per a aplicacions de servidor escrites en el
+llenguatge Java.</em> Proporciona els mitjans per a que els projectes
+Java de la banda de servidor puguen ser fàcilment integrats i
+construïts amb els altres.  Vostè pot trobar més informació
+al <url name="lloc web d'Avalon"
+url="http://java.apache.org/avalon/">.
+
+<sect1>Presentació
+<p>Els següents són sistemes de plantilles, motors de transformació i
+altres projectes relacionats amb la presentació.
+
+<sect2>Cocoon<label id="cocoon">
+<p>Cocoon aprofita altres tecnologies XML d'Apache com Xerces, Xalan i
+FOP per a proporcionar un framework de publicació integral. El
+framework pot parlar amb moltes fonts de dades diferents can i pot
+transformar el contingut en diversos formats d'alliberament diferents
+com PDF, HTML, XML and RTF. Pot funcionar com un servlet o com a un
+programa de línia d'ordres. Vostè pot aprendre més sobre Cocoon a la
+<url name="pàgina llar del projecte"
+url="http://xml.apache.org/cocoon/">
+
+<sect2>Velocity
+<p><em>Velocity és un motor de plantilles basat en Java. Pot
+utilitzar-se com a una utilitat independent (stand-alone) per a
+generar codi font, HTML i informes, o pot combinar-se amb altres
+sistemes per a proporcionar serveis de plantilles.</em> Velocity té un
+paradigma Model Vista Controlador que reforça la separació del codi
+Java i la plantilla HTML. Vostè pot aprendre més sobre
+Velocity <url name="ací"
+url="http://jakarta.apache.org/velocity/index.html">.
+
+<sect2>AxKit
+<p>
+<url name="AxKit" url="http://axkit.org"> <label id="axkit"> és un
+Servidor d'Aplicacions popular basat en XML per a mod_perl i
+Apache. Permet la separació de contingut i representació i proporciona
+conversió al vol des de XML a qualsevol format.
+
+<sect2>Xalan
+<p>
+Xalan és un processador de XSLT disponible per a Java i C++. XSL és un
+llenguatge de fulls d'estil per a XML. La T ve de Transformation. XML
+és bo emmagatzemant dades estructurades (informació). Vostè de vegades
+necessita mostrar estes dades a l'usuari o aplicar alguna altra
+transformació.  Xalan pren el document XML original, llig la
+configuració de la transformació (full d'estil) i retorna HTML, text
+pla o un altre document XML.  Vostè pot aprendre més sobre Xalan a les
+pàgines llar dels projectes <url name="Xalan Java"
+url="http://xml.apache.org/xalan-j/index.html"> and <url name="Xalan
+C++" url="http://xml.apache.org/xalan-c/index.html">.
+
+<sect2>FOP
+<p>Extret del lloc web: <em>FOP és una aplicació Java que llig un
+arbre d'objectes de format i converteix en un document
+PDF</em>. D'aquesta manera FOP pren un document XML i retorna un PDF,
+de manera similar a com ho fa Xalan amb HTML o text. Vostè pot
+aprendre més sobre FOP <url name="ací"
+url="http://xml.apache.org/fop">.
+
+
+<sect1>Analitzadors i llibreries d'Accés a Documents
+<p>El que hi ha a continuació són distintes llibreries que es poden
+utilitzar per analitzar i manipular un ventall de formats de document.
+
+<sect2>Xerces
+<p>
+El projecte Xerces proporciona analitzadors XML per a un ventall de
+llenguatges, incloent Java, C++ i Perl. Els "bindings" de Perl estan
+basats en les fonts C++.  Un analitzador XML és un ferrament utilitzat
+per a un accés programàtic a documents XML.  Esta és una descripció dels estàndards suportats per Xerces:
+<itemize>
+<item><url name="DOM"
+url="http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001/level-one-core.html">:
+DOM són les sigles de Document Object Model. Els documents XML són
+jeràrquics per naturalesa (etiquetes niades). Els documents XML es
+poden accedir a través d'un interfície semblant a un arbre. El
+processament és com segueix:
+<itemize>
+<item>Analitzar el document
+<item>Construir l'arbre
+<item>afegir/eliminar/modificar nodes
+<item>Serialitzar l'arbre
+</itemize>
+<item><url name="SAX" url="http://www.saxproject.org">:API senzill per
+a XML. Aquest és un API basat en fluxos. Açò significa que nosaltres
+rebrem respostes a mesura que es vagen trobant elements. Estes
+respostes es poden utilitzar per a construir un arbre DOM per exemple.
+<item><url name="XML Namespaces" url="http://www.w3.org/TR/REC-xml-names/">
+<item>XML Schema: L'estàndard XML proporciona la sintaxi per a
+escriure documents. XML Schema proporciona els ferraments per a
+definir el <em>contingut</em> del document XML (semàntica). Permet
+definir que un element en el document ha de ser un sencer entre 10 i
+20 o contindre una adreça IP.
+</itemize>
+El codi base inicial del projecte Xerces XML fou donat per IBM. Vostè
+pot trobar més informació a les pàgines llar de <url name="Xerces
+Java"
+url="http://xml.apache.org/xerces-j/index.html">, <url name="Xerces
+C++" url="http://xml.apache.org/xerces-c/index.html">
+i <url name="Xerces Perl"
+url="http://xml.apache.org/xerces-p/index.html">.
+
+<sect2>Batik
+<p><em>Batik és un joc d'eines basat en Java per a aplicacions que
+volen utilitzar imatges en el format
+<url name="Scalable Vector Graphics (SVG)"
+url="http://www.w3.org/TR/SVG/"> per a diversos propòsits, com
+visualització, generació o manipulació.</em>
+<p> És una especificació central de XML i compleix amb la
+especificació W3C. És una miqueta atípic respecte a altres projectes
+Apache, en que proporciona un component gràfic. Batik proporciona
+ganxos per a estendre el framework mitjançant etiquetes
+personalitzades i permet la conversió de SVG a altres formats com JPEG
+o PNG.  Vostè pot aprendre més a la <url name="pàgina llar de Batik"
+url="http://xml.apache.org/batik/">
+
+<sect2>POI
+<p>
+El projecte POI consisteix en APIs per a manipular diversos formats de
+fitxer basats en el format OLE 2 Compound Document de Microsoft
+utilitzant Java pur. Açò inclou documents Word i Excel. Vostè pot
+trobar més informació a <htmlurl url="http://jakarta.apache.org/poi/">
+
+<sect1>Interoperabilitat
+<p>Les següents són llibreries per comunicació remota i
+interoperabilitat entre servidors.
+
+<sect2>SOAP
+<p>Apache SOAP ("Simple Object Access Protocol") i Axis són
+implementacions del <url name="protocol SOAP"
+url="http://www.w3.org/TR/SOAP">
+<p>SOAP és un protocol lleuger per a l'intercanvi d'informació en un
+entorn descentralitzat i distribuït. És un protocol basat en XML que
+consisteix de tres parts:
+<itemize>
+<item><em>Un sobre (envelope) que defineix una framework per a
+descriure què hi ha en un missatge o com processar-lo</em>,
+<item><em>un conjunt de normes de codificació per a expressar
+instàncies de tipus de dades definits per una aplicació</em>, i
+<item><em>una convenció per a representar crides a processos remots i
+respostes</em>.
+</itemize>
+Bàsicament vostè pot pensar en SOAP com un sistema de crida a
+processos remots, basat en HTTP i XML. Per una banda açò significa que
+és detallat i lent comparat amb altres sistemes. Per l'altra, facilita
+la interoperabilitat, correcció d'errors i desenvolupament de clients
+i servidors per a diversos llenguatges ja que la majoria de
+llenguatges moderns tenen mòduls HTTP i XML. Vostè pot aprendre més a
+la <url name="pàgina llar d'Apache SOAP"
+url="http://xml.apache.org/soap/">
+
+<sect2>XML-RPC
+<p>El <url name="projecte XML-RPC"
+url="http://xml.apache.org/xmlrpc/"> és una implementació en Java del
+protocol XML-RPC, un protocol lleuger similar i predecessor de SOAP.
+
+<sect2>XML security
+<p>El <url name="projecte XML security"
+url="http://xml.apache.org/security/"> proporciona signatura i
+verificació de documents XML per l'intercanvi segur de documents.
+
+<sect1>Desenvolupament
+
+<sect2>Apache Portable Runtime
+<p>El projecte <url name="APR" url="http://apr.apache.org">
+proporciona una capa de portabilitat que abstrau un nombre d'APIs per
+a manipulació de fitxers, accés a la xarxa, etcètera. Està escrit en C
+i funciona amb la majoria de sabors de Unix, Windows i molts altres
+sistemes. És la base per a Apache 2.0
+
+<sect2>Ant
+<p><url name="Ant" url="http://jakarta.apache.org/ant/"> és un
+ferrament de construcció basat en Java. Té una API modular i pot
+estendre's creant tasques noves. És impulsat amb fitxers de
+configuració XML.
+
+<sect2>Byte Code Library
+<p>La <url name="Byte Code Engineering Library"
+url="http://jakarta.apache.org/bcel/"> (BCEL) és una llibreria per a
+analitzar, crear i manipular fitxers binaris de classes Java.
+
+<sect2>Log4j
+<p>Este paquet proporciona un framework de logging que poden utilitzar
+aplicacions Java.  Pot ser habilitat en temps d'execució sense
+modificar el binari i s'ha dissenyat amb el rendiment en ment. Es pot
+trobar a <htmlurl url="http://jakarta.apache.org/log4j/">
+
+<sect2>ORO i Regexp
+<p>ORO és un complet paquet que proporciona suport d'expressions
+regulars per a Java. Inclou suport per a expressions regulars de
+Perl5, expressions glob, etcètera. Tot baix la llicència Apache.
+Vostè pot aprendre més sobre ORO
+a <htmlurl url="http://jakarta.apache.org/oro/index.html">. Hi ha un
+altre paquet d'expressions regulars ASF, <url name="Regexp"
+url="http://jakarta.apache.org/regexp/">.
+
+<sect2>Struts
+<p>Struts és un projecte Apache que intenta portar el paradigma del
+disseny Model-Vista-Controlador (MVC) al desenvolupament web. Es
+construeix sobre les tecnologies <url name="Servlet"
+url="http://java.sun.com/products/servlet"> i <url name="JavaServer
+Pages" url="http://java.sun.com/products/jsp">. La part del model està
+formada per Java server objects, que representen l'estat intern de
+l'aplicació. La part de la vista està construïda via JavaServer Pages
+(JSP), què és una combinació de HTML/XML estàtic i Java. Els JSP també
+permeten al desenvolupador definir noves etiquetes.  La part del
+controlador consisteix en servlets, que agafen sol·licituds (GET/POST)
+del client, realitzar accions sobre el model i actualitzen la vista
+proporcionant el JSP adequat.  Vostè pot aprendre més a
+les <url name="pàgines del projecte Struts"
+url="http://jakarta.apache.org/struts/index.html">.
+
+<sect2>Taglibs
+<p>La tecnologia JavaServer pages permet als desenvolupadors per a
+proporcionar la funcionalitat mitjançant l'adició d'etiquetes
+personalitzades. El projecte Taglibs té la intenció de ser un
+repositori comú per a aquestes extensions. Inclou etiquetes per a
+utilitats comunes (p. ex. date), accés a bases de dades SQL etcètera.
+<p>
+Vostè pot aprendre sobre TagLibs a
+<htmlurl url="http://jakarta.apache.org/taglibs/">.  Més documentació
+està inclosa en el paquet.
+
+<sect2>Base de dades
+<p><url name="OJB" url="http://jakarta.apache.org/ojb/"> és una eina
+de mapatge de base de dades que permet persistència i emmagatzematge
+d'objectes Java a bases de dades relacionals. <url name="Xindice"
+url="http://xml.apache.org/xindice/"> és una base de dades XML nativa
+per a l'emmagatzematge i sol·licitud de documents XML.
+
+<sect2>Comuns
+<p>El <url name="projecte Commons"
+url="http://jakarta.apache.org/commons/"> proporciona una gran
+varietat de components Java reutilitzables amb el mínim de
+dependències.
+
+<sect1>Proves
+<p>Els següents projectes ASF cobreixen proves i anàlisis de rendiment.
+
+<sect2>httpd-test
+<p>El <url name="projecte httpd-test"
+url="http://httpd.apache.org/test/"> proporciona una framework de
+testeig per al servidor web Apache i eines com <url name="flood"
+url="http://httpd.apache.org/test/flood/"> per a testejar la càrrega
+HTTP.
+
+<sect2>Cactus
+<p><url name="Cactus" url="http://jakarta.apache.org/cactus/"> és un
+entorn de treball de test per a testejar el codi Java de la banda de
+servidor com poden ser Servlets i EJBs.
+
+<sect2>JMeter
+<p>Aquesta és una eina de proves escrita en Java amb una careta
+gràfica. Es pot obtindre
+a <htmlurl url="http://jakarta.apache.org/jmeter/">.
+
+<sect2>Lakta
+<p><url name="Lakta" url="http://jakarta.apache.org/lakta/"> és un
+ferrament de proves HTTP d'extrem a extrem
+
+<sect2>Watchdog
+<p>El <url name="projecte Watchdog"
+url="http://jakarta.apache.org/watchdog/"> és una suite de conjunts de
+validació per a la especificació de Servlet i JavaServer Pages.
+
+<sect>On trobar més informació
+<p>Recursos Apache addicionals
+<sect1>Llocs web
+<p>A continuació, alguns llocs web d'utilitat
+<itemize>
+<item><url name="Apache Website" url="http://www.apache.org">
+<item><url name="Apache Week" url="http://www.apacheweek.com">
+<item><url name="Apache modules directory" url="http://modules.apache.org">
+<item><url name="Apache today" url="http://www.apachetoday.com">
+<item><url name="Apache World" url="http://www.apacheworld.org">
+<item><url name="Slashdot Apache section" url="http://slashdot.org/index.pl?section=apache">
+</itemize>
+<sect1>Llibres
+<p>Jo mantinc <url name="una llista de llibres"
+url="http://www.apacheworld.org/apache_overview/books/"> relacionada amb aquest document. No és una llista integral, però a canvi, incloc només aquells llibres que jo he trobat ben escrits i útils.
+<sect1>Fòrums de suport
+<p>Vostè pot trobar la llista de correu d'usuaris d'Apache
+a <htmlurl url="http://httpd.apache.org/lists.html">. Existeixen
+llistes similars per a la resta de projectes mencionats
+ací. Assegure's de que llig el document Frequently Asked Questions
+(Preguntes Freqüents) abans de publicar. Vostè pot també obtindre
+suport al grup de notícies comp.infosystems.www.servers.unix
+a <htmlurl url="http://groups.google.com">.
+<p>Si vostè vol suport comercial, considere contactar
+a <url name="Covalent" url="http://www.covalent.net">, que proporciona
+suport expert per a Apache (a una taxa, pressupost). Si vostè està
+utilitzant Apache sobre Linux, el seu proveïdor Linux pot tindre plans
+de suport que incloguen Apache.
+
+<sect>Contactant l'Autor
+<p>Vostè pot posar-se en contacte amb mi a daniel @ rawbyte.com
+. Agraïsc suggerències i correccions, però per favor, per favor, no
+m'envie missatges demanant-me que arregle la seua instal·lació
+Apache. Senzillament no dispose del temps per a contestar a gent
+individualment. Si vostè necessita suport, per favor referisca's als
+recursos mencionats més amunt.
+<p>
+
+<sect1>Traduccions
+<p>Si vostè vol contribuir amb una traducció d'este document hauria
+d'utilitzar la font SGML. Revise <htmlurl url="http://www.tldp.org">
+per a informació.  Per favor, deixe'm una nota, i així podré
+assegurar-me de que vostè obté la versió més recent.
+
+<sect>Open Content Open Publication License
+
+<p>Open Publication License
+Draft v1.0, 8 June 1999 (text version)
+
+
+<sect1>REQUIREMENTS ON BOTH UNMODIFIED AND MODIFIED VERSIONS
+
+<p>The Open Publication works may be reproduced and distributed in
+whole or in part, in any medium physical or electronic, provided that
+the terms of this license are adhered to, and that this license or an
+incorporation of it by reference (with any options elected by the
+author(s) and/or publisher) is displayed in the reproduction.
+
+<p>Proper form for an incorporation by reference is as follows:
+
+<p>Copyright (c) &lt;year&gt; by &lt;author's name or
+designee&gt;. This material may be distributed only subject to the
+terms and conditions set forth in the Open Publication License, vX.Y
+or later (the latest version is presently available at
+http://www.opencontent.org/openpub/). The reference must be
+immediately followed with any options elected by the author(s) and/or
+publisher of the document (see section VI).
+
+<p>Commercial redistribution of Open Publication-licensed material is
+permitted.
+
+<p>Any publication in standard (paper) book form shall require the
+citation of the original publisher and author. The publisher and
+author's names shall appear on all outer surfaces of the book. On all
+outer surfaces of the book the original publisher's name shall be as
+large as the title of the work and cited as possessive with respect to
+the title.
+
+
+<sect1>COPYRIGHT
+
+<p>The copyright to each Open Publication is owned by its author(s) or designee.
+
+
+<sect1>SCOPE OF LICENSE
+
+<p>The following license terms apply to all Open Publication works,
+unless otherwise explicitly stated in the document.
+
+<p>Mere aggregation of Open Publication works or a portion of an Open
+Publication work with other works or programs on the same media shall
+not cause this license to apply to those other works. The aggregate
+work shall contain a notice specifying the inclusion of the Open
+Publication material and appropriate copyright notice.
+
+<p>SEVERABILITY. If any part of this license is found to be
+unenforceable in any jurisdiction, the remaining portions of the
+license remain in force.
+
+<p>NO WARRANTY. Open Publication works are licensed and provided "as
+is" without warranty of any kind, express or implied, including, but
+not limited to, the implied warranties of merchantability and fitness
+for a particular purpose or a warranty of non-infringement.
+
+
+<sect1>REQUIREMENTS ON MODIFIED WORKS
+
+<p>All modified versions of documents covered by this license,
+including translations, anthologies, compilations and partial
+documents, must meet the following requirements:
+
+<itemize>
+
+<item> 1. The modified version must be labeled as such.
+
+<item> 2. The person making the modifications must be identified and
+the modifications dated.
+
+<item> 3. Acknowledgement of the original author and publisher if
+applicable must be retained according to normal academic citation
+practices.
+
+<item> 4. The location of the original unmodified document must be
+identified.
+
+<item> 5. The original author's (or authors') name(s) may not be used
+to assert or imply endorsement of the resulting document without the
+original author's (or authors') permission.
+
+</itemize>
+
+
+<sect1>GOOD-PRACTICE RECOMMENDATIONS
+
+<p>In addition to the requirements of this license, it is requested
+from and strongly recommended of redistributors that:
+
+<itemize>
+
+<item> 1. If you are distributing Open Publication works on hardcopy
+or CD-ROM, you provide email notification to the authors of your
+intent to redistribute at least thirty days before your manuscript or
+media freeze, to give the authors time to provide updated
+documents. This notification should describe modifications, if any,
+made to the document.
+
+<item> 2. All substantive modifications (including deletions) be
+either clearly marked up in the document or else described in an
+attachment to the document.
+
+<item> 3. Finally, while it is not mandatory under this license, it is
+considered good form to offer a free copy of any hardcopy and CD-ROM
+expression of an Open Publication-licensed work to its author(s).
+
+</itemize>
+
+<sect1>LICENSE OPTIONS
+
+<p>The author(s) and/or publisher of an Open Publication-licensed
+document may elect certain options by appending language to the
+reference to or copy of the license. These options are considered part
+of the license instance and must be included with the license (or its
+incorporation by reference) in derived works.
+
+<p>A. To prohibit distribution of substantively modified versions
+without the explicit permission of the author(s). "Substantive
+modification" is defined as a change to the semantic content of the
+document, and excludes mere changes in format or typographical
+corrections.
+
+<p>To accomplish this, add the phrase `Distribution of substantively
+modified versions of this document is prohibited without the explicit
+permission of the copyright holder.' to the license reference or copy.
+
+<p>B. To prohibit any publication of this work or derivative works in
+whole or in part in standard (paper) book form for commercial purposes
+is prohibited unless prior permission is obtained from the copyright
+holder.
+
+<p>To accomplish this, add the phrase 'Distribution of the work or
+derivative of the work in any standard (paper) book form is prohibited
+unless prior permission is obtained from the copyright holder.' to the
+license reference or copy.
+
+</article>
+
+<!-- Local IspellDict: ca-valencia -->
+<!-- Local IspellPersDict: ~/emacs/.ispell-valencia -->
+
+<!--  LocalWords:  d'Apache Lopez Ridruejo Apache HTTP Servlets JSP
+ -->
+<!--  LocalWords:  Tomcat. l'Apache Foundation L'ASF Tomcat
+ -->
