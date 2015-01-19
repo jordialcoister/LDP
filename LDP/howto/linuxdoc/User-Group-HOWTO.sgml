@@ -2,60 +2,60 @@
 
 <article>
 
-<title>Linux User Group HOWTO
+<title>COM d'Usuaris i Grups Linux
 <author><url name="Rick Moen" url="mailto:%20rick@linuxmafia.com%20"></author>
 <date>v1.8.4, 2013-07-25
 
 <abstract>
-The Linux User Group HOWTO is a guide to founding, maintaining, and
-growing a GNU/Linux user group, co-authored by Kendall Clark and Rick Moen
-(now maintained by Rick Moen).  
+El COM Usuaris i Grups Linux és una guia per a fundar, mantindre, i fer créixer
+un grup d'usuaris GNU/Linux, escrit per Kendall Clark i Rick Moen
+(ara mantingut per Rick Moen).
 </abstract>
 
 <toc>
 
-<sect>Introduction
+<sect>Introducció
 
-<sect1>Purpose
+<sect1>Propòsit
 <p>
-The Linux User Group HOWTO is intended to serve as a guide to founding,
-maintaining, and growing a GNU/Linux user group.
+El COM d'Usuaris i Grups Linux s'ha fet amb el propòsit de servir com a guia per
+a fundar, mantindre i fer créixer un grup d'usuaris GNU/Linux.
 
-GNU/Linux is a freely-distributable implementation of Unix for personal
-computers, servers, workstations, PDAs, and embedded systems.  It was
-developed on the i386 and now supports a huge range of processors from 
-tiny to colossal:
+GNU/Linux és una implementació de lliure distribució de Unix per a 
+ordinadors personals, servidors, estacions de treball, PDAs, sistemes encastats.
+Fou desenvolupat a l'i386 i ara suporta un enorme rang de processadors des de molt 
+petits fins a colossals:
 
 <itemize>
-        <item><bf>Diverse <url name="PDA / embedded / microcontroller / router" 
-              url="http://www.uclinux.org/ports/"> devices:</bf> 
+        <item><bf>Diversos dispositius <url name="PDA / encastats / micro-controladors / encaminadors" 
+              url="http://www.uclinux.org/ports/">:</bf> 
               <itemize>
-                 <item>Advanced RISC Machines, Ltd. <url name="ARM" url="http://www.arm.linux.org.uk/"> family (StrongARM SA-1110, XScale, ARM6, ARM7, ARM2, ARM250, ARM3i, ARM610, ARM710, ARM7TDMI, ARM720T, and ARM920T, including Sigma Designs DVD systems using ARM cores)</item>
+                 <item>La Família Advanced RISC Machines, Ltd. <url name="ARM" url="http://www.arm.linux.org.uk/"> (StrongARM SA-1110, XScale, ARM6, ARM7, ARM2, ARM250, ARM3i, ARM610, ARM710, ARM7TDMI, ARM720T, i ARM920T, incloent sistemes de DVD Sigma Designs utilitzant nuclis ARM)</item>
                  <item>Analog Devices, Inc.'s <url name="Blackfin DSP" url="http://www.linuxfordevices.com/c/a/News/Another-nativeDSP-Linux-port-this-one-to-ADIs-Blackfin/"></item>
-                 <item>Axis Communications <url name="ETRAX series" url="https://en.wikipedia.org/wiki/ETRAX_CRIS"> ("CRIS" = Code Reduced Instruction Set RISC architecture)</item>
-                 <item>Elan SC520 and SC300</item>
+                 <item>La <url name="sèrie ETRAX" url="https://en.wikipedia.org/wiki/ETRAX_CRIS"> d'Axis Communications ("CRIS" = Code Reduced Instruction Set Arquitectura RISC)</item>
+                 <item>Elan SC520 i SC300</item>
                  <item>FreeScale <url name="MC68EN302"
 url="http://www.freescale.com/files/netcomm/doc/data_sheet/MC68EN302.pdf"></item>
                  <item>Fujitsu <url name="FR-V" url="http://ecos.sourceware.org/hardware.html#FR-V"></item>
-                 <item>Hitachi <url name="H8" url="http://www.uclinux.org/pub/uClinux/ports/h8/"> series</item>
+                 <item>La sèrie <url name="H8" url="http://www.uclinux.org/pub/uClinux/ports/h8/"> d'Hitachi</item>
                  <item>Intel i960</item>
                  <item>Intel IA32-compatibles (Cyrix MediaGX, STMicroelectronics <url name="STPC" url="http://web.archive.org/web/20070626190436/http://www.stmcu.com/forums-cat-132-6.html">, ZF Micro ZFx86)</item>
                  <item>Matsushita <url name="AM3x" url="http://ecos.sourceware.org/hardware.html#Matsushita%20AM3x"></item>
-                 <item>MIPS-compatibles (Toshiba TMPRxxxx / TXnnnn, NEC <url name="VR" url="http://www.linux-mips.org/wiki/NEC_VR4100"> series, Realtek 8181">)</item>
-                 <item>Motorola 680x0-based machines (Motorola VMEbus boards, <url name="ISICAD Prisma" url="http://ds.dial.pipex.com/town/way/fr30/"> machines, and Motorola Dragonball &amp; <url name="ColdFire" url="http://www.uclinux.org/ports/coldfire/"> CPUs, and Cisco 2500/3000/4000 series routers)</item>
-                 <item>Motorola embedded <url name="PowerPC" url="http://penguinppc.org/embedded/"> (including MPC / PowerQUICC I, II, III families)</item>
+                 <item>MIPS-compatibles (Toshiba TMPRxxxx / TXnnnn, la sèrie <url name="VR" url="http://www.linux-mips.org/wiki/NEC_VR4100"> de NEC, Realtek 8181)</item>
+                 <item>Màquines Motorola 680x0-based (plaques Motorola VMEbus, màquines <url name="ISICAD Prisma" url="http://ds.dial.pipex.com/town/way/fr30/">, i CPUs Motorola Dragonball &amp; <url name="ColdFire" url="http://www.uclinux.org/ports/coldfire/">, i encaminadors Cisco de les sèries 2500/3000/4000)</item>
+                 <item>Motorola <url name="PowerPC" url="http://penguinppc.org/embedded/"> encastats (incloent MPC / famílies PowerQUICC I, II, III)</item>
                  <item>NEC <url name="V850E" url="http://ecos.sourceware.org/tools/linux-v850-elf.html"></item>
                  <item>Renesas Technology (formerly Hitachi) SH3/SH4 (<url name="SuperH" url="http://wiki.debian.org/SH4">)</item>
                  <item>Samsung <url name="CalmRISC" url="http://ecos.sourceware.org/hardware.html#CalmRISC"></item>
-                 <item>Texas Instruments's <url name="DM64x" url="http://www.linuxfordevices.com/c/a/News/Worlds-first-nativeDSP-Linux-port/"> and <url name="C54x DSP" url="http://www.linuxfordevices.com/c/a/News/Embedded-Linux-distro-supports-TI-DSPbased-digital-media-processors/"> families</item>
-		 <item>Xilinx <url name="PetaLinux" url="http://www.xilinx.com/tools/petalinux-sdk.htm"> (formerly SoftBlaze, formerly Microblaze) soft processor implemented on Xilinx FPGAs</item>
+                 <item>Les famílies de Texas Instruments <url name="DM64x" url="http://www.linuxfordevices.com/c/a/News/Worlds-first-nativeDSP-Linux-port/"> i <url name="C54x DSP" url="http://www.linuxfordevices.com/c/a/News/Embedded-Linux-distro-supports-TI-DSPbased-digital-media-processors/"></item>
+		 <item>Xilinx <url name="PetaLinux" url="http://www.xilinx.com/tools/petalinux-sdk.htm"> (abans coneguda com SoftBlaze, abans coneguda com Microblaze) processador tou implementat sobre FPGAs Xilinx</item>
               </itemize>
         </item>
         <item><bf>Intel <url name="8086 / 80286" 
               url="http://elks.sourceforge.net/"></bf>.</item>
-        <item><bf>Intel IA32 family:</bf> i386, i486, Pentium, Pentium Pro, 
-              Pentium II, Pentium III, Celeron, Xeon, and Pentium IV processors, 
-              as well as IA32 clones from AMD (386DX/DXL/SL/SLC/SX, 
+        <item><bf>La família Intel IA32:</bf> processadors i386, i486, Pentium, 
+	      Pentium Pro, Pentium II, Pentium III, Celeron, Xeon, and Pentium IV, 
+              així com els clons d'IA32 d'AMD (386DX/DXL/SL/SLC/SX, 
               486DX/DX2/DX4/SL/SLC/SLC2/SLC3/SX/SX2, Elan, K5, 
               K6/K6-II/K6-III), Cyrix (386DX/DXL/SL/SLC/SX, 
               486DLC/DLC2/DX/DX2/DX4/SL/SLC/SLC2/SLC3/SX/SX2, Cyrix III), 
@@ -64,103 +64,105 @@ url="http://www.freescale.com/files/netcomm/doc/data_sheet/MC68EN302.pdf"></item
               NexGen (Nx586), Transmeta (Crusoe), 
               TI (486DLC/DLC2), UMC (486SX-S, U5D/U5S), 
               VIA (C3 Ezra "CentaurHauls", C3-2 "Nehemiah"), 
-              and others.</item>
+              i altres.</item>
         <item><bf>Intel/HP <url name="IA64"
               url="http://www.ia64-linux.org/">:</bf> Trillian, Itanium, Itanium2/McKinley</item>
         <item><bf>x86-64 family</bf>
-              including AMD Hammer/Opteron/K8/Athlon64/Turion/Phenom/Phenom II/FX/Fusion and 
-              Intel Prescott/Nocona/Potomac, Core, Atom, Nehalem, Sandy Bridge and Ivy Bridge</item>
-        <item><bf>Motorola <url name="68020-68040"
-              url="http://www.linux-m68k.org/"> series (with MMU)</bf>: 
+              incloent AMD Hammer/Opteron/K8/Athlon64/Turion/Phenom/Phenom II/FX/Fusion i 
+              Intel Prescott/Nocona/Potomac, Core, Atom, Nehalem, Sandy Bridge i Ivy Bridge</item>
+        <item><bf>Motorola sèries <url name="68020-68040"
+              url="http://www.linux-m68k.org/"> (amb MMU)</bf>: 
               <url name="m68k Mac" url="http://www.mac.linux-m68k.org/">, 
               Amiga, Atari ST/TT/Medusa/Falcon, HP/Apollo Domain, 
               <url name="HP9000/300"
               url="http://www.tazenda.demon.co.uk/phil/linux-hp/">, 
-              sun3, and 
+              sun3, i 
               <url name="Sinclair Q40"
               url="http://ftp4.de.freesbie.org/pub/misc/tsx-11/680x0/q40/install/">.
               </item>
-        <item><bf>Motorola/IBM PowerPC family:</bf> Most 
+        <item><bf>Motorola/IBM PowerPC family:</bf> La majoria de 
               <url name="PowerMac"
-              url="http://penguinppc.org/mac/"> (including G3/G4/G5)  /
+              url="http://penguinppc.org/mac/"> (incloent G3/G4/G5)  /
               CHRP / PReP / POP,  
               <url name="Amiga PowerUP System" 
               url="http://linux-apus.sourceforge.net/">, 
-              and IBM PPC64 (AS/400, RS/6000, iSeries,
+              i IBM PPC64 (AS/400, RS/6000, iSeries,
               pSeries, PowerMac G5).</item>  
         <item><bf><url name="MIPS"url="http://www.linux-mips.org/">:</bf> 
-              most SGI, Cobalt Qube, 
+              la majoria d'SGI, Cobalt Qube, 
               <url name="DECStation" url="http://decstation.unix-ag.org/">, 
-              Sony PlayStation2, and many others</item>
+              Sony PlayStation2, i molts altres</item>
         <item><bf>DEC <url name="Alpha" url="http://www.alphalinux.org/"></bf></item>
         <item><bf>HP <url name="PA-RISC" url="http://www.parisc-linux.org/"></bf></item>
         <item><bf>SPARC International SPARC32 / SPARC64</bf></item>
         <item><bf>Digital <url name="VAX"
-              url="http://vax-linux.org/"> minicomputers and MicroVAXen</bf></item>
+              url="http://vax-linux.org/"> mini-ordinadors i MicroVAXen</bf></item>
         <item><bf>Mainframes:</bf> <url name="IBM S/390 models G5 and G6 / zSeries models z800, z890, z900, and z990"
-               url="https://www.ibm.com/developerworks/linux/linux390/"> and Fujitsu AP1000+ (SuperSPARC cluster)</item>
+               url="https://www.ibm.com/developerworks/linux/linux390/"> i Fujitsu AP1000+ (cluster SuperSPARC)</item>
 </itemize>
 
-Note that some items listed were probably one-time forks, little or not
-at all maintained since creation.  On some of the rarer architectures, 
-<url name="NetBSD" url="http://www.netbsd.org/"> may be more practical.
-(The 
-<url name="Debian GNU/kFreeBSD" url="http://www.debian.org/ports/kfreebsd-gnu/"> port should also be solid enough to 
-serve as a compromise option, furnishing GNU/Linux userspace code on the
-high performance / high stability FreeBSD kernel, and <url name="NexentaOS" url="http://en.wikipedia.org/wiki/Nexenta_OS">
-provides something similar on the OpenSolaris kernel.)
+Tinga en compte que algunes de les entrades llistades van ser probablement one-time forks, 
+poc o gens mantinguts des de la seua creació.  En algunes de les arquitectures meś rares, 
+<url name="NetBSD" url="http://www.netbsd.org/"> pot ser més pràctic.
+(El port <url name="Debian GNU/kFreeBSD" url="http://www.debian.org/ports/kfreebsd-gnu/"> 
+hauria de ser prou sòlid també com per a ser una opció de compromís, furnishing el codi d'espai 
+d'usuari GNU/Linux sobre el nucli FreeBSD d'alt rendiment / alta estabilitat, i 
+<url name="NexentaOS" url="http://en.wikipedia.org/wiki/Nexenta_OS"> proporciona alguna cosa 
+similar sobre el nucli OpenSolaris.)
 
-If seriously interested in the subject of Linux ports, please see also 
-<url name="Xose Vazquez Perez's Linux ports page" 
-url="http://web.archive.org/web/20070813000855/http://www.itp.uni-hannover.de/ports/linux_ports.html"> and
-<url name="Jerome Pinot's Linux architectures list"
-url="http://web.archive.org/web/20050308130348/http://ngc891.blogdns.net/kernel/docs/arch.txt"> (static mirrors, as both pages vanished in 2005), if only because 
-hardware support is more complex than just generic CPU functionality, 
-encompassing support for myriad bus variations and other subtle hardware
-issues (especially for 
-<url name="Linux PDA / embedded / microcontroller / router ports" 
+Si està seriosament interessat en el tema dels ports de Linux, per favor mire també
+<url name="la pàgina de ports de Linux de Xose Vazquez Perez" 
+url="http://web.archive.org/web/20070813000855/http://www.itp.uni-hannover.de/ports/linux_ports.html"> i
+<url name="la llista d'arquitectures Linux de Jerome Pinot"
+url="http://web.archive.org/web/20050308130348/http://ngc891.blogdns.net/kernel/docs/arch.txt"> (espills estàtics, 
+ja que les dos pàgines es van esvaïr en 2005), si només perque el suport
+de maquinar és més complexe que simplement la funcionalitat genèrica de CPU,
+acompassar el suport per a innumerables variacions de busos i altres problemes 
+subtils de maquinari (especialment per a <url name="ports de Linux PDA / encastats / micro-controladors / encaminadors" 
 url="http://www.linuxfordevices.com/">).  
-The above list aims mostly to generally illustrate the breadth of 
-Linux's reach.
+La llista de dalt pretén il·lustrar de forma genèrica l'amplitud de la riquesa de Linux.
 
-<sect1>Other sources of information
+<sect1>Altres fonts d'informació
 <p>
-If you want to learn more, the <url url="http://www.tldp.org/"
-name="Linux Documentation Project"> is a good place to start.
+Si vol aprendre més, el <url url="http://www.tldp.org/"
+name="Linux Documentation Project"> és un bon lloc per on començar.
 
-For general information about computer user groups, please see the
+Per a informació general sobre grups d'usuaris, per favor mire 
 <url name="Association of PC Users Groups"
 url="http://www.apcug.net/">.
 
-<sect>What is a GNU/Linux user group?
+<sect>Què és un grups d'usuaris de GNU/Linux?
 <p>
 
-<sect1>What is GNU/Linux?
+<sect1>Què és GNU/Linux?
 <p>
-To fully appreciate LUGs' role in the GNU/Linux movement, it helps to
-understand what makes GNU/Linux unique.
+Per a apreciar completament els rol dels GUL en el moviment GNU/Linux, l'ajudarà 
+comprendre que fa de GNU/Linux únic.
 
-GNU/Linux as an operating system is powerful -- but GNU/Linux as an
-<it><bf>idea</bf></it> about software development is even more so. GNU/Linux
-is a <bf>free</bf> operating system: It's licensed under the GNU General
-Public Licence. Thus, source code is freely available in perpetuity to
-anyone.  It's maintained by a unstructured group of programmers
-world-wide, under technical direction from Linus Torvalds and other key
-developers. GNU/Linux as a movement has no central structure, bureaucracy,
-or other entity to direct its affairs. While this situation has
-advantages, it poses challenges for allocation of human resources,
-effective advocacy, public relations, user education, and training.
+GNU/Linux com a sistema operatiu és potent -- però GNU/Linux com a 
+<it><bf>idea</bf></it> sobre desenvolupament de programari ho és
+encara més. GNU/Linux és un sistema operatiu <bf>lliure</bf>: Està
+licenciat baix la GNU General Public Licence. Així, el codi font està
+disponible lliurement de manera perpetua per a tothom.  Està mantingut
+per un grup des-estructurat de programadors al voltant del món, baix
+la direcció tècnica de Linux Torvals i altres desenvolupadors
+clau. GNU/Linux com a moviment no té una estructura central,
+burocràcia, o altres entitats per a dirigir els seus assumptes. Mentre
+que aquesta situació té avantatges, això planteja reptes per a
+l'assignació de recursos humans, la defensa efectiva de Linux, les
+relacions públiques, la educació dels usuaris, i la formació.
 
 <p>
-(This HOWTO credits the Free Software Foundation's 
+(Aquest COM reconeix el 
 <url name="GNU Project" url="http://www.gnu.org/gnu/gnu-history.html">
-as the crucial motive force behind creating and furthering a free 
-aka open source integrated system.  Thus, it refers to "distributions" 
-comprising the GNU operating system atop the Linux kernel as "GNU/Linux".
-Yes, the term is awkward, and FSF's request for credit isn't widely 
-honoured; but the justice of FSF's claim is obvious.)
+de la Free Software Foundation com la força motriu crucial darrere de
+la creació i el foment d'un sistema lliure, àlies de font oberta.
+Així, es refereix a les "distributions" formades pel sistema operatiu
+GNU al cim del nucli Linux com "GNU/Linux".  Sí, el terme és incòmode,
+i les peticions de la FSF de reconeixmenet no són amplament honorades;
+però la justícia que reclama la FSF és òbvia.)
 
-<sect1>How is GNU/Linux unique?
+<sect1>Com és GNU/Linux únic?
 <p>
 GNU/Linux's loose structure is unlikely to change.  That's a good thing:
 It works precisely because people are free to come and go as they
@@ -1622,3 +1624,5 @@ suggestions:
 
 </article>
 
+<!-- Local IspellDict: ca-valencia -->
+<!-- Local IspellPersDict: ~/emacs/.ispell-valencia -->

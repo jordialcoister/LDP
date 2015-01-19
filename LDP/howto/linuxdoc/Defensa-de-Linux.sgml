@@ -1,256 +1,261 @@
 <!doctype linuxdoc system>
-
 <article>
 
-<title>Linux Advocacy mini-HOWTO
+<title>Mini-COM de defensa de Linux
 <author>Paul L. Rogers,
-<tt><htmlurl url  = "mailto:Paul.L.Rogers@li.org"
-             name = "Paul.L.Rogers@li.org"></tt>
+<tt><htmlurl url="mailto:Paul.L.Rogers@li.org" name="Paul.L.Rogers@li.org"></tt>
 
-<date>v0.5c, 3 May 2000
+<date>v0.5c, 3 Maig 2000
 <abstract>
-This document provides suggestions for how the Linux community can
-effectively advocate the use of Linux.
+Aquest document proporciona propostes sobre com la comunitat Linux pot
+defensar de manera efectiva l'ús de Linux.
 </abstract>
 
 <toc>
 
 
-<sect>About this document 
+<sect>Sobre aquest document 
 <p>
 
-This is the Linux Advocacy mini-HOWTO and is intended to provide guidelines
-and ideas to assist with <em>your</em> Linux advocacy efforts.
+Aquest és el mini-COM de defensa de Linux i està pensat per a
+proporcionar directrius i idees per a ajudar-lo amb els <em>seus</em>
+esforços en defensa de Linux.
 
-This mini-HOWTO was inspired by Jon ``maddog'' Hall when he responded to a
-request for feedback on guidelines for advocating Linux during
-<url url  = "http://www.netday.org"
-     name = "NetDay"> activities.  He responded positively to the
-guidelines and observed that they were the basis of a list of ``canons
-of conduct'' that would benefit the Linux community.
+Aquest mini-COM es va inspirar en Jon ``maddog'' Hall quan respongué a
+una sol·licitud de directius per a la defensa de Linux durant les
+activitats del <url url = "http://www.netday.org" name = "NetDay">.
+Ell respongué positivament a les directrius i va observar que eren el
+fonament d'una llista de ``cànons de conducta'' que beneficiarien a la
+comunitat Linux.
 
-This document is available in HTML form at
-<htmlurl url  = "http://www.datasync.com/~rogerspl/Advocacy-HOWTO.html"
-         name = "http://www.datasync.com/~rogerspl/Advocacy-HOWTO.html">.
+Aquest document està disponible en format HTML a
+<htmlurl url = "http://www.datasync.com/~rogerspl/Advocacy-HOWTO.html"
+         name = 
+         "http://www.datasync.com/~rogerspl/Advocacy-HOWTO.html">.
 
 Nat Makarevitch
-<htmlurl url  = "mailto:nat@nataa.fr.eu.org"
-         name = "&lt;nat@nataa.fr.eu.org&gt;">
-has translated this document into
-<url url  = " http://www.linux-france.org/article/these/advocacy/Advocacy-HOWTO-fr.html"
-     name = "French">.
+<htmlurl url = "mailto:nat@nataa.fr.eu.org" name =
+         "&lt;nat@nataa.fr.eu.org&gt;"> ha traduït aquest document al
+<url url = "
+     http://www.linux-france.org/article/these/advocacy/Advocacy-HOWTO-fr.html"
+     Name = "Francés">.
 
 Chie Nakatani
-<htmlurl url  = "mailto:jeanne@mbox.kyoto-inet.or.jp"
-         name = "&lt;jeanne@mbox.kyoto-inet.or.jp&gt;">
-has translated this document into
+<htmlurl url = "mailto:jeanne@mbox.kyoto-inet.or.jp" name =
+         "&lt;jeanne@mbox.kyoto-inet.or.jp&gt;"> ha traduït aquest
+         document al
 <url url  = "http://jf.linux.or.jp/JFdocs/Advocacy.html"
-     name = "Japanese">.
+     name = "Japonés">.
 
 Janusz Batko
 <htmlurl url  = "mailto:janus@krakow.linux.org.pl"
          name = "&lt;janus@krakow.linux.org.pl&gt;">
-has translated this document into
+ha traduït aquest document al 
 <url url  = "http://www.jtz.org.pl/Html/mini/Advocacy.pl.html"
-     name = "Polish">.
+     name = "Polac">.
 
 Bruno H. Collovini
 <htmlurl url  = "mailto:buick@microlink.com.br"
          name = "&lt;buick@microlink.com.br&gt;">
-has translated this document into
+ha traduït aquest document al 
 <url url  = "http://www.microlink.com.br/~buick/dragons/op1/minihowtos/br-advocacy.html"
-     name = "Portuguese">.
+     name = "Portugués">.
 
 Mauricio Rivera Pineda
 <htmlurl url  = "mailto:rmrivera@hotmail.com"
          name = "&lt;rmrivera@hotmail.com&gt;">
-has translated this document into
+ha traduït aquest document al 
 <url url  = "http://www.linux-es.com/docs/HOWTO/translations/es/mini/Advocacy-Mini-Como"
-     name = "Spanish">.
+     name = "Espanyol">.
 
-The author and maintainer of the Linux Advocacy mini-HOWTO is Paul L. Rogers
+Jordi Garcia Soler
+<htmlurl url  = "mailto:rmrivera@hotmail.com"
+         name = "&lt;rmrivera@hotmail.com&gt;">
+ha traduit aquest document al 
+<url url  = "http://www.linux-es.com/docs/HOWTO/translations/es/mini/Advocacy-Mini-Como"
+     name = "Valencià">.
+
+
+L'autor i mantenidor del mini-COM de Defensa de Linux és Paul L. Rogers
 <htmlurl url  = "mailto:Paul.L.Rogers@li.org"
          name = "&lt;Paul.L.Rogers@li.org&gt;">.
 
-Comments and proposed additions are welcome.
+Els comentaris i propostes d'afegits són benvinguts.
 
-If you need to know more about the
+Si necessita saber més sobre el
 <htmlurl url  = "http://www.linuxdoc.org/"
          name = "Linux Documentation Project">
-or about Linux HOWTO's, feel free to contact the supervisor Tim Bynum
+o sobre COMs de Linux, ets lliure de contactar amb el supervisor Tim Bynum
 <htmlurl url  = "mailto:linux-howto@sunsite.unc.edu"
          name = "&lt;linux-howto@sunsite.unc.edu&gt;">.
-Tim Bynum will post this document to several national and international
-newsgroups on a monthly basis.
+Tim Bynum publicarà aquest document a diversos grups de notícies nacionals
+i internacionals mensualment.
 
-A personal note: Due to various circumstances, I have not been able
-to dedicate as much time to maintaining this mini-HOWTO and interacting
-with the Linux community as I would have desired.  I apologize for this
-and if you have attempted to contact me and I was slow in responding,
-please forgive me being so inconsiderate.  While I still have many other
-commitments, I am anticipating that they will start requiring less time
-to meet and allow me to catch up on other parts of my life.
-I appreciate your patience and would like to extend a special thanks
-to all who have taken the time to suggest additions and corrections.
+Una nota personal: Degut a vàries circumstàncies, no he pogut dedicar-li tant
+temps com haguera volgut a mantindre aquest manicomi i a interactuar amb la 
+comunitat Linux com haguera desitjat. Demane disculpes per això, i si vosté ha
+intentat contactar amb mi i he tardat en contestar, per favor, disculpe'm
+per ser tan desconsiderat. Malgrat que encara tinc molts altres compromisos,
+anticipe que començaran a requerir-me menys dedicació i a permetre'm dedicar-me
+a altres parts de la meua vida.
+Agraïsc la seua paciència i voldria estendre un agraïment especial a tots 
+els que s'han pres la molèstia de suggerir adicions i correccions.
 
-<sect>Copyright Information
+<sect>Informació de Copyright
 <p>
 
-This mini-HOWTO is Copyright &copy; 1996-2000 by Paul L. Rogers.  All rights
-reserved.
+Este mini-COM és Copyright &copy; 1996-2000 per Paul L. Rogers.  Tots els
+drets reservats.
 <p>
-A verbatim copy may be reproduced or distributed in any medium physical or
-electronic without permission of the author.  Translations are similarly
-permitted without express permission if it includes a notice on who translated
-it.
+Una copia literal pot ser reproduïda o distribuïda en qualsevol medi físic
+o electrònic sense el permís de l'autor. Les traduccions estan igualment
+permeses sense autorització expressa si inclou un avís de qui el va traduir.
 <p>
-Short quotes may be used without prior consent by the author.  Derivative work
-and partial distributions of the Advocacy mini-HOWTO must be accompanied with
-either a verbatim copy of this file or a pointer to the verbatim copy.
+Es poden utilitzar cites breus sense el consentiment previ de l'autor. Els 
+treballs derivats i les distribucions parcials del mini-COM de Defensa de Linux
+han d'anar acompanyats d'una còpia literal d'aquest fitxer o un enllaç a la
+mateixa.
 <p>
-Commercial redistribution is allowed and encouraged; however, the author would
-like to be notified of any such distributions.
+La redistribució comercial està permesa i es convida a fer-la; No obstant això,
+a l'autor li agradaria ser notificat de cadascuna de les distribucions.
 <p>
-In short, we wish to promote dissemination of this information through as many
-channels as possible.  However, we do wish to retain copyright on the HOWTO
-documents, and would like to be notified of any plans to redistribute the
-HOWTOs.
+Resumint, desitgem promocionar i difondre aquesta informació a través de 
+tants canals com siga possible. No obstant això, desitgem retindre el copyright
+dels documents COM, i voldríem ser notificats dels plans per redistribuir-los.
 <p>
-We further want that <em>all</em> information provided in the HOWTOs is
-disseminated.  If you have questions, please contact Tim Bynum, the Linux
-HOWTO coordinator, at 
+Es més, nosaltres volem que <em>tota</em> la informació facilitada en els COMs es
+difonga. Si té alguna pregunta, per favor, contacte amb Tim Bynum, el 
+coordinador dels Linux COM, a 
 <htmlurl url  = "mailto:linux-howto@sunsite.unc.edu"
          name = "linux-howto@sunsite.unc.edu">.
 
 
-<sect>Introduction
+<sect>Introducció
+<p>
+La comunitat Linux ha sabut durant un temps que per a moltes 
+aplicacions, Linux és un producte estable, confiable i robust 
+(malgrat que no perfecte). Desafortunadament, encara hi ha
+molta gent, incloent key decision-makers, que no estan assabentats
+de la existència de Linux i les seues capacitats.
+
+Si Linux i tots els altres components que maquillen una distribució de
+Linux encara no han alcançat el seu màxim potencial, és crític que 
+nosaltres arribem a ``clients'' potencials i defensem (anant amb compte 
+de no prometre massa) l'ús de Linux per a les aplicacions apropiades. 
+La raó de que moltes empreses de productes ho hagen fer bé en el mercat 
+no és deu majoritàriament a la superioritat tècnica del producte, sinó
+a les capacitats de marketing de la empresa.
+
+Si vosté disfruta utilitzant Linux i li agradaria contribuir d'alguna 
+manera a la comunitat Linux, per favor considere actuar de una o més de
+les idees en aquest mini-HOWTO i ajude a altres a aprendre més sobre 
+Linux.
+
+
+<sect>Informació Relacionada
 <p>
 
-The Linux community has known for some time that for many
-applications, Linux is a stable, reliable, robust (although not
-perfect) product.  Unfortunately, there are still many people,
-including key decision-makers, that are not aware of the existence of
-Linux and its capabilities.
-
-If Linux and the many other components that make up a Linux
-distribution are to reach their full potential, it is critical that we
-reach out to prospective ``customers'' and advocate (being careful not
-to promise too much) the use of Linux for appropriate applications.
-The reason that many a company's products have done well in the
-marketplace is not so much due to the product's technical superiority
-but the company's marketing abilities.
-
-If you enjoy using Linux and would like to contribute something to
-the Linux community, please consider acting on one or more of the
-ideas in this mini-HOWTO and help others learn more about Linux.
-
-
-<sect>Related Information
-<p>
-
-Lars Wirzenius, former
+Lars Wirzenius, formador
 <htmlurl url  = "news:comp.os.linux.announce"
          name = "comp.os.linux.announce">
-moderator and long-time Linux activist, also has some
+moderador i activista Linux de llarga durada, també té alguns
 <url url = "http://www.iki.fi/liw/texts/advocating-linux.html"
-name = "thoughts">
-about Linux advocacy.  
+name = "pensaments"> sobre defensa de Linux.  
 
-Eric S. Raymond provides an
+Eric S. Raymond proporciona una
 <url url  = "http://www.tuxedo.org/~esr/writings/cathedral-bazaar/cathedral-bazaar.html"
-     name = "analysis">
-of why the development model used by the Linux community has
-been so successful.
+     name = "anàlisi">
+de perquè el model de desenvolupament utilitzat per la comunitat Linux ha
+sigut tan exitós.
 
-The free software community has recognized that the terms
-"free software" and "freely available software" are not appropriate
-in all contexts.  For more information about using the term
-"open-source software" when marketing "free software", please
-visit the
+La comunitat del software lliure ha reconegut que els termes
+"programari lliure" i "programari lliurement disponible" no són apropiats
+en tots els contexts. Per a més informació sobre la utilització del terme
+"programari de font oberta" al vendre "programari lliure", per favor
+visit el lloc
 <url url  = "http://www.opensource.org/"
      name = "Open Source">
-site.
+.
 
-If you need to brush up on your Linux sales techniques,
-take a look at the
+Si vostè necessita "raspallar-se" en les seues tècniques de venta de Linux,
+faça una cop d'ull al assaig 
 <url url  = "http://zgp.org/~dmarti/linuxmanship/"
      name = "Linuxmanship">
-essay by Donald B. Marti, Jr.
+per Donald B. Marti, Jr.
 
-The 
-<url url  = "http://www.cse.unsw.edu.au/~conradp/linux/pr/"
-     name = "Linux PR">
-site discusses the importance of press releases to the Linux
-community.  Another way to gain valuable experience in this
-area is to organize a NetDay at a local school using the
-guidelines presented in the
+El lloc 
+<url url = "http://www.cse.unsw.edu.au/~conradp/linux/pr/" name =
+     "Linux PR"> discuteix la importància dels lliuraments de premsa
+     per a la comunitat Linux.  Una altra manera de guanyar
+     experiència valuosa en aquesta àrea és organitzar un NetDay a una
+     escola local utilitzant les directrius presentades a la guia
 <url url  = "http://www.netday.org/NetDay/howto/guide/"
      name = "NetDay How-To Guide">.
 
+L'objectiu de 
 <url url  = "http://www.li.org/"
-     name = "Linux International's">
-goal is to promote the development and use of Linux.
+     name = "Linux International">
+és promoure el desenvolupament i la utilització de Linux.
 
-The
+El
 <url url  = "http://www.linuxdoc.org/"
      name = "Linux Documentation Project">
-is an invaluable resource for Linux advocates.
+és un recurs d'incalculable valor per als defensors de Linux.
 
-The
+El
 <url url  = "http://www.portalux.com/"
      name = "Linux Center Project">
-provides a thematical index of resources about
-Linux and free software.
+proporciona un índex temàtic de recursos sobre Linux i el programari lliure.
 
-The
+El lloc 
 <url url  = "http://www.m-tech.ab.ca/linux-biz/"
      name = "Linux Business Applications">
-site provides a forum for organizations that depend on Linux
-for day-to-day business operations to share their experiences.
+proporciona un fòrum per a organitzacions que depenen de Linux 
+en les operacions de cada dia per a compartir experiències.
 
 <url url  = "http://linas.org/linux/"
      name = "Linux Enterprise Computing">
-and
+i
 <url url  = "http://www.cyber.com.au/misc/frsbiz/"
      name = "Freely Redistributable Software in Business">
-cover resources and topics of interest to those
-deploying Linux in a business/commercial/enterprise setting.
+cobreixen recursos i temes d'interés per a aquells que 
+despleguen Linux en un entorn de professional/comercial/empresarial.
 
-The
+L'objectiu de 
 <url url  = "http://www.10mb.com/linux/"
-     name = "Linux Advocacy Project's">
-goal is to encourage commercial application developers
-to provide native Linux versions of their software.
+     name = "Linux Advocacy Project's"> és encoratjar als
+desenvolupadors d'aplicacions comercials a proporcionar versions
+natives per a Linux del seu programari.
 
-The
+El programa
 <url url  = "http://visar.csustan.edu/giveaway.html"
      name = "Linux CD and Support Giveaway">
-program is helping make Linux more widely
-available by encouraging the reuse of Linux CD-ROMs.
+està ajudant a fer Linux disponible més àmpliament
+animant la reutilització de CD-ROMs de Linux.
 
 <htmlurl url  = "http://www.ssc.com/"
          name = "Specialized Systems Consultants, Inc. (SSC)">
-hosts the
+allotja el lloc 
 <url url  = "http://www.linuxresources.com/"
      name = "Linux Resources">
-site and publishes the
+i publica el
 <em><url url  = "http://www.linuxjournal.com/"
          name =  "Linux Journal"></em>.
 
-The 
+La llista de correu 
 <url url  = "http://www.lege.com/linux-biz.html"
      name = "linux-biz">
-mailing list is a forum created to discuss the
-use of Linux in a business environment.  
+és un fòrum creat per a discutir la utilització
+de Linux en entorns de negocis.  
 
-The Linux Mission Critical Systems
+Sistemes Linux de Missió Crítica
 <url url  = "http://wauug.erols.com/mclinux/results.html"
      name = "survey">
-documents successful existing systems which have a large
-load and are up 24 hours per day.
+documenta sistemes exitosos existents que suporten un gran càrrega 
+i estan encesos 24 hores al dia.
 
-A number of online publications are now devoted to
-covering Linux. These include:
+Un nombre de publicacions en línia estan ara dedicades a
+cobrir Linux. Aquestes inclouen:
 <itemize>
 <item><em><url url  = "http://mercury.chem.pitt.edu/~angel/LinuxFocus/"
                name = "LinuxFocus"></em>
@@ -265,135 +270,135 @@ covering Linux. These include:
                name = "PLUTO Journal"></em>.
 </itemize>
 
-Additional links to online publications can be found at the
+Enllaços addicionals a publicacions en línia es poden trobar al
 <url url  = "http://www.linuxdoc.org/links/media.html"
      name = "Linux Documentation Project">
-and the
+i al
 <url url  = "http://www.portalux.com/informations/journals/"
      name = "Linux Center Project">.
 
-<sect>Advocating Linux
+<sect>Defensa de Linux
 <p>
 
 <itemize>
-<item>Share your personal experiences (good and bad) with Linux.
-      Everyone knows that software has bugs and limitations and
-      if we only have glowing comments about Linux, we aren't
-      being honest.  I <em>love</em> to tell people about having to
-      reboot four times (three scheduled) in three years.
+<item>Comparteix les teues experiències personals (bones i dolentes) amb Linux.
+  Tothom sap que el programari té errors i limitacions i si nosaltres
+  només tenim comentaris brillants sobre Linux, no estarem sent 
+  sincers. A mi <em>m'encanta<em> contar-li a la gent sobre haver de
+  reiniciar quatre vegades (tres programades) en tres anys.
+      
+<item>Si algú té un problema que Linux podria ser capaç de resoldre,
+  oferisca's a proporcionar enllaços a la informació apropiada
+  (Pàgines web, articles de revistes, llibres, consultors, &hellip;).
+  Si, de fet, vostè no ha utilitzat la solució proposada, diga-ho.
 
-<item>If someone has a problem that Linux may be able to solve,
-      offer to provide pointers to appropriate information
-      (Web pages, magazine articles, books, consultants, &hellip;).
-      If you haven't actually used the proposed solution, say so.
-
-<item>If you are available for making presentations about Linux,
-      register with the
-      <url url  = "http://noframes.linuxjournal.com/lsb/listing.html"
+<item>Si està disponible per a fer presentacions sobre Linux, registre's
+  amb el <url url  = "http://noframes.linuxjournal.com/lsb/listing.html"
            name = "Linux Speakers Bureau">.
 
-<item>Offer to help someone start using Linux.  Follow up to make
-      sure that they are able to use their system effectively.
+<item>Oferisca's a ajudar a algú a començar a utilitzar Linux. Faça un 
+  seguiment per a assegurar-se de que ells poden utilitzar els seus
+  sistemes de manera efectiva.
 
-<item>Some people still believe that Linux and similar systems
-      operate only in text-mode.  Make sure that they are aware of
-      the availability of graphical applications, such as the
+<item>Alguna gent encara creu que Linux i sistemes similars operen només en
+  mode text. Assegure's de que ells estiguen assabentats de la disponibilitat 
+  d'aplicacions gràfiques com el
       <url url  = "http://www.gimp.org/"
            name = "Gimp">.
 
-<item>Try to respond to one ``newbie'' posting each week.
-      Seek out the tough questions, you may be the only one
-      to respond and you may learn something in the process.     
-      However, if you aren't confident that you can respond with 
-      the correct answer, find someone that can.
+<item>Intente respondre a la publicació d'un ``newbie'' cada setmana.
+  Busca les preguntes més complicades, potser ets l'únic en respondre
+  i podria aprendre alguna cosa en el procés.
+  Tanmateix, si vostè no confia en poder contestar amb la resposta correcta, 
+  trobe algú que puga.
 
-<item>Seek out small software development firms and offer to make
-      a presentation about Linux.
+<item>Busque xicotetes firmes de desenvolupament de programari i oferisca'ls 
+  fer una presentació sobre Linux.
 
-<item>If the opportunity arises, make a presentation to your
-      employer's Information Technology group.
+<item>Si la oportunitat sorgeix, faça una presentació al grup de Tecnologia
+  de la informació del seu empleador.
 
-<item>Participate in community events such as 
+<item>Participe en esdeveniments de la comunitat com 
       <url url  = "http://www.netday.org/"
            name = "NetDay">.
-      While your first priority must be to
-      contribute to the success of the event, use the opportunity to let
-      others know what Linux can do for them.
+      Mentres la seua prioritat ha de ser contribuir a l'èxit de l'esdeveniment, 
+      utilitze la oportunitat per a permetre a altres saber què pot fer Linux 
+      per ells.
 
-<item>Always consider the viewpoints of the person to whom you are
-      ``selling'' Linux.  Support, reliability, interoperability and
-      cost are all factors that a decision-maker must consider.
-      Of the above, cost is often the least important portion of the equation.
+<item>Tinga sempre en consideració els punts de vista de la persona a qui li
+  està ``venent'' Linux. Suport, fiabilitat, interoperabilitat i preu són
+  tots els factors que un decision-maker ha de considerar.
+  De dalt, el preu sol ser la porció menys important de l'ecuació.
 
-<item>Availability of support is often mentioned as a concern when
-      considering the adoption of Linux.  Companies such as
+<item>La disponibilitat de suport sol ser mencionada com una preocupació al
+  considerar l'adopció de Linux.  Empreses com
       <url url  = "http://www.caldera.com/"
            name = "Caldera">,
       <url url  = "http://www.cygnus.com/"
            name = "Cygnus Solutions">,
       <url url  = "http://www.redhat.com/"
            name = "Red Hat">,
-      and
+      i
       <url url  = "http://www.suse.com/"
            name = "S.u.S.E.">
-      offer support for some or all components of a typical Linux
-      distribution.  In addition, the
+      ofereixen suport per a alguns o tots els components d'una distribució 
+      típica de Linux. A més, el
       <url url  = "http://www.linuxdoc.org/HOWTO/Consultants-HOWTO.html"
            name = "Linux Consultants HOWTO">
-      provides a listing of companies providing commercial
-      Linux related support.  Of course, some of the best support is
-      found in the <em>comp.os.linux</em> and <em>linux</em> newsgroup
-      hierarchies.
+      proporciona un llistat d'empreses que proporcionen suport comercial 
+      relatiu a Linux. Pressupost, part del millor suport es troba a les 
+      jerarquies dels grups de notícies <em>comp.os.linux</em> i <em>linux</em>.
       
-<item>Point out that the production of
+<item>Assenyalar que la producció de 
       <url url  = "http://www.opensource.org/"
            name = "open-source software">
-      takes place in an environment of open collaboration between
-      system architects, programmers, writers, alpha/beta testers
-      and end users which often results in well documented, robust
-      products such as
+      té lloc en un entorn de col·laboració oberta entre arquitectes de 
+      sistemes, programadors, escriptors, alfa/beta testers i usuaris finals
+      que sovint donen com a resultat productes robusts i ben documentats, com
       <url url  = "http://www.apache.org/"
            name = "Apache">,
       <url url  = "http://www.gnu.org/"
            name = "GNU Emacs">,
       <url url  = "http://www.perl.com/"
            name = "Perl">
-      and the 
+      i el
       <url url  = "http://www.linuxhq.com/"
            name = "Linux kernel">.
 
-<item>Stand up and be counted! Register with the
+<item>Alce's i siga comptat! Registre's amb el
       <url url  = "http://counter.li.org/"
            name = "Linux Counter">.
  
-<item>Report successful efforts of promoting Linux to
+<item>Informe d'esforços exitosos de promoció de Linux a
       <htmlurl url  = "http://www.li.org/"
                name = "Linux International">
       (<htmlurl url = "mailto:li@li.org"
                name = "li@li.org">)
-      and similar organizations.
+      i organitzacions similars.
 
-<item>Find a new home for Linux CD-ROMs and books that you no longer
-      need.  Give them to someone interested in Linux, a public
-      library or a school computer club.  A book and its CD-ROM
-      would be most appropriate for a library.  However, please be
-      sure that making the CD-ROM publicly available does not
-      violate a licensing agreement or copyright.  Also, inform
-      the library staff that the material on the CD-ROM is freely
-      distributable.  Follow up to make sure it is available on
-      the shelves.
+<item>Trobe una nova llar per a CD-ROMs i llibres que ja no
+  necessitarà.  Done'ls a algú interessat en Linux, una llibreria
+  pública o a un club d'informàtica d'alguna escola. Un llibre i el
+  seu CD-ROM seria més apropiat per a una llibreria. Tanmateix, per
+  favor, assegure's de que fer el CD-ROM disponible públicament no
+  viola cap acord de llicència o copyright. A més, informe al personal
+  de la llibreria de que el material del CD-ROM és lliurement
+  distribuïble Faça'n un seguiment per a assegurar-se de que està
+  disponible als prestatges.
 
-<item>When purchasing books about software distributed with Linux,
-      give preference to books written by the author of the software.
-      The royalties that authors receive from book sales may be
-      the only monetary compensation received for their efforts.
+<item>Al comprar llibres sobre programari distribuït amb Linux, done
+  preferència als llibres escrits per l'autor del programari. Les
+  primes pels drets d'autor que reben els autors per les vendes dels
+  llibres potser són la única compensació econòmica que reben pels
+  seus esforços.
 
 <-- Need to fix or change the Powered by Linux text -->
 
-<item>Encourage Linux-based sites to submit their entry for the
-      <url url  = "http://sunsite.nus.edu.sg/pub/LDP/powered.html"
-           name = "Powered by Linux">
-      page and suggest that banners promoting
+<item>Anime als llocs web basats en Linux a presentar la seua entrada
+  per a la pàgina
+      <url url = "http://sunsite.nus.edu.sg/pub/LDP/powered.html" name
+           = "Powered by Linux"> i suggerisca que mostren banners
+           promocionant
       <url url  = "http://www.cse.unsw.edu.au/~conradp/banners/"
            name = "Linux">,
       <url url  = "http://www.apache.org/"
@@ -402,211 +407,206 @@ and the
            name = "GNU">,
       <url url  = "http://www.perl.com/"
            name = "Perl">
-      &hellip; be displayed on their site.  
+      &hellip; al seu lloc.  
 
-<item>Participate! If you have benefited from
-      <url url  = "http://www.opensource.org/"
-           name = "open-source software">,
-      please consider assisting the free software community by:
+<item>Participe! Si vostè s'ha beneficiat de l'
+      <url url = "http://www.opensource.org/" name = "open-source
+           software">, per favor, considere ajudar a la comunitat del
+           programari lliure d'alguna d'aquestes maneres:
       <itemize>
-      <item>submitting detailed bug reports
-      <item>writing documentation
-      <item>creating artwork
-      <item>supplying management skills
-      <item>suggesting enhancements
-      <item>providing technical support
-      <item>contributing software
-      <item>donating equipment
-      <item>furnishing financial support.
+      <item>enviant informes detallats d'error
+      <item>escrivint documentació
+      <item>creant obres d'art
+      <item>proporcionant habilitats de gestió ??? supplying management skills
+      <item>suggerint millores
+      <item>proporcionant suport tècnic
+      <item>contribuint en el programari
+      <item>donant equipament
+      <item>proporcionant suport financer.
        </itemize>
-      The
-      <url url  = "http://www.linuxdoc.org/"
-           name = "Linux Documentation Project">
-      provides a
-      <url url  = "http://www.linuxdoc.org/devel.html"
-           name = "list">
-      of Linux and Linux-related projects.
+      El <url url = "http://www.linuxdoc.org/" name = "Linux
+           Documentation Project"> proporciona una 
+      <url url = "http://www.linuxdoc.org/devel.html" name = "llists">
+           de Linux projectes relacionats.
 
-<item>Finally, keep in mind that we all have infinitely more important
-      issues to deal with than the selection of a computing environment.
+<item>Finalment, tinga en compte que tots nosaltres tenim coses
+      infinitament més importants que fer que triar un entorn
+      informàtic.
 </itemize>
 
-<sect>Canons of Conduct
+<sect>Cànons de Conducta
 <p>
 
 <itemize>
-<item>As a representative of the Linux community, participate
-      in mailing list and newsgroup discussions in a professional
-      manner. Refrain from name-calling and use of vulgar language.
-      Consider yourself a member of a virtual corporation
-      with Mr. Torvalds as your Chief Executive Officer.  Your words
-      will either enhance or degrade the image the reader has of the
-      Linux community.
+<item>Com a representant de la comunitat Linux, participe en una
+      llista de correu in discussions de grups de notícies d'una
+      manera professional. Abstinga's de insultar i utilitzar
+      llenguatge vulgar. Considere's membre d'un a corporació virtual
+      amb el Sr. Torvalds com el seu President. Les seues paraules 
+      milloraran o bé degradaran la imatge que el lector té de la
+      comunitat Linux.
 
-<item>Avoid hyperbole and unsubstantiated claims at all costs. It's
-      unprofessional and will result in unproductive discussions.
+<item>Evite les hipèrboles i afirmacions a tota costa. És poc
+      professional i resultarà en discussions improductives.
 
-<item>A thoughtful, well-reasoned response to a posting will not
-      only provide insight for your readers, but will also increase
-      their respect for your knowledge and abilities.
+<item>Una resposta reflexiva i ben raonada a una publicació no només
+      proporcionarà una nova visió als seus lectors, sinó que, a més,
+      augmentarà el seu respecte envers els seus coneixements i
+      habilitats.
      
-<item>Don't bite if offered flame-bait.  Too many threads degenerate
-      into a ``My O/S is better than your O/S'' argument.
-      Let's accurately describe the capabilities of Linux and
-      leave it at that.
+<item>No pique si li ofereixen flame-bait.  Massa fils degeneren en una
+      discussió tipus ``El meu S/O és millor que el teu
+      S/O''. Descriga'm amb precisió les capacitats de Linux i
+      deixem-ho ahí.
 
-<item>Always remember that if you insult or are disrespectful
-      to someone, their negative experience may be shared with many others.
-      If you do offend someone, please try to make amends.
+<item>Recorda sempre que si vostè insulta o és poc respectuós amb
+      algú, la seua experiència negativa pot ser compartida amb molts
+      altres. Si vostè ofén a algú, per favor intente fer les paus.
 
-<item>Focus on what Linux has to offer.  There is no need to bash
-      the competition.  Linux is a good, solid product
-      that stands on its own.
+<item>Centre's en allò que Linux ofereix.  No hi ha cap necessitat de
+      fomentar la competició.  Linux és un producte bo i sòlid que es
+      manté en peu per si sol.
 
-<item>Respect the use of other operating systems.  While Linux is
-      a wonderful platform, it does not meet everyone's needs.
+<item>Respecte l'ús d'altres sistemes operatius.  Malgrat que Linux és
+      una plataforma meravellós, no cobreix les necessitats de tothom.
 
-<item>Refer to another product by its proper name.
-      There's nothing to be gained by attempting to ridicule a company
-      or its products by using ``creative spelling''.
-      If we expect respect for Linux,  we must respect other products.
-
-<item>Give credit where credit is due.  Linux is just the kernel.
-      Without the efforts of people involved with the
+<item>Referisca's a un altre producte pel seu nom propi. No hi ha res
+      a guanyar al intentar ridiculitzar a una empres o els seus
+      productes utilitzant ``ortografia creativa''. Si esperem
+      respecte per a Linux, hem de respectar els altres productes.
+ 
+<item>Done crèdit on el cwhere credit is due.  Linux només és el
+      nucli.  Sense l'esforç de les persones involucrades amb el
       <url url  = "http://www.gnu.org/gnu/linux-and-gnu.html"
            name = "GNU project">,
-      MIT, Berkeley and others too numerous to mention, the Linux
-      kernel would not be very useful to most people.
+      MIT, Berkeley i altres massa numerosos per a mencionar-los, el
+           nucli Linux no seria gens útil per a moltes persones.
 
-<item>Don't insist that Linux is the only answer for a particular
-      application. Just as the Linux community cherishes the freedom
-      that Linux provides them, Linux only solutions would deprive 
-      others of their freedom.
+<item>No insistisca en què Linux és la única resposta per a una
+      aplicació en particular. De la mateixa manera que la comunitat
+      Linux s'estima la lliberta que els proporciona, les solucions
+      Linux privarien a altres de la seua llibertat.
 
-<item>There will be cases where Linux is not the
-      answer.  Be the first to recognize this and offer another
-      solution.
+<item>Hi haurà casos en que Linux no és la resposta.  Siga el primer a
+      reconèixer-ho i oferisca una altra solució.
 </itemize>
 
 
-<sect>User Groups
+<sect>Grups d'Usuaris
 <p>
 
 <itemize>
-<item>Participate in a local user group.  An
-<url url  = "http://www.linuxdoc.org/links/&num;lug"
-     name = "index">
-of Linux User Group registries is part of the
-<url url  = "http://www.linuxdoc.org/"
-     name = "Linux Documentation Project">.
-If a user group does not exist in your area, start one.
+<item>Participe en un grup d'usuaris local.  Un
+<url url = "http://www.linuxdoc.org/links/&num;lug" name = "índex"> de
+     registres de Grups d'Usuaris de Linux és part del
+  <url url = "http://www.linuxdoc.org/" name = "Linux Documentation
+     Project">.  Si un grup d'usuaris no existeix a la seua àrea
+     inicie'n un.
 
-<item>The
-      <url url  = "http://www.linuxdoc.org/HOWTO/User-Group-HOWTO.html"
-           name = "Linux User Group HOWTO">
-      covers many of the issues involved with starting an
-      user group and discusses the importance of Linux
-      advocacy as one of the goals of a user group.
+<item>El
+      <url url = "http://www.linuxdoc.org/HOWTO/User-Group-HOWTO.html"
+           name = "Linux User Group HOWTO"> cobreix moltes de les
+           qüestions involucrades en la iniciació d'un grup i
+           discuteix la importància de la defensa de Linux com un dels
+           objectius d'un grup d'usuaris.
 
-<item>Make speakers available to organizations interested in Linux.
+<item>Pose ponents a disposició de les organitzacions interessades en Linux.
 
-<item>Issue
+<item>Emeta 
       <url url  = "http://www.cse.unsw.edu.au/~conradp/linux/pr/"
-           name = "press releases">
-      about your activities to your local media.
+           name = "comunitats de premsa">
+      sobre les seues activitats al seu medi local.
 
-<item>Volunteer to configure a Linux system to meet the needs of
-      local community organizations.  Of course, the installation
-      process must include training the user community to use the
-      system and adequate documentation for ongoing maintenance.
+<item>Presente's voluntari per a configurar un sistema Linux per a
+      cobrir les necessitats de les organitzacions de la comunitat
+      local.  Pressupost, el procés d'instal&midddot;lació ha
+      d'incloure formar a la comunitat d'usuaris per a la utilització
+      del sistema i adeqüe documentació per al manteniment en curs.
 
-<item>Discus the Linux Advocacy mini-HOWTO at a meeting.  Brainstorm
-      and submit new ideas. 
+<item>Debata el mini-COM de Defensa de Linux en una reunió.  Faça
+      pluja d'idees i presente'n de noves.
 </itemize>
 
 
-<sect>Vendor Relations
+<sect>Relació amb els venedors
 <p>
 
 <itemize>
-<item>When contemplating a hardware purchase, ask the vendor about 
-      Linux support and other user's experiences with the product
-      in a Linux environment. 
+<item>Al contemplar una compra de maquinari, pregunte al venedor sobre
+      el suport de Linux i les experiències d'altres usuaris amb el
+      producte baix un entorn Linux. 
 
-<item>Consider supporting vendors that sell Linux based products and
-      services.  Encourage them to have their product listed in the
-      <url url  = "http://www.linuxdoc.org/HOWTO/Commercial-HOWTO.html"
-           name = "Linux Commercial HOWTO">.
+<item>Considere donar suport als venedors que venen productes basats
+      en Linux i sevicis.  Anime'ls a tindre els seu producte llistat
+      al <url url =
+      "http://www.linuxdoc.org/HOWTO/Commercial-HOWTO.html" name =
+      "Linux Commercial HOWTO">.
 
-<item>Support vendors that donate a portion of their income to
-      organizations such as the
-      <url url  = "http://www.gnu.org/help/help.html"
-           name = "Free Software Foundation">,
-      the
-      <url url  = "http://li.org/li/fund/grants.shtml"
-           name = "Linux Development Grant Fund">,
-      the
+<item>Done suport als venedors que donen part dels seus beneficis a
+      organitzacions com la 
+      <url url = "http://www.gnu.org/help/help.html" name = "Free
+           Software Foundation">, la
+      <url url = "http://li.org/li/fund/grants.shtml" name = "Linux
+           Development Grant Fund">, la
       <url url  = "http://www.xfree86.org/donations.html"
-           name = "XFree86 Project">
-      or
-      <url url  = "http://www.debian.org/donations.html"
-           name = "Software in the Public Interest">.
-      If possible, make a personal donation to these or
-      other organizations that support
-      <url url  = "http://www.opensource.org/"
-           name = "open-source software">.
-      Don't forget that some employers offer a matching
-      gift program program.
+           name = "XFree86 Project"> o
+      <url url = "http://www.debian.org/donations.html" name =
+           "Software in the Public Interest">.  Si és possible, faça
+           una donació personal a aquestes o altres organitzacions que
+           donen suport al 
+      <url url = "http://www.opensource.org/" name = "programari de
+           font oberta">.  No oblide que alguns empleadors ofereixen
+           un programa de regal de programava coincident.
 
-<item>If you need an application that is not supported on
-      Linux, contact the vendor and request a native Linux version.
+<item>Si vostè necessita una aplicació que no està suportada en Linux,
+      pose's en contacte amb el venedor i demane una versió nativa de Linux.
 </itemize>
 
 
-<sect>Media Relations
+<sect>Relacions amb el Mitjans
 <p>
 
 <itemize>
 
-<item>Linux International is collecting
+<item>Linux International està recollint
       <url url  = "http://www.li.org/li/resources/pressclippings.shtml"
-           name = "press clippings">
-      that mention Linux, GNU and other freely redistributable software.
-      When you see such an article, please send the
-      following information to 
-      <htmlurl url  = "mailto:clippings@li.org"
-               name = "clippings@li.org">:
+           name = "retalls de premsa">
+      que mencionen a Linux, GNU i altre programari lliurement re-distribuïble.
+      Quan vostè veja un article d'aquests, per favor envie la següent
+      informació a  
+      <htmlurl url = "mailto:clippings@li.org" name =
+               "clippings@li.org">:
       <itemize>
-      <item>Name of publication
-      <item>Publisher's contact address
-      <item>Name of author
-      <item>Author's contact address
-      <item>Title of article
-      <item>Page number where the article starts
-      <item>The URL if available online
-      <item>A summary of the article, including your opinion
+      <item>Nom de la publicació
+      <item>Adreça de contacte del l'editor
+      <item>Nom de l'autor
+      <item>Adreça de contacte de l'autor
+      <item>Títol de l'article
+      <item>Número de pàgina on comença l'article
+      <item>La URL si està disponible en línia
+      <item>Un resum de l'article, incloent la seua opinió
       </itemize>
 
-<item>If you believe that Linux was not given fair treatment in
-      an article, review or news story, send the details, including
-      the above information, to
+<item>Si vostè creu que Linux no ha rebut un tracte just en un
+      article, revisió o notícia, envie els detalls, incloent la
+      informació de dalt, a
       <htmlurl url  = "mailto:li@li.org"
                name = "li@li.org">
-      so that an appropriate response can be sent to the publisher.
-      If you contact the publisher directly, be professional and
-      sure of your facts.
+      per a que una resposta apropiada puga ser enviada a l'editor.
+      Si vostè contacta a l'editor directament, siga professional i
+      segur dels seus fets.
 
-<item>If you involved with a Linux related project, issue
+<item>Si vostè s'involucra en un projecte relacionat amb Linux, emeta
       <url url  = "http://www.cse.unsw.edu.au/~conradp/linux/pr/"
-           name = "press releases">
-      to appropriate news services on a regular basis.
+           name = "comunicats de premsa">
+      als serveis de notícies apropiats de manera regular.
 </itemize>
 
 
-<sect>Acknowledgements
+<sect>Agraïments
 <p>
 
-Grateful acknowledgement is made to all contributors, including:
+Es fan agraïts reconeixements per a tots els col·laboradors, incloent:
 
 <tscreen><verb>
 Kendall G. Clark          <kclark@cmpu.net>
@@ -630,3 +630,22 @@ Sean Woolcock             <sbwoolco@eos.ncsu.edu>
 </verb></tscreen>
 
 </article>
+
+<!-- Local IspellDict: ca-valencia -->
+<!-- Local IspellPersDict: ~/emacs/.ispell-valencia -->
+
+<!--  LocalWords:  Jon maddog Hall HTML Makarevitch Chie Nakatani MIT
+ -->
+<!--  LocalWords:  Janusz Batko Bruno Collovini Mauricio Rivera Bynum
+ -->
+
+<!--  LocalWords:  mini-COM Rogers. Wirzenius NetDay CD-ROMs newbie
+ -->
+<!--  LocalWords:  CD-ROM Torvalds Berkeley GNU URL Kendall Clark
+ -->
+<!--  LocalWords:  Wendell Cochran Allan Crain Greg Hankins Ladner
+ -->
+<!--  LocalWords:  Kionka Michlmayr Caetano Idan Shoham Spiers
+ -->
+<!--  LocalWords:  Suire Juhapekka Tolvanen Sean Woolcock
+ -->
