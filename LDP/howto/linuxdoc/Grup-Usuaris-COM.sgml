@@ -1,0 +1,1628 @@
+<!doctype linuxdoc system>
+
+<article>
+
+<title>COM d'Usuaris i Grups Linux
+<author><url name="Rick Moen" url="mailto:%20rick@linuxmafia.com%20"></author>
+<date>v1.8.4, 2013-07-25
+
+<abstract>
+El COM Usuaris i Grups Linux és una guia per a fundar, mantindre, i fer créixer
+un grup d'usuaris GNU/Linux, escrit per Kendall Clark i Rick Moen
+(ara mantingut per Rick Moen).
+</abstract>
+
+<toc>
+
+<sect>Introducció
+
+<sect1>Propòsit
+<p>
+El COM d'Usuaris i Grups Linux s'ha fet amb el propòsit de servir com a guia per
+a fundar, mantindre i fer créixer un grup d'usuaris GNU/Linux.
+
+GNU/Linux és una implementació de lliure distribució de Unix per a 
+ordinadors personals, servidors, estacions de treball, PDAs, sistemes encastats.
+Fou desenvolupat a l'i386 i ara suporta un enorme rang de processadors des de molt 
+petits fins a colossals:
+
+<itemize>
+        <item><bf>Diversos dispositius <url name="PDA / encastats / micro-controladors / encaminadors" 
+              url="http://www.uclinux.org/ports/">:</bf> 
+              <itemize>
+                 <item>La Família Advanced RISC Machines, Ltd. <url name="ARM" url="http://www.arm.linux.org.uk/"> (StrongARM SA-1110, XScale, ARM6, ARM7, ARM2, ARM250, ARM3i, ARM610, ARM710, ARM7TDMI, ARM720T, i ARM920T, incloent sistemes de DVD Sigma Designs utilitzant nuclis ARM)</item>
+                 <item>Analog Devices, Inc.'s <url name="Blackfin DSP" url="http://www.linuxfordevices.com/c/a/News/Another-nativeDSP-Linux-port-this-one-to-ADIs-Blackfin/"></item>
+                 <item>La <url name="sèrie ETRAX" url="https://en.wikipedia.org/wiki/ETRAX_CRIS"> d'Axis Communications ("CRIS" = Code Reduced Instruction Set Arquitectura RISC)</item>
+                 <item>Elan SC520 i SC300</item>
+                 <item>FreeScale <url name="MC68EN302"
+url="http://www.freescale.com/files/netcomm/doc/data_sheet/MC68EN302.pdf"></item>
+                 <item>Fujitsu <url name="FR-V" url="http://ecos.sourceware.org/hardware.html#FR-V"></item>
+                 <item>La sèrie <url name="H8" url="http://www.uclinux.org/pub/uClinux/ports/h8/"> d'Hitachi</item>
+                 <item>Intel i960</item>
+                 <item>Intel IA32-compatibles (Cyrix MediaGX, STMicroelectronics <url name="STPC" url="http://web.archive.org/web/20070626190436/http://www.stmcu.com/forums-cat-132-6.html">, ZF Micro ZFx86)</item>
+                 <item>Matsushita <url name="AM3x" url="http://ecos.sourceware.org/hardware.html#Matsushita%20AM3x"></item>
+                 <item>MIPS-compatibles (Toshiba TMPRxxxx / TXnnnn, la sèrie <url name="VR" url="http://www.linux-mips.org/wiki/NEC_VR4100"> de NEC, Realtek 8181)</item>
+                 <item>Màquines Motorola 680x0-based (plaques Motorola VMEbus, màquines <url name="ISICAD Prisma" url="http://ds.dial.pipex.com/town/way/fr30/">, i CPUs Motorola Dragonball &amp; <url name="ColdFire" url="http://www.uclinux.org/ports/coldfire/">, i encaminadors Cisco de les sèries 2500/3000/4000)</item>
+                 <item>Motorola <url name="PowerPC" url="http://penguinppc.org/embedded/"> encastats (incloent MPC / famílies PowerQUICC I, II, III)</item>
+                 <item>NEC <url name="V850E" url="http://ecos.sourceware.org/tools/linux-v850-elf.html"></item>
+                 <item>Renesas Technology (formerly Hitachi) SH3/SH4 (<url name="SuperH" url="http://wiki.debian.org/SH4">)</item>
+                 <item>Samsung <url name="CalmRISC" url="http://ecos.sourceware.org/hardware.html#CalmRISC"></item>
+                 <item>Les famílies de Texas Instruments <url name="DM64x" url="http://www.linuxfordevices.com/c/a/News/Worlds-first-nativeDSP-Linux-port/"> i <url name="C54x DSP" url="http://www.linuxfordevices.com/c/a/News/Embedded-Linux-distro-supports-TI-DSPbased-digital-media-processors/"></item>
+		 <item>Xilinx <url name="PetaLinux" url="http://www.xilinx.com/tools/petalinux-sdk.htm"> (abans coneguda com SoftBlaze, abans coneguda com Microblaze) processador tou implementat sobre FPGAs Xilinx</item>
+              </itemize>
+        </item>
+        <item><bf>Intel <url name="8086 / 80286" 
+              url="http://elks.sourceforge.net/"></bf>.</item>
+        <item><bf>La família Intel IA32:</bf> processadors i386, i486, Pentium, 
+	      Pentium Pro, Pentium II, Pentium III, Celeron, Xeon, and Pentium IV, 
+              així com els clons d'IA32 d'AMD (386DX/DXL/SL/SLC/SX, 
+              486DX/DX2/DX4/SL/SLC/SLC2/SLC3/SX/SX2, Elan, K5, 
+              K6/K6-II/K6-III), Cyrix (386DX/DXL/SL/SLC/SX, 
+              486DLC/DLC2/DX/DX2/DX4/SL/SLC/SLC2/SLC3/SX/SX2, Cyrix III), 
+              IDT (Winchip, Winchip 2, Winchip 2A/3), 
+              IBM (486DX/DX2/DX4/SL/SLC/SLC2/SLC3/SX/SX2),
+              NexGen (Nx586), Transmeta (Crusoe), 
+              TI (486DLC/DLC2), UMC (486SX-S, U5D/U5S), 
+              VIA (C3 Ezra "CentaurHauls", C3-2 "Nehemiah"), 
+              i altres.</item>
+        <item><bf>Intel/HP <url name="IA64"
+              url="http://www.ia64-linux.org/">:</bf> Trillian, Itanium, Itanium2/McKinley</item>
+        <item><bf>x86-64 family</bf>
+              incloent AMD Hammer/Opteron/K8/Athlon64/Turion/Phenom/Phenom II/FX/Fusion i 
+              Intel Prescott/Nocona/Potomac, Core, Atom, Nehalem, Sandy Bridge i Ivy Bridge</item>
+        <item><bf>Motorola sèries <url name="68020-68040"
+              url="http://www.linux-m68k.org/"> (amb MMU)</bf>: 
+              <url name="m68k Mac" url="http://www.mac.linux-m68k.org/">, 
+              Amiga, Atari ST/TT/Medusa/Falcon, HP/Apollo Domain, 
+              <url name="HP9000/300"
+              url="http://www.tazenda.demon.co.uk/phil/linux-hp/">, 
+              sun3, i 
+              <url name="Sinclair Q40"
+              url="http://ftp4.de.freesbie.org/pub/misc/tsx-11/680x0/q40/install/">.
+              </item>
+        <item><bf>Motorola/IBM PowerPC family:</bf> La majoria de 
+              <url name="PowerMac"
+              url="http://penguinppc.org/mac/"> (incloent G3/G4/G5)  /
+              CHRP / PReP / POP,  
+              <url name="Amiga PowerUP System" 
+              url="http://linux-apus.sourceforge.net/">, 
+              i IBM PPC64 (AS/400, RS/6000, iSeries,
+              pSeries, PowerMac G5).</item>  
+        <item><bf><url name="MIPS"url="http://www.linux-mips.org/">:</bf> 
+              la majoria d'SGI, Cobalt Qube, 
+              <url name="DECStation" url="http://decstation.unix-ag.org/">, 
+              Sony PlayStation2, i molts altres</item>
+        <item><bf>DEC <url name="Alpha" url="http://www.alphalinux.org/"></bf></item>
+        <item><bf>HP <url name="PA-RISC" url="http://www.parisc-linux.org/"></bf></item>
+        <item><bf>SPARC International SPARC32 / SPARC64</bf></item>
+        <item><bf>Digital <url name="VAX"
+              url="http://vax-linux.org/"> mini-ordinadors i MicroVAXen</bf></item>
+        <item><bf>Mainframes:</bf> <url name="IBM S/390 models G5 and G6 / zSeries models z800, z890, z900, and z990"
+               url="https://www.ibm.com/developerworks/linux/linux390/"> i Fujitsu AP1000+ (cluster SuperSPARC)</item>
+</itemize>
+
+Tinga en compte que algunes de les entrades llistades van ser probablement one-time forks, 
+poc o gens mantinguts des de la seua creació.  En algunes de les arquitectures meś rares, 
+<url name="NetBSD" url="http://www.netbsd.org/"> pot ser més pràctic.
+(El port <url name="Debian GNU/kFreeBSD" url="http://www.debian.org/ports/kfreebsd-gnu/"> 
+hauria de ser prou sòlid també com per a ser una opció de compromís, furnishing el codi d'espai 
+d'usuari GNU/Linux sobre el nucli FreeBSD d'alt rendiment / alta estabilitat, i 
+<url name="NexentaOS" url="http://en.wikipedia.org/wiki/Nexenta_OS"> proporciona alguna cosa 
+similar sobre el nucli OpenSolaris.)
+
+Si està seriosament interessat en el tema dels ports de Linux, per favor mire també
+<url name="la pàgina de ports de Linux de Xose Vazquez Perez" 
+url="http://web.archive.org/web/20070813000855/http://www.itp.uni-hannover.de/ports/linux_ports.html"> i
+<url name="la llista d'arquitectures Linux de Jerome Pinot"
+url="http://web.archive.org/web/20050308130348/http://ngc891.blogdns.net/kernel/docs/arch.txt"> (espills estàtics, 
+ja que les dos pàgines es van esvaïr en 2005), si només perque el suport
+de maquinar és més complexe que simplement la funcionalitat genèrica de CPU,
+acompassar el suport per a innumerables variacions de busos i altres problemes 
+subtils de maquinari (especialment per a <url name="ports de Linux PDA / encastats / micro-controladors / encaminadors" 
+url="http://www.linuxfordevices.com/">).  
+La llista de dalt pretén il·lustrar de forma genèrica l'amplitud de la riquesa de Linux.
+
+<sect1>Altres fonts d'informació
+<p>
+Si vol aprendre més, el <url url="http://www.tldp.org/"
+name="Linux Documentation Project"> és un bon lloc per on començar.
+
+Per a informació general sobre grups d'usuaris, per favor mire 
+<url name="Association of PC Users Groups"
+url="http://www.apcug.net/">.
+
+<sect>Què és un grups d'usuaris de GNU/Linux?
+<p>
+
+<sect1>Què és GNU/Linux?
+<p>
+Per a apreciar completament els rol dels GUL en el moviment GNU/Linux, l'ajudarà 
+comprendre que fa de GNU/Linux únic.
+
+GNU/Linux com a sistema operatiu és potent -- però GNU/Linux com a 
+<it><bf>idea</bf></it> sobre desenvolupament de programari ho és
+encara més. GNU/Linux és un sistema operatiu <bf>lliure</bf>: Està
+licenciat baix la GNU General Public Licence. Així, el codi font està
+disponible lliurement de manera perpetua per a tothom.  Està mantingut
+per un grup des-estructurat de programadors al voltant del món, baix
+la direcció tècnica de Linux Torvals i altres desenvolupadors
+clau. GNU/Linux com a moviment no té una estructura central,
+burocràcia, o altres entitats per a dirigir els seus assumptes. Mentre
+que aquesta situació té avantatges, això planteja reptes per a
+l'assignació de recursos humans, la defensa efectiva de Linux, les
+relacions públiques, la educació dels usuaris, i la formació.
+
+<p>
+(Aquest COM reconeix el 
+<url name="GNU Project" url="http://www.gnu.org/gnu/gnu-history.html">
+de la Free Software Foundation com la força motriu crucial darrere de
+la creació i el foment d'un sistema lliure, àlies de font oberta.
+Així, es refereix a les "distributions" formades pel sistema operatiu
+GNU al cim del nucli Linux com "GNU/Linux".  Sí, el terme és incòmode,
+i les peticions de la FSF de reconeixmenet no són amplament honorades;
+però la justícia que reclama la FSF és òbvia.)
+
+<sect1>Com és GNU/Linux únic?
+<p>
+GNU/Linux's loose structure is unlikely to change.  That's a good thing:
+It works precisely because people are free to come and go as they
+please: <bf>Free programmers are happy programmers are effective
+programmers</bf>.
+
+However, this loose structure can disorient the new user: Whom
+does she call for support, training, or education? How does she know
+what GNU/Linux is suitable for?
+
+In part, LUGs provide the answers, which is why LUGs are vital to
+the movement: Because your town, village, or metropolis sports no
+Linux Corporation "regional office", the LUG takes on many of the same
+roles a regional office does for a large multi-national corporation.
+
+GNU/Linux is unique in neither having nor being burdened by central
+structures or bureaucracies to allocate its resources, train its users,
+and support its products. These jobs get done through diverse means: the
+Internet, consultants, VARs, support companies, colleges, and
+universities. However, increasingly, in many places around the globe,
+they are done by a LUG.
+
+<sect1>What is a user group?
+<p>
+Computer user groups are not new. In
+fact, they were central to the personal computer's history:
+Microcomputers arose in large part to satisfy demand for affordable,
+personal access to computing resources from electronics, ham radio, and
+other hobbyist user groups.  Giants like IBM eventually discovered the
+PC to be a good and profitable thing, but initial impetus came from the
+grassroots.
+
+In the USA, user groups have changed -- many for the worse --
+with the times. The financial woes and dissolution of the largest user
+group ever, the Boston Computer Society, were well-reported; but, all
+over the USA, most PC user groups have seen memberships decline.
+American user groups in their heyday produced newsletters, maintained
+shareware and diskette libraries, held meetings and social events, and,
+sometimes, even ran electronic bulletin board systems (BBSes). With the
+advent of the Internet, however, many services that user groups once
+provided migrated to things like CompuServe and the Web.
+
+GNU/Linux's rise, however, coincided with and was intensified by the
+general public "discovering" the Internet. As the Internet grew more
+popular, so did GNU/Linux: The Internet brought new users,
+developers, and vendors. So, the same force that sent traditional user
+groups into decline propelled GNU/Linux forward, and inspired new groups 
+concerned exclusively with it. 
+
+To give just one indication of how LUGs differ from traditional 
+user groups: Traditional groups must closely 
+monitor what software users redistribute at meetings.
+While illegal copying of restricted proprietary software certainly
+occurred, it was officially discouraged -- for good reason.
+At LUG meetings, however, that entire mindset simply does not apply:
+Far from being forbidden, unrestricted copying of GNU/Linux
+should be among a LUG's primary goals.  In fact, there is anecdotal
+evidence of traditional user groups having difficulty adapting to
+GNU/Linux's ability to be lawfully copied at will.
+
+(Caveat:  A few distributions bundle GNU/Linux with proprietary
+software packages whose terms don't permit public redistribution.
+Check licence terms, if in doubt.  Offers or requests to copy 
+distribution-restricted proprietary software of any sort should be
+heavily discouraged anywhere in LUGs, and declared off-topic for all 
+GNU/Linux user group on-line forums, for legal reasons.)
+
+<sect1>Summary
+<p>
+For the GNU/Linux movement to grow, among other requirements,
+LUGs must proliferate and succeed.  Because of GNU/Linux's
+unusual nature, LUGs must provide some of the same functions a "regional
+office" provides for large computer corporations like IBM, Microsoft,
+and Sun. LUGs can and must train, support, and educate users,
+coordinate consultants, advocate GNU/Linux as a computing solution,
+and even serve as liaison to local news outlets.
+
+<sect>What LUGs exist?
+<p>
+Since this document is meant as a guide not only to maintaining and
+growing LUGs but also to founding them, we should, before going further,
+discuss what LUGs already exist.
+
+<sect1>LUG lists
+<p>
+There are several LUG lists on the Web. If you are considering founding a
+LUG, your first task should be to find any nearby existing LUGs.
+<it>Your best bet may be to join a LUG already established in your area,
+rather than founding one.</it>
+
+As of 2007, there are LUGs in all 50 US states plus the District of
+Columbia, all of Canada's ten provinces and three territories, all six of 
+Australia's states plus the Australian Capital Territory, in 76 locations 
+in India, and over 100 other countries, including Russia, China, and most 
+of Western and Eastern Europe. 
+
+<itemize>
+        <item><url name="Linux.org List" url="http://www.linux.org/xfa-groups-home/"></item>
+	<item><url name="LibrePlanet Group List" url="http://libreplanet.org/wiki/Group_list"></item>
+	<item><url name="Open Directory: LUGS" url="http://dmoz.org/Computers/Software/Operating_Systems/Linux/User_Groups/"></item>
+	<item><url name="Lea-Linux List" url="http://www.lea-linux.org/documentations/index.php/Annuaire:LUG_%26_assos_nationales"></item>
+	<item><url name="Yahoo Linux &gt; User Groups" url="http://dir.yahoo.com/Computers_and_Internet/Software/Operating_Systems/Unix/Linux/User_Groups/">
+	<item><url name="CLUE: the Canadian Linux Users' Exchange" url="http://www.linux.ca/"></item>
+        <item><url name="UK Linux User Groups" url="http://www.lug.org.uk/"></item>
+	<item><url name="Linux Australia" url="http://www.linux.org.au/"></item>
+	<item><url name="LUGs List for India and Asia" url="http://www.wikiwikiweb.de/LugsList"></item>
+        <item><url name="I Linux User Group italiani" url="http://lugmap.linux.it/"></item>
+</itemize>
+
+<sect1>Solidarity versus convenience
+<p>
+While (most) LUG lists on the Web are well-maintained, likely they don't
+list every LUG. If considering founding a LUG, I suggest, in addition to
+consulting these lists, posting a message to <url
+name="comp.os.linux.announce" url="news:comp.os.linux.announce">, <url
+name="comp.os.linux.misc" url="news:comp.os.linux.misc">, or an
+appropriate regional Usenet hierarchy, inquiring about nearby LUGs. You
+should also lodge a query (mailing list post, comment during a meeting)
+at any existing LUG you are aware of anywhere near your area,
+about LUGs near you.  If no such (nearby) LUG exists, your postings will
+alert potential members to your initiative.
+
+Carefully balance convenience against solidarity:  If a LUG exists in
+your metropolitan area but on the other side of the city, starting a new
+group may be better for convenience's sake. On the other hand, joining
+the other group may be better for reasons of unity and solidarity.
+<bf><it>Greater numbers almost always means greater power, influence,
+and efficiency</it></bf>. While two groups of 100 members each might be
+nice, one with 200 has advantages. Of course, if you live in a small
+town or village, any group is better than none.
+
+The point is that starting a LUG is a significant undertaking, which
+should be commenced with all relevant facts and some appreciation of the
+effect on other groups.
+
+<sect>What does a LUG do?
+<p>
+LUGs' goals are as varied as their locales.  There is no LUG master
+plan, nor will this document supply one. Remember: GNU/Linux is free from
+bureaucracy and centralised control; so are LUGs.
+
+It is possible, however, to identify a core set of goals for a 
+LUG:
+
+<itemize>
+	<item>advocacy</item>
+	<item>education</item>
+	<item>support</item>
+	<item>socialising</item>
+</itemize>
+
+Each LUG combines these and other goals uniquely, according to its
+membership's needs.
+
+<sect1>GNU/Linux advocacy
+<p>
+The urge to advocate the use of GNU/Linux is widely felt.  When you find
+something that works well, you want to tell as many people as you can.
+LUGs' role in advocacy cannot be overestimated, especially since
+wide-scale commercial acceptance is only newly underway.  While
+it is certainly beneficial to the movement, each and every time a
+computer journalist writes a positive review of GNU/Linux, it is also
+beneficial every time satisfied GNU/Linux users brief their friends,
+colleagues, employees, or employers.
+
+There is effective advocacy, and there is ineffective carping: As 
+users, we must be constantly vigilant to advocate GNU/Linux in such a way as
+to reflect positively on the product, its creators and developers, and
+our fellow users.  The <url name="Linux Advocacy HOWTO" 
+url="http://www.tldp.org/HOWTO/Advocacy.html">, available at the 
+<url name="Linux Documentation Project" url="http://www.tldp.org/">, 
+gives some helpful suggestions, as does Don Marti's excellent 
+<url name="Linuxmanship" url="http://zgp.org/~dmarti/linuxmanship/"> essay.
+Suffice it to say that advocacy is important to a LUG's mission.
+
+A time may come when advocacy is irrelevant, because GNU/Linux has
+more or less won the day, when the phrase "no one ever got fired for
+using Linux" becomes reality. Until then, LUGs play a vital role in
+promoting GNU/Linux use. They do so because their advocacy is free,
+well-intentioned, and backed up by organisational commitment. If a
+person encounters GNU/Linux through a LUG's efforts, then that new
+user's already ahead of the game: <it>She knows of an organisation that
+will help her install, configure, and even maintain GNU/Linux on whatever
+computers she's willing to dedicate to it.</it>
+
+New users already in contact with a LUG are ahead
+of others whose interest in GNU/Linux has been piqued by a computer
+journalist, but who have no one to whom to turn for aid in their
+quest to install, run, and learn GNU/Linux.
+
+It is, therefore, important for LUGs to advocate GNU/Linux, because
+their advocacy is effective, well-supported, and free.
+
+<sect1>The limits of advocacy
+<p>
+Advocacy can be mis-aimed; advocacy can go wrong and be
+counterproductive; advocacy can be simply inappropriate in the first
+place.  The matter merits careful thought, to avoid wasted time or
+worse.
+
+Many attempts at advocacy fail ignominiously because the advocate fails
+to listen to what the other party feels she wants or needs.  (As Eric
+S. Raymond <url name="says" 
+url="http://www.itworld.com/LWD000913expo00">, 
+"Appeal to the prospect's interests and values, not to
+yours.") If that person wants exactly the proprietary-OS setup she
+already has, then advocacy wastes your time and hers.  If her
+stated requirements equate exactly to MS-Project, MS-Visio, and
+Outlook/Exchange groupware, then trying to "sell" her what she doesn't
+want will only annoy everyone (regardless of whether her requirements
+list is real or artificial).  Save your effort for someone more
+receptive.  
+
+Along those lines, bear in mind that, for many people, perhaps most, an
+"advocate" is perceived as a salesman, and thus classified as someone to
+resist rather than listen to fairly.  They've never heard of someone
+urging them to adopt a piece of software without
+benefiting materially, so they assume there must be something in
+it for you and will push back, and
+act as if they're doing you a personal favour to even listen, let alone
+try your recommendations.  
+
+I recommend bringing such discussions back to Earth
+immediately, by pointing out that software policy should be based in
+one's own long-term self interest, that you have zero personal stake in
+their choices, and that you have better uses for your time than speaking
+to an unreceptive audience. After that, if
+they're still interested, at least you won't face the same artificial
+obstacle.
+
+At the same time, make sure you don't live up to the stereotype of the
+OS advocate, either.  Just proclaiming your views at someone without
+invitation is downright rude and offensive.  Moreover, when done
+concerning GNU/Linux, it's also pointless:  Unlike the case with proprietary
+OSes, our OS will not live or die by the level of its acceptance and
+release/maintenance of ported applications.  It and all key applications
+are open source: the programmer community that maintains it is
+self-supporting, and would keep it advancing and and healthy regardless
+of whether the business world and general public uses it with wild
+abandon, only a little, or not at all. Because of its open-source
+licence terms, source code is permanently available. GNU/Linux cannot be
+"withdrawn from the market" on account of insufficient popularity, or at
+the whim of some company.  Accordingly, there is simply no point in
+arm-twisting OS advocacy -- unlike that of some OS-user communities we
+could mention.   (Why not just make information available for those
+receptive to it, and stop there?  That meets any reasonable person's
+needs.)
+
+Last, understand that the notion of "use value" for software is quite
+foreign to most people -- the notion of measuring software's value by
+what you can do with it.  The habit of valuing everything at
+<it>acquisition cost</it> is deeply ingrained.  In 1996, I heard a young
+fellow from Caldera Systems speak at a Berkeley, California LUG about
+the origins of Caldera Network Desktop (the initial name of their GNU/Linux
+distribution) in Novell, Inc.'s "Corsair" desktop-OS project:  In
+surveying corporate CEOs and CTOs, they found corporate officers to be
+inherently unhappy with anything they could get for free.  So, Caldera
+offered them a solution -- by charging money.
+
+Seen from this perspective, being conservative about the costs and
+difficulties of GNU/Linux deployments helps make them positively attractive
+-- and protects your credibility as a spokesman.  Even better would be
+to frame the discussion of costs in terms of the cost of functionality
+(e.g., 1000-seat Internet-capable company e-mail with offline-user
+capability and webmail) as opposed to listing software as a retail-style
+line-item with pricing:  After all, any software project has costs,
+even if the acquisition price tag is zero, and the real point of open
+source isn't initial cost but rather long-term control over IT -- a key
+part of one's operations:  With proprietary systems, the user (or
+business) has lost control of IT, and is on the wrong side of a monopoly
+relationship with one's vendor.  With open source, the user is in
+control, and nobody can take that away.  Explained that way (as
+opportunity to reduce and control IT risk), people readily understand
+the difference -- especially CEOs -- and it's much more significant over
+the long term than acquisition cost.
+
+<sect1>GNU/Linux education
+<p>
+Not only is it the business of a LUG to advocate GNU/Linux usage, but
+also to train members, as well as the nearby computing public,
+to use our OS and associated components -- a goal that can make a huge
+real-world difference in one's local area.  While universities and
+colleges are increasingly including GNU/Linux in their curricula, for
+sundry reasons, this won't reach some users.  For those, a LUG can
+give basic or advanced help in system administration, programming,
+Internet and intranet technologies, etc.
+
+In an ironic twist, many LUGs have turned out to be a backbone of
+corporate support: Every worker expanding her computer skills through
+LUG participation is one fewer the company must train.  Though home
+GNU/Linux administration doesn't exactly scale to running corporate data
+warehouses, call centres, or similar high-availability facilities, it's
+light years better preparation than MS-Windows experience.  As Linux has
+advanced into journaling filesystems, high availability, real-time
+extensions, and other high-end Unix features, the already blurry line
+between GNU/Linux and "real" Unixes has been increasingly vanishing.
+
+Not only is such education a form of worker training, but it will also
+serve, as information technology becomes increasingly vital to the
+global economy, as community service: In the USA's metropolitan areas,
+for example, LUGs have taken GNU/Linux into local schools, small businesses,
+community and social organisations, and other non-corporate
+environments. This accomplishes the goal of advocacy and also
+educates the general public.  As more such organisations seek Internet
+presence,  provide their personnel dial-in access, or other
+GNU/Linux-relevant functions, LUGs gain opportunities for community
+participation, through awareness and education efforts -- extending to
+the community the same generous spirit characteristic of GNU/Linux and the
+free software / open source community from its very beginning. Most
+users can't program like Torvalds, but we can all give time and
+effort to other users, the GNU/Linux community, and the broader
+surrounding community.
+
+GNU/Linux is a natural fit for these organisations, because deployments
+don't commit them to expensive licence, upgrade, or maintenance fees.
+Being technically elegant and economical, it also runs very well on
+cast-off corporate hardware that non-profit organisations are only too
+happy to use: The unused Pentium II in the closet can do <bf>real
+work</bf>, if someone installs GNU/Linux on it.
+
+In addition, education assists other LUG goals over time, in
+particular that of support: Better education means better
+support, which in turn facilitates education, and eases the 
+community's growth.  Thus, education forms the entire effort's keystone:
+If only two or three percent of a LUG assume the remainder's support
+burden, that LUG's growth will be stifled. One thing you can count on:
+<bf><it>If new and inexperienced users don't get needed help
+from their LUG, they won't participate there for long</it></bf>.
+If a larger percentage of members support the rest, the LUG will not
+face that limitation. education -- and, equally, support for
+allied projects such as the Apache Web server, X.org, Freedesktop.org, 
+TeX, LaTeX, etc.  -- is key to this dynamic: Education turns new users into
+experienced ones.
+
+Finally, GNU/Linux is a self-documenting operating environment: In other words,
+writing and publicising our community's documentation is up to us.
+Therefore, make sure LUG members know of the <url name="Linux
+Documentation Project" url="http://www.tldp.org/"> and its worldwide
+mirrors.  Consider operating an LDP mirror site.  Also, make sure to
+publicise -- through <tt>comp.os.linux.announce</tt>, the LDP, and other
+pertinent sources of information -- any relevant documentation
+the LUG develops: technical presentations, tutorials, local FAQs, etc.
+LUGs' documentation often fails to benefit the worldwide 
+community for no better reason than not notifying the outside world.
+Don't let that happen: It is highly probable that if someone at one LUG
+had a question or problem with something, then others elsewhere
+will have it, too.
+
+<sect1>GNU/Linux support
+<p>
+Of course, for the <bf>newcomer</bf>, the primary role of a
+LUG is GNU/Linux support -- but it is a mistake to suppose that 
+support means only <it>technical</it> support for new users. It
+should mean much more.
+
+LUGs have the opportunity to support:
+
+<itemize>
+	<item>users</item>
+	<item>consultants</item>
+	<item>businesses, non-profit organisations, and schools</item>
+	<item>the GNU/Linux movement</item>
+</itemize>
+
+<sect2>Users
+<p>
+New users' most frequent complaint, once they have GNU/Linux
+installed, is the steep learning curve characteristic of all modern 
+Unixes. With that learning curve, however, comes the power and 
+flexibility of a real operating system. A LUG is often the a new 
+user's main resource to flatten the learning curve.
+
+During GNU/Linux's first decade, it gained some first-class journalistic 
+resources, which should not be neglected:  The main monthly magazines
+of longest standing are <it><url name="Linux Journal"
+url="http://www.linuxjournal.com/"></it> and <it><url name="Linux Gazette"
+url="http://linuxgazette.net/"></it>.  More recently, 
+they've been joined by 
+<it><url name="LinuxFocus" url="http://www.linuxfocus.org/"></it> and the
+<it><url name="New LinuxFocus" url="http://new.linuxfocus.org/cms/"></it> (on-line),
+<it><url name="Linux Format" url="http://www.linuxformat.com"></it>,
+<it><url name="LinuxUser and Developer" url="http://www.linuxuser.co.uk/"></it>,
+<it><url name="Linux Magazine" url="http://www.linux-magazine.com/"></it>, and
+<it><url name="LINUX For You" url="http://www.linuxforu.com/"></it>.
+
+Standout on-line magazines and news sites with weekly or better publication 
+cycles include <it><url name="Linux Weekly News" url="http://lwn.net/"></it>, 
+<it><url name="DistroWatch Weekly" url="http://distrowatch.com/weekly.php"></it>,
+<it><url name="Linux Today" url="http://linuxtoday.com"></it>, and
+<url name="FreshNews" url="http://www.freshnews.org/">.
+
+All of these resources have eased LUGs' job of spreading essential
+news and information --  about bug fixes, security problems, patches, 
+new kernels, etc., but new users must still be made aware of
+them, and taught that the newest kernels are always
+available from <url name="ftp.kernel.org" url="ftp://ftp.kernel.org">,
+that the <url name="Linux Documentation Project" url="http://www.tldp.org/">
+has newer versions of Linux HOWTOs than do CD-based GNU/Linux distributions, 
+and so on.
+
+Intermediate and advanced users
+also benefit from proliferation of timely and useful tips, facts,
+and secrets. Because of the GNU/Linux world's manifold aspects, even
+advanced users often learn new tricks or techniques simply by
+participating in a LUG. Sometimes, they learn of software packages
+they didn't know existed; sometimes, they just remember arcane
+<tt>vi</tt> command sequences they've not used since college.
+
+<sect2>Consultants
+<p>
+
+LUGs can help consultants find their customers and vice-versa,
+by providing a forum where they can come together.
+Consultants also aid LUGs by providing experienced leadership.
+New and inexperienced users gain benefit from both LUGs and
+consultants, since their routine or simple requests for support are
+handled by LUGs <it>gratis</it>, while their complex needs and problems --
+the kind requiring paid services -- can be fielded by consultants found 
+through the LUG.
+
+The line between support requests needing a consultant and those
+that don't is sometimes indistinct; but, in most cases, the difference
+is clear. While a LUG doesn't want to gain the reputation for
+pawning new users off unnecessarily on consultants -- as this is simply
+rude and very anti-GNU/Linux behaviour -- there is no reason for LUGs not to
+help broker contacts between users needing consulting services and
+professionals offering them.
+
+Caveat:  While "the difference is clear" to intelligent people of goodwill,
+the Inevitable Ones are <it>also</it> always with us, who act willfully
+dense about the limits of free support when they have pushed those
+limits too far.  Remember, too, my earlier point about the vast majority
+of the population valuing everything at acquisition cost (instead of use
+value), <it>including what they receive for free</it>.  This leads some,
+especially some in the corporate world, to use (and abuse) LUG
+technical support with wild abandon, while simultaneously complaining
+bitterly of its inadequate detail, insufficient promptness, supposedly
+unfair expectations that the user learn and not re-ask minor variations on
+the same question endlessly, etc.  In other words, they treat relations
+with LUG volunteers the way they would a paid support vendor, but one
+they treat with <it>zero respect</it> because of its zero acquisition
+cost.
+
+In the consulting world, there's a saying about applying "invoice therapy" 
+to such behaviour:  Because of the value system alluded to above, if
+your consulting advice is poorly heeded and poorly used, it just might
+be the case that you need to charge more.  By contrast, the technical
+community has often been characterised as a "gift culture", with a
+radically different value system: Members gain status through enhanced
+reputation among peers, which in turn they improve through visible
+participation:  code, documentation, technical assistance to the public,
+etc.
+
+Clash between the two very different value-based cultures is inevitable
+and can become a bit ugly.  LUG activists should be prepared to intercede
+before the ingrate newcomer is handed her head on a platter, and
+politely suggest that her needs would be better served by paid
+(consultant-based) services.  There will always be judgement calls;
+the borderline is inherently debatable and a likely source of
+controversy.
+
+Telltale signs that a questioner may need to be transitioned to consulting-based assistance include:
+
+<itemize>
+ 	<item>An insistence on getting solutions in "recipe" (rote) form, 
+              with the apparent aim of not needing to learn technological 
+              fundamentals.
+	<item>Asking the same questions (or ones closely related) repeatedly.
+	<item>Insisting on <it>private</it> assistance from helpers active in
+              <it>public</it> (GNU/Linux community) forums.
+	<item>Vague problem descriptions, or ones that change with time.
+	<item>Interrupting answers in order to ask additional questions 
+              (suggesting lack of attention to the answers).
+	<item>Demands that answers be recast or delivered more quickly 
+              (suggesting that the questioner's time and trouble are 
+              valuable, but that helpers' are not).
+	<item>Asking unusually complex, time-consuming, and/or multipart 
+              questions.
+</itemize>
+
+In general, LUG members are especially delighted to help, on a volunteer
+basis, members who seem likely to participate in the "gift
+culture" by picking up its body of  lore and, in turn, perpetuating it
+by teaching others in their turn.  Certainly, there's nothing wrong with
+having other priorities and values, but such folk may in some cases be
+best referred to paid assistance, as a better fit for their needs.
+
+An additional observation that may or may not be useful, at this point:
+There are things one may be willing to do for free, to assist others in the
+community, that one will refuse to do for money:  Shifting from
+assisting someone as a volunteer fundamentally changes the relationship.
+A fellow computerist who suddenly becomes a customer is a very different
+person; one's responsibilities are quite different, and greater.  You're
+advised to be aware, if not wary, of this distinction.
+
+Please see Joshua Drake's <url name="Linux Consultants Guide"
+url="http://www.commandprompt.com/community/consultants/guide/"> for an
+international list of GNU/Linux consultants.
+
+<sect2>Businesses, non-profit organisations, and schools
+<p>
+LUGs also have the opportunity to support local businesses and
+organisations. This support has two aspects: First, LUGs can support
+businesses and organisations wanting to use our OS (and its 
+applications) as a part of their
+computing and IT efforts. Second, LUGs can support local businesses
+and organisations developing software for GNU/Linux, cater to users,
+support or install distributions, etc.
+
+The support LUGs can provide to local businesses wanting to use GNU/Linux as
+a part of their computing operations differs little from the help LUGs
+give individuals trying GNU/Linux at home. For example, compiling the Linux
+kernel doesn't really differ. Supporting businesses, however, may
+require supporting proprietary software -- e.g., the Oracle, Sybase,
+and DB2 databases (or VMware, Win4Lin, and such things).   
+Some LUG expertise in these areas may help businesses make the leap
+into GNU/Linux deployments.
+
+This leads us directly to the second kind of support a LUG can give to
+local businesses: LUGs can serve as a clearinghouse for information
+available in few other places. For example:
+
+<itemize>
+
+	<item>Which local ISP is Linux-friendly?</item> 
+	<item>Are there any local hardware vendors building Linux PCs?</item>
+	<item>Does anyone sell Linux CDs locally?</item>
+
+</itemize>
+
+Maintaining and making this kind of information public not only helps
+the LUG members, but also helps friendly businesses and encourages
+them to continue to be GNU/Linux-friendly. It may even, in some cases, help
+further a competitive environment in which other businesses are
+encouraged to follow suit.
+
+<sect2>Free / open-source software development
+<p>
+Finally, LUGs may also support the movement by soliciting and
+organising charitable giving. <url name="Chris Browne"
+url="mailto:%20cbbrowne@cbbrowne.com%20"> has thought about this issue as much as
+anyone I know, and he contributes the following:
+
+<sect3>Chris Browne on free software / open source philanthropy
+<p> 
+A further involvement can be to encourage sponsorship of various
+GNU/Linux-related organisations in a financial way.  With the <url
+url="http://linuxcounter.net/" name="multiple millions"> of users,
+it would be entirely plausible for grateful users to individually
+contribute a little. Given millions of users, and the not-unreasonable
+sum of a hundred dollars of "gratitude" per user (&dollar;100 being
+roughly the sum <it>not</it> spent this year upgrading a Microsoft OS),
+that could add up to <it>hundreds of millions</it> of dollars towards
+development of improved GNU/Linux tools and applications.
+
+<p> 
+A user group can encourage members to contribute to various
+"development projects". Having some form of "charitable tax exemption"
+status can encourage members to contribute directly to the group,
+getting tax deductions as appropriate, with contributions flowing on to
+other organisations.
+
+<p> 
+It is appropriate, in any case, to encourage LUG members to direct
+contributions to organisations with projects and goals they
+individually wish to support.
+
+<p> 
+This section lists possible candidates. None is being explicitly 
+recommended here, but the list represents useful food for
+thought.  Many are registered as charities in the USA, thus
+making US contributions tax-deductible.
+
+<p>
+Here are organisations with activities particularly directed towards
+development of software working with GNU/Linux:
+
+<itemize>
+<item><url url="http://www.linuxfoundation.org/about" name="The Linux Foundation">
+<item><url url="http://www.debian.org/donations.html" name="Debian / Software In the Public Interest">
+<item><url url="https://my.fsf.org/associate/support_freedom" name="Free Software Foundation"> 
+<item><url url="http://www.kde.org/community/donations/" name="KDE Project">
+<item><url url="http://www.gnome.org/friends/" name="GNOME Foundation">
+</itemize>
+
+<p>
+Contributions to these organisations have the direct effect of
+supporting creation of freely redistributable software usable with
+GNU/Linux.  Dollar for dollar, such contributions almost certainly yield
+greater benefit to the community than any other kind of spending.
+
+<p> 
+There are also organisations less directly associated with GNU/Linux, that
+may nonetheless be worthy of assistance, such as:
+
+<itemize>
+<item>The <url url="http://www.eff.org/" name="Electronic Frontier Foundation"> 
+
+<p>
+Based in San Francisco, EFF is a donor-supported membership organization
+working to protect our fundamental rights regardless of technology; to
+educate the press, policy-makers, and the general public about civil
+liberties issues related to technology; and to act as a defender of 
+those liberties. Among our various activities, EFF opposes misguided
+legislation, initiates and defends court cases preserving individuals'
+rights, launches global public campaigns, introduces leading edge
+proposals and papers, hosts frequent educational events, engages the
+press regularly, and publishes a comprehensive archive of digital civil
+liberties information at one of the most linked-to Web sites in the
+world.
+
+<item>The LaTeX3 Project Fund 
+
+<p> 
+The <url url="http://www.tug.org/" name="TeX Users Group (TUG)"> is
+working on the "next generation" version of the LaTeX publishing
+system, known as LaTeX3.  GNU/Linux is one of the platforms on which TeX
+and LaTeX are best supported.
+<p> Donations for the project can be sent to:
+<tscreen>
+<verb>
+TeX Users Group
+c/o Robin Laakso, executive director
+TeX Users Group
+PO Box 2311
+Portland, OR 97208-2311
+</verb>
+</tscreen>
+
+Alternatively, donations can be made 
+<url url="https://www.tug.org/donate.html" name="online">.
+
+<item> <URL URL="http://www.gutenberg.org/" name="Project Gutenberg"> 
+
+<p>
+Project Gutenberg's purpose is to make freely available in electronic
+form the texts of public-domain books.  This isn't directly a "Linux
+thing", but seems fairly worthy, and they actively encourage platform
+independence, which means their "products" are quite usable with GNU/Linux.
+
+<item> <url url="http://runeberg.org/" name="Project Runeberg">
+
+<p>
+Project Runeberg is similar to Project Gutenberg, except concentrating
+on making editions of classic Nordic (Scandinavian) literature openly
+available over the Internet.
+
+
+<item> <url url="http://www.osef.org/donations.html" name="Open Source
+Education Foundation">
+
+<p>
+The Open Source Education Foundation's purpose to enhance K-12 education
+through the use of technologies and concepts derived from The Open
+Source and Free Software movement.  In conjunction with Tux4Kids, OSEF 
+created a bootable distribution of GNU/Linux (Knoppix for Kids) based 
+on Klaus Knopper's Knoppix, aimed at kids, parents, teachers, and 
+other school officials. OSEF installs and supports school computer labs, 
+and has developed a "K12 Box" as a compact Plug and Play workstation 
+computer for student computer labs.
+
+<item> <url url="http://www.osafoundation.org/donations.htm" name="Open 
+Source Applications Foundation"> 
+
+<p>OSAF is Mitch Kapor's non-profit foundation to create and popularise
+open-source application software of uncompromising quality, starting
+with its pioneering personal information manager, Chandler.
+  
+</itemize>
+
+(Please note that suggested additions to the above list of GNU/Linux-relevant 
+charities are most welcome.)
+
+
+<sect2>Linux movement
+<p>
+I have referred throughout this HOWTO to what I call the <bf>GNU/Linux
+movement</bf>. There really is no better way to describe the
+international GNU/Linux phenomenon: It isn't a bureaucracy, but is
+organised. It isn't a corporation, but is important to businesses
+everywhere. The best way for a LUG to support the international GNU/Linux
+movement is to keep the local community robust, vibrant, and
+growing. GNU/Linux is <it>developed</it> internationally, which is easy
+enough to see by reading the kernel source code's 
+<file>MAINTAINERS</file> file -- but
+GNU/Linux is also <it>used</it> internationally.  This ever-expanding
+user base is key to GNU/Linux's continued success, and is where the LUGs
+are vital.
+
+The movement's strength internationally lies in offering
+unprecedented computing power and sophistication for its cost and
+freedom. The keys are value and independence from proprietary control.
+Every time a new person, group, business, or organisation experiences
+GNU/Linux's inherent value, the movement grows.  LUGs help that
+happen.
+
+<sect1>Linux socialising
+<p>
+The last goal of a LUG we'll cover is socialising -- in some ways,
+the most difficult goal to discuss, because it isn't clear how
+many or to what degree LUGs do it. While it would be strange to
+have a LUG that didn't engage in the other goals, there may be
+LUGs for which socialising isn't a factor.
+
+It seems, however, that whenever two or three GNU/Linux users get together,
+fun, hijinks, and, often, beer follow. Linus Tovalds has
+always had one enduring goal for Linux: to have more fun. For hackers,
+kernel developers, and GNU/Linux users, there's nothing quite like
+downloading a new kernel, recompiling an old one, fooling with a
+window manager, or hacking some code. GNU/Linux's sheer fun keeps many
+LUGs together, and leads LUGs naturally to socialising.
+
+By "socialising", here I mean primarily sharing experiences, forming
+friendships, and mutually-shared admiration and respect. There is
+another meaning, however -- one social scientists call
+<it>acculturation</it>. In any movement, institution, or human
+community, there is the need for some process or pattern of events in
+and by which, to put it in GNU/Linux terms, newcomers are turned into
+hackers. In other words, acculturation turns you from "one of them" to
+"one of us".
+
+It is important that new users come to learn GNU/Linux culture,
+concepts, traditions, and vocabulary.  GNU/Linux acculturation, unlike "real
+world" acculturation, can occur on mailing lists and Usenet, although
+the latter's efficacy is challenged by poorly acculturated users and by
+spam. LUGs are often much more efficient at this task than are mailing 
+lists or newsgroups, precisely because of the former's greater interactivity 
+and personal focus.
+
+<sect>LUG activities
+<p>
+In the previous section I focused exclusively on what LUGs do and 
+should do. This section's focus shifts to practical strategies.
+
+There are, despite permutations of form, two basic things LUGs do:
+First, members meet in physical space; second, they communicate
+in cyberspace. Nearly everything LUGs do can be seen in terms of
+meetings and online resources.
+
+<sect1>Meetings
+<p>
+As I said above, physical meetings are synonymous with LUGs (and 
+most user groups).  LUGs have these kinds of meetings:
+
+<itemize>
+	<item>social</item>
+	<item>technical presentations</item>
+	<item>informal discussion groups</item>
+	<item>user group business</item>
+	<item>GNU/Linux installation</item>
+	<item>configuration and bug-squashing</item>
+</itemize>
+
+What do LUGs do at these meetings?
+
+<itemize>
+	<item>Install distributions for newcomers and strangers.</item>
+	<item>Teach members about GNU/Linux.</item>
+	<item>Compare GNU/Linux to other operating systems.</item>
+	<item>Teach members about application software.</item>
+	<item>Discuss advocacy.</item>
+	<item>Discuss the free software / open-source movement.</item>
+	<item>Discuss user group business.</item>
+	<item>Eat, drink, and be merry.</item>
+</itemize>
+
+
+<sect1>Online resources
+<p>
+The commercial rise of the Internet coincided roughly with that of
+GNU/Linux; the latter owes something to the former. The 'Net has always been
+important to development. LUGs are no different: Most have Web
+pages, if not whole Web sites. In fact, I'm not sure how else to find a
+LUG, but to check the Web.  
+
+It makes sense, then, for a LUG to make use of whatever Internet
+technologies they can: Web sites, mailing lists, wikis, ftp, e-mail, Web
+discussion forums, netnews, etc. As the world of commerce is
+discovering, the 'Net is an effective way to advertise, inform, educate,
+and even sell. The other reason LUGs make extensive use of Internet
+technology is that the very essence of GNU/Linux is to <it>provide</it>
+a stable and rich platform to deploy these technologies. So,
+not only do LUGs benefit from, say, establishment of a Web site,
+because it advertises their existence and helps organise members,
+but, in deploying these technologies, LUG members 
+learn about them and see GNU/Linux at work.
+
+Arguably, a well-maintained Web site is the one must-have, among those
+Internet resources.  My essay
+<url name="Recipe for a Successful Linux User Group"
+url="http://linuxmafia.com/faq/Linux_PR/newlug.html">, for that reason,
+spends considerable time discussing Web issues.  Quoting it (in outline form):
+
+<itemize>
+        <item>You need a Web page.
+	<item>Your Web page needs a reasonable URL.
+	<item>You need a regular meeting location.
+	<item>You need a regular meeting time.
+	<item>You need to avoid meeting-time conflicts.
+	<item>You need to make sure that meetings happen as advertised, without fail.
+	<item>You need a core of several enthusiasts.
+	<item>Your core volunteers need out-of-band methods of communication.
+	<item>You need to get on the main lists of LUGs, and keep your entries accurate.
+	<item>You must have login access to maintain your Web pages, as needed.
+	<item>Design your Web page to be forgiving of deferred maintenance.
+	<item>Always include the day of the week, when you cite event dates. Always check that day of the week, first, using gcal.
+	<item>Place time-sensitive and key information prominently near the top of your main Web page.
+	<item>Include maps and directions to your events.
+	<item>Emphasise on your main page that your meeting will be free of charge and open to the public (if it is).
+	<item>You'll want to include an RSVP "mailto" hyperlink, on some events.
+	<item>Use referral pages.
+	<item>Make sure every page has a revision date and maintainer link.
+	<item>Check all links, at intervals.
+	<item>You may want to consider establishing a LUG mailing list.
+	<item>You don't need to be in the Internet Service Provider business.
+	<item>Don't go into any other business, either.
+	<item>Walk the walk. (Do the LUG's computing on GNU/Linux.)
+</itemize>
+
+That essay partly supplements (and partly overlaps) this HOWTO.
+
+Some LUGs using the Internet effectively:
+
+<itemize>
+
+	<item><url name="Atlanta Linux Enthusiasts" url="http://www.ale.org/"></item>
+
+	<item><url name="Boston Linux and Unix" url="http://www.blu.org/"></item>
+
+	<item><url name="Colorado Linux Users and Enthusiasts" url="http://www.cluedenver.org/"></item>
+
+	<item><url name="Dusseldorfer Linux Users Group" url="http://www.dlug.de/"></item>
+	
+        <item><url name="India Linux Users Group - Delhi" url="http://linux-delhi.org/"></item>
+
+	<item><url name="Israeli Group of Linux Users" url="http://www.iglu.org.il/"></item>
+
+	<item><url name="Korean Linux Users Group" url="http://www.lug.or.kr/"></item>
+
+	<item><url name="Linux Mexico (La Cofradia Digital)" url="http://cofradia.org/"></item>
+
+	<item><url name="Linux User Group Austria" url="http://www.luga.at/"></item> 
+
+        <item><url name="Linux User Group of Davis" url="http://www.lugod.org/"></item>
+
+	<item><url name="Linux User Group of Rochester" url="http://www.lugor.org/"></item>
+
+	<item><url name="Nederlandse Linux Gebruikers Groep (Netherlands Linux Users Group or NLLGG)" url="http://www.nllgg.nl/"></item>
+
+	<item><url name="North Texas Linux Users Group" url="http://www.ntlug.org/"></item>
+
+	<item><url name="Ottawa Canada Linux Users Group" url="http://www.oclug.on.ca/"></item>
+
+	<item><url name="Provence Linux Users Group" url="http://plugfr.org/"></item>
+
+	<item><url name="Tokyo Linux Users Group" url="http://www.tlug.jp/"></item>
+
+	<item><url name="Turkish Linux User Group" url="http://www.linux.org.tr/"></item>
+
+	<item><url name="Victoria Linux User Group" url="http://www.vlug.org/"></item>
+
+	<item><url name="Volgograd Linux User Group" url="http://volgograd.lug.ru/"></item>
+
+</itemize>
+
+<p>
+Please let me know if your LUG uses the Internet in an important or
+interesting way; I'd like this list to include your group.
+
+<sect>Practical suggestions
+<p>
+Finally, I want to make some very practical, even mundane, suggestions
+for anyone wanting to found, maintain, or grow a LUG.
+
+<sect1>LUG support organisations
+<p>
+
+There once were numerous organisations offering assistance to LUGs.
+One of the long-time ones remains active:
+
+<descrip>
+
+	<tag>Tux.Org:</tag> Tux.Org is an umbrella organisation for
+	LUGs and open-source software development projects, providing
+	a corporate entity, Web hosting, mailing lists, mirrors of 
+	popular software, and expertise and funding in planning special
+	LUG events.  More information can be found at the
+        <url name="http://www.tux.org/" url="http://www.tux.org/">
+	Web site.
+
+</descrip>
+
+<sect1>Founding a LUG
+<p>
+
+<itemize>
+
+	<item>Determine the nearest existing LUG.</item>
+	<item>Announce your intentions on <tt>comp.os.linux.announce</tt> and on an appropriate regional hierarchy.</item>
+	<item>Announce your intention wherever computer users are in your area: bookstores, swap meets, cybercafes, colleges corporations, Internet service providers, etc.</item>
+	<item>Find friendly businesses or institutions in your area willing to help you form the LUG.</item>
+	<item>Form a mailing list or some means of communication among the people who express an interest in forming a LUG.</item>
+	<item>Ask key people specifically for help in spreading the word about your intention to form a LUG.</item>
+	<item>Solicit space on a Web server to put a few HTML pages together about the group.</item>
+	<item>Begin looking for a meeting place.</item>
+	<item>Schedule an initial meeting.</item>
+	<item>Discuss at the initial meeting the goals for the LUG.</item>
+
+</itemize>
+
+<sect1>Maintaining and growing a LUG
+<p>
+
+<itemize>
+
+	<item>Make the barriers to LUG membership as low as possible.</item>
+	<item>Make the LUG's Web site a priority: Keep all information current, make it easy to find details about meetings (who, what, and where), and make contact information and feedback mechanisms prominent.</item>
+	<item>Install distributions for anyone who wants it.</item>
+	<item>Post flyers, messages, or handbills wherever computer users are in your area.</item>
+	<item>Secure dedicated leadership.</item>
+	<item>Follow Linus Torvalds's <it>benevolent dictator</it> model of leadership.</item>
+	<item>Take the big decisions to the members for a vote.</item>
+	<item>Start a mailing list devoted to technical support and ask the "gurus" to participate on it.</item>
+	<item>Schedule a mixture of advanced and basic, formal and informal, presentations.</item>
+	<item>Support the software development efforts of your members.</item>
+	<item>Find way to raise money without dues: for instance, selling GNU/Linux merchandise to your members and to others.</item>
+	<item>Consider securing formal legal standing for the group, such as incorporation or tax-exempt status.</item>
+	<item>Find out if your meeting place is restricting growth of the LUG.</item>
+	<item>Meet in conjunction with swap meets, computer shows, or other community events where computer users -- i.e., potential GNU/Linux users -- are likely to gather.</item>
+	<item>Elect formal leadership for the LUG as soon as practical: Some helpful officers might include President, Treasurer, Secretary, Meeting Host (general announcements, speaker introductions, opening and closing remarks, etc.), Publicity Coordinator (handles Usenet and e-mail postings, local publicity), and Program Coordinator (organises and schedules speakers at LUG meetings).</item>
+	<item>Provide ways for members and others to give feedback about the direction, goals, and strategies of the LUG.</item>
+	<item>Support GNU/Linux and free software / open source development efforts by donating Web space, a mailing list, or an ftp site.</item>
+	<item>Establish an ftp/Web site for relevant software.</item>
+	<item>Archive everything the LUG does for the Web site.</item>
+	<item>Solicit "door prizes" from GNU/Linux vendors, VARs, etc. to give away at meetings.</item>
+	<item>Give credit where due.</item>
+	<item>Submit your LUG's information to all the LUG lists.</item>
+	<item>Publicise your meetings on appropriate Usenet groups and in local computer publications and newspapers.</item>
+	<item>Compose promotional materials, like PostScript files, for instance, members can use to help publicise the LUG at workplaces, bookstores, computer stores, etc.</item>
+	<item>Make sure you know what LUG members want the LUG to do.</item>
+	<item>Release press releases to local media outlets about any unusual LUG events like an Installation Fest, Net Day, etc.</item>
+	<item>Use LUG resources and members to help local non-profit organisations and schools with their Information Technology needs.</item>
+	<item>Advocate the use of our OS enthusiastically but responsibly.</item>
+	<item>Play to LUG members' strengths.</item>
+	<item>Maintain good relations with vendors, VARs, developers, etc.</item>
+	<item>Identify and contact consultants in your area.</item>
+	<item>Network with the leaders of other LUGs in your area, state, region, or country to share experiences, tricks, and resources.</item>
+	<item>Keep LUG members advised on the state of software -- new kernels, bugs, fixes, patches, security advisories -- and the state of the GNU/Linux world at large -- new ports, trademark and licensing issues, where Torvalds is living and working, etc.</item>
+        <item>Notify the Linux Documentation Project -- and other pertinent sources of GNU/Linux information -- about the documentation the LUG produces: technical presentations, tutorials, local HOWTOs, etc.</item>
+</itemize>
+
+<sect>Legal and political issues
+<p>
+
+<sect1>Organisational legal issues
+<p>
+The case for formal LUG organisation can be debated:
+
+<it>Pro:</it> Incorporation and recognised tax-exemption limits
+liability and helps the group carry insurance.  It aids fundraising.
+It avoids claims for tax on group income.
+
+<it>Con:</it> Liability shouldn't be a problem for modestly careful
+people. (You're not doing skydiving, after all.)  Fundraising isn't needed
+for a group whose activities needn't involve significant expenses.
+(Dead-tree newsletters are so 1980.)  Not needing a treasury, you avoid
+needing to argue over it, file reports about it, or fear it being taxed
+away. Meeting space can usually be gotten for free at ISPs, colleges,
+pizza parlours, brewpubs, coffeehouses, computer-training firms,
+GNU/Linux-oriented companies, or other friendly institutions, and can
+therefore be free of charge to the public.  No revenues and no expenses
+means less need for organisation and concomitant hassles.
+
+For whatever it's worth, this HOWTO's originator and second maintainer lean,
+respectively, towards the pro and con sides of the issue -- but choose
+your own poison:  If interested in formally organising your LUG, this
+section will introduce you to some relevant issues.
+
+<bf>Note:</bf> this section should not be construed as competent legal
+counsel. These issues require the expertise of competent legal
+counsel; you should, before acting on any of the statements made in
+this section, consult an attorney.
+
+
+<sect2>Canada
+<p>
+Thanks to <htmlurl name="Chris Browne" url="mailto:%20cbbrowne@cbbrowne.com%20">
+for the following comments about the Canadian situation.
+
+<p>
+The Canadian tax environment strongly parallels the US environment (for which,
+see below), in that the "charitable organisation" status confers similar tax
+advantages for donors over mere "not for profit" status, while
+requiring that similar sorts of added paperwork be filed by the
+"charity" with the tax authorities in order to attain and maintain
+certified charity status.
+
+<sect2>Germany
+<p>
+Correspondent <htmlurl name="Thomas Kappler" url="mailto:%20Thomas.Kappler@stud.uni-karlsruhe.de%20"> warns that the process of founding a non-profit entity in Germany
+is a bit complicated, but comprehensively covered at <url
+name="http://www.buergergesellschaft.de/?id=106947" url="http://www.buergergesellschaft.de/?id=106947">.
+
+<sect2>Sweden
+<p>
+In Sweden, LUGs are not required to register, but then are regarded as 
+clubs.  Registration with Skatteverket (national tax authority) offers 
+two classification options:  non-profit organisation or "economical 
+association". The latter is an organisation where the goal is to benefit 
+its members economically, and as such is probably unsuitable, being 
+traditionally used for collectives of companies, or building societies 
+/ co-operative tenant-owners, and such).
+
+Non-profit organisations in Sweden doesn't have specific laws to follow. 
+Rather, general Swedish law applies: They can hire people and they can 
+make profit. Generally they don't pay tax on their profits. (Profits 
+stay in the organisation; unlike the case with "economical associations", 
+members don't receive business proceeds.) To be able to do business, you
+must register with Skatteverket to get an "organisation number", allowing 
+the group to pay and get paid. Otherwise you will probably have to 
+arrange business through a member in his/her individual capacity.  
+It may then also be possible, after securing an organisation number to 
+apply for government financial support.
+
+<sect2>United States of America
+<p>
+There are at least two different legal statuses a LUG in the USA may
+attain:
+
+<enum>
+	<item>incorporation as a non-profit entity</item>
+	<item>tax-exemption</item>
+</enum>
+
+Although relevant statutes differ among states, most states
+allow user groups to incorporate as non-profit entities. Benefits
+of incorporation for a LUG include limitations of liability
+of LUG members and volunteers (<it>but only in their passive roles
+as member/shareholders, not as participants</it>), as well as 
+limitation or even exemption from state corporate franchise taxes
+(which, however, is highly unlikely to be a real concern -- see 
+"Common Misconceptions Debunked", below).
+
+While you should consult competent legal counsel before incorporating
+your LUG as a non-profit, you can probably reduce your legal
+fees by being acquainted with relevant issues before consulting
+with an attorney. I recommend the <it><url name="Non-Lawyers' Non-Profit
+Corporation Kit" url="http://alphapublications.com/"></it>.
+
+As for the second status, tax-exemption, this is not a legal status, so
+much as an Internal Revenue Service judgement. It's important to realise
+non-profit incorporation <bf>does not</bf> ensure that IRS will rule
+your LUG tax-exempt. It is quite possible for a non-profit corporation
+to <bf>not</bf> be tax-exempt.
+
+IRS has a relatively simple document explaining the criteria
+and process for tax-exemption. It is <bf>Publication 557:</bf>
+<it>Tax-Exempt Status for Your Organization</it>, available as
+an Acrobat file from the IRS's Web site. I strongly recommend
+you read this document <bf>before</bf> filing for non-profit incorporation.
+While becoming a non-profit corporation cannot
+ensure your LUG will be declared tax-exempt, some
+incorporation methods will <bf>prevent</bf> IRS from declaring your
+LUG tax-exempt. <it>Tax-Exempt Status for Your Organization</it>
+clearly sets out necessary conditions for your LUG to be declared
+tax-exempt.
+
+Finally, there are resources available on the Internet for non-profit
+and tax-exempt organisations. Some of the material is probably
+relevant to your LUG.
+
+Common Misconceptions Debunked:
+
+<itemize>
+    <item><p>Incorporation and tax-exempt status are separate issues.  You don't have to be incorporated to get recognition of tax-exempt status.  You don't have to be tax-exempt to be incorporated.  (Odds are, you honestly won't want either.  You just probably assume you do.)</item>
+    <item><p>The "liability shield" one can get from incorporating <it>doesn't 
+protect volunteers from legal liability</it>.  All it does is prevent any 
+plaintiffs from suing individual shareholders (LUG members, in this case) 
+for tort damages <it>merely because they own the corporation</it>, if the 
+corporation itself is alleged to have wronged the plaintiff.  Plaintiff's 
+maximum haul in damages from suing the corporation is limited to the 
+corporate net assets, in that one case.  However, volunteers are still
+fully liable for any personal involvement they're alleged to have had.</item>
+    <item><p>Umbrella insurance coverage against tort liability (i.e., against civil litigation) for your volunteers almost certainly costs far too much for your group to afford (think $2,500 each and every year in premium payouts, give or take, to buy $1M in general liability insurance coverage -- which generally would cover only the corporation as a whole and its directors in the strict performance of their defined duties), if you can find it at all.</item>
+    <item><p>IRS recognition as a tax-exempt group doesn't mean donations to
+your group necessarily become tax-deductible:  Automatic deductibility is
+reserved to <it>charities only</it>, IRS category 501(c)(3), which must obey 
+extremely stifling restrictions on group activities (e.g., it would then 
+become illegal to host anti-DMCA events or support any other political
+activity), and must meet exacting paperwork and auditing standards.  It's 
+difficult to envision 501(c)(3) charity status actually making functional 
+sense for any Linux group -- though one continually hears it recommended by
+those who imagine being able to tell people their donations will be guaranteed tax deductible must justify any accompanying disadvantages.  Most LUGs would more logically file (if at all) for recognition as a "social and recreation club", category <url url="http://web.archive.org/web/20090818124349/http://www.t-tlaw.com/lr-06.htm" name="501(c)(7)">.</item>
+   <item><p>In any event, unless one wishes to become a registered charity to render incoming donations tax-deductible, there is <it>literally no point</it> in applying for  IRS  recognition of your small, informal Linux group under any of the Internal Revenue Code section 501(c) tax-exempt statuses, because IRS simply doesn't care about groups with annual gross revenues less than $25,000, and <url url="http://www.guidestar.org/news/features/990_myths.jsp" name="doesn't want to hear from them">  (2010 update:  IRS now does require a very simple annual <url url="http://epostcard.form990.org/" name="e-Postcard"> informational filing from all small non-profits, to keep their 501(c) certifications, but still doesn't want tax from them).</item>
+   <item><p>The <url name="Federal Volunteer Protection Act of 1997" url="http://www.congress.gov/cgi-bin/query/C?c105:./temp/~c105ss2v68"> does <url name="not" url="http://www.runquist.com/article_vol_protect.htm">, in fact, shield volunteers of Internal Revenue Code section 501(c)(3) charities from tort lawsuits.  At most, it furnishes some legal defences that can be raised during (expensive) civil litigation, with a large number of holes and limitations, and in most states will be denied unless the group also carries large amounts of (very expensive -- see above) liability insurance.  Also, unless the volunteer's duties are not very meticulously defined and monitored, and the alleged tort occurs strictly in the scope of those duties, there's no shield at all -- plus the litigated action must not involve a motor vehicle / aircraft / vessel requiring an operator's licence, nor may the volunteer be in violation of any state or Federal law, else again there's no shield at all.  (On the bright side, it's completely false, as often alleged, that the volunteer must be a member of the group, to be covered:  In fact, the Act clearly states that a volunteer may be anyone who performs defined services for a qualifying group and receives no compensation for that labour.)</item>
+</itemize>
+
+As may be apparent from the above, a number of groups have, in the past, talked themselves into unjustifiable levels of bureaucratic strait-jacketing with no real benefit and serious ongoing disadvantages to their groups, because of misconceptions, careless errors, and tragically bad advice in the above areas.  In general, you should be slow to heed the counsel of amateur financial and tax advisors.  (This HOWTO's maintainer had past experience during his first career as a <it>professional</it> finance and tax advisor, but, if you need competent advice tailored to your situation, please have a consultation with someone currently working in that field.)
+
+<sect1>Other legal issues
+<p>
+
+<sect2>Bootlegging
+<p>
+As a reminder, it's vital that offers or requests to copy
+distribution-restricted proprietary software of any sort be heavily
+discouraged anywhere in LUGs, and banned as off-topic from all GNU/Linux user
+group on-line forums.  This is not generally even an issue -- much less
+so than among proprietary-OS users -- but (e.g.) one LUG of my
+acquaintance briefly used a single LUG-owned copy of PowerQuest's
+Partition Magic on all NTFS-formatted machines brought to its
+installfests for dual-boot OS installations, on a very dubious theory
+of legality.
+
+If it smells unlawful, it almost certainly is.  Beware.
+
+<sect2>Antitrust
+<p>
+It's healthy to discuss the consulting business in general in user
+group forums, but for antitrust legal reasons it's a bad idea to get into 
+"How much do you charge to do [foo]?" discussions, there.
+
+<sect1>Software politics
+<p>
+<url name="Chris Browne" url="mailto:%20cbbrowne@cbbrowne.com%20"> has the
+following to say about the kinds of intra-LUG political dynamics that
+often crop up (lightly edited and expanded by the HOWTO maintainer):
+
+<sect2>People have different feelings about free / open-source software
+<p>
+GNU/Linux users are a diverse bunch.  As soon as you try to put a lot of
+them together, <it>some</it> problem issues can arise. Some, who are
+nearly political radicals, believe all software, always, should be
+"free".  Because Caldera charges quite a lot of money for its
+distribution, and doesn't give all profits over to <it>(pick favorite
+advocacy organisation)</it>, it must be "evil".  Ditto Red Hat or
+SUSE.  Keep in mind that all three of these companies have made and
+continue to make significant contributions to free / open-source software.
+
+(HOWTO maintainer's note:  The above was a 1998 note, from before
+Caldera exited the GNU/Linux business, renamed itself to The SCO Group,
+Inc., and launched a major copyright / contract / patent / trade-secret
+lawsuit and PR campaign against GNU/Linux users.  My, those times do change.
+Still, we're grateful to the Caldera Systems that <em> was </em>, for
+its gracious donation of hardware to help Alan Cox develop SMP kernel
+support, for funding the development of RPM, and for its extensive past
+kernel source contributions and work to combine the GNU/Linux and historical
+Unix codebases.)
+
+<p> 
+Others may figure they can find some way to highly exploit the
+"freeness" of the GNU/Linux platform for fun and profit. Be aware that many
+users of the BSD Unix variants consider <it>their</it> licences that
+<it>do</it> permit companies to build "privatised" custom versions of
+their kernels and C libraries preferable to the "enforced permanent
+freeness" of the GPL as applied to the Linux kernel and GNU libc.  Do
+not presume that all people promoting this sort of view are necessarily
+greedy leeches.
+
+<p> 
+If/when these people gather, disagreements can occur.
+
+<p> 
+Leaders should be clear on the following facts:
+
+<itemize>
+
+<item>There are a lot of opinions about the GPL and other open-source
+licences and how they work -- mostly misinformed.  It is easy to
+misunderstand both the GPL and alternative licensing schemes.  Most
+attempts at debating same are, at root,  pointless, ritualised symbolic
+warfare among people who should know better.  In the rare event that
+participants actually aspire to understand the subject, please direct
+them to the OSI's "license-discuss" mailing list and the Debian
+Project's "debian-legal" mailing list, where substantive analysis is
+possible and encouraged.
+
+<item> GNU/Linux benefits from contributions from many places, including
+proprietary-software vendors, e.g., in the Linux kernel, X.org, and
+gcc.
+
+<item> Proprietary implies neither better nor horrible.
+
+</itemize>
+
+<p> 
+The main principle can be extended well beyond this; computer "holy
+wars" have long been waged over endless battlegrounds, including 
+GNU/Linux vs. other Unix variants vs. Microsoft OSes, the "IBM PC" vs.
+sundry Motorola 68000-based systems, the 1970s' varied 8-bit systems 
+against each other, KDE versus GNOME....
+
+<p>
+A wise LUG leader will seek to move past such differences, if only
+because they're tedious.  LUG leaders ideally therefore will have thick
+skins.
+
+<sect2>Non-profit organisations and money don't mix terribly well.
+<p>
+It is important to be careful with finances in any sort of non-profit.
+In businesses, which focus on substantive profit, people are not
+typically too worried about minor details such as alleged misspending of
+<it>immaterial</it> sums.  The same cannot be said of non-profit
+organisations.  Some people are involved for reasons of principle, and
+devote inordinate attention to otherwise minor issues, an example of C.
+Northcote Parkinson's <url name="Bike Shed Effect" 
+url="http://linuxmafia.com/~rick/lexicon.html#bikeshed">.  LUG business
+meetings' potential for wide participation correspondingly expands the
+potential for exactly such inordinate attention.
+
+<p>
+As a result, it is probably preferable for there to <it>not</it> be any
+LUG membership fee, as that provides a specific thing for which people
+can reasonably demand accountability.  Fees not collected can't be
+misused -- or squabbled over.
+
+<p>
+If there <it>is</it> a lot of money and/or other substantive property,
+the user group must be accountable to members.
+
+<p>
+Any vital, growing group should have more than one active person.  In
+troubled nonprofits, financial information is often tightly held by
+someone who will not willingly relinquish monetary control. Ideally,
+there should be <it>some</it> LUG duty rotation, including duties
+involving financial control.
+
+<p>
+Regular useful financial reports should be made available to those
+who wish them. A LUG maintaining official "charitable status"
+for tax purposes must file at least annual financial reports
+with the local tax authorities, which would represent a minimum
+financial disclosure to members.
+
+<p>
+With the growth of GNU/Linux-based financial software, regular reports are
+now quite practical.  With the growth of the Internet, it should even be
+possible to publish these on the World-Wide Web.
+
+<sect1>Elections, democracy, and turnover
+<p>
+Governing your LUG democratically is absolutely vital -- if and
+only if you believe it is.  I intend that remark somewhat less cynically
+than it probably sounds, as I shall explain.
+
+Tangible stakes at issue in LUG politics tend to be minuscule to the point of
+comic opera:  There are typically no real assets. Differences of view 
+can be resolved by either engineering around them with technology (the GNU/Linux-ey
+solution) or by letting each camp run efforts in parallel. Moreover, even the
+most militantly "democratic" LUGs typically field, like clockwork,
+exactly as many candidates as there are offices to be filled -- not a
+soul more.
+
+It's tempting to mock such exercises as empty posturing, but such
+is not (much) my intent.  Rather, I
+mention them to point out something more significant:  Attracting and 
+retaining key volunteers is vital to the group's success.  Anything that 
+makes that happen is good.  It seems likely that the
+"democratic" exercise stressed in some groups, substantive or not,
+encourages participation, and gives those elected a sense of status,
+legitimacy, and involvement.  Those are Good Things.  
+
+Thus, if elections and formal structure help attract key
+participants, use them.  If those deter participants, 
+lose them.  If door-prizes and garage sales bring people in, do
+door-prizes and garage sales.  Participation, as much as software, is
+the lifeblood of your LUG. 
+
+The reason I spoke of "key" volunteers, above, is because, inevitably, a
+very few people will do almost all of the needed work.  It's just the
+way things go, in volunteer groups. An anecdote may help illustrate my
+point:  Towards the end of my long tenure as editor and typesetter of
+San Francisco PC User Group's 40-page monthly magazine, I was repeatedly
+urged to make magazine management more "democratic".  I finally replied
+to the club president, "See that guy over there?  That's Ed, one of my
+editorial staff.  Ed just proofread twelve articles for the current
+issue.  So, I figure he gets twelve votes."  The president and other
+club politicos were dismayed by my work-based recasting of their
+democratic ideals: Their notion was that each biped should have an equal
+say in editorial policy, regardless of ability to typeset or proofread,
+or whether they had ever done <it>anything</it> to assist magazine
+production. Although he looked quite unhappy about doing so, the
+president dropped the subject.  I figured that, when it came right down
+to it, he'd decide that the club needed people who got work done more
+than they needed his brand of "democracy".
+
+But we weren't quite done:  A month or so later, I was introduced to a 
+"Publications Committee", who arrived with the intent of doing nothing but 
+vote on matters of newsletter policy (i.e., issue "executive" orders to the 
+volunteer production staff).  Their first shock came when I listened politely 
+to their advice but then applied my editorial judgement as usual.  Much 
+worse, though:  I also assigned them work, as part of my staff.  Almost 
+all immediately lost interest. (Bossing around other people seemed likely 
+to be fun; doing actual work was not.)
+
+The point is that the widespread urge to vote on everything is at best
+orthogonal to any desire to perform needed work; at worst, the former
+serves as an excuse to compulsively meddle in others' performance
+of the latter.
+
+To sum up:  Have all the "democracy" that makes you happy, but watching after
+the well-being of your key volunteers is what matters.  (To quote Candide, 
+"We must cultivate our garden.")
+ 
+Last, plan for your replacement:  If your LUG is a college student
+group, and must go through a paperwork deathmarch every year to stay
+accredited, make sure that and all other vital processes are documented,
+so new LUG officers needn't figure everything out from scratch.  Think
+of it as a systems-engineering problem:  You're trying to eliminate
+single points of failure.
+
+And what works for the guys in the next town may not work for your crowd:
+Surprise!  The keys to this puzzle are still being sought.  So, please
+experiment, and let me know what works for you, so I can tell others.
+Have fun!
+
+<sect>About this document
+
+<sect1>Terms of use
+<p>
+
+Copyright (C) 2003-2013, Rick Moen.  Copyright (C) 1997-1998 by Kendall Grant 
+Clark. This document may be distributed under the terms set forth 
+in the Creative Commons Attribution-ShareAlike 3.0 licence at <url
+name="http://creativecommons.org/licenses/by-sa/3.0/"
+url="http://creativecommons.org/licenses/by-sa/3.0/">, or, at your
+option, any later version.
+
+<sect1>New versions
+<p>
+New versions of the Linux User Group HOWTO will be periodically
+uploaded to various GNU/Linux Web and ftp sites, principally <url
+url="http://linuxmafia.com/lug/" name="http://linuxmafia.com/lug/"> and
+the <url name="Linux Documentation Project"
+url="http://www.tldp.org/">.
+
+<sect1>Please contribute to this HOWTO 
+<p> 
+I welcome questions about and feedback on this document. Please send
+them to me at <htmlurl name="rick@linuxmafia.com"
+url="mailto:%20rick@linuxmafia.com%20">. <it>I am especially interested in
+hearing from LUG leaders around the world, especially outside the USA</it>. 
+Please let me know of innovative or noteworthy things your group does,
+meriting description here.
+
+<sect1>Document history
+<p>
+<itemize>
+	<item>1.0: Released on 13 July 1997.</item>
+	<item>1.1: Expanded online resources section.</item>
+	<item>1.3: Added LUG support organisations and expanded the Legal and Organisational Issues section.</item>
+	<item>1.3.1: General editing for clarity and conciseness.</item>
+	<item>1.4: General editing, added new LUG resources.</item>
+	<item>1.4.1: General editing for clarity.</item>
+	<item>1.5: Added some resources, some discussion of LUG documentation, also general editing.</item>
+	<item>1.5.1: Changed Web location for this document and author's e-mail address.</item>
+	<item>1.5.2: New copyright notice and license.</item>
+	<item>1.5.3: Miscellaneous edits and minor re-organisations.</item>
+	<item>1.6: Added Chris Browne's material: GNU/Linux philanthropic
+donations and LUG political considerations.</item>
+	<item>1.6.1: Very minor additions.</item>
+	<item>1.6.2: Minor corrections.</item>
+	<item>1.6.3: Maintenance assumed by Rick Moen on 26 July 2003:  General 
+initial touch-up, correction of broken URLs, etc.</item>
+	<item>1.6.4: Further minor fixes and additions.</item>
+	<item>1.6.5: More-extensive edits, added "Limits of advocacy",
+added caveat about conflicting value systems in support contexts.  Added
+more news sites, reordered examples of LUGs using Internet well.  General 
+tightening of phrasing, greater brevity in places, tempering of the more
+egregious boosterism.</item>
+	<item>1.6.6: More small fixes, added Yahoo LUG list.</item>
+	<item>1.6.7: Added formal-organisational pros/cons, "Elections,
+democracy, and turnover" section, Web site suggestions, and link
+to "Recipe for a Successful Linux User Group" essay. Fixed mis-tagged 
+sections under "Legal and political issues".</item>
+	<item>1.6.8: Fixed small glitches.  Rewrote section concerning
+GNU/Linux news outlets; parts of sections concerning consultants, businesses,
+and elections.</item>
+	<item>1.6.9: Minor corrections.</item>
+	<item>1.7.0: Caught up with GLUE membership having become free
+of charge.</item>
+	<item>1.7.1: Added a bunch more newly supported embedded CPUs.</item>
+	<item>1.7.2: Added more on CPU support / ports (which section was always a bit silly, but I figure it might as well be exhaustive, correct, and <it>grandly</it> silly, if present at all); furnished matching URLs.  Added details about GNU/Linux in India, and <it>LINUX For You</it> magazine.  Expanded legal issues section.</item>
+	<item>1.7.3: Added mention of Debian GNU/NetBSD to the CPU ports 
+section.  Reorganised and further expanded the latter.  Recorded <it>Linux
+Gazette</it>'s move to new hosting.  Added <it>LinuxFocus</it>.</item>
+	<item>1.7.4: Added <it>LinuxWorld Magazine</it>, fixed URL of Recipe for
+a Successful Linux User Group, which I moved.  Added Tux.Org and 
+LinuxUserGroups.org as LUG support organisations.
+        <item>1.7.5: Added several more embedded CPUs to the supported list, implemented licence change (9 Jan 2004) to Creative Commons Attribution ShareAlike 1.0 or later after securing permission from Kendall Clark. (The HOWTO had previously been under the LDPL version posted at LDP's site in 1997, which by 2004 had become not only deprecated but also somewhat indeterminate as to content, because the licence had been edited in place with neither clear versioning nor a distinct URL for each revision.)</item>
+        <item>1.7.6: Corrected addresses for TeX User Group in USA and
+UK.  Added mention of C. Northcote Parkinson's Bike Shed Effect.  Other 
+minor corrections.</item>
+        <item>1.7.7: Added reference to the UK Linux User Groups site.
+Added description of PingoS e.V.  Corrected URL for Thomas Kappler's 
+e-mail address.  Added Volgograd LUG to Online Resources.</item>
+        <item>1.7.8: Added Jerome Pinot's Linux architectures list,
+used some data from it.  Added "I Linux User Group italiani".  
+Corrected capitalisation of PingoS.  After securing permission from
+Kendall Clark, added "or any later version" clause to document licence.</item>
+        <item>1.7.9: Corrected India Linux link and added 
+<it>LINUX For You</it>, per suggestions from Rohit Kumar.  Added Linux 
+Foundation to list of candidates for receiving monetary support.  Made fixes 
+to Red Hat LUG list (reincarnated as "Army of Friends" database), as suggested 
+by Vincenzo Virgilio. Added LinuxHQ and O'Reilly LUG lists and FSF GNU User 
+Groups list.  Added Wikipedia Category:LUGs page.  Dropped material about the 
+GLUE site, which SSC, Inc.  tragically deleted in mid-2006 without allowing 
+anyone a chance to adopt it.  Added kernel support for two more embedded chip 
+families.  Substituted static mirrors for two (vanished) pages listing 
+Linux kernel ports.  Dropped <it>LinuxWorld Magazine</it> (vanished).  
+Removed references to getting help in founding LUGs from Red Hat User 
+Group Program and Kara Pritchard's LinuxUserGroups.org (both vanished) 
+and from lug.net (deactivated).  Added Swedish tax/regulatory details 
+from Martin Karlsson.  Added analysis of issues surrounding incorporation, 
+tax-exempt status, and insurance in the USA.  Found new URLs for a vast 
+number of links.  Updated licence to Creative Commons BY-SA 3.0, to 
+incorporate improvements.  Re-sorted country coverage into alphabetical 
+order (a small gesture to further reduce US-centrism).</item>
+        <item>1.8.0:  Corrected typos.  Improved some markup.  Expanded "Common Misconceptions Debunked" section to address recently popular errors about USA Volunteer Protection Act of 1997, civil liability, and IRS 501(c)(3) tax-exempt status.  Linked directly to the Act and an analysis page.  Furnished links for <it>Non-Lawyers' Non-Profit Corporation Kit</it>, for <it>DistroWatch Weekly</it>, and for the Raymond quotation.</item>
+	<item>1.8.1:  Banished more typos.  (I blame society.)</item>
+        <item>1.8.2:  Added more CPU ports.  APCUG changed Web sites.  Linux India's LUG list, lugww.counter.li.org, Red Hat Army of Friends, LUG Webring, O'Reilly LinuxGroups, and LINUX For You Magazine (of India) LUG List vanished.  IDG moved the Raymond article (again).  LinuxFocus was revived via a CMS.  NewsForge was shut down by The Company Formerly Known as VA Linux.  Linux International Development Grant Fund program vanished.  Project Gutenberg moved to its own domain.  Colorado Linux Users and Enthusiasts moved.  Added mention of IRS e-Postcard for 501(c) non-profits.  Added Linux Users Group - Delhi.  Added New Zealand Linux Resource.  Added Project Runeberg.</item>
+        <item>1.8.3:  Replacement ARM Linux Web site.  New URLs for many embedded and other systems.  SoftBlaze renamed to PetaLinux.a  LUGs WorldWide Project, Linux Online -- User Groups, LinuxHQ User Groups, and New Zealand Linux Resource vanished.  Free Software Foundation GNU Users Groups got moved/renamed to LibrePlanet Group List.  New URLs for LinuxFormat and LinuxCounter.  PingoS e.V. vanished (though its SelfLinux project for hypertext tutorials in the German language persists).  Linux User Group of Singapore, St. Petersburg Linux User Group, and Svenska Linuxforeningen folded.</item>
+        <Item>1.8.4:  Linux.org (without its former Linux Online branding) has been rebuilt and offers a new LUG directory.</item>
+</itemize>
+
+
+
+<sect1>Acknowledgements
+<p>
+
+I would like to give a big thank-you to Kendall Grant Clark for the 
+initial versions of this document in 1997-1998, and for trusting me to take
+over and renovate his creation starting in 2003.
+
+Warm regards and thanks to <url name="Chris Browne"
+url="mailto:%20cbbrowne@cbbrowne.com%20"> for describing the situation with
+non-profit and charitable groups in Canada, his thoughts on financial
+donations as a way to participate in GNU/Linux and the free software and 
+open-source software movements, and his ideas about the kinds of
+political issues likely to arise within LUGs.
+
+In addition, the following people have made helpful comments and
+suggestions:
+
+<itemize>
+        <item>Matthew Craig</item>
+	<item>Jeff Garvas</item>
+	<item>Greg Hankins</item>
+	<item>James Hertzler</item>
+	<item>Thomas Kappler</item>
+	<item>Martin Karlsson</item>
+	<item>Hugo van der Kooij</item>
+	<item>Rohit Kumar</item>
+	<item>Charles Lindahl</item>
+	<item>Don Marti</item>
+	<item>Vincenzo Virgilio</item>
+</itemize>
+
+
+</article>
+
+<!-- Local IspellDict: ca-valencia -->
+<!-- Local IspellPersDict: ~/emacs/.ispell-valencia -->
