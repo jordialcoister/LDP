@@ -1,0 +1,669 @@
+<!doctype linuxdoc system>
+<article>
+  <title>LinuxDoc+Emacs+Ispell-COM</title>
+  <author>
+    Autor: Philippe MARTIN (<htmlurl url="mailto:feloy@wanadoo.fr"
+    name="feloy@wanadoo.fr">) &nl; Traductor: S&eacute;bastien
+    Blondeel (<htmlurl url="mailto:Sebastien.Blondeel@lifl.fr"
+    name="Sebastien.Blondeel@lifl.fr">) &nl; Traductor al valencià:
+    Jordi Garcia Soler
+    (<htmlurl url="mailto:jordialcoister@gmail.com"
+    name="jordialcoister@gmail.com">)
+  </author>
+  <date>v0.4, 27 de Febrer de 1998
+  <abstract>
+    Este document va dirigit a escriptors i traductors de COMs de
+    Linux o de qualsevol altre document per al Linux Documentation
+    Project. Els ofereix pistes relatives a la utilització d'eines
+    incloent Emacs i Ispell.
+  </abstract>
+  <toc>
+    <sect>Preàmbul
+    <sect1>Copyright
+    <p>
+      Copyright Philippe Martin 1998&nl; Vostè pot redistribuir i/o
+      modificar aquest document sempre i quan complisca amb els termes
+      i condicions de la GNU General Public Licence, versió 2 o
+      posteriors.
+      <sect1>Crèdits
+<p>
+Un agraïment especial per a S&eacute;bastien Blondeel, qui és un
+cercador d'errors horrible i que m'ha fet tantes preguntes sobre la
+configuració d'Emacs. Les seues intel·ligents preguntes m'han permès
+entendre'l millor i passar-li eixe coneixement a vostè a través
+d'aquest document.
+<sect1>Comentaris
+<p>
+No dubte en dir-me qualsevol cosa que vostè pense que pot ajudar a
+millorar este document. Examinaré les seues crítiques en
+profunditat.&nl; No dubte tampoc en fer-me qualsevol pregunta
+relacionada amb els temes discutits ací. Em farà més que feliç
+contestar-les, ja que poden ajudar-me a millorar encara més este
+document.
+<footnote>
+Nota del traductor: Si l'anglés és horrible, això va per mi!
+</footnote>
+<sect1>Versions
+<p>
+Aquest document tracta sobre les següents versions de programari:
+<itemize>
+<item>Sgml-tools versió 0.99,
+<item>Emacs versió 19.34,
+<item>Ispell versió 3.1,
+<item>Totes les llibreries d'Emacs referides en aquest document es
+distribueixen amb la versió d'Emacs indicada dalt, llevat de
+<tt/iso-sgml/, que es distribueix amb XEmacs, i <tt/psgml/, què és una
+llibreria independent.
+</itemize>
+<sect>Introducció
+<sect1>SGML
+<p>
+<it>Standard Generalised Mark-up Language</it>, o
+<bf>SGML</bf>, és una llenguatge per a definir tipus de documents.
+<p>
+Per exemple, algú pot definir el tipus de document <it>recepta</it>,
+amb una primer part presentant els ingredients, una segona part
+introduint els accessoris, una tercera oferint instruccions pas per
+pas per a cuinar el pastís, i una bonica fotografia final per a
+mostrat el resultat final.
+<p>
+Açò s'anomena una <it>Document Type Definition (Definició de Tipus de
+Document)</it>.  No defineix quina aparença tindrà el producte final,
+només defineix què pot contindre.
+<p>
+Utilitzant el mateix exemple, estic segur de que al llegir la meua
+idea d'una recepta, vostè ha reconegut les seues, o la seua recepta
+favorita. No obstant això, no tenen la mateixa aparença: la meua té
+una foto de la tassa del bany en el cantó superior esquerre, i la
+llista d'ingredients es pot trobar al jardí del darrere, entre la
+piscina i la barbacoa. La seua?
+<p>
+Gràcies a esta definició estàndard, algú pot escriure un document,
+sense haver de tindre en compte quina aparença tindrà finalment per al
+lector.
+</sect1>
+<sect1>La Definició de Tipus <tt>LinuxDoc</tt>
+<p>
+Aquest tipus s'utilitza per a escriure, com potser vostè ha endevinat,
+documents relacionats amb Linux.
+<p>
+Tals documents són construïts generalment de la següent manera:
+començant amb un títol seguit del nom de l'autor, la data i el número
+de versió. Aleshores ve el resum (així vostè no haurà de cercar pel
+document abans d'adonar-se de que després de tot no és allò què estava
+buscant), aleshores el contingut que mostrarà la estructura per a que
+aquells que tinguen pressa puguen anar directament a la part que
+vulguen llegir.
+<p>
+Aleshores ve una llista de capítols, seccions i paràgrafs. Entre aquests, un pot inserir trossets de programes, canviar la font per a emfatitzar una paraula o una frase, inserir llistes, referenciar una altra part del document, etc...
+<p>
+Per a escriure tal document, vostè tan sols necessita especificar en el
+moment correcte el títol, l'autor, la data, i la versió del document,
+els capítols i seccions, dir abans d'inserir una llista quins són els
+seus elements, etc...
+</sect1>
+<sect1><tt>SGML-Tools</tt>
+<p>
+<bf>SGML-Tools</bf> transformarà la especificació d'un document en el
+resultat final en la forma que vostè preferisca. Si vostè el vol en la
+seua llibreria personal, vostè triarà <it>PostScript</it>. Si vostè
+vol compartir-li amb el món a través de la Web, serà <it>HTML</it>. Si
+vostè no pot ajudar i ha de ser llegit baix Windows, pot
+transformar-lo a <it>RTF</it> per a poder llegir-lo amb qualsevol
+processador de textos. O, potser, utilitzar els tres formats per
+acomodar-lo als seus estats d'ànim canviants.  Les SGML-Tools estan
+disponibles via FTP anònim
+a <htmlurl url="ftp://ftp.lip6.fr/pub/sgml-tools/" name
+="ftp://ftp.lip6.fr/pub/sgml-tools/">
+</sect1>
+<sect>El seu primer document.
+<p>
+<sect1>A partir d'un document de text
+<p>
+Si vostè vol transformar un document de text a SGML per a portar-lo a altres formats, este és el camí a seguir:
+<enum>
+<item>
+Afija les següents línies al començ de tot:
+<verb>
+<!doctype linuxdoc system>
+<article>
+<title>El Títol Va Ací&etago;title>
+<author>
+el nom de l'autor, l'e-mail de l'autor, etc.
+&etago;author>
+<date>
+versió i data
+&etago;date>
+</verb>
+<item>
+Si vostè descriu breument el contingut del document al començ,
+embolicant eixe paràgraf amb les etiquetes
+<tt>&lt;abstract&gt;</tt> i <tt>&etago;abstract&gt;</tt>.
+<item>
+Aleshores introduisca l'etiqueta <tt>&lt;toc&gt;</tt>, què són les
+sigles de <em>Table Of Contents</em>.
+<item>
+Al començ de cada nou capítol, reemplaçe la línia amb el títol i el
+número de capítol amb:
+<verb>
+<sect>Títol Del Capítol
+</verb>
+i afija l'etiqueta <tt>&etago;sect&gt;</tt> al final del capítol.&nl;
+<p>
+<bf>Nota&nbsp;:</bf> Vostè no ha de posar el número de capítol, açò es
+fa automàticament.
+<item>
+Procedisca de la mateixa manera amb les seccions. Vostè ha de esborrar
+els seus números i etiquetar els seus títols
+amb <tt>&lt;sect1&gt;</tt> i els seus finals
+amb <tt>&etago;sect1&gt;</tt>.
+<item>
+Vostè pot també definir fins a 4 nivells de niat en les seccions,
+utilitzant <tt>&lt;sectn&gt;</tt> i <tt>&etago;sectn&gt;</tt> on
+<tt>n=</tt> 2, 3, o 4 de manera similar.
+<item>
+Al començ de cada paràgraf, inserisca l'etiqueta <tt>&lt;p&gt;</tt>.
+<item>
+Si vostè necessita emfatitzar algunes parts, etiquete-les amb 
+<tt>&lt;it&gt;</tt> <tt>&etago;it&gt;</tt> (<it>italics
+(cursiva)</it>), <tt>&lt;bf&gt;</tt> i <tt>&etago;bf&gt;</tt>
+(<bf>bold face (negreta)</bf>), o <tt>&lt;tt&gt;</tt>
+i <tt>&etago;tt&gt;</tt> (<tt>typewriter style (estil de màquina
+d'escriure</tt>).
+<item>
+Per a inserir una llista com la següent:
+<verb>
+Açò és una llista de quatre línies:
+- la primera línia va ací
+- a continuació ve la segona línia 
+- i encara una altra més
+- això és tot.
+</verb>
+vostè ho ha de substituir per:
+<verb>
+Açò és una llista de quatre línies:
+<itemize>
+<item>la primera línia va ací
+<item>a continuació ve la segona línia 
+<item>i encara una altra més
+<item>això és tot.
+&etago;itemize>
+</verb>
+<item>
+Quan un bloc sencer és part d'un programa, o alguna altra cosa que necessita to stick out:
+<verb>
+<verb>
+10 REM Oh Déu meu, què és açò?
+20 REM Em creia que açò feia temps que havia desaparegut!
+30 PRINT "He tornat per a";
+40 PRINT "salvar el Món."
+50 INPUT "De qui creu vostè? ",M$
+60 IF M$="Bill" THEN PRINT "Thou art wise.":GOTO PARADISE
+70 ELSE PRINT "Vostè no en té ni idea...":GOTO RICHMOND
+&etago;verb>
+</verb>
+<item>
+Arribats ací, la seua habilitat de formatatge SGML és prou decent. Si
+vostè vol refinar el seu document, pot fer una ullada a la guia de
+l'usuari de <bf>SGML-Tools</bf>, que aporta més detalls sobre el Tipus
+de Document <bf>LinuxDoc</bf>.
+</enum>
+</sect1>
+</sect>
+<sect>Configurant <tt>Emacs</tt>
+<p>
+<sect1>Caràcters Accentuats
+<p>
+Si vostè vol escriure documents en Valencià o en qualsevol altra
+llengua d'Europa occidental, vostè necessitarà caràcters de 8
+bits. Així és com es configura Emacs per a dir-li que accepte eixos
+caràcters.
+<sect2>La visualització de caràcters de 8 bits
+<p>
+Per a permetre a Emacs mostrar caràcters de 8 bits, vostè necessitarà les següents línies al seu arxiu <tt>.emacs</tt>:
+<verb>
+(standard-display-european 1)
+(load-library "iso-syntax")
+</verb>
+Si vostè està utilitzant Emacs a un terminal que no suporta 8 bits, pot
+utilitzar la llibreria <tt>iso-ascii</tt> (<tt>(load-library
+"iso-ascii")</tt>), que li diu a Emacs que mostre eixos caràcters en la
+seua millor aproximació.
+<sect2>La escriptura de caràcters de 8 bits
+<p>
+Si el seu teclat li permet introduir caràcters accentuats, cap
+problema. Si no, hi ha alguns remeis:
+<sect3>La llibreria <tt>iso-acc</tt>
+<p>
+La llibreria <tt>iso-acc</tt> d'Emacs li permetrà teclejar caràcters
+de 8 bits des d'un teclat de 7 bits.
+<p>
+Per a utilitzar-la, introduïsca el següent al seu arxiu <tt>.emacs</tt>:
+<verb>
+(load-library "iso-acc")
+</verb>
+<p>
+Aleshores, després execute Emacs i òbriga l'arxiu que vostè necessita editar,
+teclege <tt>Meta-x iso-accents-mode</tt>.
+<p>
+Vostè pot aleshores introduir la <bf>&egrave;</bf> de la paraula
+valenciana <em>caf&egrave;</em> prement <bf>'</bf> i
+després <tt>e</tt>. De manera més general, vostè pot teclejar un
+caràcter accentuat prement l'accent i a continuació la lletra a
+accentuar (en majúscules o minúscules). Els següents són els accents
+que vostè pot utilitzar:
+<list>
+<item><tt>'</tt>~: Apòstrof
+<item><tt>`</tt>~: Accent Greu
+<item><tt>^</tt>~: Accent circumflex
+<item><tt>&quot;</tt>~: Cometes
+<item><tt>&tilde;</tt>~: Titlla, ce trencada, i altres casos particulars
+(cf iso-acc.el).
+<item><tt>/</tt>~: Per a barrar una lletra, etc.
+</list>
+Si vostè necessita algun d'aquests caràcters i no la lletra accentuada, teclege un espai a continuació. Per exemple, per a teclejar
+<it>l'&eacute;l&eacute;phant</it>, prema <tt>l ' <cparam/spc/ ' e l ' e ...</tt>
+<p>
+Trobarà totes les combinacions possibles al fitxer <tt>iso-acc.el</tt>.
+<sect3>La tecla <cparam/Meta/
+<p>
+Alguns terminals li permetran escriure caràcters de 8 bits amb la tecla
+<cparam/Meta/ (o <cparam/Alt/). Per exemple, prement
+<bf><cparam/Meta/-i</bf> obtindrà el caràcter <bf>&eacute;</bf>.
+<p>
+Però Emacs reserva la tecla <cparam/Meta/ per altres usos, i no conec
+cap llibreria que li permeta utilitzar-la per als caràcters
+accentutats.
+<p>
+Aquesta és una solució:
+<verb>
+(global-set-key "\ei" '(lambda () (interactive) (insert ?\351)))
+_ ___
+</verb>
+Una línia així, si s'inserta al seu arxiu <tt>.emacs</tt>, li permetrà teclejar 
+<bf>&eacute;</bf> utilitzanr la combinació de
+tecles <bf><cparam/Meta/-i</bf>.  Vostè pot redefinir d'aquesta manera
+les combinacions que vostè necessite, reemplaçant la <bf>i</bf> amb la
+tecla correcta i el <bf>351</bf> amb el codi correcte (el codi pres
+del conjunt de caràcters ISO-8859-1).
+<p>
+<bf>Atenció!</bf> Alguns modes locals poden redefinir tals
+combinacions de tecles.
+<sect2>Mostrant caràcters SGML de 8 bits
+<p>
+Baix SGML, vostè pot escriure caràcters accentuats amb macros. Per
+exemple, la tecla <bf/&egrave;/ és <bf/&amp;egrave;/. Generalment, les
+aplicacions que necessiten llegir SGML poden llegir caràcters 8 bits i
+no hi ha cap necessitat d'utilitzar estes macros. Però alguns poden no
+ser capaços de fer-ho. Donat que hi ha una manera de solucionar este
+problema, seria una llàstima permetre que això falle.
+<p>
+La llibreria <tt>iso-sgml</tt> li permetrà teclejar caràcters
+accentuats baix Emacs, com sempre, però a l'alçar el seu arxiu al
+disc, convertirà estos caràcters de 8 bits en els seu equivalents
+SGML.
+<p>
+Per tant és fàcil, gràcies a esta llibreria, teclejar i re-llegir el
+seu document baix Emacs, i pot estar segur de que una aplicació que no
+admeta caràcters de 8 bits acceptarà el seu document.
+<p>
+Per a utilitzar aquesta llibreria, vostè nomé necessita afegir les
+següents línies al seu arxiu <tt>.emacs</tt>:
+<verb>
+(setq sgml-mode-hook
+'(lambda () "Defaults for SGML mode."
+(load-library "iso-sgml")))
+</verb>
+<sect1>El mode SGML
+<p>
+Al carregar un arxiu amb la extensió <bf>.sgml</bf>, Emacs entra al 
+<bf>mode sgml</bf> automàticament. Si no ho fa, vostè pot dir-li que
+ho faça manualment teclejant <tt>Meta-x sgml-mode</tt>, o
+automàticament afegint les línies següents al seu
+arxiu <tt>.emacs</tt>:
+<verb>
+(setq auto-mode-alist
+(append '(("\.sgml$" . sgml-mode))
+auto-mode-alist))
+</verb>
+Aquest mode li permetrà triar com inserir caràcters de 8 bits per
+exemple. Amb <tt>Meta-x sgml-name-8bit-mode</tt> (o la entrada de
+menú <it>SGML/Toggle 8-bit insertion</it>), vostè pot triar teclejar
+caràcters de 8 bits tal qual, o en format SGML, és a dir amb la
+forma <bf>&amp;...;</bf>.  De la mateixa manera li permetrà ocultar o
+mostrar etiquetes SGML, amb <tt>Meta-x sgml-tags-invisible</tt> (o la
+entrada de menú <it>SGML/Toggle Tag Visibility</it>).
+<sect1>Mode PSGML
+<p>
+El mode PSGML és de gran ajuda per a editar documentes SGML amb Emacs.
+<p>
+La documentació <htmlurl name="psgml-linuxdoc"
+url="http://www.linux-france.com/article/psgml-linuxdoc">
+explica com instal·lar aquest mode i utilitzar-lo amb
+<it>LinuxDoc</it>.
+<sect1>Miscel·lània
+<p>
+<sect2>Mode auto-fill
+<p>
+Al mode normal, quan vostè tecleja un paràgraf i arriba al final d'una
+línia, vostè ha d'utilitzar la tecla <cparam/Return/ per a anar a la
+línia següent, or else your line goes on through the whole
+paragraph. Quan vostè utilitza <cparam/Return/ per a arribar a la
+següent línia, obtè un paràgraf amb els marges drets iregulars.
+<p>
+Si vostè permet que algunes línies superen un ample raonable, no serà
+capaç de veure-les amb alguns editors.
+<p>
+El mode <bf>auto-fill</bf> automatitza aquesta avorrida tasca: quan
+vostè supera una determinada columna (per defècte la 70ena), vostè
+serà portat automàticament a la següent línia.
+<p>
+Així és com s'utilitza aquest mode, i es defineix l'ample de les seues
+línies a 80:
+<verb>
+(setq sgml-mode-hook
+'(lambda () "Defaults for SGML mode."
+(auto-fill-mode)
+(setq fill-column 80)))
+</verb>
+<sect>Ispell
+<p>
+Si vostè vol comprovar la ortografia del seu document dins d'Emacs,
+vostè pot utilitzar el paquet <bf>Ispell</bf> i el seu mode Emacs.
+<sect1>Triant els seus diccionaris per defecte
+<p>
+Vostè pot configurar Emacs de manera que al carregar un fitxer, trie
+automàticament quins diccionaris utilitzar (vostè en pot utilitzar
+varis). El primer, certament el més important, és el diccionari
+principal, distribuït amb Ispell. Vostè pot triar entre vàries
+llengües. La segona és el seu diccionari personal, on Ispell
+introduirà les paraules que no puga trobar en el diccionari principal
+però que vostè li demane que recorde. Si vostè desitja utilitzar per
+defecte el diccionari de Francés que ve amb Ispell, i l'arxiu 
+<tt>.ispell-dico-perso</tt> al seu directori llar com a diccionari
+personal, introduïsca les següents línies al seu arxiu <tt>.emacs</tt>:
+<verb>
+(setq sgml-mode-hook
+'(lambda () "Defauts for SGML mode."
+(setq ispell-personal-dictionary "~/.ispell-dico-perso")
+(ispell-change-dictionary "francais")
+))
+</verb>
+<sect1>Sel·leccionant diccionaris especials per a certs arxius
+<p>
+Vostè pot tindre un xicotet problema si no comprova la ortografia
+dels documents en la mateixa llengua sempre. Si vostè tradueix
+documents, és molt probable que vostè canvie de llengua (i
+diccionari) sovint.
+<p>
+No conec cap manera de sel·leccionar amb Lisp, ja siga automàticament,
+o amb un clic de ratolí, els diccionaris principal i personal
+associats a la llengua utilitzada en estos moments. (Si vostè la
+coneix, per favor diga-me-la!)
+<p>
+Tanmateix, és possible indicar, al final del fitxer, quins diccionaris
+vol utilitzar per a l'arxiu actual (i només aquest).  És suficient amb
+afegir-los com a comentaris, de manera que Ispell pot llegir-los al
+llançar una comprovació d'ortografia:
+<verb>
+<!-- Local IspellDict: english -->
+<!-- Local IspellPersDict: ~/emacs/.ispell-english -->
+</verb>
+Si vostè ha definit prèviament, al seu fitxer <tt/.emacs/ , que els
+seus diccionaris per defecte són els Francesos, aleshores vostè pot
+afegir estes línies al final de qualsevol arxiu escrit en anglés.
+<sect1>Comprovant la ortografia del seu document
+<p>
+Per a comprovar la ortografia de tot el seu document, utilitze, des de
+qualsevol part del document l'ordre <tt>Meta-x
+    ispell-buffer</tt>. Vostè pot també executar només la comprovació
+en una regió al seu document:
+<itemize>
+<item> Maque l'inici de la regió amb <tt>Ctrl-Spc</tt>
+(mark-set-command),
+<item> Vaja al final de la regió a comprovar,
+<item> Teclege <tt>Meta-x ispell-region</tt>.
+</itemize>
+Aleshores Emacs executa Ispell. Al trobar una paraula desconeguda,
+este li mostra la paraula que ha escrit (normalment realçada) i li
+demana una tecla:
+<itemize>
+<item><bf>spc (espai)</bf>accepta la paraula, només esta vegada,
+<item><bf>i </bf>accepta la paraula i la insereix en el seu diccionari
+  personal,
+<item><bf>a </bf>accepta la paraula per a aquesta sessió,
+<item><bf>A </bf>accepta la paraula per aquest fitxer, i l'insereix en
+  el diccionari de l'arxiu local
+<item><bf>r </bf>li permet corregir la paraula a ma
+<item><bf>R </bf>li permet corregir totes les ocurrències de la
+  paraula mal escrita,
+<item><bf>x </bf>para la comprovació, i torna a posar el cursor en el
+  seu lloc,
+<item><bf>X </bf>para la comprovació i deixa el cursor on està,
+  deixant-li a vostè corregir el seu arxiu; vostè podrà continuar la
+  comprovació d'ortografia més tard si tecleja <tt>Meta-x
+  ispell-continue</tt>,
+<item><bf>? </bf>li ofereix ajuda en línia.
+</itemize>
+Si ispell troba una o vàries paraules properes a la desconeguda, les
+mostrarà en una xicoteta finestra, cadascuna d'elles precedida per un
+dígit. Només teclege este dígit per a reemplaçar la paraula mal
+escrita amb la paraula corresponent.
+
+<sect1>Diccionari personal contra fitxer local de diccionari
+<p>
+La tecla <bf>i</bf> li permetrà inserir una paraula en el seu
+diccionari personal, mentre que <bf>A</bf> li permetrà inserir la
+paraula en el fitxer local de diccionari.
+<p>
+El fitxer local de diccionari és una seqüència de paraules inserides
+al final del fitxer, com a comentaris, rellegits per Ispell cada volta
+que s'executa al fitxer. d'Aquesta manera, vostè pot acceptar algunes
+paraules, que són acceptables en aquest arxiu en particular, però no
+necessàriament acceptables en altres arxius.
+<p>
+Per el que a mi respecta, crec que és millor que el diccionari
+personal estiga reservat per a paraules que el diccionari no coneix,
+però que pertanyen a la llengua (com les paraules amb guionet), més
+algunes paraules comunes com noms propis o altres
+(com <it>Linux</it>), si no s'assemblen massa a una paraula real del
+diccionari principal; afegir massa paraules al diccionari personal,
+com noms de persones, pot ser perillós, perquè poden semblar-se a una
+paraula del llenguatge (one can imagine Ispell being mystified on the
+following: `<it>When the going gets tof, the tof get
+going</it><footnote>
+<em>Tof</em> és una abreviació francesa del nom
+<em>Christophe</em>.</footnote>'!).
+<sect1>Comprovació ortogràfica mentre s'escriu.
+<p>
+Ispell pot comprovar la ortografia del seu arxiu mentre vostè
+escriu. Vostè necessita utilitzar <bf>ispell-minor-mode</bf> per a
+açò. Per a iniciar-ho o parar-ho, teclege <tt>Meta-x
+ispell-minor-mode</tt>. Ispell farà sonar un <em>beep</em> cada vegada
+que vostè teclege una paraula que no coneix.
+<p>
+Si eixos <em>beeps</em> li molesten (o el seu company d'habitació està
+fent la migdiada), vostè pot reemplaçar eixos molestos <em>beeps</em>
+amb un flaix en la pantalla, mitjançant la ordre <tt>Meta-x
+set-variable RET visible-bell RET t RET</tt>. Vostè pot afegir la
+següent línia al seu <tt>.emacs</tt> i silenciar l'Emacs per a sempre:
+<verb>
+(setq visible-bell t)
+</verb>
+<sect>Trucs Bruts
+<sect1>Inserir una capçalera automàticament
+<p>
+Emacs li permet <em>connectar</em> algunes accions a qualsevol
+esdeveniment (obrir un arxiu, alçar, executar un nou mode, etc... ).
+<p>
+La llibreria <bf>autoinsert</bf> utilitza aquesta característica: quan vostè obri un nou fitxer baix Emacs, aquesta llibreria insereix, segons el tipus de fitxer, una capçalera <em>estàndard</em>.
+<p>
+En el nostre cas, esta capçalera <em>estàndard</em> ben bé podria ser
+la part que declara el tipus de document (LinuxDoc), el títol,
+l'autor, i la data.
+<p>
+Descriuré ací dos maneres de inserir una capçalera com eixa. Vostè pot
+inserir un arxiu de plantilla contenint la informació a inserir, o pot
+executar una rutina <bf>elisp</bf>.
+<sect2>inserint un arxiu
+<p>
+Vostè primer ha de dir-li a Emacs que execute <tt>auto-insert</tt>
+quan s'obri un fitxer, aleshores que llija la
+llibreria <bf>autoinsert</bf> que declara la
+llista <tt>auto-insert-alist</tt> que necessitem canviar. Aquesta
+llista defineix la capçalera a inserir per a cada tipus de fitxer. Per
+defecte, el arxiu a inserir ha de estar al
+directori <tt>~/insert/</tt>, però és possible redefinir la
+variable <tt>auto-insert-directory</tt> si vostè vol posar-lo en algun
+altre lloc.
+<p>
+Afija les següents línies al seu arxiu <tt>.emacs</tt> per a inserir el fitxer
+<tt>~/emacs/sgml-insert.sgml</tt> cada vegada que vostè obri un nou
+arxiu SGML:
+<verb>
+(add-hook 'find-file-hooks 'auto-insert)
+(load-library "autoinsert")
+(setq auto-insert-directory "~/emacs/")
+(setq auto-insert-alist
+(append '((sgml-mode . "sgml-insert.sgml"))
+auto-insert-alist))
+</verb>
+Aleshores, vostè pot escriure en el
+fitxer <tt>~/emacs/sgml-insert.sgml</tt> la seua capçalera
+personalitzada, aleshores tornar a executar Emacs i obrir algun
+arxiu <tt>foobar.sgml</tt>. Emacs hauria de demanar-li confirmació per
+a la inserció automàtica, i si vostè contesta sí, inserir la seua
+capçalera.
+<sect2>executant una rutina
+<p>
+Açò funciona com abans, però enlloc d'assignar-li a 
+<tt>auto-insert-alist</tt> un fitxer a inserir, vostè necessita
+definir una funció a executar. Així és com ha de procedir, suposant
+que vostè vol escriure esta funció en un arxiu
+anomenat <tt>~/emacs/sgml-header.el</tt>.  (No hi ha cap necessitat de
+carregar el seu fitxer <tt>.emacs</tt> amb eixa mena de funcions, ja
+que pot acabar fent-se massa llarg):
+<verb>
+(add-hook 'find-file-hooks 'auto-insert)
+(load-library "autoinsert")
+(add-to-list 'load-path "~/emacs")
+(load-library "sgml-header")
+(setq auto-insert-alist
+(append '(((sgml-mode . "SGML Mode") . insert-sgml-header))
+auto-insert-alist))
+</verb>
+Vostè trobarà a  <ref id="insert-sgml-header" name="apèndix"> un exemple de funció <tt>insert-sgml-header</tt>.
+<appendix>
+<sect>Una funció <tt>insert-sgml-header</tt> <label id="insert-sgml-header">
+<p>
+Esta funció li permetrà a l'usuari inserir una capçalera
+personalitzada per a un document Linux Documentation Project en un
+arxiu. Pot ser cridat automàticament quan s'obri un fitxer nou, o
+explícitament, per l'usuari.
+<p>
+Aquesta funció li demana a l'usuari, a través
+del <em>mini-buffer</em>, certes porcions d'informació, algunes de les
+quals són necessaris i algunes no. Primer ve el títol. Si no se'n dóna
+cap, la funció retorna immediatament, i no insereix res. Aleshores ve
+la data, l'autor, el seu correu electrònic i pàgina web (aquests dos
+últims són opcionals).  Aleshores ve una sol·licitud del nom del
+traductor. Si no n'hi ha cap, només prema <em>Retorn</em>, i cap
+pregunta més sobre un hipotètic traductor serà formulada. Si n'hi ha
+un, se li demanarà el seu e-mail i pàgina web (igualment opcionals).
+Aquesta funció, aleshores, imprimeix la seua sol·licitud en el buffer
+actual, incloent pressupost tota la informació que vostè ha teclejat
+al formulari de configuració, i incloent igualment totes les etiquetes
+que serveixen per al resum i el primer capítol. Finalment, posa el
+cursor en el lloc on el resum s'ha de teclejar.
+<verb>
+(defun insert-sgml-header ()
+"Inserts the header for a LinuxDoc document"
+(interactive)
+(let (title author email home translator email-translator home-translator date
+starting-point)
+(setq title (read-from-minibuffer "Title: "))
+(if (> (length title) 0)
+(progn
+(setq date (read-from-minibuffer "Date: ")
+author (read-from-minibuffer "Author: ")
+email (read-from-minibuffer "Author e-mail: ")
+home (read-from-minibuffer "Author home page: http://")
+translator (read-from-minibuffer "Translator: "))
+(insert "<!doctype linuxdoc system>\n<article>\n<title>")
+(insert title)
+(insert "&etago;title>\n<author>\nAuthor: ") (insert author) (insert "&nl;\n")
+(if (> (length email) 0)
+(progn
+(insert "<htmlurl url=\"mailto:")
+(insert email) (insert "\" name=\"") (insert email)
+(insert "\">&nl;\n")))
+(if (> (length home) 0)
+(progn
+(insert "<htmlurl url=\"http://")
+(insert home) (insert "\" name=\"") (insert home)
+(insert "\">\n&nl;")))
+(if (> (length translator) 0)
+(progn
+(setq email-translator (read-from-minibuffer "Translator e-mail: ")
+home-translator (read-from-minibuffer "Translator home page: http://"))
+(insert "Translator : ")
+(insert translator)
+(insert "&nl;\n")
+(if (> (length email-translator) 0)
+(progn
+(insert "<htmlurl url=\"mailto:")
+(insert email-translator) (insert "\" name=\"")
+(insert email-translator)
+(insert "\">&nl;\n")))
+(if (> (length home-translator) 0)
+(progn
+(insert "<htmlurl url=\"http://")
+(insert home-translator) (insert "\" name=\"")
+(insert home-translator)
+(insert "\">&nl;\n")))))
+(insert "&etago;author>\n<date>\n")
+(insert date)
+(insert "\n&etago;date>\n\n<abstract>\n")
+(setq point-beginning (point))
+(insert "\n&etago;abstract>\n<toc>\n\n<sect>\n<p>\n\n\n&etago;sect>\n\n&etago;article>\n")
+(goto-char point-beginning)
+))))
+</verb>
+</article>
+<!-- Local IspellDict: ca-valencia -->
+<!-- Local IspellPersDict: ~/emacs/.ispell-valencia -->
+
+<!-- LocalWords: bastien HOWTOs rushy HTML Dieresis phant eacute sgml caf
+-->
+<!-- LocalWords: tof Christophe autoinsert elisp Blondeel spc XEmacs
+-->
+<!--  LocalWords:  sectn it italics bf bold face tt typewriter style
+ -->
+<!--  LocalWords:  itemize PRINT INPUT IF THEN Thou wise. GOTO ELSE
+ -->
+<!--  LocalWords:  PARADISE RICHMOND SGML-Tools LinuxDoc Emacs emacs
+ -->
+<!--  LocalWords:  load-library iso-acc Meta-x iso-accents-mode cf
+ -->
+<!--  LocalWords:  iso-acc.el setq sgml-mode-hook Defaults iso-sgml
+ -->
+<!--  LocalWords:  sgml-mode auto-fill-mode fill-column d'Emacs beep
+ -->
+<!--  LocalWords:  ispell-dico-perso ispell-buffer Ctrl-Spc beeps GNU
+ -->
+<!--  LocalWords:  mark-set-command ispell-region ispell-continue RTF
+ -->
+<!--  LocalWords:  ispell-minor-mode set-variable visible-bell append
+ -->
+<!--  LocalWords:  l'Emacs add-hook find-file-hooks auto-insert defun
+ -->
+<!--  LocalWords:  auto-insert-directory auto-insert-alist Ispell-COM
+ -->
+<!--  LocalWords:  sgml-insert.sgml foobar.sgml insert-sgml-header
+ -->
+<!--  LocalWords:  Philippe COMs Documentation PostScript Project.
+ -->
+<!--  LocalWords:  Licence Sgml-tools Standard Generalised Mark-up
+ -->
+<!--  LocalWords:  Language Type Definition FTP sect
+ -->
