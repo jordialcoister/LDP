@@ -88,7 +88,7 @@ url="http://www.freescale.com/files/netcomm/doc/data_sheet/MC68EN302.pdf"></item
               url="http://linux-apus.sourceforge.net/">, 
               i IBM PPC64 (AS/400, RS/6000, iSeries,
               pSeries, PowerMac G5).</item>  
-        <item><bf><url name="MIPS"url="http://www.linux-mips.org/">:</bf> 
+<<<        <item><bf><url name="MIPS"url="http://www.linux-mips.org/">:</bf> 
               la majoria d'SGI, Cobalt Qube, 
               <url name="DECStation" url="http://decstation.unix-ag.org/">, 
               Sony PlayStation2, i molts altres</item>
@@ -115,7 +115,7 @@ Si està seriosament interessat en el tema dels ports de Linux, per favor mire t
 url="http://web.archive.org/web/20070813000855/http://www.itp.uni-hannover.de/ports/linux_ports.html"> i
 <url name="la llista d'arquitectures Linux de Jerome Pinot"
 url="http://web.archive.org/web/20050308130348/http://ngc891.blogdns.net/kernel/docs/arch.txt"> (espills estàtics, 
-ja que les dos pàgines es van esvaïr en 2005), si només perque el suport
+ja que les dos pàgines es van esvair en 2005), si només perquè el suport
 de maquinar és més complexe que simplement la funcionalitat genèrica de CPU,
 acompassar el suport per a innumerables variacions de busos i altres problemes 
 subtils de maquinari (especialment per a <url name="ports de Linux PDA / encastats / micro-controladors / encaminadors" 
@@ -142,9 +142,9 @@ comprendre que fa de GNU/Linux únic.
 GNU/Linux com a sistema operatiu és potent -- però GNU/Linux com a 
 <it><bf>idea</bf></it> sobre desenvolupament de programari ho és
 encara més. GNU/Linux és un sistema operatiu <bf>lliure</bf>: Està
-licenciat baix la GNU General Public Licence. Així, el codi font està
+llicenciat baix la GNU General Public Licence. Així, el codi font està
 disponible lliurement de manera perpetua per a tothom.  Està mantingut
-per un grup des-estructurat de programadors al voltant del món, baix
+per un grup desestructurat de programadors al voltant del món, baix
 la direcció tècnica de Linux Torvals i altres desenvolupadors
 clau. GNU/Linux com a moviment no té una estructura central,
 burocràcia, o altres entitats per a dirigir els seus assumptes. Mentre
@@ -157,92 +157,100 @@ relacions públiques, la educació dels usuaris, i la formació.
 <url name="GNU Project" url="http://www.gnu.org/gnu/gnu-history.html">
 de la Free Software Foundation com la força motriu crucial darrere de
 la creació i el foment d'un sistema lliure, àlies de font oberta.
-Així, es refereix a les "distributions" formades pel sistema operatiu
-GNU al cim del nucli Linux com "GNU/Linux".  Sí, el terme és incòmode,
-i les peticions de la FSF de reconeixmenet no són amplament honorades;
-però la justícia que reclama la FSF és òbvia.)
+Així, es refereix a les "distribucions" formades pel sistema operatiu
+GNU col·locada al cim del nucli Linux com "GNU/Linux".  Sí, el terme
+és incòmode, i les peticions de la FSF de reconeixement no són
+amplament honorades; però la justícia que reclama la FSF és òbvia.)
 
-<sect1>Com és GNU/Linux únic?
+<sect1>Què fa de GNU/Linux únic?
 <p>
-GNU/Linux's loose structure is unlikely to change.  That's a good thing:
-It works precisely because people are free to come and go as they
-please: <bf>Free programmers are happy programmers are effective
-programmers</bf>.
+La estructura solta de GNU/Linux difícilment canvie. Això és una cosa
+bona: Funciona precisament perquè la gent és lliure de vindre i
+d'anar-se'n com s'estime més: <bf>Els programadors lliures són
+programadors feliços, són programadors eficients</bf>.
 
-However, this loose structure can disorient the new user: Whom
-does she call for support, training, or education? How does she know
-what GNU/Linux is suitable for?
+Tanmateix, aquests estructura solta (deslligada) pot desorientar a
+l'usuari novell: A qui truca per obtindre suport, formació o educació?
+Com sap per a què és apte GNU/Linux?
 
-In part, LUGs provide the answers, which is why LUGs are vital to
-the movement: Because your town, village, or metropolis sports no
-Linux Corporation "regional office", the LUG takes on many of the same
-roles a regional office does for a large multi-national corporation.
+En part, els GUL proporcionen les resposta, que és la raó per la que
+són vitals per al moviment: Perquè a la teua ciutat, poble o metròpoli
+no hi ha una "oficina regional" de la Corporació Linux, així, els GUL
+prenen molts dels rols que una oficina regional fa per a un empresa
+multinacional.
 
-GNU/Linux is unique in neither having nor being burdened by central
-structures or bureaucracies to allocate its resources, train its users,
-and support its products. These jobs get done through diverse means: the
-Internet, consultants, VARs, support companies, colleges, and
-universities. However, increasingly, in many places around the globe,
-they are done by a LUG.
+GNU/Linux és únic en no tindre estructures centrals o burocràcies ni
+sentir-ne la càrrega per a assignar els seus recursos, formar als seus
+usuaris, i donar suport als seus productes. Aquestes feines es fan de
+diverses maneres: la Internet, consultors, VARs, empreses de suport,
+col·legues, i universitats. Tanmateix, cada vegada més, en molts llocs
+al voltant del globus, són fetes per un GUL.
 
-<sect1>What is a user group?
+<sect1>Què és un grup d'usuaris?
+
+Els grups d'usuaris d'ordinadors no són algo nou. De fet, fóren
+centrals per a la història de la informàtica personal: Els
+microordinadors sorgiren en la seua majoria per a satisfer la demanda
+d'accés personal assequible, accés personal a recursos informàtics per
+grups d'usuaris aficionats a la electrònica, radioaficionats, i
+altres. Gegants com IBM finalment es van adonar de que el PC era una
+cosa bona i rendible, però els ímpetus inicials vingueren de la base.
+
+A EUA, els grups d'usuaris han canviat -- molts a pitjor -- amb el
+temps. The financial woes and dissolution of the largest user group
+ever, the Boston Computer Society, fou ben documentat; però, arreu
+dels EEUU, la majoria de grups d'usuaris de PC han vist com disminuïen
+els seus membres.  Els grups d'usuaris nord-americans en el seu apogeu
+produïen butlletins de notícies, mantenien shareware i llibreries de
+disquets, celebraven reunions i esdeveniments socials, i, de vegades fins i
+tot corrien sistemes de taulers electrònics (BBSes, Bulletin Board
+System). Tanmateix, amb l'adveniment d'Internet, molts serveis una
+vegada proporcionats pels grups d'usuaris, es traslladaren a coses com
+i el Web.
+
+L'augment de GNU/Linux, tanmateix va coincidir i alhora es va
+intensificar pel "descobriment" d'Internet pel públic en general. A
+mesura que Internet es va anar fent més popular, va anar fent-se fer
+As the Internet grew more popular, so did GNU/Linux: La Internet portà
+nous usuaris, desenvolupadors, i proveïdors. Així, la mateixa força
+que va enviar als grups d'usuaris tradicionals al declivi va propulsar
+GNU/Linux i va inspirar nous grups dedicats en exclusiva a ell The
+Internet brought new users, developers, and vendors.
+
+Per a donar només una idea de com els GUL es diferencien dels grups
+d'usuaris tradicionals: Els grups tradicionals han de monitoritzar
+quin programari redistribueixen els usuaris a les reunions. Mentre la
+còpia il·legal de programari propietari restringit certament va ocórrer,
+estava oficialment desaconsellat -- per bones raons.  Tanmateix, a les
+reunions dels GUL, tota aquella mentalitat simplement no aplica: Lluny
+d'estar prohibit, la còpia sense restriccions de GNU/Linux hauria
+d'estar entre els principals objectius dels GULs.  De fet, hi ha
+evidencies anecdotàries de grups d'usuaris tradicionals tenint
+dificultats per adaptar-se a l'habilitat de GNU/Linux de ser legalment
+copiat a voluntat.
+
+(Advertència: Algunes distribucions farcellen GNU/Linux amb paquets de
+programari propietari els termes dels quals no permeten la
+redistribució pública. Si dubta, comprove els termes de la llicència.
+Les ofertes o peticions de còpia de programari propietari amb
+restriccions de distribució haurien d'estar fortament desaconsellades
+a qualsevol lloc als GUL, i declarat off-topic a tots els fòrums de
+grups d'usuaris de GNU/Linux, per qüestions legals.)
+
+<sect1>Resum
 <p>
-Computer user groups are not new. In
-fact, they were central to the personal computer's history:
-Microcomputers arose in large part to satisfy demand for affordable,
-personal access to computing resources from electronics, ham radio, and
-other hobbyist user groups.  Giants like IBM eventually discovered the
-PC to be a good and profitable thing, but initial impetus came from the
-grassroots.
+Per a que el moviment GNU/Linux cresca, entre altres requeriments, els
+GUL han de proliferar i tindre èxit. Donada la naturasela inusual de
+GNU/Linux, els GUL han de proporcionar algunes de les mateixes
+funcions que proporcionaria una "oficina regional" per a les grans
+corporacions com IBM, Microsoft, i Sun. Els GUL poden i han de formar,
+donar suport, i educar usuaris, coordinar consultors, defensar
+GNU/Linux com a solució informàtica, i fins i tot actuar d'enllaç amb
+els punts de venda de notícies locals.
 
-In the USA, user groups have changed -- many for the worse --
-with the times. The financial woes and dissolution of the largest user
-group ever, the Boston Computer Society, were well-reported; but, all
-over the USA, most PC user groups have seen memberships decline.
-American user groups in their heyday produced newsletters, maintained
-shareware and diskette libraries, held meetings and social events, and,
-sometimes, even ran electronic bulletin board systems (BBSes). With the
-advent of the Internet, however, many services that user groups once
-provided migrated to things like CompuServe and the Web.
-
-GNU/Linux's rise, however, coincided with and was intensified by the
-general public "discovering" the Internet. As the Internet grew more
-popular, so did GNU/Linux: The Internet brought new users,
-developers, and vendors. So, the same force that sent traditional user
-groups into decline propelled GNU/Linux forward, and inspired new groups 
-concerned exclusively with it. 
-
-To give just one indication of how LUGs differ from traditional 
-user groups: Traditional groups must closely 
-monitor what software users redistribute at meetings.
-While illegal copying of restricted proprietary software certainly
-occurred, it was officially discouraged -- for good reason.
-At LUG meetings, however, that entire mindset simply does not apply:
-Far from being forbidden, unrestricted copying of GNU/Linux
-should be among a LUG's primary goals.  In fact, there is anecdotal
-evidence of traditional user groups having difficulty adapting to
-GNU/Linux's ability to be lawfully copied at will.
-
-(Caveat:  A few distributions bundle GNU/Linux with proprietary
-software packages whose terms don't permit public redistribution.
-Check licence terms, if in doubt.  Offers or requests to copy 
-distribution-restricted proprietary software of any sort should be
-heavily discouraged anywhere in LUGs, and declared off-topic for all 
-GNU/Linux user group on-line forums, for legal reasons.)
-
-<sect1>Summary
+<sect>Quins GUL existeixen?
 <p>
-For the GNU/Linux movement to grow, among other requirements,
-LUGs must proliferate and succeed.  Because of GNU/Linux's
-unusual nature, LUGs must provide some of the same functions a "regional
-office" provides for large computer corporations like IBM, Microsoft,
-and Sun. LUGs can and must train, support, and educate users,
-coordinate consultants, advocate GNU/Linux as a computing solution,
-and even serve as liaison to local news outlets.
-
-<sect>What LUGs exist?
-<p>
-Since this document is meant as a guide not only to maintaining and
+Com aquest documetn està  is meant com una guia no només per a mantindre i fer créixer GULs, sinó també per a fundar-los, abans de continuar, hauríem de  as a guide not only to maintaining and
 growing LUGs but also to founding them, we should, before going further,
 discuss what LUGs already exist.
 
