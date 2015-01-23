@@ -82,7 +82,7 @@ està datat de fa més de 9 mesos.
 
 <sect>Introducció.<label id="intro">
 
-<p><bf/Què és açò i que no./
+<p><bf/Què és açò i que no és./
 
 <p>DNS és el Domain Name System (Sistema de Noms de Domini).  DNS
 converteix noms de màquina a les adreces IP que totes les màquines a
@@ -97,14 +97,14 @@ de la màquina <tt/199.249.150.4/.  DNS a més conté mapejos en l'altre
 sentit, des del número IP al nom de màquina; açò s'anomena "mapeig
 invertit".
 
-<p>DNS és, per al no iniciat (vostè ;-), una de les arees més opaques
+<p>DNS és, per al no iniciat (vostè ;-), una de les àrees més opaques
 de l'administració de xarxa.  Afortunadament, DNS no és en realitat
 difícil.  Aquest COM intentarà aclarir algunes coses.  Descriu com
 posar en marxa un servidor de noms DNS <em/simple/, començant amb un
 servidor només de cau (caching server) i continuant fins a posar en
 marxa un servidor DNS primari per a un domini.  Per a configuracions
 més complexes vostè pot consultar la secció <ref id="qanda"
-name="qanda"> d'aquest document.  Si no no està descrit ahi vostè
+name="qanda"> d'aquest document.  Si no està descrit ahi vostè
 necessitarà <em/llegir/ la Documentació Real. Tornaré sobre en què
 consisteix esta Documentation Real a <ref id="bigger" name="l'últim
 capítol">.
@@ -112,13 +112,13 @@ capítol">.
 <p>Abans de que vostè començe amb açò, hauria de configurar la seua
 màquina per a poder fer telnet dins i fora d'ella, i fer correctament
 tota mena de connexions a la xarxa, i vostè hauria de ser especialment
-capaç de fer <tt/telnet 127.0.0.1/ i get la seua pròpia màquina
+capaç de fer <tt/telnet 127.0.0.1/ i alançar la seua pròpia màquina
 (prove-ho ara!).  Vostè necessita a més uns bons
 fitxers <tt>/etc/nsswitch.conf</tt>, <tt>/etc/resolv.conf</tt>
 i <tt>/etc/hosts</tt> com a punt de partida, ja que jo no explicaré el
 seu funcionament ací.  Si vostè encara no té tot açò preparat i
 funcionant el Networking-HOWTO i/o el Networking-Overview-HOWTO
-expliquen com configurar-ho.  Llisca'ls.
+expliquen com configurar-ho.  Llija'ls.
 
 <p>Quan dic `la seua màquina' em referisc a la màquina en la que vostè
 està intentant posar en mara DNS, no cap altra màquina que vostè tinga
@@ -134,81 +134,87 @@ name="qanda">.
 <em/The Internet Software Consortium/.  <tt/Named/ està inclòs en la
 majoria de distribucions de Linux i normalment està instal·lat
 com <tt>/usr/sbin/named</tt>, habitualment des d'un paquet anomenat
-<tt/BIND/, en majúscules o minúscules depenent del (depending on the
-whim) de qui el va empaquetar.
+<tt/BIND/, en majúscules o minúscules depenent del caprici de qui el
+va empaquetar.
 
-<p>If you have a named you can probably use it; if you don't have one
-you can get a binary off a Linux ftp site, or get the latest and
-greatest source from <url url="ftp://ftp.isc.org/isc/bind9/">.  This
-HOWTO is about BIND version 9.  The old versions of the HOWTO, about
-BIND 4 and 8, is still available at <url
-url="http://langfeldt.net/DNS-HOWTO/"> in case you use BIND 4 or 8
-(incidentally, you will find this HOWTO there too).  If the named man
-page talks about (at the very end, in the FILES section)
-<tt/named.conf/ you have BIND 8; if it talks about <tt/named.boot/ you
-have BIND 4.  If you have 4 and are security conscious you really
-ought to upgrade to the latest version of BIND 8.  Now.
+<p>Si vostè té un named probablement pot utilitzar-lo; si no en té pot
+aconseguir un binari des d'un lloc ftp de Linux, o obtindre les
+darreres i millors fonts de <url url="ftp://ftp.isc.org/isc/bind9/">.
+Aquest COM és sobre BIND versió 9.  Les versions antigues del COM,
+sobre BIND 4 i 8, enncara romanen disponibles
+a <url url="http://langfeldt.net/DNS-HOWTO/"> en el cas que vostè
+utilitze 4 o 8 (per cert, vostè trobarà aquest COM allí també). Si la
+pàgia de manual de named parla sobre (al final de tot, a la secció
+FITXERS) <tt/named.conf/ vostè té BIND 8; si parla sobre
+<tt/named.boot/ vostè té BIND 4.  Si vostè té aquesta darrera versió i
+es preocupa per la seguretat, realment hauria d'actualitar a la última
+versió de BIND 8.  Ara.
 
-<p>DNS is a net-wide database.  Take care about what you put into it.
-If you put junk into it, you, and others, will get junk out of it.
-Keep your DNS tidy and consistent and you will get good service from
-it.  Learn to use it, admin it, debug it and you will be another good
-admin keeping the net from falling to its knees by mismanagement.
+<p>DNS és una base de dades net-wide.  Vaja amb compte amb què hi
+posa. Si vostè hi posa brossa, vostè, i altres, hi trauran
+brossa. Mantinga el seu DNS ordenat i consistent i n'obtindrà un bon
+servei.  Aprenga a utilitzar-lo, administre'l, optimitze'l i vostè
+serà un altre bon administrador evitant que la xarxa caiga de genolls
+per una mala gestió.
 
-<p><bf/Tip:/ Make backup copies of all the files I instruct you to
-change if you already have them, so that if after going through this
-nothing works you can get it back to your old, working state.
+<p><bf/Consell:/ Faça copies de seguretat de tots els fitxers que jo
+li ensenyaré a modificar si vostè ja els té, d'aquesta manera, si
+després no funciona res, pot tornar al seu antic estat en funcioament.
 
-<sect1>Other nameserver implementations.
+<sect1>Altre implementacions de servidor de noms.
 
-<p>This section was written by Joost van Baal.
+<p>Aquesta secció fou escrita per Joost van Baal.
 
-<p>Various packages exist for getting a DNS server on your box.  There
-is the BIND package (<url url="http://www.isc.org/products/BIND/">);
-the implementation this HOWTO is about.  It's the most popular
-nameserver around and it's used on the vast majority of name serving
-machines on the Internet, around and being deployed since the 1980's.
-It's available under a BSD license.  Since it's the most popular
-package, loads of documentation and knowledge about BIND is around.
-However, there have been security problems with BIND.
+<p>Existeixen diversos paquests per a obtindre un servidor DNS a la
+seua caixa. Hi ha el paquet BIND
+(<url url="http://www.isc.org/products/BIND/">); la implementació de
+la que tracta aquest COM. És el servidor de noms més popular les
+disponibles i és utilitzat en la immensa majoria de màquines servint
+noms a la Internet, disponible i en desenvolupament des d'els anys
+vuitanta.  Està disponible baix una llicència BSD. Donat què és el
+paquet més popular, hi ha disponible molta documentació i coneixements
+sobre BIND. Tanmateix, han hagut problemes de seguretat amb BIND.
 
-<p>Then there is djbdns (<url url="http://djbdns.org/">), a relatively
-new DNS package written by Daniel J. Bernstein, who also wrote qmail.
-It's a very modular suite: various small programs take care of the
-different jobs a nameserver is supposed to handle.  It's designed with
-security in mind.  It uses a simpler zone-file format, and is
-generally easier to configure.  However, since it's less well known,
-your local guru might not be able to help you with this.
-Unfortunately, this software is not Open Source.  The author's
-advertisement is on <url url="http://cr.yp.to/djbdns/ad.html">.
+<p>Alehores està djbdns (<url url="http://djbdns.org/">), un paquet
+relativament nou escrit per Daniel J. Bernstein, qui a més va escriure
+qmail. És una suite molt modular: vàris programes menuts s'encareguen
+dels diferents treballs que un servidor de noms se suposa que ha de
+manejar. Està dissenyat amb la seguretat en ment. Utilitza un format
+molt simple de fitxer-zona, i és generalment més fàcil de
+configurar. Tanmateix, com no és tan ben conegut, el seu guru local
+podria no ser capaç d'ajudar-lo amb açò. Desgraciadament, aquest
+programari no és Open Source.  L'anunci de l'autor està
+a <url url="http://cr.yp.to/djbdns/ad.html">.
 
-<p>Whether DJBs software is really an improvement over the older
-alternatives is a subject of much debate.  A discussion (or is it a
-flame-war?) of BIND vs djbdns, joined by ISC people, is on <url
-url="http://www.isc.org/ml-archives/bind-users/2000/08/msg01075.html">
+<p>Si el programari DJBs és realment una millora sobre les
+alterniatives més antigues és un tema fora de debat. Una discussió és
+una (o és una guerra encesa?) de BIND contra djbdns, reunida per la
+gent d'ISC, es pot trobar
+a <url URL="HTTP://WWW.ISC.ORG/ML-ARCHIVES/BIND-USERS/2000/08/MSG01075.HTML">
 
-<sect>A resolving, caching name server.<label id="caching">
+<SECT> Servidor de resolució, i servidor de noms cau.<label id="caching">
 
-<p><bf/A first stab at DNS config, very useful for dialup, cable-modem, 
-ADSL and similar users./
+<p><bf/Una primera estoada a la configuració de DNS, molt útil per a
+usuaris de modem, cable-modem, ADSL i similars./
 
-<p>On Red Hat and Red Hat related distributions you can achieve the
-same practical result as this HOWTO's first section by installing the
-packages <tt/bind/, <tt/bind-utils/ and <tt/caching-nameserver/.  If
-you use Debian simply install <tt/bind/ (or <tt/bind9/, as of this
-writing, BIND 9 is not supported by Debian Stable (potato)) and
-<tt/bind-doc/.  Of course just installing those packages won't teach
-you as much as reading this HOWTO.  So install the packages, and then
-read along verifying the files they installed.
+<p>A Red Hat i les distribucions reaacionades vostè pot alcançar el
+mateix resultat pràctic que la primera secció d'aquest COM instal·lant
+els paquets <tt/bind/, <tt/bind-utils/ i <tt/caching-nameserver/.  Si
+vostè utilitza Debian, simplement instal·le <tt/bind/ (o <tt/bind9/,
+en el moment d'escriure aquest manual, BIND 9 no està suportat per
+Debian Stable (potato)) i <tt/bind-doc/.  Pressupost només instal·lant
+eixos paquets vostè no aprendrà tant com legint este COM. Així que
+instal·le els paquets, i aleshores llija verificant els fitxer que han
+instal·lat.
 
-<p>A caching only name server will find the answer to name queries and
-remember the answer the next time you need it.  This will shorten the
-waiting time the next time significantly, especially if you're on a
-slow connection.
+<p>Una servidor de noms només cau trobarà la resposta a peticions de
+noms i recordarà la resposta la pròxima vegada que vostè la
+necessite. Açò acurtarà el temps d'espera significativament la pròxima
+vegada, especialment si vostè està a una connexió lenta.
 
-<p>First you need a file called <tt>/etc/named.conf</tt> (Debian:
-<tt>/etc/bind/named.conf</tt>).  This is read when named starts.  For
-now it should simply contain:
+<p>Primer vostè necessita una fitxer anomenat <tt>/etc/named.conf</tt> (Debian:
+<tt>/etc/bind/named.conf</tt>).  Aquest és llegit quan named s'incia.
+Per ara, hauria de contindre simplement:
 
 <code>
 // Config file for caching only name server
@@ -250,17 +256,17 @@ zone "0.0.127.in-addr.arpa" {
 };
 </code>
 
-<p>The Linux distribution packages may use different file names for
-each kind of file mentioned here; they will still contain about the
-same things.
+<p>Els paquets de distribució de Linux poden utilitzar diferents noms
+de fitxer per a cada tipus de fitxer mencionat ací; de tota manera
+contindran coses molt similars.
 
-<p>The `<tt/directory/' line tells named where to look for files.  All
-files named subsequently will be relative to this.  Thus <tt>pz</tt>
-is a directory under <tt>/var/named</tt>, i.e.,
-<tt>/var/named/pz</tt>.  <tt>/var/named</tt> is the right directory
-according to the <em/Linux File system Standard/.
+<p>La línia `<tt/directory/' li diu a named on buscar el fitxers.
+Tots els noms de fitxer anomenants posteriorment seràn relatius a
+aquest. Així <tt>pz</tt> és un directori baix <tt>/var/named</tt>, és
+a dir, <tt>/var/named/pz</tt>.  <tt>/var/named</tt> és el directori
+correcte segons el <em/Linux File system Standard/.
 
-<p>The file named <tt>/var/named/root.hints</tt> is named in this.
+<p>El fitxer anomenat <tt>/var/named/root.hints</tt> és un d'ells.
 <tt>/var/named/root.hints</tt> should contain this:
 <code>
 ;
@@ -298,14 +304,16 @@ L.ROOT-SERVERS.NET.     6D  IN      A       198.32.64.12
 M.ROOT-SERVERS.NET.     6D  IN      A       202.12.27.33
 </code>
 
-<p>The file describes the root name servers in the world.  The servers
-change over time and must be maintained now and then.  See the <ref
-id="maint" name="maintenance section"> for how to keep it up to date.
+<p>El fitxer descriu els servidors de noms arrels al Món.  Els
+servidors canvien al llarg del temps i s'han de mantindre ara i adés.
+Mire la <ref id="maint" name="secció de manteniment"> per a informació
+sobre com mantindre la llista actualitzada.
 
-<p>The next section in <tt/named.conf/ is the last <tt/zone/.  I will
-explain its use in a later chapter; for now just make this a file
-named <tt/127.0.0/ in the subdirectory <tt/pz/: (<em/Again, please
-remove leading spaces if you cut and paste this/)
+<p>La següent secció a <tt/named.conf/ és l'última
+<tt/zone/.  Explicaré el seu ús en un capítol posterior; per ara només
+copie el següent llistat a u fitxer anomenat <tt/127.0.0/ al
+sub-directori <tt/pz/: (<em/De nou, per favor elimine els espais si
+vostè copia i apega açò/)
 
 <code>
 $TTL 3D
