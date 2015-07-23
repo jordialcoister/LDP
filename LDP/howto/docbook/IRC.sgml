@@ -15,98 +15,97 @@
        <date>2005-01-07</date>
        <authorinitials>fredlwm</authorinitials>
        <revremark>
-          Fifth revision.
+          Cinquena revisió.
        </revremark>
      </revision>
    </revhistory>     
-  <abstract><para>This document aims to describe the basics of IRC and
-  respective applications for Linux.</para></abstract>
+  <abstract><para>Aquest document preten descriure els conceptes
+  fonamentals de l'IRC i les respectives aplicacions per a
+  Linux.</para></abstract>
 </articleinfo>
 
 <sect1 id="intro">
 
-<title>Introduction</title>
+<title>Introducció</title>
 
-<para>This document is still WIP, and should be treated as such. I'll do
-my best to keep it updated and accurate.</para>
+<para>Aquest document encara és WIP, i se l'hauria de tractar com a tal. Faré el millor que puga per a mantindre'l actualitzat i accurate.</para>
 
-<para>The following bibles shouldn't be ignored:</para>
+<para>Les següents biblies no haurien de ser ignorades:</para>
 
 <itemizedlist>
 <listitem>
-<para>RFC 1459 by Jarkko Oikarinen and Darren Reed was the first about
-the Internet Relay Chat Protocol - 
+<para>L'RFC 1459 per Jarkko Oikarinen i Darren Reed va ser el primer
+sobre l'Internet Relay Chat Protocol -
 <ulink url="http://ftp.isi.edu/in-notes/rfc1459.txt">
 <literal>http://ftp.isi.edu/in-notes/rfc1459.txt</literal></ulink></para>
 </listitem>
 
 <listitem>
-<para>RFC 2810 by Christophe Kalt updates RFC 1459 and describes the
-Architecture of the Internet Relay Chat - 
+<para>L'RFC 2810 per Christophe Kalt actualitza l'RFC 1459 i descriu
+l'Arquitectura de l'Internet Relay Chat -
 <ulink url="http://ftp.isi.edu/in-notes/rfc2810.txt">
 <literal>http://ftp.isi.edu/in-notes/rfc2810.txt</literal></ulink></para>
 </listitem>
 
 <listitem>
-<para>RFC 2811 by Christophe Kalt updates RFC 1459 and describes the
-Channel Management of the Internet Relay Chat - 
+<para>L'RFC 2811 per Christophe Kalt actualitza l'RFC 1459 i desciur
+la Gestió de Canals de l'Internet Relay Chat -
 <ulink url="http://ftp.isi.edu/in-notes/rfc2811.txt">
 <literal>http://ftp.isi.edu/in-notes/rfc2811.txt</literal></ulink></para>
 </listitem>
 
 <listitem>
-<para>RFC 2812 by Christophe Kalt updates RFC 1459 and describes the
-Client Protocol of the Internet Relay Chat - 
+<para>L'RFC 2812 per Christophe Kalt actualitza l'RFC 1459 i descriu
+el Protocol de l'Internet Relay Chat -
 <ulink url="http://ftp.isi.edu/in-notes/rfc2812.txt">
 <literal>http://ftp.isi.edu/in-notes/rfc2812.txt</literal></ulink></para>
 </listitem>
 
 <listitem>
-<para>RFC 2813 by Christophe Kalt updates RFC 1459 and describes the
-Server Protocol of the Internet Relay Chat - 
+<para>L'RFC 2813 per Christophe Kalt actualitza l'RFC 1459 i descriu i
+descriu el Server Protocol de l'Internet Relay Chat -
 <ulink url="http://ftp.isi.edu/in-notes/rfc2813.txt">
 <literal>http://ftp.isi.edu/in-notes/rfc2813.txt</literal></ulink></para>
 </listitem>
 </itemizedlist>
 
-<para>Also be sure to check the following links:</para>
+<para>També assegura't de revisar els següents enllaços:</para>
 
 <para><ulink url="http://www.irchelp.org/">
 <literal>http://www.irchelp.org/</literal></ulink></para>
 
 <sect2>
 
-<title>Objectives</title>
+<title>Objectius</title>
 
-<para>Among others, the objectives of this mini-HOWTO are:</para>
+<para>Els objectius, d'aquest mini-HOWTO entre d'altres són:</para>
 
 <itemizedlist>
 <listitem>
-<para>Link important resources about IRC;</para>
+<para>Enllaçar recursos importants sobre IRC;</para>
 </listitem>
 
 <listitem>
-<para>Avoid common misuses of IRC by writing an IRC Etiquette;</para>
+<para>Evitar els mals usos de l'IRC escrivint un codi d'Etiqueta IRC;</para>
 </listitem>
 
 <listitem>
-<para>List popular clients, servers, bots, and bouncers, along with
-their maintainers, #channel, small description, download location, home
-page, and hints;</para>
+<para>Llistar clients, servidors i bouncers populars, juntament amb
+els seus mantenidors, #canal, una xicoteta descripció, download
+location, pàgina llar, i consells;</para>
 </listitem>
 
 <listitem>
-<para>List IRC tools available in the latest release of all major
-distributions.</para>
+<para>Llistar les eines d'IRC disponibles en el darrer alliberament de totes les distribucions principals.</para>
 </listitem>
 </itemizedlist>
 </sect2>
 
 <sect2>
 
-<title>Miscellaneous</title>
+<title>Miscel·lània</title>
 
-<para>The latest version of this document is available at
+<para>La darrera versió d'aquest document es troba disponible a
 <ulink url="http://www.pervalidus.net/documentation/IRC-mini-HOWTO/">
 <literal>http://www.pervalidus.net/documentation/IRC-mini-HOWTO/</literal></ulink></para>
 <para>A WIP of the next draft may be available at
@@ -145,268 +144,287 @@ document in the near future, so feel free to make them.</para>
 
 <sect1 id="about">
 
-<title>About IRC</title>
+<title>Sobre l'IRC</title>
 
-<para>Excerpt from RFC2810:</para>
+<para>Estracte de la RFC2810:</para>
 
-<para>The IRC (Internet Relay Chat) protocol is for use with text based
-conferencing. It has been developed since 1989 when it was originally
-implemented as a mean for users on a BBS to chat amongst
-themselves.</para>
+<para>El protocol IRC (Internet Relay Chat) s'utilitza per a fer
+conferencies de text. Es desenvolupa des de 1989 quan va ser
+originalment implementat com un mitjà per a que usuaris a una BBS
+pogueren xarrar entre ells.</para>
 
-<para>First formally documented in May 1993 by RFC 1459 [IRC], the
-protocol has kept evolving.</para>
+<para>Documentat per primera vegada a Maig del 1993 per la RFC 1459
+[IRC], el protocol s'ha mantingut en evolució.</para>
 
-<para>The IRC Protocol is based on the client-server model, and is well
-suited to running on many machines in a distributed fashion.  A typical
-setup involves a single process (the server) forming a central point for
-clients (or other servers) to connect to, performing the required
-message delivery/multiplexing and other functions.</para>
+<para>El protocol IRC està basat en el model client servidor, i es
+molt adeqüat per a executar-se en moltes màquina de manera
+distribuida.  Una configuració típica implica un únic procés (el
+servidor) formant un punt central de connexió per a clients (o altres
+servidors), realitzant la requerida entrega/mulitplexació de missatges
+i altres funcions.</para>
 
-<para>This distributed model, which requires each server to have a copy
-of the global state information, is still the most flagrant problem of
-the protocol as it is a serious handicap, which limits the maximum size
-a network can reach.  If the existing networks have been able keep
-growing at an incredible pace, we must thank hardware manufacturers for
-giving us ever more powerful systems.</para>
+<para>Aquest model distribuit, que requereix que cada servidor tinga
+una còpia de la informació de l'estat global, és encara el problema
+més flagrant del protocol ja què és un seriós hàndicap, que limita la
+mida màxima que una xarxa pot alcançat.  Si les xarxes existents són
+capaces de créixer a un ritme increïble, li hem d'agraïr als
+fabricants de maquinari per proporcionar-nos sistemes encara més
+potents.</para>
 </sect1>
 
 <sect1 id="bhistory">
 
-<title>Brief History of IRC</title>
+<title>Breu Història de l'IRC</title>
 
-<para>The first IRC daemon was written in the summer of 1998 by Jarkko
-"WiZ" Oikarinen of the University of Oulu, Finland. Originally intended
-as a BBS-style replacement for Talk, IRC quickly spread; first through
-Scandinavian, and then throughout the rest of the world. Within a year
-there were over 40 servers linked up.</para>
+<para>El primer dimoni d'IRC fou escrit a l'estiu de 1988 per Jarkko
+"WiZ" Oikarinen de la Universitat d'Oulu, Finlàndia. Originalment
+intended com un substitut estil BBS per a Talk, l'IRC es va escampar
+ràpidament; primer entre els Escandinaus, i aleshores per la resta del
+món. En un any hi havien uns 40 servidors enllaçats entre ells.</para>
 
-<para>At this stage there was only one network, and so a name
-unnecessary - it was simply 'IRC'; but as the size of the network grew,
-disagreements began to form. IRC was a pretty chaotic medium with
-netsplits, nick collisions, and channel takeovers all commonplace; and
-it was inevitable that at some stage users would split off to form their
-own networks.</para>
+<para>En aquesta etapa només hi havia una xarxa, pel que un nom era
+innecessàri - era simplement l''IRC'; però a mesura que la mida de la
+xarxa cresqué, els desacords començaren a formar-se. L'IRC era una
+medi caòtic on netsplits, les col·lisions de sobrenom, i les
+adquisicions de canal estàven a l'ordre del dia; i era inevitable que
+en algún moment els usuaris es dividirien per a formar les seues
+pròpies xarxes.</para>
 
-<para>One of the first major splits was in 1992, when Wildthang created
-the Undernet network. Originally intended as a test network, Undernet
-quickly grew, gaining a reputation as a friendly network due to it's
-introduction of services to protect users and channels.</para>
+<para>Una de les primeres divisions principals fou en 1992, quan
+Wildthang va crear la xarxa Undernet. Originalment intended com a
+xarxa de proves, Undernet cresqué ràpidament, guanyant-se una
+reputació com a xarxa amigable gràcies a que va introduir serveis per
+a protegir els usuaris i canals.</para>
 
-<para>Two years later, Undernet itself forked, the new networking
-becoming DALnet. DALnet's founder, dalvenjah, took Undernet's concept of
-services to a new level, introducing support for nick registration,
-G-lines, and a host of other features.</para>
+<para>Dos anys més tard, la Undernet mateixa es va bifurcar, la nova
+xarxa esdevingué DALnet.  El fundador de DALnet, dalvenjah, prengué el
+concepte de serveis d'Undernet a un nou nivell, introduint suport per
+al registre de nick, G-lines, i una pila d'altres característiques.</para>
 
-<para>Meanwhile on IRCnet (as the original IRC network was now known),
-feelings where running high. IRCnet was opposed to the concept of
-channel/nick 'ownership' which Undernet and DALnet had introduced, but
-clearly something had to be done about the constant channel takeovers
-that were occuring. Two alternative ideas were proposed: nick/channel
-delay, and timestamping (see http://www.irc-help.org for information),
-but there was bitter dispute over which to implement.</para>
+<para>Mentrestant a IRCnet (com és coneguda la xarxa IRC original
+ara), els sentiments feelings where running high. IRCnet s'oposava al
+concepte de 'propietat' de canal/sobrenom que Undernet i DALnet havien
+introduit, però clarament alguna cosa s'havia de fer respecte a les
+constants apropiacions de canal que estàven ocorrent. Dos idees
+alternatives foren proposades: retard de sobrenom/canal, i
+timestamping (mire http://www.irc-help.org per a més informació), però
+hi havia una amarga disputa sobre quina implementar.</para>
 
-<para>In July of 1996, IRCnet split, with most of the North American
-servers leaving to form EFnet, leaving IRCnet as a mostly European
-network.</para>
+<para>A Juliol de 1996, IRCnet es va bifurcar, amb la majoria dels
+servidors Nord Americans marxant per a formar EFnet, deixant IRCnet
+com a una xarxa majoritàriament Europea.</para>
 
-<para>Since then, hundreds of other smaller networks have formed, most
-using modified versions of either DALnet, EFnet, IRCnet, or Undernet's
-ircd.</para>
+<para>Des d'aleshores, centenars d'altres xarxes similars s'ha format,
+la majoria utilitzant versions modificades del ircd de DALnet, EFnet,
+IRCnet, o Undernet.</para>
 </sect1>
 
 <sect1 id="beginners">
 
-<title>Beginner's guide on using IRC</title>
+<title>Guia d'iniciació a la utilització de l'IRC</title>
 
-<para>The standard IRC client is the original ircII. It's part of most
-Linux distributions, and most other text-based IRC clients (notably
-BitchX and EPIC) are derived from it.</para>
+<para>El client IRC estàndard és l'ircII original. Forma part de la majoria de distribucions Linux, i la majoria dels altres clients IRC (especialment BitchX i EPIC) s'en deriven.</para>
 
 <sect2>
 
-<title>Running the ircII program</title>
+<title>Executant el programa ircII</title>
 
-<para>It's easy to use ircII. Let's say you want to connect to
-irc.freenode.net as mini-HOWTO.</para>
-<para>At the command line, type:</para>
+<para>L'ircII és fàcil d'utilitzar. Digam que vol connectar-se a
+irc.freenode.net com a mini-HOWTO.</para>
+<para>A la línia d'ordres, teclege:</para>
 <para>$ irc mini-HOWTO irc.freenode.net</para>
-<para>You can also export variables, so you won't need to use them at
-the command line. For bash and zsh users:</para>
+<para>Vostè pot també exportar variables, d'aquesta manera no caldrà
+que les utilitze en la línia d'ordres. Per a usuaris de bash i
+zsh:</para>
 <para>$ export IRCNICK=mini-HOWTO IRCSERVER=irc.freenode.net</para>
-<para>For csh and tcsh users, replace <emphasis>export</emphasis> with
+<para>Per als usuaris de csh i tcsh,
+substituïsca <emphasis>export</emphasis> amb
 <emphasis>setenv</emphasis>.</para>
 
-<para>Add them to your shell profile (e.g. ~/.bash_profile or
-~/.zprofile) when you're done.</para>
-<para>Other common variables are IRCNAME and IRCUSER, to respectively
-set the ircname part of a /whois and username as seen at the first line
-'mini-HOWTO is ~username@hostname (ircname)'. Keep in mind that IRCUSER
-won't work if you run an ident daemon (default on most distributions).
-If you still need to change your username (not recommended, and I hope
-you're not using IRC logged as root !), install oidentd from <ulink url="http://ojnk.sourceforge.net/">
-<literal>http://ojnk.sourceforge.net/</literal></ulink> . To configure,
-read the oidentd.conf man page. Finally run '/usr/local/sbin/oidentd -g
-nobody -u nobody'. Add this to your startup scripts (e.g.
-/etc/rc.d/rc.local) when you're done.</para>
-<para>If not set, IRCNICK, IRCUSER, and IRCNAME will be retrieved from
-/etc/passwd .</para>
+<para>Afija-les al seu perfil de shell (p. ex. ~/.bash_profile o
+~/.zprofile) quan hàges acabat.</para>
+<para>Altres variables comunes són IRCNAME i IRCUSER, per a definir
+respectivament la part ircname d'un /whois i el nom d'usuari com es
+veu a la primera línia 'mini-HOWTO és ~username@hostname
+(ircname)'. Tina present que IRCUSER no funcinoarpa si executa un
+dimoni ident (per defecte en la majoria de distribucions).  Si vostè
+encara necessita canviar el seu nom d'usuari (no es recomana, i espere
+que no vostè no estiga utilitzant l'IRC com a root !), instal·le
+oidentd des
+de <ulink url="http://ojnk.sourceforge.net/"> <literal>http://ojnk.sourceforge.net/</literal></ulink>. Per
+a configurar-lo, llija la pàgina man de oidentd.conf. Finalment,
+execute '/usr/local/sbin/oidentd -g nobody -u nobody'. Afija açò als
+seus guions d'arranc (p. ex.  /etc/rc.d/rc.local) quan vostè haja
+acabat.</para>
+<para>Si no estan definides, IRCNICK, IRCUSER i IRCNAME es recuperaran
+de /etc/passwd .</para>
 </sect2>
 
 <sect2>
 
-<title>Commands</title>
+<title>Órdres</title>
 
-<para>Use /help to get a list on all available commands (/help help is a
-good start). Replace <emphasis>nick</emphasis> by any IRCNICK.</para>
+<para>Utilitze /help per a obtindre una llista de totes les ordres
+disponibles (/help help és un bon
+començament). Substituïsca <emphasis>nick</emphasis> per qualsevol
+IRCNICK.</para>
 
 <itemizedlist>
 <listitem>
-<para>First, /set NOVICE off</para>
+<para>Primer, /set NOVICE off</para>
 </listitem>
 
 <listitem>
-<para>/nick IRC-mini-HOWTO changes your IRCNICK to
+<para>/nick IRC-mini-HOWTO canvia el seu IRCNICK a
 <emphasis>IRC-mini-HOWTO</emphasis></para>
 </listitem>
 
 <listitem>
-<para>/set realname The Linux IRC mini-HOWTO changes your IRCNAME to
-<emphasis>The Linux IRC mini-HOWTO</emphasis> (doesn't change on the
-same connection)</para>
+<para>/set realname El mini-COM de IRC amb Linux canvia el teu IRCNAME
+a <emphasis>The Linux IRC mini-HOWTO</emphasis> (no canvia en la
+mateixa connexió)</para>
 </listitem>
 
 <listitem>
-<para>/j #mini-HOWTO joins channel
-<emphasis>#mini-HOWTO</emphasis></para>
+<para>/j #mini-COM s'uneix al canal
+<emphasis>#mini-COM</emphasis></para>
 </listitem>
 
 <listitem>
-<para>/j #unmaintained-HOWTO joins
-channel<emphasis>#unmaintained-HOWTO</emphasis></para>
+<para>/j #COM-sense-mantindre s'uneix al canal
+<emphasis>#COM-sense-mantindre</emphasis></para>
 </listitem>
 
 <listitem>
-<para>/j #mini-HOWTO changes the active current channel to
-<emphasis>#mini-HOWTO</emphasis></para>
+<para>/j #mini-COM canvia el canal actiu actual a
+<emphasis>#mini-COM</emphasis></para>
 </listitem>
 
 <listitem>
-<para>/msg <emphasis>nick</emphasis> Hi. sends a private message to
-<emphasis>nick</emphasis> containing <emphasis>Hi.</emphasis></para>
+<para>/msg <emphasis>sobrenom</emphasis> Hola. envia un missatge
+privat a
+<emphasis>sobrenom</emphasis> contenint <emphasis>Hi.</emphasis></para>
 </listitem>
 
 <listitem>
-<para>/notice <emphasis>nick</emphasis> (or #mini-HOWTO) Hi. sends a
-notice to <emphasis>nick</emphasis> (or #mini-HOWTO) containing
-<emphasis>Hi.</emphasis></para>
+<para>/notice <emphasis>sobrenom</emphasis> (o #mini-COM)
+Hola. envia un a notice to <emphasis>sobrenom</emphasis> (o
+#mini-COM) contenint
+<emphasis>Hola.</emphasis></para>
 </listitem>
 
 <listitem>
-<para>/query <emphasis>nick</emphasis> starts a private conversation
-with <emphasis>nick</emphasis>. /query ends the private
-conversation</para>
+<para>/query <emphasis>sobrenom</emphasis> inicia una conversa
+privada amb <emphasis>sobrenom</emphasis>. /query finalitza la
+conversació privada</para>
 </listitem>
 
 <listitem>
-<para>/me uses <emphasis>Linux.</emphasis> sends an action to the
-current channel or query containing <emphasis>IRC-mini-HOWTO loves
+<para>/me uses <emphasis>Linux.</emphasis> envia una acció al canal
+actual o sol·licitud contenint <emphasis>IRC-mini-HOWTO estima
 Linux.</emphasis></para>
 </listitem>
 
 <listitem>
-<para>/dcc chat <emphasis>nick</emphasis> starts a chat with
-<emphasis>nick</emphasis>. Use /msg =<emphasis>nick</emphasis> (notice
-the <emphasis>=</emphasis>) to send messages over the chat</para>
+<para>/dcc chat <emphasis>sobrenom</emphasis> inicia una conversa amb 
+<emphasis>sobrenom</emphasis>. Utilitze /msg
+=<emphasis>nick</emphasis> (tinga en compte el <emphasis>=</emphasis>)
+per a enviar missatges sobre la conversa</para>
 </listitem>
 
 <listitem>
-<para>/dcc send <emphasis>nick</emphasis> /etc/HOSTNAME sends the given
-file to <emphasis>nick</emphasis></para>
+<para>/dcc send <emphasis>sobrenom</emphasis> /etc/HOSTNAME envia el
+fitxer donat a <emphasis>sobrenom</emphasis></para>
 </listitem>
 
 <listitem>
-<para>/dcc get <emphasis>nick</emphasis> receives the file offered by
-<emphasis>nick</emphasis></para>
+<para>/dcc get <emphasis>sobrenom</emphasis> rep el fitxer ofert per 
+<emphasis>sobrenom</emphasis></para>
 </listitem>
 
 <listitem>
-<para>/part leaves the active current channel</para>
+<para>/part abandona el canal actual</para>
 </listitem>
 
 <listitem>
-<para>/part #unmaintained-HOWTO leaves channel
-<emphasis>#unmaintained-HOWTO</emphasis></para>
+<para>/part #COM-sense-mantindre deixa el canal 
+<emphasis>#COM-sense-mantindre</emphasis></para>
 </listitem>
 
 <listitem>
-<para>/discon disconnects from current IRCSERVER</para>
+<para>/discon desconecta de l'IRCSERVER (Servidor IRC) actual</para>
 </listitem>
 
 <listitem>
-<para>/server irc.oftc.net connects to IRCSERVER
+<para>/server irc.oftc.net connecta a IRCSERVER
 <emphasis>irc.oftc.net</emphasis></para>
 </listitem>
 
 <listitem>
-<para>/quit Bye. quits your IRC session with a reason
-<emphasis>Bye.</emphasis></para>
+<para>/quit Adéu. deixa la seua sessió d'IRC amb una raó
+<emphasis>Adéu.</emphasis></para>
 </listitem>
 </itemizedlist>
 
-<para>Most of the above commands (including the use of environmental
-variables) will also work in other console-based clients.</para>
+<para>La majoria de les ordres de dalt (incloent la utilització de
+variables d'entorn) funciorà també en altres clients de
+consola.</para>
 
 </sect2>
 
 <sect2>
 
-<title>IRC Etiquette</title>
+<title>Etiqueta IRC</title>
 
-<para>WARNING WARNING WARNING WARNING WARNING</para>
+<para>ADVERTÈNCIA ADVERTÈNCIA ADVERTÈNCIA ADVERTÈNCIA ADVERTÈNCIA </para>
 
 <itemizedlist>
 <listitem>
-<para>Never use IRC logged as root or any user with excessive
-privileges. Bad things may happen sooner or later. You were warned. It's
-highly recommended you create an user only to use IRC.</para>
+<para>Mai utilitze l'IRC com a root o com a qualsevol usuari amb
+privilegis excessius. Coses dolentes poden passar abans o
+després. Està avisat. És altament recomanat que vostè cree un usuari
+només per a utilitzar l'IRC.</para>
 </listitem>
 </itemizedlist>
 
 <para>$ man adduser</para>
 
-<para>On Linux channels you shouldn't:</para>
+<para>A canal sobre Linux no hauria de:</para>
 
 <itemizedlist>
 <listitem>
-<para>Act as an idiot. If you want to be respected, then first respect
-each other.</para>
+<para>Actuar com un idiota. Si vol que el respecten, començe per
+respectar als demés.</para>
 </listitem>
 
 <listitem>
-<para>Use colors (^C). Most Linux users don't tolerate such mIRC crazes,
-and ircII doesn't really support them. The same should apply for
-ANSI.</para>
+<para>Utilitzar colors (^C). La majoria d'usuaris de Linux no toleren
+tals mIRC crazes, i ircII realment no les suporta. El mateix huaria
+d'aplicar per a ANSI.</para>
 </listitem>
 
 <listitem>
-<para>Use full CAPS, bold (^B), reverse (^V), underline (^_), blink
-(^F), and bell (^G). The first 4 are here to emphasize words, not the
-whole text. The last 2 are just very annoying. </para>
+<para>Utilitzar paraules en MAJÚSCULES, en negreta (^B), invertides
+(^V), subratllades (^_), parpellejant (^F), o campanes (^G). Els
+quatre primers estan ací per a emfatitzar paraules, no per al text
+complet. Les 2 últimes són senzillament molt molestes. </para>
 </listitem>
 
 <listitem>
-<para>Ask if you can ask a question. Just ask, but first read all
-documentation available on the subject. Start looking at <ulink url="file:/usr/share/doc/">
-<literal>/usr/doc/</literal></ulink> (on
-some systems it may be <ulink url="file://usr/doc/">
-<literal>/usr/doc/</literal></ulink>, otherwise go to <ulink url="http://www.tldp.org/">
-<literal>http://www.tldp.org/</literal></ulink> or <ulink url="http://www.ibiblio.org/pub/Linux/docs/">
-<literal>http://www.ibiblio.org/pub/Linux/docs/</literal></ulink> . And
-don't repeat your question immediately. Wait at least 10 minutes. If you
-don't get any answer it's because nobody knows or wants to help. Respect
-their choice, they're not your personal assistant. Also never send mass
-private messages. It's like spam.</para>
+<para>Preguntar si pot fer una pregunta. Pregunte, però primer llija
+tota la documentació disponible sobre el tema. Començe mirant
+a <ulink url="file:/usr/share/doc/"> <literal>/usr/doc/</literal></ulink>
+(a alguns sistemes pot
+ser <ulink url="file://usr/doc/"> <literal>/usr/doc/</literal></ulink>,
+en qualsevol altre cas, vaja a <ulink url="http://www.tldp.org/">
+<literal>http://www.tldp.org/</literal></ulink>
+o <ulink url="http://www.ibiblio.org/pub/Linux/docs/">
+<literal>http://www.ibiblio.org/pub/Linux/docs/</literal></ulink> . I
+no repetisca la seua pregunta immediatament. Espere almenys 10
+minuts. Si vostè no obté cap resposta és perquè ningún ho sap o val
+ajudar. Respecte la seua decisió, no són el seu assistent
+personal. Tampoc envie mai missatges privats massius. És com el correu
+brossa.</para>
 </listitem>
 </itemizedlist>
 </sect2>
@@ -414,7 +432,7 @@ private messages. It's like spam.</para>
 
 <sect1 id="console">
 
-<title>Console IRC Clients</title>
+<title>Clients IRC de Consola</title>
 
 <sect2>
 

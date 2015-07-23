@@ -6,12 +6,12 @@
 
 <!-- Title information -->
 
-<title>Automount mini-Howto
+<title>Automount mini-Com
 <author> Rahul Sundaram, <url url="mailto:Rahulsundaram AT yahoo DOT co DOT in" name="rahulsundaram@yahoo.co.in">
 <date>v1.6, 2002-12-27
 <abstract>
-This file describes the autofs automounter, how to configure it, and
-points out some problems to avoid.
+Aquest fitxer desciu l'autofs automounter, com configurar-lo, i assenyala alguns
+problemes a evitar.
 </abstract>
 
 <!-- Table of contents -->
@@ -19,78 +19,110 @@ points out some problems to avoid.
 
 <!-- Begin the document -->
 
-<sect>Introduction
-<sect1> Revision History
+<sect>Introducció
+<sect1> Historial de Revisions
 <p>
 <itemize>
-<item> Versions below 1.5 - Authored by Don.
-<item> Version 1.5   - Added the copyright and other minor details.Rahul Sundaram took over maintainance.
-<item> Version 1.5.1 - Added details to the question about VFAT.
-<item> Version 1.5.2 - Revision history and other minor corrections.
-<item> Version 1.6 - Added a few questions and answers.
+<item> Versions per baix de la 1.5 - Escrit per Don.
+<item> Version 1.5   - Afegit el copyright i altres detalls menors. Rahul 
+Sundaram prengé el manteniment.
+<item> Version 1.5.1 - Afegits detalls a la qüestió sobre el VFAT.
+<item> Version 1.5.2 - Historial de revisions i altres correccions menors.
+<item> Version 1.6 - Afegides algunes preguntes i respostes.
 </itemize>
 </p>
 
-<sect1> Automount - what and why?
+<sect1> Automuntatge - què i perquè?
 <p>
-Automounting is the process where mounting and unmounting of certain
-filesystems is done automatically by a daemon. If the filesystem is unmounted,
-and a user attempts to access it, it will be automatically (re)mounted. This
-is especially useful in large networked environments and for crossmounting
-filesystems between a few machines (especially ones which are not always
-online). It may also be very useful for removable devices, or a few other
-uses, such as easy switching between a forced-on ascii conversion mount of
-a dos filesystem and a forced-off ascii conversion mount of the same dos fs.
-If you are new to Linux and dont understand what mounting and deamons are,then refer to
-some documentation regarding this.
+L'automuntatge és el procés mitjançant el qual muntatge i el
+desmuntatge de certs sistemes de fitxers es fa automàticament
+mitjançant un dimoni. Si el sistema de fitxers es desmunta i un usuari
+tracta d'acccedir-lo, aquest es (re)munta. Açò és especialment útil en
+grans entorns en xarxa i per muntatges encreuats de sistemes de
+fitxers entre unes poques màquines (especialment unes que no estàn
+sempre en línia). Podria ser també molt útil per a dispositius
+desmuntables, o per a uns pocs altres usos, com l'intercanvi fàcil
+entre el muntatge amb conversió ascii forçada d'un sistema de fitxers
+dos i un muntatge sense conversió ascii del mateix sistema de fitxers
+dos. Si vostè és nou en Linux i no entén que són els dimonis ni el
+muntatge, aleshores referisca's a alguna documentació sobre el tema.
 
-<sect1>Types of automounting
-<p>There are two types of automounters in linux; <em>AMD</em> and <em>autofs</em>. AMD is the
-automount daemon, and supposedly works like the SunOS AMD. It is implemented in user space, meaning it's not part of the kernel. It's not necessary for the kernel to understand automounting if you NFS mount to the local host, through the AMD daemon, which routes all automount filesystem traffic through the NFS system. Autofs is a newer system assisted by the kernel, meaning that the kernel's filesystem code knows where the automount mount points are on an otherwise normal underlying fs, and the automount program takes it from there. Only autofs will be described in this mini-howto.
+<sect1>Tipus d'automountatge
+<p>Hi ha dos tipus d'automountadors a linux; <em>AMD</em>
+ i <em>autofs</em>. AMD és el dimoni d'automuntatge, i suposadament
+ treballa com el SunOS AMD. Està implementat en l'espai d'usuari, el
+ que significa que no forma part del núcli. No és necessari que el 
+ núcli entenga l'automuntatge si vostè munta la seua màquina local, a
+ través del sistema NFS mitjançant el dimoni AMD, que enruta tot el
+ tràfic del sistema de fitxers automout a través del sistema
+ NFS. Autofs és un nou sistema assistit pel núcli, el que significa
+ que el codi del sistema de fixers del núcli sap on estàn els punts 
+ de muntatge automount en un sistema de fitxers underlying normal, i
+ el programa automout o agafa d'ahí. Només autofs serà descrit en
+ aquest mini-com.
 
 <sect>Administrative
-<sect1>Copyright information
+<sect1>Informació de Copyright
 <p>
-This mini-HOWTO is Copyright  Rahul Sundaram Sundaram.All rights reserved.This document is licensed under
-the <url url="http://tldp.org/copyright.html" name="Linux Documentation Project license">.I welcome any kind of commercial distrubution but I would like to receive information regarding this.I would 
-also help anyone willing to translate this document.If you require any exceptions to the licensing terms
-please contact me <url url="mailto:Rahulsundaram AT yahoo DOT co DOT in" name="Rahul Sundaram">. The latest version  of this document is always available at the Linux Documentation
-website at <url url="http://tldp.org/HOWTO/mini/Automount.html">.
+Aquest mini-COM és un Copyright  Rahul Sundaram Sundaram.Tots els
+drets reservat. Aquest document està llicentat baix la 
+<url url="http://tldp.org/copyright.html" 
+name="Linux Documentation Project license">. Agrairé tota mena de
+  distribució comercial, però m'agradaria rebre informació al
+  respecte. També ajudaria a qualsevol interessat en traduir aquest
+  document. Si requereix alguna excepció als termes de la llicència,
+  per favor contacte amb mi 
+  <url url="mailto:Rahulsundaram AT yahoo DOT co DOT in" 
+  name="Rahul Sundaram">. La última versió d'aquest document està
+  sempre disponible al lloc web de Linux Documentation
+  <url url="http://tldp.org/HOWTO/mini/Automount.html">.
 
 <sect1>Disclaimer
 <p>
-Although I have tried to do my best to bring out this howto in a good form,I am 
-not responsible for any damage due to the actions taken based upon the
-information contained in this document. It is impossible to test the
-things under all the configurations, so probably some of the hints given
-in this document may be incorrect and may not work on your system. In case you
-find anything wrong, let me know it first.I will rewrite it as soon as possible.
+Malgrat que he intentat fer-ho el millor possible tat per a dur a
+terme aquest com de la millor manera, no em faig responsable de cap 
+dany causat per les accions preses basades en la informació continguda 
+en aquest document. És impossible provar les coses baix totes les
+configuracions, així que probablement algunes de les pistes ofertes en
+aquest document poden ser incorrectes i potser no funcionen al seu
+sistema. En el cas de que vostè trobe alguna cosa malament, faça-m'ho
+saber primer. Jo ho reescriuré tan aviat com em siga possible.
 
-This document is provided ``as is''. I put great effort into writing
-it as accurately as I could, but you use the information contained in
-it at your own risk. In no event shall I be liable for any damages
-resulting from the use of this work.
+Aquest document es proporciona ``tal qual''. He posat un gran esforç
+en escriure'l tan precís com he pogut, però vostè utilitza
+la informació continguda en ell baix el seu pròpi risc. En cap cas
+seré resoponsable dels danys resultants de l'ús d'aquest treball.
 
-<sect>Installation
+<sect>Instal·lació
 <p>
-Autofs is implemented in kernel-space, so your kernel must have support compiled in. All versions of the kernel starting from 2.2.xx supports autofs.
-<p>The automount program and its configuration files are also necessary; using the rpms. The RedHat distribution has this package available as part of the installation.
+Autofs és implementat en l'espai del núcli, pel que el seu núcli ha de
+tindre el suport compilat en ell. Totes les versions del núcli a
+partir de la 2.2.xx suporten autofs.
 
-<sect>Configuration
-<p>Installing the RPM packages will get you to this point easily enough, but here's the part you might not be sure about if you haven't done this before.
+<p>El programa automount i els seus fitxers de configuració també
+  seràn necessàris; utilitzant el rpms. La distribució RedHat té
+  aquest paquet disponible com a part de la instal·lació.
 
-<p>There are two files in /etc, one called <tt>auto.master</tt> and one called <tt>auto.misc</tt>.
-A sample auto.master looks like this:
+<sect>Configuració
+<p>Instal·lant els paquets RPM et portaràn a aquest punt prou
+  fàcilment, però ací està la part de la vostè potser no està segur
+  si no ha fet açò abans.
+
+<p>Hi ha dos fitxers a /etc, un anomenat <tt>auto.master</tt> i un
+  anomenat <tt>auto.misc</tt>. Un auto.master d'exemple seria així:
 <verb>
 /auto   /etc/auto.misc  --timeout=60
 </verb>
-<p>The first entry is not the mount point. It's where the set of mount points
-(found in the second entry) are going to be. The third option says that the
-mounted filesystems can try to unmount themselves 60 seconds after use. You will have to
-stop using the disk before unmounting it.
+<p>La primera entrada no és el punt de muntatge. És on el conjunt de
+  punts de muntatge (que es troben en la segona entrada) va a
+  estar. La tercera opció diu que els sistemes muntats poden provar a
+  desmuntar-se ells mateixos 60 segons després del seu ús. Vostè haurà
+  de deixar d'utilitzar el disc abans de desmuntar-lo.
 <p>
-Auto.misc is a "map file". The map file can have any name; this one is named auto.misc because it originally controlled /misc. Multiple map files can be defined in auto.master.
-My auto.misc looks like this:
+Auto.misc és un "fitxer de mapeig". El fitxer de mapeig pot tindre
+qualsevol nom; aquest es diu auto.misc perquè originalment controlava
+/misc. Es poden definir múltiples fitxers de mapeig a auto.master.
+El meu auto.misc s'assembla a açò:
 <verb>
 kernel          -ro,soft,intr           ftp.kernel.org:/pub/linux
 cd              -fstype=iso9660,ro      :/dev/cdrom
@@ -98,90 +130,119 @@ zip             -fstype=auto            :/dev/hdd4
 floppy          -fstype=vfat            :/dev/fd0
 </verb>
 <p>
-The first column (the "key") is the mount point. In this case it would be
-/auto/floppy or whatever. The middle set are the options; read the mount
-manpage for details on this. And the last column specifies where the fs
-comes from. The "kernel" entry is supposed to be an NFS mount. The : on all
-the other lines means its a local device.
+La primera columna (la "clau") és el punt de muntatge. En aquest cas
+seria /auto/floppy o el que siga. El conjunt central són les opcions;
+llija la pàgina de manula de mount per més detalls sobre açò. I la
+última columna especifica d'on vé el sistema de fitxers. La entrada
+"kernel" se suposa què és un muntatge NFS. El caràcter : a totes les
+altres línies significa què és un un dispositiu local.
 
 
-<sect>The long wait for unmounting
+<sect>El llarg camí del desmuntatge
 <p>
-Some of you may be eyeing that 60 second timeout and thinking, <em>that's a long
-time to wait to eject a floppy.. Maybe I'll just sync the disks and pop
-it out mounted and nobody will notice.</em> Let me suggest <tt>saner alternatives</tt>.
-First of all, you can change the timeout. But that could be a little
-inefficient; telling the system to unmount stuff after only 15 seconds or
-whatever. Depending on your setup, you may be able to simply run the umount
-command as a normal user.  But there is actually a way to ask the automount program to umount. 
-If you send (with the program kill) the signal <tt>SIGUSR1</tt> to the automount process,
-it will unmount everything it can. But before people start making unmount
-buttons on their window managers, there's a little problem.
+Alguns de vostès potser miren aquells 60 segons de compte enrere i
+pensen, <em>això és molt de temps esperant per a expulsar un
+disquet. Potser tan sols sincronitze els discos, l'expulse muntat i
+ningú se n'adonarà.</em> Deixem suggerir <tt>alternative més
+sanes</tt>. Primer de tot, vostè pot canviar el compte enrere. Però
+això pot ser una miqueta ineficient; dient-li al sistema que desmunte
+coses després de 15 segons o el que siga. Depenent de la seua
+configuració But that, vostè pot estar capacitat per a senzillament
+executar la ordre umount com a usuari normal. Però hi ha, de fet, una
+manera de demanar al programa automout que desmunte. Si vostè envia
+(amb el programa kill) la senyal <tt>SIGUSR1</tt> al procés automount,
+aquest desmuntarà tot allò que puga. Però abans de que la gent començe
+a fer-se botons d'automuntatge als seus gestors de finestres, hi ha un
+xicotet problema.
 <p>
-The automount process is run by root, and it will only accept signals from
-root. Half of the reason you're probably doing automounting is so you can 
-mount and unmount without being root. It would be easy to make a suid-root
-C program which does the dirty deed. However, by using sudo it is possible
-to allow users to send the proper kill signal. The only problem is that
-sudo will not let you use to process subcommands, which you would have to
-do to find the current PID. You should have a program called killall, which
-will let you do this: 
+El procés automout s'executa pel root, i només acceptarà senyals del
+root. La meitat de la raó per la que probablement vostè està fent
+automountatge és perquè li permet muntar i desmuntar sense ser
+root. Seria fàcil fer un programa suid-root en C que fes la faena
+bruta. Tanmateix, utilitzant sudo és possible permetre a usuaris
+enviar la senyal kill apropiada. L'únic problema és que sudo no li
+permetrà utilitzar les subordres de processos que vostè hauria de fer
+per a trobar el PID actual. Vostè hauria de tindre un programa
+anomenat killall, que li permetria fer açò: 
 
 <verb>
 ALL     ALL=NOPASSWD:/usr/bin/killall -USR1 automount
 </verb>
-Otherwise, you would have to allow your users to send -SIGUSR1 to all processes.
-That has various effects on programs; it will recycle some window managers,
-but kills xemacs. So here's hoping there's no buffer overruns in killall...
+En cas contrari, vostè hauria de permetre als seus usuaris enviar
+-SIGUSR1 a tots els processos.  Això te vàris efectes en programes;
+reciclarà alguns gestors de finestres, però matarà xemacs. Així que
+So here's hoping there's no buffer overruns in killall...
 
-<sect>Questions
+<sect>Preguntes
 <p>
 
-<sect1>I don't see /auto/floppy, or whatever mountpoint I'm looking for.
+<sect1>No veig /auto/floppy, ni cap punt de muntatge que busque, siga
+  el que siga.
 
 <p>
-If automount is setup properly, whatever mount point you're looking for will be there if you try and use it, even though you don't see it when not in use. If you're browsing the directory with a
-graphical tool, you may need to type in the name manually; most programs will try what you give it, and the drive will be mounted before it notices. Unfortunately not
-being able to choose from the available invisible mount points is probably the
-major drawback of autofs. If it really bugs you, edit the configuration files.
-(Hint, the ones that end in .c for "configuration")
+Si automount està configurat adeqüadament, siga quin siga el punt de
+muntatge que està buscant estarà ahi, si vostè prova a utilitzar-lo,
+tot i que no el veja quan no està en ús. Si vostè està navegant pel
+directori amb una eina gràfica, podria necessitar escriure el nom
+manualment; la majoria de programes provaràn el que els dones, i la
+unitat serà muntada abans de que se n'adone. Desafortunadament no
+poder triar els punts de muntatge invisibles és probablement el major
+desavantatge d'autofs. Si realment bugs you, edite els fitxers de
+configuració. (Pista, els que acaben en .c com a "configuration")
 
-One workaround several people have tried is to create symbolic links to where automount will create something once it's mounted. This will likely prevent the program from complaining a directory doesn't exist (if the mount works, that is) but careless directory listings will cause filesystems to be mounted. 
+Una solució qeu vàries persones han triat és crear un enllaç simbòlic
+on automount crearà alguna cosa una vegada la munte. Açò probablement
+previndrà que el programa es queixe de que un directori no existeix
+(si el muntatge funciona) però els llistats de directori descuidats
+causaràn que els sistemes de fitxers siguen muntats.
 
-<sect1>How do I see what's mounted?
+<sect1>Com veig quès està muntat?
 <p>
-The <tt>df</tt> command. <tt>mount</tt> with no options will do the same, plus show the options its mounted with.
+La ordre <tt>df</tt>. <tt>mount</tt> sense opcions farà el mateix,
+però a més mostrarà les opcions amb les que es va muntar.
 
 
 
-<sect1>I put in a win95 disk ("vfat") and it was autodetected as only a regular FAT disk.
+<sect1>Jo pose un disc win95 ("vfat") i és detectat com un disk fat
+normal.
 <p>
-This is not a problem with automount.The "auto" fs type does not attempt a vfat mount before it successfully mounts an MS-DOS filesystem. VFAT is an extension of the basic FAT filesystem inorder to provide Windows 95 and Windows NT with long filenames. 
+Açò no és un problema amb automount. El tipus de sistema de fitxers
+"auto" no intenta un muntatge vfat abans de muntar amb èxit un sistema
+de fitxers MS-DOS. VFAT és una extensió del sistema de fitxers FAT
+bàsic per tal de proporcionar-li a Windows 95 i Windows NT noms llargs
+de fitxer.
 <p>
-According to one of the authors of mount, since mount is only a wrapper around a system call which must specify the filesystem type, it's still the responsibility of the user to come up with the fs type. Having mount take a list of filesystems to try in order, rather than the current "heuristic" is under consideration. Some users have simply not compiled msdos into the kernel; this prevents it from being tested prior to vfat. This will work for most people; a few actually need msdos fs and there is actually a work around.
-You have to copy the /proc/filesystems as /etc/filesystems and edit it to change the order such that vfat appears before msdos.(Thanks Mark)
+Segons un dels autors de mount, com mount és només un wrapper al
+vontant d'una crida del sistema que ha d'especificar el tipus de
+sistema de fitxers, continúa sent responsibilitat de l'usuari arribar
+amb el tipus de sistema de fitxers. Having mount take a list of
+filesystems to try in order, rather than the current "heuristic" is
+under consideration. Alguns usuaris senzillament no tenenn msdos
+compilat dins del núcli; açò evita que siga provat abans d'vfat. Açò
+funcionarà per a la majoria de gent; uns pocs necessiten el sistema de
+fitxers msdos i, de fet, hi ha una solució. Vostè ha de copiar el
+fitxer /proc/filesystems com /etc/filesystems i editar-lo per a
+canviar l'ordre de manera que vfat aparega abans que msdos. (Gràcies
+Mark)
 
-Ariel(aslinux At dsgml.com) writes 
+Ariel(aslinux At dsgml.com) escriu 
 
-"
-o make mount try vfat before fat, just create or edit the file
-/etc/filesystems
+" o faça que mount prove vfat abans de fat, senzillament cree o edite
+el fitxer /etc/filesystems
 
-List, in order of priority, what filesystems you want the 'auto' fs
-type
-to try.
+Lliste, per ordre de prioritat, quins sistemes de fitxers vol que el
+tipus de sistema de fitxers 'auto' prove.
 
-Create the file with cp /proc/filesystems /etc/filesystems.
+Cree el fitxer amb cp /proc/filesystems /etc/filesystems.
 
-Edit the list to change the order. Put fs types that are detected with
-great confidence such as ext2 (which means they are checked very
-quickly),
-and those that are more common for you first. Just put vfat before 
-msdos
-and you're all set. Make sure to put both, in case you're mounting
-something that has no vfat.
+Edite la llista per a canviar l'ordre. Pose primer els tipus de sistema de
+fitxers que són detectats amb molta seguretat com  ext2 (el que
+significa que es poden comprovar molt ràpidament), i aquells que són
+més comuns per a vostè. Senzillament pose vfat abans de msdos i vostè
+estarà llest. Assegure's de posar-los els dos, en el cas de que vostè
+estiga muntant alguna cosa que no siga vfat.
 
-Mine looks like:
+El meu es pareix a:
 
 ext2
 vfat
@@ -190,8 +251,8 @@ iso9660
 
 ****
 
-I use a timeout of 1 second for removable devices. Create separate
-maps, separated by the timeout you need.
+Jo utilitze un timeout de 1 segon per als dispositius removable. Cree
+mapes separats, separats pel timeout que necessite.
 
 You're thinking 1 second? That wastes a lot of resources - but it
 doesn't.
@@ -207,82 +268,104 @@ i.e.
 
 floppy      -fstype=auto,sync,user,umask=002,gid=floppy     :/dev/fd0"
 
-That should make clear the answer.
+Això hauria de deixar clara la resposta.
 
-<sect1>My filesystem <tt>/auto/grumblesmurf</tt> is mounted and <tt>kill -SIGUSR1</tt> won't unmount it.
+<sect1>El meu sistema de fitxers <tt>/auto/grumblesmurf</tt> està
+  muntat i <tt>kill -SIGUSR1</tt> no el desmunta.
 <p>
-It's being used by something. Root probably can't manually unmount it
-either. If you're the one who caused it to be mounted (i.e. it can't be someone
-else using it) look around for a shell that might be in that directory. If
-there are none, look for something else (particularly something that might
-have gone though that directory like a directory browser) that might have left
-an invisible foot in the door so to speak. If you've given up looking, try
-using the fuser program.
+Està sent utilitzat per alguna cosa. Root probablement tampoc el pot
+desmuntar manualment. Si és vostè qui ha provocat el seu muntatge (és
+a dir, que no pot ser que algú altre l'estiga utilitzant) busque un
+shell que podria estar en eixe directori. Si no n'hia ha cap, busque
+alguna altra cosa (particularment alguna cosa que podria haver anat a
+a través d'eixe directori, com un navegador de directoris) que podria
+haver deixat un peu invisible en la porta per dir-ho així. Si s'ha
+rendit de buscar, prove a utilitzar el programa fuser.
 
-<sect1>What happens if I make / the directory for the automounter
+<sect1>Què passa si jo definisc el directori / com el directori per a
+l'automounter
 <p>
-I dont recommend it.If you want /grumblesmurf, then I suggest a symbolic link. It would be much safer.
+Jo no ho recomane. Si vostè vol /grumblesmurf, aleshores li suggerisc
+un enllaç simbòlic. Serà molt més segur.
 
-<sect1>Can I have two map files on the same directory?
+<sect1>Puc tindre dos fitxers de mapeig en el mateix directori?
 <p>
-Not as far as I know. Try using one map file, with specific options for individual entries.
+Fins on jo sé, no. Prove a utilitzar un fitxer de mapeig, amb opcions
+específiques per a entrades individuals.
 
-<sect1>I'm using SuSE 6.0 and needed <tt>---timeout</tt> instead of <tt>--timeout</tt>
+<sect1>Estic utilitzant SuSE 6.0 i he necessitat <tt>---timeout</tt>
+enlloc de <tt>--timeout</tt>
 <p>
-Another solution to "timeout not working" problems would be to add a <tt>-t time</tt> option to the autofs script.
+Una altra solució als problemes tipus "timeout no funciona" seria
+afegir una opció <tt>-t time</tt> a l'script d'autofs.
 
-<sect1>How do I set the permissions and ownership for the filesystem (ie)FAT.
+<sect1>Com definisc els permisos i propietari per al sistema de
+  fitxers (p.ex.)FAT.
 <p>
-Check the man page for mount for some of the options, such as setting the uid=value or umask=value options. One option that appears to be missing for FAT filesystems is mode=value. Sorry. Check in with the people who do mounting.
+Consulte la pàgina man de mount per a for algunes de les opcions, com
+definir les opcions el uid=valor o umask=valor. Una opció que sembla
+estar perduda per als sistemes de fitxers FAT és mode=value. Ho
+sent. Comprove-ho amb la gent que fa muntatges.
 
-<sect1>How to browse the content of an autofs directory, when sub-dirs are not currently mounted ?
+<sect1>Com navegar pel contingut d'un directori autofs, quan els
+  subdirectoris no estàn actualment muntats?
 
-Philippe Froidevaux <philippe.froidevaux AT unifr.ch> writes 
+Philippe Froidevaux <url url="mailto:philippe.froidevaux@unifr.ch"
+name="philippe.froidevaux AT unifr.ch"> escriu
 <p>
 
-		" The author of autofs say "no way"
+		" L'autor d'autofs diu "de cap manera"
 
-a possible hack is (from the newsgroup) :
+un possible hack és (del grup de notícies) : "
 
-"don't mount to  /home/blauser  but to  /mount/.auto/blauser
-then add a link   /home/blauser -> /mount/.auto/blauser
+"no munte a  /home/blauser  sino a  /mount/.auto/blauser
+i affig un enllaç   /home/blauser -> /mount/.auto/blauser
 
-now you can browse into /home and see the users-home, it then gets
-mounted when you enter it.
+ara vostè pot navegar dins de /home i veure el directori llar dels
+usuaris, aquest és muntat quen vostè hi accedeix.
 
-problem with this: it isn't so clean and needs work for each user.
+el problema amb açò: no és tan net i necessita feina per a cada usuari.
 
-another solution is to use 'amd' in place of 'autofs', but amd is less
-performant".
+una altra solució consisteix a utilitzar 'amd' enlloc de 'autofs',
+però amb té menys rendiment".
 
 
 
-<sect1>Who do I thank for autofs?
+<sect1>A qui li agraïsc per autofs?
 <p>
-This is only a documentation provided for you to grab everyone's attention to what a great
-job had been done with autofs, and howeasy it is to use.Compared to the original perpetrators
-of AMD,the autofs is very well documented and the implementors have my sincere thanks.
-Everything has been copyrighted by the Transmeta company so it's not possible to provide
-a credits list, but Peter Anvin is probably responsible for quite a bit of it. Peter also held
-a session on autofs at linuxworldexpo on March 3, 1999.
+Açò només és una documentació proporcionada per a vostè per a cridar
+l'atenció de tothom de la gran feina que s'ha fet amb autofs, i lo
+fàcil què és d'utilitzar. Comparat amb els autors originals d'AMD,
+l'autofs està molt ben documentat i els executors tenen el meu sinzer
+agraïmet.  Tota ha sigut copyrighted per la empresa Transmeta amb la
+qual cosa no és possible proporcionar un llista de crèdits, però Peter
+Anvin és probablement responsable d'una bona part d'ell. Peter a més
+celebrar una sessió sobre autofs a la linuxworldexpo el 3 de Març de
+1999.
 
-<sect1>Where can I learn more about automounting?
+<sect1>On puc aprendre més sobre automountatge?
 <p>
-There's a autofs tutorial at <url url="http://www.linuxhq.com/lg/issue24/nielsen.html">.
-See also am-utils at <url url="http://www.cs.columbia.edu/~ezk/am-utils">
+Hi ha un tutorial d'autofs a <url url="http://www.linuxhq.com/lg/issue24/nielsen.html">.
+Mire també am-utils a <url url="http://www.cs.columbia.edu/~ezk/am-utils">
 
-<sect1>where to contact the developpers" ?.Is there a mailing-list for autofs ?
+<sect1>On contactar amb els desenvolupadors?. Hi ha una llista de
+  correu per a autofs?
 <p>
-I could not locate any information regarding this.Please let me know if you come across anything.
+No he pogut trobar cap informació al respecte. Per favor faça-m'ho
+saber si vostè es troba amb alguna cosa.
 
-<sect>Acknowledgements,feedback and dedication
+<sect>Agraïemts, aportacions i dedicació
 <p>
-I would like to thank <url url="mailto:don@sabotage.org" name="Don"> (email id seems to be invalid now) for his original work on this mini-Howto.I thank Ariel for his
-answer regarding the question on "win95 vfat" issue.I would thank all my friends for their support and everyone who were patient enough with me while I completed this work.
-Please mail me to <url url="mailto:Rahulsundaram AT yahoo DOT co DOT in" name="Rahul Sundaram"> in case of any suggestions,improvements or if you have any bright ideas.
-Please mail me if you have any good tutorials or stuff that I can add to this document.Thanks in advance.
-I dedicate this document to my late parents Mr.V.Sundaram and Mrs.S.Soundara Sundaram.
+M'agradaria agraïr a <url url="mailto:don@sabotage.org" name="Don">
+(l'identificador del correu sembla ser vàlid ara) pel seu treball
+original en aquest mini-COM. Li agraïsc a Ariel per la seua resposta
+respecte a la pregunta sobre "win95 vfat" issue. M'agradaria agraïr-li
+a tots els meus amics pel seu suport i a tots aquells que van ser
+suficientment pacients amb mi mentres completava aquest treball. Per
+favor, escriga'm un correu a <url url="mailto:Rahulsundaram AT yahoo
+DOT co DOT in" name="Rahul Sundaram"> in cas de suggerències, millores
+o si vostè té idees brillants. Per favor esciga'm un correu si té bons
+tutorials o coses que puc afegir a aquest document. Gràcies amb
+antelació.  Li dedique aquest document als meus úlitms pares Mr.V.Sundaram
+i Mrs.S.Soundara Sundaram.
 </article>
-
-
-2
