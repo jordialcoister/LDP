@@ -5,39 +5,69 @@
 
 <!-- Title Information -->
 
-<title>The Linux Networking Overview HOWTO
+<title>COM de Perspectiva General del Treball en Xarxa a Linux
 <author>Daniel Lopez Ridruejo, <tt/ridruejo@rawbyte.com/
 <date>v0.32, 8 July 2000
 
 <!-- Abstract -->
 <abstract>
-The purpose of this document is to give an overview of the networking capabilities of the Linux Operating System and to provide pointers for further information and implementation details.
+El propòsit d'aquest Document és el d'oferir una perspectiva general de
+les capacitats de treball en xarxa del siSistema Operatiu Linux i
+proporcionar referències a informació addicional i detalls
+d'implementació.
 </abstract>
 
 <!-- Table of Contents -->
 <toc>
 
 <!-- Begin the document -->
-<sect>Introduction
+<sect>Introducció
 <p>
 
-The purpose of this document is to give an overview of the networking
-capabilities of the Linux operating system. Although one of the strengths of
-Linux is that plenty of information exists for nearly every component of it,
-most of this information is focused on implementation. New Linux users,
-particularly those coming from a Windows environment, are often unaware of the networking possibilities of Linux. This document aims to show a general picture of such possibilities with a brief description of each one and pointers for further information. The information has been gathered from many sources: HOWTOs, faqs, projects' web pages and my own hands-on experience. Full credit is given to the authors of these other sources. Without them and their programs this document would have not been possible or necessary.
+El propòsit d'aquest document és el de proporcionar una perspectva
+general de les capacitat de treball en xarxa del sistema operatiu
+Linu. Malgrat que un dels punts forts de Linux és que existeix
+moltíssima informació per a quasi tots els seus components, la majoria
+d'aquesta informació està enfocada en la impliementació. Els usuaris
+nous de Linux, particularment aquells que venen d'un entorn Windows,
+sovint no estàn assabentats de les possibilitats de treball en xarxa
+de Linu. Aquest documnent pretén mostrar un plànol general de tals
+possibilitats amb una breu descripció de cadascuna d'elles i
+ennlaços <!--pointers--> per a informació addicional. La informació ha
+estat reunida des de moltes fonts: HOWTOs, faqs, planes web de
+projectes i la meua experiència personal. S'ofereix tot el
+reconeixement als autors d'aquestes fonts. Sense ells i els seus
+programes aquest document no hauria sigut possible o necessari.
 
 <sect>Linux.
 <p>
-<sect1> What is Linux?
+<sect1> Què és Linux?
 <p>
-The primary author of Linux is Linus Torvalds. Since his original versions, it has been improved by countless numbers of people. It is a clone, written entirely from scratch, of the Unix operating system. One of the more interesting facts about Linux is that its development occurs simultaneously around the world.
+L'autor principal de Linux és Linus Torvalds. Des de les seues
+versions originals, ha sigut millorat per un incontables nombre de
+persones . És un clon, escrit des de zero, del sistema operatiu
+Unix. Un dels fets més interessants de Linux és que el seu
+desenvolupament ocorre de manera simultània al voltant del món.
 <p>
-Linux has been copyrighted under the terms of the GNU General Public License (GPL). This is a license written by the Free Software Foundation (FSF) that is designed to prevent people from restricting the distribution of software. In brief, it says that although money can be charged for a copy, the person who received the copy can not be prevented from giving it away for free. It also means that the source code must be available. This is useful for programmers. Anybody can modify Linux and even distribute his/her modifications, provided that they keep the code under the same copyright.
+El copyright de Linux s'ha <!--copyrighted--> fet baix els termes de
+la GNU General Public License (GPL). Això és una licència escrita per
+la Free Software Foundation (FSF) què està dissenyada per a evitar que
+la gent puga restingir la distribució de programari. Bàsicament, diu
+que malgrat que es poden cobrar diners per una còpia, no es pot evitar
+que la persona que reba la còpia la distribuïsca gratuïtament. També
+significa que el codi font ha d'estar disponible. Açò és útil per a
+programadors. Qualsevol pot modificar Linux i fins i tot distribuïr
+les seues modificacions, sempre i quan mantinga el codi baix el mateix
+copyright.
 
-<sect1> What makes Linux different?
+<sect1> Què fa que Linux siga diferent? <!--What makes Linux different?-->
 <p>
-Why work on Linux? Linux is generally cheaper (or at least no more expensive) than other operating systems and is frequently less problematic than many commercial systems. But what makes Linux different is not its price (after all, why would anyone want an OS - even a free one - if it is not good enough?) but its outstanding capabilities:
+Per què treballar en Linux? Linux és generalment més barat (o almenys
+no més car) que altrs sistemes operatius i sovint és menys problemàtic
+que mols altres sistemes comercials. Però allò que fa Linux diferent
+no és el seu preu (després de tot, per què voldria algún un SO - fins
+i tot un de grauït - si no és suficientment bo?) sinò les seues
+capacitats fora de sèrie:
 <p>
 <itemize>
 <item>Linux is a true 32-bit multitasking operating system, robust and capable enough to be used in organizations ranging from universities to large corporations. 

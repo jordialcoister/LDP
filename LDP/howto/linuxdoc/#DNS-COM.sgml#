@@ -10,211 +10,211 @@ COM esdevindre un administrador de DNS en el menor temps possible. <!--become a 
 
 <toc>
 
-<sect>Pre‡mbul
+<sect>Pre√†mbul
 
 <p>Paraules clau: DNS, BIND, BIND 4, BIND 8, BIND 9, named, dialup, PPP,
 slip, ISDN, Internet, domain, name, resolution, hosts, caching.
 
-<p>Aquest document Ès part del Linux Documentation Project.
+<p>Aquest document √©s part del Linux Documentation Project.
 
 <sect1>Temes legals <!--Legal stuff-->
 
 <p>(C)opyright 1995-2001 Nicolai Langfeldt, Jamie Norrish &amp; Co. No
-el modifique sense esmenar el copyright, distribuÔsca'l lliurement
-perÚ retinga el missatge de copyright.
+el modifique sense esmenar el copyright, distribu√Øsca'l lliurement
+per√≤ retinga el missatge de copyright.
 
-<sect1>CrËdits i sol∑licitud d'ajuda.
+<sect1>Cr√®dits i sol¬∑licitud d'ajuda.
 
 <p>Vull agrair a tota la gent a la que he molestat per a que llisquen
 aquest COM (vosaltres ja sabeu qui sou) i a tots els lectors que m'han
-enviat suggerËncies i notes per correu electrÚnic.
+enviat sugger√®ncies i notes per correu electr√≤nic.
 
-<p>Aquest no ser‡ mai un document acabat; per favor envie'm correu
-sobre els seus problemes i successos.  VostË em pot ajudar a fer d'aÁÚ
-un millor COM.  AixÌ que per favor, envie comentaris i/o preguntes o
+<p>Aquest no ser√† mai un document acabat; per favor envie'm correu
+sobre els seus problemes i successos.  Vost√® em pot ajudar a fer d'a√ß√≤
+un millor COM.  Aix√≠ que per favor, envie comentaris i/o preguntes o
 diners a janl(at)langfeldt.net.  O compre el meu llibre sobre DNS (es
-titula "The Concise Guide to DNS and BIND", la bibliografia tÈ ISBNs).
-Si vostË m'envia un correu electrÚnic i vol una resposta, per favor,
-mostre la simple cortesia de <em/assegurar-se/ de que l'adreÁa de
-retorn Ès correcta i funciona.  TambÈ, <bf/per favor/ llija la
-secciÛ <ref id="qanda" name="qanda"> abans d'enviar-me un email.  Una
-altra cosa, nomÈs puc entendre noruec i anglÈs.
+titula "The Concise Guide to DNS and BIND", la bibliografia t√© ISBNs).
+Si vost√® m'envia un correu electr√≤nic i vol una resposta, per favor,
+mostre la simple cortesia de <em/assegurar-se/ de que l'adre√ßa de
+retorn √©s correcta i funciona.  Tamb√©, <bf/per favor/ llija la
+secci√≥ <ref id="qanda" name="qanda"> abans d'enviar-me un email.  Una
+altra cosa, nom√©s puc entendre noruec i angl√©s.
 
-<p>AÁÚ Ès un COM.  Ho he mantingut com a part del LDP des de 1995.
-Als 2000, vaig escriure un llibre sobre la mateixa tem‡tica.  Vull
-dir-ho, malgrat que este COM Ès en molts aspectes similar al
-llibre <em>no</em> Ès una versiÛ aiguada confeccionada per a vendre el
-llibre.  El lectors d'aquest COM m'han ajudat a entendre el quË Ès
-difÌcil d'entendre de DNS.  AÁÚ ha ajudat al llibre, perÚ el llibre
-tambÈ m'ha ajudat a reflexionar sobre el que aquest COM necessitava.
-El COM begot el llibre.  El llibre va engendrar la versiÛ 3 d'aquest
-COM.  El meu agraÔment a l'editor del llibre, qui em va donar
+<p>A√ß√≤ √©s un COM.  Ho he mantingut com a part del LDP des de 1995.
+Als 2000, vaig escriure un llibre sobre la mateixa tem√†tica.  Vull
+dir-ho, malgrat que este COM √©s en molts aspectes similar al
+llibre <em>no</em> √©s una versi√≥ aiguada confeccionada per a vendre el
+llibre.  El lectors d'aquest COM m'han ajudat a entendre el qu√® √©s
+dif√≠cil d'entendre de DNS.  A√ß√≤ ha ajudat al llibre, per√≤ el llibre
+tamb√© m'ha ajudat a reflexionar sobre el que aquest COM necessitava.
+El COM begot el llibre.  El llibre va engendrar la versi√≥ 3 d'aquest
+COM.  El meu agra√Øment a l'editor del llibre, qui em va donar
 l'oportunitat :-)
 
-<!-- AÁÚ Ès un comentari per als traductors:
+<!-- A√ß√≤ √©s un comentari per als traductors:
 
-Si vostË Ès un traductor, pot posar acÌ informaciÛ sobre com trobar a
-alg˙ que parle la llengua a la que l'ha traduÔt i que puga ajudar amb
-problemes de DNS, com vostË (d'una altra manera, rebrÈ correu en xinÈs
+Si vost√® √©s un traductor, pot posar ac√≠ informaci√≥ sobre com trobar a
+alg√∫ que parle la llengua a la que l'ha tradu√Øt i que puga ajudar amb
+problemes de DNS, com vost√® (d'una altra manera, rebr√© correu en xin√©s
 i espanyol demanant ajuda quant a DNS)
 
-Si vostË vol traduir este COM, per favor, notifique-m'ho per a que
-puga seguir la pista de a quines lleng¸es ha estat publicat, i tambÈ
+Si vost√® vol traduir este COM, per favor, notifique-m'ho per a que
+puga seguir la pista de a quines lleng√ºes ha estat publicat, i tamb√©
 per a que puga notificar-li-ho quan el COM siga actualitzat.
 
-Per favor, tampoc modifique "(at)" en la meua adreÁa de correu
-electrÚnic de dalt amb una "@", perÚ traduÔsca-ho si cal. D'aquesta
+Per favor, tampoc modifique "(at)" en la meua adre√ßa de correu
+electr√≤nic de dalt amb una "@", per√≤ tradu√Øsca-ho si cal. D'aquesta
 manera, espere reduir la quantitat de spam que rep, o almenys no
 augmentar-la.
 
 -->
 
-<sect1>DedicatÚria
+<sect1>Dedicat√≤ria
 
-<p>Este COM est‡ dedicat a Anne Line Norheim Langfeldt.  Malgrat que
-probablement no ho llija mai, ja que no Ès eixa classe de xica.
+<p>Este COM est√† dedicat a Anne Line Norheim Langfeldt.  Malgrat que
+probablement no ho llija mai, ja que no √©s eixa classe de xica.
 
 <sect1>Versions actualitzades
 
-<p>VostË hauria de poder trobar versions actualitzades d'este COM a
+<p>Vost√® hauria de poder trobar versions actualitzades d'este COM a
 <url url="http://langfeldt.net/DNS-HOWTO/"> i
-a <url url="http://www.linuxdoc.org/">.  Vaja all‡ si este document
-est‡ datat de fa mÈs de 9 mesos.
+a <url url="http://www.linuxdoc.org/">.  Vaja all√† si este document
+est√† datat de fa m√©s de 9 mesos.
 
-<sect>IntroducciÛ.<label id="intro">
+<sect>Introducci√≥.<label id="intro">
 
-<p><bf/QuË Ès aÁÚ i que no Ès./
+<p><bf/Qu√® √©s a√ß√≤ i que no √©s./
 
-<p>DNS Ès el Domain Name System (Sistema de Noms de Domini).  DNS
-converteix noms de m‡quina a les adreces IP que totes les m‡quines a
+<p>DNS √©s el Domain Name System (Sistema de Noms de Domini).  DNS
+converteix noms de m√†quina a les adreces IP que totes les m√†quines a
 la xarxa tenen.  Tradueix (o "mapeja" as the jargon would have it) del
-nom a l'adreÁa i de l'adreÁa al nom, i algunes altres coses.  Aquest
+nom a l'adre√ßa i de l'adre√ßa al nom, i algunes altres coses.  Aquest
 COM documenta com definir tals mapejos utilitzant un sistema Unix, amb
-unes poques coses especÌfiques de Linux.
+unes poques coses espec√≠fiques de Linux.
 
-<p>Un mapeig Ès simplement una associaciÛ entre dos coses, en este cas
-un nom de m‡quina, com <tt/ftp.linux.org/, i el n˙mero IP (o adreÁa)
-de la m‡quina <tt/199.249.150.4/.  DNS a mÈs contÈ mapejos en l'altre
-sentit, des del n˙mero IP al nom de m‡quina; aÁÚ s'anomena "mapeig
+<p>Un mapeig √©s simplement una associaci√≥ entre dos coses, en este cas
+un nom de m√†quina, com <tt/ftp.linux.org/, i el n√∫mero IP (o adre√ßa)
+de la m√†quina <tt/199.249.150.4/.  DNS a m√©s cont√© mapejos en l'altre
+sentit, des del n√∫mero IP al nom de m√†quina; a√ß√≤ s'anomena "mapeig
 invertit".
 
-<p>DNS Ès, per al no iniciat (vostË ;-), una de les ‡rees mÈs opaques
-de l'administraciÛ de xarxa.  Afortunadament, DNS no Ès en realitat
-difÌcil.  Aquest COM intentar‡ aclarir algunes coses.  Descriu com
-posar en marxa un servidor de noms DNS <em/simple/, comenÁant amb un
-servidor nomÈs de cau (caching server) i continuant fins a posar en
+<p>DNS √©s, per al no iniciat (vost√® ;-), una de les √†rees m√©s opaques
+de l'administraci√≥ de xarxa.  Afortunadament, DNS no √©s en realitat
+dif√≠cil.  Aquest COM intentar√† aclarir algunes coses.  Descriu com
+posar en marxa un servidor de noms DNS <em/simple/, comen√ßant amb un
+servidor nom√©s de cau (caching server) i continuant fins a posar en
 marxa un servidor DNS primari per a un domini.  Per a configuracions
-mÈs complexes vostË pot consultar la secciÛ <ref id="qanda"
-name="qanda"> d'aquest document.  Si no est‡ descrit ahi vostË
-necessitar‡ <em/llegir/ la DocumentaciÛ Real. TornarÈ sobre en quË
-consisteix esta Documentation Real a <ref id="bigger" name="l'˙ltim
-capÌtol">.
+m√©s complexes vost√® pot consultar la secci√≥ <ref id="qanda"
+name="qanda"> d'aquest document.  Si no est√† descrit ahi vost√®
+necessitar√† <em/llegir/ la Documentaci√≥ Real. Tornar√© sobre en qu√®
+consisteix esta Documentation Real a <ref id="bigger" name="l'√∫ltim
+cap√≠tol">.
 
-<p>Abans de que vostË comenÁe amb aÁÚ, hauria de configurar la seua
-m‡quina per a poder fer telnet dins i fora d'ella, i fer correctament
-tota mena de connexions a la xarxa, i vostË hauria de ser especialment
-capaÁ de fer <tt/telnet 127.0.0.1/ i alcanÁar la seua prÚpia m‡quina
-(prove-ho ara!).  VostË necessita a mÈs uns bons
+<p>Abans de que vost√® comen√ße amb a√ß√≤, hauria de configurar la seua
+m√†quina per a poder fer telnet dins i fora d'ella, i fer correctament
+tota mena de connexions a la xarxa, i vost√® hauria de ser especialment
+capa√ß de fer <tt/telnet 127.0.0.1/ i alcan√ßar la seua pr√≤pia m√†quina
+(prove-ho ara!).  Vost√® necessita a m√©s uns bons
 fitxers <tt>/etc/nsswitch.conf</tt>, <tt>/etc/resolv.conf</tt>
-i <tt>/etc/hosts</tt> com a punt de partida, ja que jo no explicarÈ el
-seu funcionament acÌ.  Si vostË encara no tÈ tot aÁÚ preparat i
+i <tt>/etc/hosts</tt> com a punt de partida, ja que jo no explicar√© el
+seu funcionament ac√≠.  Si vost√® encara no t√© tot a√ß√≤ preparat i
 funcionant, el Networking-HOWTO i/o el Networking-Overview-HOWTO
 expliquen com configurar-ho.  Llija'ls.
 
-<p>Quan dic `la seua m‡quina' em referisc a la m‡quina en la que vostË
-est‡ intentant posar en marxa DNS, no cap altra m‡quina que vostË tinga
-i que estiga involucrada en el seu esforÁ de treball en xarxa.
+<p>Quan dic `la seua m√†quina' em referisc a la m√†quina en la que vost√®
+est√† intentant posar en marxa DNS, no cap altra m√†quina que vost√® tinga
+i que estiga involucrada en el seu esfor√ß de treball en xarxa.
 
-<p>Assumisc que vostË no est‡ darrere de cap tipus de tallafocs que
-bloqueja peticions de nom.  Si ho est‡, vostË necessitar‡ una
-configuraciÛ especial --- mire la secciÛ a <ref id="qanda"
+<p>Assumisc que vost√® no est√† darrere de cap tipus de tallafocs que
+bloqueja peticions de nom.  Si ho est√†, vost√® necessitar√† una
+configuraci√≥ especial --- mire la secci√≥ a <ref id="qanda"
 name="qanda">.
 
 <p>El servei de noms a Unix es fa amb un programa anomenat
-<tt/named/.  Aquest Ès part del paquet ``BIND'' quË est‡ coordinat per
-<em/The Internet Software Consortium/.  <tt/Named/ est‡ inclÚs en la
-majoria de distribucions de Linux i normalment est‡ instal∑lat
+<tt/named/.  Aquest √©s part del paquet ``BIND'' qu√® est√† coordinat per
+<em/The Internet Software Consortium/.  <tt/Named/ est√† incl√≤s en la
+majoria de distribucions de Linux i normalment est√† instal¬∑lat
 com <tt>/usr/sbin/named</tt>, habitualment des d'un paquet anomenat
-<tt/BIND/, en maj˙scules o min˙scules depenent del caprici de qui el
+<tt/BIND/, en maj√∫scules o min√∫scules depenent del caprici de qui el
 va empaquetar.
 
-<p>Si vostË tÈ un named probablement pot utilitzar-lo; si no en tÈ pot
+<p>Si vost√® t√© un named probablement pot utilitzar-lo; si no en t√© pot
 aconseguir un binari des d'un lloc ftp de Linux, o obtindre les
 darreres i millors fonts de <url url="ftp://ftp.isc.org/isc/bind9/">.
-Aquest COM Ès sobre BIND versiÛ 9.  Les versions antigues del COM,
+Aquest COM √©s sobre BIND versi√≥ 9.  Les versions antigues del COM,
 sobre BIND 4 i 8, enncara romanen disponibles
-a <url url="http://langfeldt.net/DNS-HOWTO/"> en el cas que vostË
-utilitze 4 o 8 (per cert, vostË trobar‡ aquest COM allÌ tambÈ). Si la
-p‡gina de manual de named parla sobre (al final de tot, a la secciÛ
-FITXERS) <tt/named.conf/ vostË tÈ BIND 8; si parla sobre
-<tt/named.boot/ vostË tÈ BIND 4.  Si vostË tÈ aquesta darrera versiÛ i
+a <url url="http://langfeldt.net/DNS-HOWTO/"> en el cas que vost√®
+utilitze 4 o 8 (per cert, vost√® trobar√† aquest COM all√≠ tamb√©). Si la
+p√†gina de manual de named parla sobre (al final de tot, a la secci√≥
+FITXERS) <tt/named.conf/ vost√® t√© BIND 8; si parla sobre
+<tt/named.boot/ vost√® t√© BIND 4.  Si vost√® t√© aquesta darrera versi√≥ i
 es preocupa per la seguretat, realment hauria d'actualitzar a la
-˙ltima versiÛ de BIND 8.  Ara.
+√∫ltima versi√≥ de BIND 8.  Ara.
 
-<p>DNS Ès una base de dades net-wide.  Vaja amb compte amb quË hi
-posa. Si vostË hi posa brossa, vostË, i altres, hi trauran
-brossa. Mantinga el seu DNS ordenat i consistent i n'obtindr‡ un bon
-servei.  Aprenga a utilitzar-lo, administre'l, optimitze'l i vostË
-ser‡ un altre bon administrador evitant que la xarxa caiga de genolls
-per una mala gestiÛ.
+<p>DNS √©s una base de dades net-wide.  Vaja amb compte amb qu√® hi
+posa. Si vost√® hi posa brossa, vost√®, i altres, hi trauran
+brossa. Mantinga el seu DNS ordenat i consistent i n'obtindr√† un bon
+servei.  Aprenga a utilitzar-lo, administre'l, optimitze'l i vost√®
+ser√† un altre bon administrador evitant que la xarxa caiga de genolls
+per una mala gesti√≥.
 
-<p><bf/Consell:/ FaÁa copies de seguretat de tots els fitxers que jo
-li ensenyarÈ a modificar si vostË ja els tÈ, d'aquesta manera, si
-desprÈs no funciona res, pot tornar al seu antic estat en funcionament.
+<p><bf/Consell:/ Fa√ßa copies de seguretat de tots els fitxers que jo
+li ensenyar√© a modificar si vost√® ja els t√©, d'aquesta manera, si
+despr√©s no funciona res, pot tornar al seu antic estat en funcionament.
 
 <sect1>Altres implementacions de servidor de noms.
 
-<p>Aquesta secciÛ fou escrita per Joost van Baal.
+<p>Aquesta secci√≥ fou escrita per Joost van Baal.
 
 <p>Existeixen diversos paquests per a obtindre un servidor DNS a la
 seua caixa. Hi ha el paquet BIND
-(<url url="http://www.isc.org/products/BIND/">); la implementaciÛ de
-la que tracta aquest COM. …s el servidor de noms mÈs popular dels
-disponibles i Ès utilitzat en la immensa majoria de m‡quines servint
+(<url url="http://www.isc.org/products/BIND/">); la implementaci√≥ de
+la que tracta aquest COM. √âs el servidor de noms m√©s popular dels
+disponibles i √©s utilitzat en la immensa majoria de m√†quines servint
 noms a la Internet, disponible i en desenvolupament des d'els anys
-vuitanta.  Est‡ disponible baix una llicËncia BSD. Donat quË Ès el
-paquet mÈs popular, hi ha disponible molta documentaciÛ i coneixements
+vuitanta.  Est√† disponible baix una llic√®ncia BSD. Donat qu√® √©s el
+paquet m√©s popular, hi ha disponible molta documentaci√≥ i coneixements
 sobre BIND. Tanmateix, han hagut problemes de seguretat amb BIND.
 
-<p>Alehores est‡ djbdns (<url url="http://djbdns.org/">), un paquet
-relativament nou escrit per Daniel J. Bernstein, qui a mÈs va escriure
-qmail. …s una suite molt modular: v‡ris programes menuts s'encareguen
+<p>Alehores est√† djbdns (<url url="http://djbdns.org/">), un paquet
+relativament nou escrit per Daniel J. Bernstein, qui a m√©s va escriure
+qmail. √âs una suite molt modular: v√†ris programes menuts s'encareguen
 dels diferents treballs que un servidor de noms se suposa que ha de
-manejar. Est‡ dissenyat amb la seguretat en ment. Utilitza un format
-molt simple de fitxer-zona, i Ès generalment mÈs f‡cil de
-configurar. Tanmateix, com no Ès tan ben conegut, el seu guru local
-podria no ser capaÁ d'ajudar-lo amb aÁÚ. Desgraciadament, aquest
-programari no Ès Open Source.  L'anunci de l'autor est‡
+manejar. Est√† dissenyat amb la seguretat en ment. Utilitza un format
+molt simple de fitxer-zona, i √©s generalment m√©s f√†cil de
+configurar. Tanmateix, com no √©s tan ben conegut, el seu guru local
+podria no ser capa√ß d'ajudar-lo amb a√ß√≤. Desgraciadament, aquest
+programari no √©s Open Source.  L'anunci de l'autor est√†
 a <url url="http://cr.yp.to/djbdns/ad.html">.
 
-<p>Si el programari DJBs Ès realment una millora sobre les
-alterniatives mÈs antigues Ès un tema fora de debat. Una discussiÛ (o
-Ès una guerra encesa?) de BIND contra djbdns, reunida per la gent
+<p>Si el programari DJBs √©s realment una millora sobre les
+alterniatives m√©s antigues √©s un tema fora de debat. Una discussi√≥ (o
+√©s una guerra encesa?) de BIND contra djbdns, reunida per la gent
 d'ISC, es pot trobar
 a <url URL="HTTP://WWW.ISC.ORG/ML-ARCHIVES/BIND-USERS/2000/08/MSG01075.HTML">
 
-<SECT> Servidor de resoluciÛ, i servidor de noms cau.<label id="caching">
+<SECT> Servidor de resoluci√≥, i servidor de noms cau.<label id="caching">
 
-<p><bf/Una primera estoada a la configuraciÛ de DNS, molt ˙til per a
+<p><bf/Una primera estoada a la configuraci√≥ de DNS, molt √∫til per a
 usuaris de modem, cable-modem, ADSL i similars./
 
-<p>A Red Hat i les distribucions relacionades vostË pot alcanÁar el
-mateix resultat pr‡ctic que a la primera secciÛ d'aquest COM
-instal∑lant els paquets <tt/bind/, <tt/bind-utils/ i
-<tt/caching-nameserver/.  Si vostË utilitza Debian, simplement
-instal∑le <tt/bind/ (o <tt/bind9/, en el moment d'escriure aquest
-manual, BIND 9 no est‡ suportat per Debian Stable (potato)) i
-<tt/bind-doc/.  Pressupost nomÈs instal∑lant eixos paquets vostË no
-aprendr‡ tant com llegint este COM. AixÌ que instal∑le els paquets, i
-aleshores llija verificant els fitxer que han instal∑lat.
+<p>A Red Hat i les distribucions relacionades vost√® pot alcan√ßar el
+mateix resultat pr√†ctic que a la primera secci√≥ d'aquest COM
+instal¬∑lant els paquets <tt/bind/, <tt/bind-utils/ i
+<tt/caching-nameserver/.  Si vost√® utilitza Debian, simplement
+instal¬∑le <tt/bind/ (o <tt/bind9/, en el moment d'escriure aquest
+manual, BIND 9 no est√† suportat per Debian Stable (potato)) i
+<tt/bind-doc/.  Pressupost nom√©s instal¬∑lant eixos paquets vost√® no
+aprendr√† tant com llegint este COM. Aix√≠ que instal¬∑le els paquets, i
+aleshores llija verificant els fitxer que han instal¬∑lat.
 
-<p>Un servidor de noms cau dedicat trobar‡ la resposta a peticions de
-noms i recordar‡ la resposta la prÚxima vegada que vostË la
-necessite. AÁÚ acurtar‡ el temps d'espera significativament la prÚxima
-vegada, especialment si vostË est‡ a una connexiÛ lenta.
+<p>Un servidor de noms cau dedicat trobar√† la resposta a peticions de
+noms i recordar√† la resposta la pr√≤xima vegada que vost√® la
+necessite. A√ß√≤ acurtar√† el temps d'espera significativament la pr√≤xima
+vegada, especialment si vost√® est√† a una connexi√≥ lenta.
 
-<p>Primer vostË necessita una fitxer anomenat <tt>/etc/named.conf</tt> (Debian:
-<tt>/etc/bind/named.conf</tt>).  Aquest Ès llegit quan named s'incia.
+<p>Primer vost√® necessita una fitxer anomenat <tt>/etc/named.conf</tt> (Debian:
+<tt>/etc/bind/named.conf</tt>).  Aquest √©s llegit quan named s'incia.
 Per ara, hauria de contindre simplement:
 
 <code>
@@ -257,18 +257,18 @@ zone "0.0.127.in-addr.arpa" {
 };
 </code>
 
-<p>Els paquets de distribuciÛ de Linux poden utilitzar diferents noms
-de fitxer per a cada tipus de fitxer mencionat acÌ; de tota manera
+<p>Els paquets de distribuci√≥ de Linux poden utilitzar diferents noms
+de fitxer per a cada tipus de fitxer mencionat ac√≠; de tota manera
 contindran coses molt similars.
 
-<p>La lÌnia `<tt/directory/' li diu a named on buscar el fitxers.
-Tots els noms de fitxer anomenants posteriorment ser‡n relatius a
-aquest. AixÌ <tt>pz</tt> Ès un directori baix <tt>/var/named</tt>, Ès
-a dir, <tt>/var/named/pz</tt>.  <tt>/var/named</tt> Ès el directori
+<p>La l√≠nia `<tt/directory/' li diu a named on buscar el fitxers.
+Tots els noms de fitxer anomenants posteriorment ser√†n relatius a
+aquest. Aix√≠ <tt>pz</tt> √©s un directori baix <tt>/var/named</tt>, √©s
+a dir, <tt>/var/named/pz</tt>.  <tt>/var/named</tt> √©s el directori
 correcte segons el <em/Linux File system Standard/.
 
-<p>El fitxer anomenat <tt>/var/named/root.hints</tt> Ès un d'ells.
-<tt>/var/named/root.hints</tt> hauria de contindre aÁÚ:
+<p>El fitxer anomenat <tt>/var/named/root.hints</tt> √©s un d'ells.
+<tt>/var/named/root.hints</tt> hauria de contindre a√ß√≤:
 <code>
 ;
 ; There might be opening comments here if you already have this file.
@@ -305,16 +305,16 @@ L.ROOT-SERVERS.NET.     6D  IN      A       198.32.64.12
 M.ROOT-SERVERS.NET.     6D  IN      A       202.12.27.33
 </code>
 
-<p>El fitxer descriu els servidors de noms arrels al MÛn.  Els
-servidors canvien al llarg del temps i s'han de mantindre ara i adÈs.
-Mire la <ref id="maint" name="secciÛ de manteniment"> per a informaciÛ
+<p>El fitxer descriu els servidors de noms arrels al M√≥n.  Els
+servidors canvien al llarg del temps i s'han de mantindre ara i ad√©s.
+Mire la <ref id="maint" name="secci√≥ de manteniment"> per a informaci√≥
 sobre com mantindre la llista actualitzada.
 
-<p>La seg¸ent secciÛ a <tt/named.conf/ Ès l'˙ltima
-<tt/zone/.  ExplicarÈ el seu ˙s en un capÌtol posterior; per ara nomÈs
-copie el seg¸ent llistat a u fitxer anomenat <tt/127.0.0/ al
+<p>La seg√ºent secci√≥ a <tt/named.conf/ √©s l'√∫ltima
+<tt/zone/.  Explicar√© el seu √∫s en un cap√≠tol posterior; per ara nom√©s
+copie el seg√ºent llistat a u fitxer anomenat <tt/127.0.0/ al
 sub-directori <tt/pz/: (<em/De nou, per favor elimine els espais si
-vostË copia i apega aÁÚ/)
+vost√® copia i apega a√ß√≤/)
 
 <code>
 $TTL 3D
@@ -330,10 +330,10 @@ $TTL 3D
 
 <p>Les seccions anomenades <tt/key/ i <tt/controls/ juntes
 especifiquen que el seu named es pot ser controlat per un programa
-anomenat <tt/rndc/ si es connecta des de la m‡quina local, i
-s'identifica amb la clau secreta codificada.  Aquesta clau Ès com una
-contrasenya.  Per a que rndc funcione necessitar‡
-que <tt>/etc/rndc.conf</tt> es corresponga amb aÁÚ:
+anomenat <tt/rndc/ si es connecta des de la m√†quina local, i
+s'identifica amb la clau secreta codificada.  Aquesta clau √©s com una
+contrasenya.  Per a que rndc funcione necessitar√†
+que <tt>/etc/rndc.conf</tt> es corresponga amb a√ß√≤:
 
 <code>
 key rndc_key {
@@ -347,73 +347,73 @@ options {
 };
 </code>
 
-<p>Com pot veure, el secret Ès idËntic.  Si vostË vol utilitzar
-<tt/rndc/ des d'altres m‡quines, les seues respectives hores han de
+<p>Com pot veure, el secret √©s id√®ntic.  Si vost√® vol utilitzar
+<tt/rndc/ des d'altres m√†quines, les seues respectives hores han de
 diferenciar-se menys de cinc minuts entre elles.  Jo recomane
-utilitzar el programari ntp (<tt/xntpd/ i <tt/ntpdate/) per a fer aÁÚ.
+utilitzar el programari ntp (<tt/xntpd/ i <tt/ntpdate/) per a fer a√ß√≤.
 
-<p>A continuaciÛ, vostË necessita un <tt>/etc/resolv.conf</tt> que
-es parega a aÁÚ: (<em/De nou: Elimine espais!/)
+<p>A continuaci√≥, vost√® necessita un <tt>/etc/resolv.conf</tt> que
+es parega a a√ß√≤: (<em/De nou: Elimine espais!/)
 
 <code>
 search subdomini.el-seu-domini.edu el-seu-domini.edu
 nameserver 127.0.0.1
 </code>
 
-<p>La lÌnia `<tt/search/' especifica quins dominis s'haurien de
-registrar per a qualsevol nom de m‡quina al que vostË es vulga
-connectar.  La lÌnia `<tt/nameserver/' especifica l'adreÁa del seu
-servidor de noms, en este cas la seua prÚpia m‡quina ja que Ès ahÌ on
-s'executa el seu named (127.0.0.1 Ès correcte, no importa si la seua
-m‡quina tÈ una altra adreÁa tambÈ).  Si vostË vol llistar v‡ris
-servidors de noms insereix una lÌnia `<tt/nameserver/' per a cadasc˙n:
-Named mai llig aquesta lÌnia, el que utilitze named ho fa. Nota 2: En
-alguns fitxers resolv.conf es troba una lÌnia que diu "domain".  AixÚ
-Ès correcte, perÚ no utilitze "search" i "domain" alhora, nomÈs una
-d'elles funcionar‡).
+<p>La l√≠nia `<tt/search/' especifica quins dominis s'haurien de
+registrar per a qualsevol nom de m√†quina al que vost√® es vulga
+connectar.  La l√≠nia `<tt/nameserver/' especifica l'adre√ßa del seu
+servidor de noms, en este cas la seua pr√≤pia m√†quina ja que √©s ah√≠ on
+s'executa el seu named (127.0.0.1 √©s correcte, no importa si la seua
+m√†quina t√© una altra adre√ßa tamb√©).  Si vost√® vol llistar v√†ris
+servidors de noms insereix una l√≠nia `<tt/nameserver/' per a cadasc√∫n:
+Named mai llig aquesta l√≠nia, el que utilitze named ho fa. Nota 2: En
+alguns fitxers resolv.conf es troba una l√≠nia que diu "domain".  Aix√≤
+√©s correcte, per√≤ no utilitze "search" i "domain" alhora, nom√©s una
+d'elles funcionar√†).
 
-<p>Per a il∑lustrar el que fa aquesta lÌnia: Si un client intenta
+<p>Per a il¬∑lustrar el que fa aquesta l√≠nia: Si un client intenta
 buscar <tt>foo</tt>, aleshores es prova
 primer <tt>foo.subdomini.el-seu-domini.edu</tt>,
-desprÈs <tt>foo.el-seu-domini.edu</tt>, i finalent <tt>foo</tt>.
-Potser vostË no vol posar massa dominis en la lÌnia de cerca, ja que
+despr√©s <tt>foo.el-seu-domini.edu</tt>, i finalent <tt>foo</tt>.
+Potser vost√® no vol posar massa dominis en la l√≠nia de cerca, ja que
 costa temps buscar-los tots.
 
-<p>L'exemple assumeix que vostË pertany al domini
-<tt>subdomini.el-seu-domini.edu</tt>; la seua m‡quina, doncs,
+<p>L'exemple assumeix que vost√® pertany al domini
+<tt>subdomini.el-seu-domini.edu</tt>; la seua m√†quina, doncs,
 probablement es
-diu <tt>la-seua-maquina.subdomini.el-seu-domini.edu</tt>.  La lÌnia de
+diu <tt>la-seua-maquina.subdomini.el-seu-domini.edu</tt>.  La l√≠nia de
 cerca no hauria de contindre el seu TLD (Top Level Domain,
-`<tt/edu/' en este cas).  Si necessita-se amb freq¸Ëncia connectar-se
-a m‡quines en un altre domini, vostË pot afegir el domini a la lÌnia
-de cerca aixÌ: (<em/Recorde's d'eliminar els espais al comenÁ de
-lÌnia, si Ès que n'hi ha)
+`<tt/edu/' en este cas).  Si necessita-se amb freq√º√®ncia connectar-se
+a m√†quines en un altre domini, vost√® pot afegir el domini a la l√≠nia
+de cerca aix√≠: (<em/Recorde's d'eliminar els espais al comen√ß de
+l√≠nia, si √©s que n'hi ha)
 
 <code>
 search subdomini.el-seu-domini.edu el-seu-domini.edu altre-domini.com
 </code>
 
-i aixÌ successivament. Obviament caldr‡ que pose noms de dominis
+i aix√≠ successivament. Obviament caldr√† que pose noms de dominis
 reals.  Per favor tinga en compte la manca de punts al final dels noms
-de domini. AÁÚ Ès important; per favor tinga-ho en compte.
+de domini. A√ß√≤ √©s important; per favor tinga-ho en compte.
 
 <sect1>Iniciant named<label id="starting">
 
-<p>DesprÈs de tot aÁÚ ha arribat l'hora d'iniciar named.  Si est‡
-utilitzant una connexiÛ de mÚdem, connecte primer.  Ara execute named,
-ja siga executant el guiÛ d'inici del sistema: <tt>/etc/init.d/named
+<p>Despr√©s de tot a√ß√≤ ha arribat l'hora d'iniciar named.  Si est√†
+utilitzant una connexi√≥ de m√≤dem, connecte primer.  Ara execute named,
+ja siga executant el gui√≥ d'inici del sistema: <tt>/etc/init.d/named
 start</tt> o directemant named:
 <tt>/usr/sbin/named</tt>.  Si ha provat versions anteriors de BIND,
-probablement vostË est‡ acostumat a <tt/ndc/.  A BIND 9 ha sigut
-substituÔt per <tt/rndc/, que pot controlar el seu named remotament,
-perÚ ja no pot iniciar named. Si veu el. Si vostË fa una ullada al seu
+probablement vost√® est√† acostumat a <tt/ndc/.  A BIND 9 ha sigut
+substitu√Øt per <tt/rndc/, que pot controlar el seu named remotament,
+per√≤ ja no pot iniciar named. Si veu el. Si vost√® fa una ullada al seu
 fitxer de missatges syslog (habitualment anomenat
 <tt>/var/log/messages</tt>, Debian l'anomena <tt>/var/log/daemon</tt>,
-un altre lloc on mirar sÛn els altres fitxers de <tt>/var/log</tt>)
+un altre lloc on mirar s√≥n els altres fitxers de <tt>/var/log</tt>)
 mentres que a l'iniciar named (do <tt>tail -f /var/log/messages</tt>)
 hauria de veure alguna cosa pareguda a:
 
-<p>(Les lÌnies acabades en \ continuen a la lÌnia seg¸ent)
+<p>(Les l√≠nies acabades en \ continuen a la l√≠nia seg√ºent)
 
 <tscreen><verb>
 Dec 23 02:21:12 lookfar named[11031]: starting BIND 9.1.3
@@ -433,11 +433,11 @@ Dec 23 02:21:13 lookfar named[11034]: running
 </verb></tscreen>
 
 <p>Si apareixen missatges d'error alehores ens hem equivocat.  Named
-indicar‡ el nom del fitxer que est‡ llegint.  Torna arrere i revisa el
+indicar√† el nom del fitxer que est√† llegint.  Torna arrere i revisa el
 fitxer.  Inicie named altra vegada quan estiga arreglat.
 
-<p>Ara vostË pot provar la seua configuraciÛ.  Tradicionalment
-s'utilitza un programa anomenat <tt/nslookup/ per a aÁÚ.  Hui en dia
+<p>Ara vost√® pot provar la seua configuraci√≥.  Tradicionalment
+s'utilitza un programa anomenat <tt/nslookup/ per a a√ß√≤.  Hui en dia
 es recomana <tt/dig/:
 
 <tscreen><verb>
@@ -461,15 +461,15 @@ $ dig -x 127.0.0.1
 ;; MSG SIZE  rcvd: 91
 </verb></tscreen>
 
-<p>Si obtË aixÚ, es que est‡ funcionant.  Esperem.  Si apareix una
+<p>Si obt√® aix√≤, es que est√† funcionant.  Esperem.  Si apareix una
 cosa molt diferent, torne arrere i revise-ho tot.  Cada vegada que
-vostË canvia un fitxer cal que execute <tt/rndc reload/.
+vost√® canvia un fitxer cal que execute <tt/rndc reload/.
 
-<p>Ara pot intrudir una query.  Prove a buscar alguna m‡quina propera
-a vostË.  <tt/pat.uio.no/ Ès propera a mi, a la universitat d'Oslo:
+<p>Ara pot intrudir una query.  Prove a buscar alguna m√†quina propera
+a vost√®.  <tt/pat.uio.no/ √©s propera a mi, a la universitat d'Oslo:
 
 <tscreen><verb>
-$†dig pat.uio.no
+$¬†dig pat.uio.no
 ; <<>> DiG 9.1.3 <<>> pat.uio.no
 ;; global options:  printcmd
 ;; Got answer:
@@ -494,21 +494,21 @@ uio.no.                 86400   IN      NS      ifi.uio.no.
 </verb></tscreen>
 
 <p>Aquesta vegada <tt/dig/ li demana al seu named que busque la
-m‡quina <tt/pat.uio.no/.  Aquest, aleshores, ha contactat un del
+m√†quina <tt/pat.uio.no/.  Aquest, aleshores, ha contactat un del
 servidor de noms nomenades al seu arxiu <tt/root.hints/, i la pregunta
 s'ha propagat des d'ahi.  Pot trigar una miqueta abans d'obtindre el
 resultat, ja que potser necessita buscar tots els dominis que tingues
 configurats al teu named, a <tt>/etc/resolv.conf</tt>.
 
-<!-- Mmmm, esta versiÛ de dig pareix que no mostra la bandera aa.
+<!-- Mmmm, esta versi√≥ de dig pareix que no mostra la bandera aa.
 Estrany.  I nslookup sempre diu "non-authoritative".  Un canvi de
-comportament acÌ, cal comprovar si aixÚ Ès un canvi permanent o no.
+comportament ac√≠, cal comprovar si aix√≤ √©s un canvi permanent o no.
 
-Per favor, tinga en compte la "aa" en la lÌnia "flags:".  Significa
-que la resposta Ès, quË ve directament des d'un servidor confiable.
-ExplicarÈ "authoritative" mÈs tard. -->
+Per favor, tinga en compte la "aa" en la l√≠nia "flags:".  Significa
+que la resposta √©s, qu√® ve directament des d'un servidor confiable.
+Explicar√© "authoritative" m√©s tard. -->
 
-<p>Si vostË torna a fer la mateixa pregunta obtindr‡ aÁÚ:
+<p>Si vost√® torna a fer la mateixa pregunta obtindr√† a√ß√≤:
 
 <tscreen><verb>
 $ dig pat.uio.no
@@ -541,69 +541,70 @@ nn.uninett.NO.          1d23h59m58s IN A  158.38.0.181
 </verb></tscreen>
 
 <!-- 
-<p>Fixe's en la manca de la bandera "aa" en aquesta resposta. AixÚ
+<p>Fixe's en la manca de la bandera "aa" en aquesta resposta. Aix√≤
 significa que named no ha eixit de la xarxa per a preguntar aquesta
-vegada, ja que la informaciÛ est‡ en la memÚria cau ara.  PerÚ la
-informaciÛ al cau <em/pot/ estar caducada (stale).  AixÌ que se
+vegada, ja que la informaci√≥ est√† en la mem√≤ria cau ara.  Per√≤ la
+informaci√≥ al cau <em/pot/ estar caducada (stale).  Aix√≠ que se
 l'informa (molt subtilment) d'aquest possibilitat ometent la "aa".
-PerÚ, ara ja sap que el seu cau est‡ funcionant. -->
+Per√≤, ara ja sap que el seu cau est√† funcionant. -->
 
-<p>Com vostË pot veure, aquesta vegada ha sigut molt mÈs r‡pid, 4ms
-contra mÈs de mig segon abans.  La resposta va ser cached.  Amb
-respostes cached hi ha la possibilitat de que estiga caducada, perÚ
+<p>Com vost√® pot veure, aquesta vegada ha sigut molt m√©s r√†pid, 4ms
+contra m√©s de mig segon abans.  La resposta va ser cached.  Amb
+respostes cached hi ha la possibilitat de que estiga caducada, per√≤
 els servidors origen poden controlar el temps que les respostes cached
-s'haurien de considerar v‡lides, aixÌque hi ha una altra probabilitat
-de que la resposta que obtinga <em/siga/ v‡lida.
+s'haurien de considerar v√†lides, aix√≠que hi ha una altra probabilitat
+de que la resposta que obtinga <em/siga/ v√†lida.
 
 <sect1>Resolutors
 
-<p>Tots els SO que implementen l'API est‡ndard de C incorporen les
+<p>Tots els SO que implementen l'API est√†ndard de C incorporen les
 crides gethostbyname and gethostbyaddr.  Estes poden obtindre
-informaciÛ de algunes fonts diferents.  De quines fonts ho aconsegueix
+informaci√≥ de algunes fonts diferents.  De quines fonts ho aconsegueix
 es configura a <tt>/etc/nsswitch.conf</tt> a Linux (i en alguns altres
-Unixos).  Aquest Ès un llarg fitxer que especifica de quin fitxer o
+Unixos).  Aquest √©s un llarg fitxer que especifica de quin fitxer o
 base de dades obtindre diferents classes de tipus de.  Normalment
-contÈ comentaris d'ajuda dalt de tot, que vostË hauria de considerar
-llegir.  DesprÈs d'aixÚ, trobe la lÌnia que comenÁa amb `<tt/hosts:/';
+cont√© comentaris d'ajuda dalt de tot, que vost√® hauria de considerar
+llegir.  Despr√©s d'aix√≤, trobe la l√≠nia que comen√ßa amb `<tt/hosts:/';
 s'hauria de llegir:
 
 <code>
 hosts:      files dns
 </code>
 
-(<em/Se'n recorda dels espais al principi de la lÌnia, no Ès cert? No
-ho tornarÈ a dir./)
+(<em/Se'n recorda dels espais al principi de la l√≠nia, no √©s cert? No
+ho tornar√© a dir./)
 
-<p>Si no hi ha cap lÌnia comenÁant per `<tt/hosts:/' aleshores afija
+<p>Si no hi ha cap l√≠nia comen√ßant per `<tt/hosts:/' aleshores afija
 la de dalt.  Diu que els programes haurien de mirar primer en el
-fitxer <tt>/etc/hosts</tt> i aleshores comprovar DNS according to
+fitxer <tt>/etc/hosts</tt> i aleshores comprovar DNS d'acord amb
 <tt/resolv.conf/.
 
 
-<sect1>Congratulations
+<sect1>Felicitats
 
-<p>Now you know how to set up a caching named.  Take a beer, milk, or
-whatever you prefer to celebrate it.
+<p>Ara ja sap com posar en marxa un named de cau.  Prenga un cervesa,
+llet o all√≤ que preferisca per a celebrar-ho.
 
 
-<sect>Forwarding
+<sect>Reenviament
 
-<p>In large, well organized, academic or ISP (Internet Service
-Provider) networks you will sometimes find that the network people
-have set up a forwarder hierarchy of DNS servers which helps lighten
-the internal network load and the load on the outside servers as well.
-It's not easy to know if you're inside such a network or not.  But by
-using the DNS server of your network provider as a ``forwarder'' you
-can make the responses to queries faster and less of a load on your
-network.  This works by your nameserver forwarding queries to your ISP
-nameserver.  Each time this happens you will dip into the big cache of
-your ISPs nameserver, thus speeding your queries up, your nameserver
-does not have to do all the work itself.  If you use a modem this can
-be quite a win.  For the sake of this example we assume that your
-network provider has two name servers they want you to use, with IP
-numbers <tt/10.0.0.1/ and <tt/10.1.0.1/.  Then, in your
-<tt/named.conf/ file, inside the opening section called
-``<tt/options/'', insert these lines:
+<p>En xarxes grans, ben organitzades, acad√®miques o ISP (Internet
+Service Provider) vost√® es trobar√† amb que la gent de la xarxa ha
+construit una jerarquia de reenviament de servidors DNS que ajuda a
+alleugerar la c√†rrega interna de la xarxa, aix√≠ com la c√†rrega dels
+servidors externs.  No √©s senzill saber si vost√® est√† dins d'una
+d'aquestes xarxes o no.  Per√≤ utilitzant el servidor DNS del seu
+propve√Ødor de xarxa com a ``reenviador'' vost√® pot accelerar les
+respostes a les peticions i you can make the responses to queries
+faster and less of a load on your network.  This works by your
+nameserver forwarding queries to your ISP nameserver.  Each time this
+happens you will dip into the big cache of your ISPs nameserver, thus
+speeding your queries up, your nameserver does not have to do all the
+work itself.  If you use a modem this can be quite a win.  For the
+sake of this example we assume that your network provider has two name
+servers they want you to use, with IP numbers <tt/10.0.0.1/ and
+<tt/10.1.0.1/.  Then, in your <tt/named.conf/ file, inside the opening
+section called ``<tt/options/'', insert these lines:
 
 <code>
            forward first;
@@ -1118,7 +1119,7 @@ linux.bogus.            259200  IN      SOA     ns.linux.bogus. hostmaster.linux
 Let's check what it says for <tt/www/ alone:
 
 <tscreen><verb>
-$†dig www.linux.bogus
+$¬†dig www.linux.bogus
 
 ; <<>> DiG 9.1.3 <<>> www.linux.bogus
 ;; global options:  printcmd

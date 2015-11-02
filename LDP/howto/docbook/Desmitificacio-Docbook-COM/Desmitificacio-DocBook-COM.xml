@@ -8,7 +8,7 @@
 
 <article>
 <articleinfo>
-  <title>DocBook Demystification HOWTO</title>
+  <title>COM de Desmitificació de DocBook</title>
 
   <author>
      <firstname>Eric</firstname>
@@ -26,8 +26,8 @@
 	<date>2010-09-14</date>
 	<authorinitials>esr</authorinitials>
 	<revremark>
-	   Major update. dblatex actually works for PDF production.
-	   Describe asciidoc.
+	   Actualització principal. dblatex en realitat funciona per a
+	   la producció de PDF.  Descriu asciidoc.
 	</revremark>
      </revision>
      <revision>
@@ -35,7 +35,8 @@
 	<date>2006-10-13</date>
 	<authorinitials>esr</authorinitials>
 	<revremark>
-	   Major update.  Getox seems to be dead, FOP a bit further along.
+	   Actualització principal.  Getox sembla estar mort, FOP una
+	   mica més extens.
 	</revremark>
      </revision>
      <revision>
@@ -43,7 +44,7 @@
 	<date>2004-10-28</date>
 	<authorinitials>esr</authorinitials>
 	<revremark>
-	   Minor update and license change.
+	   Actualització menor i canvi de llicència.
 	</revremark>
      </revision>
      <revision>
@@ -51,7 +52,7 @@
 	<date>2004-02-27</date>
 	<authorinitials>esr</authorinitials>
 	<revremark>
-	   Add pointers to two editors.
+	   Afegits apuntadors a dos edit.
 	</revremark>
      </revision>
      <revision>
@@ -59,8 +60,8 @@
 	<date>2003-02-17</date>
 	<authorinitials>esr</authorinitials>
 	 <revremark>
-	   Reorder to defer references to SGML until after it has been 
-	   introduced.
+	   Reordenació per a ajornar referències a SGML fins després
+	   d'haver-lo introduit.
 	</revremark>
      </revision>
      <revision>
@@ -68,8 +69,8 @@
 	<date>2002-10-01</date>
 	<authorinitials>esr</authorinitials>
 	<revremark>
-	   Correct inadvertent misrepresentation of FSF's position.
-	   Added pointer to the DocBook FAQ.
+	   Correcció d'una representació enganyosa de la posició de FSF.
+	   Afegit un apuntador al DocBook FAQ.
 	</revremark>
      </revision>
      <revision>
@@ -77,129 +78,135 @@
 	<date>2002-09-20</date>
 	<authorinitials>esr</authorinitials>
 	 <revremark>
-	   Initial version.
+	   Versió Inicial.
 	</revremark>
      </revision>
   </revhistory>
 
   <legalnotice>
     <title>Copyright</title>
-    <para>Permission is granted to copy, distribute and/or modify
-    this document under the terms of the 
+    <para>Està permesa la copia, distribució i/o modificació d'aquest
+    document baix els termes de la
     <ulink url='http://creativecommons.org/licenses/by/2.0/'>Creative Commons Attribution License,</ulink>
-    version 2.0.</para>
+    versió 2.0.</para>
   </legalnotice>
 
-  <abstract><para>
-  This HOWTO attempts to clear the fog and mystery surrounding the
-  DocBook markup system and the tools that go with it.  It is aimed at
-  authors of technical documentation for open-source projects hosted
-  on Linux, but should be useful for people composing other kinds on
-  other Unixes as well.  
+  <abstract><para> Este COM intenta aclarir la boira i misteri que
+  envolta el sistema d'etiquetatge DocBook i els ferraments que van
+  amb ell.  Està adreçat a autors de documentació tècnica per a
+  projectes de font oberta acollits a Linux, però hauria de resultar
+  útil també a persones que en componen documents d'altres tipus a
+  altres Unixos.
   </para></abstract>
 
 </articleinfo>
 
-<sect1 id="intro"><title>Introduction</title>
+<sect1 id="intro"><title>Introducció</title>
 
-<para>A great many major open-source projects are converging on
-DocBook as a standard format for their documentation &mdash; projects
-including the Linux kernel, GNOME, KDE, Samba, and the Linux
-Documentation Project.  The advocates of XML-based "structural markup"
-(as opposed to the older style of "presentation markup" exemplified by
-troff, Tex, and Texinfo) seem to have won the theoretical
-battle.  You can generate presentation markup from structural markup,
-but going in the other direction is very difficult.</para>
+<para>La immensa majoria de projectes de font oberta estàn convergint
+a DocBook com a format estàndar per a la seua documentació &mdash;
+projectes incloent el nucli Linux, GNOME, KDE, Samba, i el Linux
+Documentation Project.  Els defensors de l'"etiquetatge estructurat"
+bastat en XML (com a oposat al més vell estil d'"etiquetatge de
+presentació" exemplificat per troff, Tex, i Texinfo) sembla ser que
+han guanyat la batalla teòrica.  Vostè pot generar etiquetatge de
+presentació a partir de etiquetatge estructurat, però anar en l'altra
+direcció és molt difícil.</para>
 
-<para>Nevertheless, a lot of confusion surrounds DocBook and the
-programs that support it.  Its devotees speak an argot that is dense
-and forbidding even by computer-science standards, slinging around
-acronyms that have no obvious relationship to the things you need to
-do to write markup and make HTML or Postscript from it.  XML standards
-and technical papers are notoriously obscure.</para>
+<para>No obstant això, molta confusió envolta a DocBook i els
+programes que el suporten.  Els seus devots parlen un argot què és
+dens i prohibitiu fins i tot per als estàndards de la informàtica, que
+es passeja entre acrònims que no tenen una relació òbvia amb les coses
+que vostè necessita fer per a escriure etiquetatge i fer-ne HTML o
+Postscript.  Els estàndards XML i els papers tècnics són notablement
+foscos.</para>
 
-<para>This HOWTO will attempt to clear up the major mysteries
-surrounding DocBook and its application to open-source documentation
-&mdash; both the technical and political ones.  Our objective is to equip
-you to understand not just what you need to do to make documents, but
-why the process is as complex as it is &mdash; and how it can be
-expected to change as newer DocBook-related tools become
-available.</para>
-
-</sect1>
-<sect1><title>Why care about DocBook at all?</title>
-
-<para>There are two possibilities that make DocBook really
-interesting.  One is <emphasis>multi-mode rendering</emphasis> and the
-other is <emphasis>searchable documentation
-databases</emphasis>.</para>
-
-<para>Multi-mode rendering is the easier, nearer-term possibility; it's
-the ability to write a document in a single master format that can be
-rendered in many different display modes (in particular, as both HTML
-for on-line viewing and as Postscript for high-quality printed
-output).  This capability is pretty well implemented now.</para>
-
-<para><emphasis>Searchable documentation databases</emphasis> is
-shorthand for the possibility that DocBook might help get us to a
-world in which all the documentation on your open-source operating
-system is one rich, searchable, cross-indexed and hyperlinked
-database (rather than being scattered across several different formats
-in multiple locations as it is now).</para>
-
-<para>Ideally, whenever you install a software package on your machine
-it would register its DocBook documentation into your system's
-catalog.  HTML, properly indexed and cross-linked to the HTML in the
-rest of your catalog, would be generated.  The new package's
-documentation would then be available through your browser.  All your
-documentation would be searchable through an interface resembling a
-good Web search engine.</para>
-
-<para>HTML itself is not quite rich enough a format to get us to that
-world.  To name just one lack, you can't explicitly declare index
-entries in HTML.  DocBook <emphasis>does</emphasis> have the semantic
-richness to support structured documentation databases.  Fundamentally
-that's why so many projects are adopting it.</para>
-
-<para>DocBook has the vices that go with its virtues.  Some people
-find it unpleasantly heavyweight, and too verbose to be really
-comfortable as a composition format.  That's OK; as long as the markup
-tools they like (things like asciidoc or Perl POD or GNU Texinfo) can
-generate DocBook out their back ends, we can all still get what we
-want.  It doesn't matter whether or not everybody writes in DocBook
-&mdash; as long as it becomes the common document interchange format
-that everyone uses, we'll still get unified searchable documentation
-databases.</para>
+<para>Este HOWTO intentarà aclarir els misteris principals que
+envolten DocBook i la seua aplicació per a documentació de font oberta
+&mdash; tant els tècnics com els polítics.  El nostre objectiu és
+equipar-lo per a que entenga no només allò que necessita per a fer
+documents, sinò per què el procés és tan complexe &mdash; i com
+s'espera que canvie a mesura que nous ferraments relacionats amb
+DocBook estiguen disponibles.</para>
 
 </sect1>
-<sect1><title>Structural markup: a primer</title>
+<sect1><title>Per què preocupar-se de DocBook?</title>
 
-<para>Older formatting languages like Tex, Texinfo, and Troff
-supported <firstterm>presentation
-markup</firstterm><indexterm><primary>presentation
-markup</primary></indexterm>.  In these systems, the instructions you
-gave were about the appearance and physical layout of the text (font
-changes, indentation changes, that sort of thing).</para>
+<para>Hi ha dos possibilitats que fan de Docbook algo realment
+interessant.  Una és la <emphasis>renderització multimodal</emphasis>
+i l'altra són les <emphasis>bases de dades consultables de
+documencaió</emphasis>.</para>
 
-<para>Presentation markup was adequate as long as your objective was
-to print to a single medium or type of display device.  You run into
-its limits, however, when you want to mark up a document so that (a)
-it can be formatted for very different display media (such as printing
-vs. Web display), or (b) you want to support searching and indexing the
-document by its logical structure (as you are likely to want to do,
-for example, if you are incorporating it into a hypertext system).</para>
+<para>La renderització multimodal és la possibilitat més senzilla i el
+terme més proper; és l'habilitat d'escriure un document en un únic
+format mestre que pot rendeitzar-se en moltíssims modes de
+visualització diferents (particulament ambdós, HTML per a la
+visualització en línia i Postscript per a eixida impresa d'alta
+qualitat).  Aquesta capacitat està molt ben implementada ara.</para>
 
-<para>To support these capabilities properly, you need a system of
-<firstterm>structural markup</firstterm><indexterm><primary>structural
-markup</primary></indexterm>.  In structural markup, you describe not
-the physical appearance of the document but the logical properties of
-its parts.</para>
+<para><emphasis>Bases de dades consultables de documentació</emphasis>
+és l'abreviatura per a la possibilitat de que DocBook ens podria
+ajudar a portar-nos a un món en què tota la documentació al seu
+sistema operatiu de font oberta és una rica, consultable,
+hiperenllaçada i cross-indexed (malgrat estar dispersa en diferents
+formats a múltiples llocs com ho està ara).</para>
 
-<para>As an example: In a presentation-markup language, if you want to
-emphasize a word, you might instruct the formatter to set it in
-boldface.  In
+<para>Idealment, cada vegada que vostè instal·la un paquet de
+programari a la seua màquina, engeristraria la seua documentació
+DocBook dins del catèleg del seu sistema.  HTML, adequadament indexat
+i cross-linked a l'HTML en la resta del seu catàleg, seria generada.
+La documentació del nou paquet estaria aleshores disponible a través
+del seu navegador.  Tota la seua documentació seria consultable a
+través d'una interfície semblant a un bon motor Web de cerca.</para>
+
+<para>HTML per si sol no és un format suficientment ric per a
+portar-nos a eixe món.  Per nomenar només una mancança, vostè no por
+declarar explícitament entrades d'índex en
+HTML. DocBook <emphasis>sí</emphasis> té la riquesa semàntica per a
+suportar bases de dades de documentació estructurada.  Fundamentalment
+aquesta és la raó per la que molts projectes l'estàn adoptant.</para>
+
+<para>DocBook té el vicis que van amb les seves virtuds.  Algunes
+persones el troben desagradable, pesant, i massa detallat com per a
+ser còmode com a format de composició.  Això està bé; mentre les eines
+d'etiquetatge que els agraden (coses com asciidoc, Perl POD o GNU
+Texinfo) puguen generar DocBook a partir dels seus back-ends, encara
+podem obtindre allò que volem.  No importa si tothom escriu en DocBook
+o no &mdash; mentre es converteix en el format comú d'intercanvi de
+documents que tothom utilitza, seguirem obtenint bases de dades
+consultables de documentació.</para>
+
+</sect1>
+<sect1><title>Etiquetatge Estructural: una introducció</title>
+
+<para>Els llenguatges més antics com Tex, Texinfo, i Troff
+suportaven <firstterm>etiquetatge de
+presentació</firstterm><indexterm><primary>etiquetatge de presentació
+</primary></indexterm>.  En aquests sistemes, les instruccions que es
+donaven eren sobre l'aparença i la maquetació física del text (canvis
+de font, canvis en el sagnat, aquesta mena de coses).</para>
+
+<para>L'etiquetatge de presentació era adequat mentre el teu únic
+objectiu era imprimir a un únic medi o tipus de dispositiu.
+Tanmateix, alcançaves els seus límits, quan volies etiquetar un
+document per a que (a) poguera ser formatat per a medis de
+visualització molt diferents (com impresió contra visualització Web),
+o (b) volíes que suportara consultes i indexar-lo segons la seua
+estructura (com probablement voldràs fer si, per exemple, estàs
+incorporant-lo a un sistema d'hipertext).</para>
+
+<para>Per a suportar aquestes capacitats adequadament, necessites un sistema 
+<firstterm>estiquetatge
+estructural</firstterm><indexterm><primary>etiquetatge
+estructural</primary></indexterm>.  A l'etiqeutatge estructural,
+descrius no l'aparença física del document, sinò les propietats
+lògiques de les seues parts.</para>
+
+<para>A mode d'exemple: A un lleguatge d'etiquetatge de presentació,
+si vols emfatitzar una paraula, vostè podria instruir al formatejador
+per a que la pose en negreta.  A
 <citerefentry><refentrytitle>troff</refentrytitle><manvolnum>1</manvolnum></citerefentry>
-this would look like so:</para>
+açò seria alguna cosa com:</para>
 
 <programlisting>
 All your base
@@ -207,31 +214,31 @@ All your base
 belong to us!
 </programlisting>
 
-<para>In a structural-markup language, you would tell the formatter to
-emphasize the word:</para>
+<para>En un llenguatge de marques estructural, vostè li diria al
+formatejador que emfatitzara la paraula:</para>
 
 <programlisting>
 All your base &lt;emphasis&gt;are&lt;/emphasis&gt; belong to us!
 </programlisting>
 
-<para> The "&lt;emphasis&gt;" and &lt;/emphasis&gt;in the line above
-are called <firstterm>markup
-tags</firstterm><indexterm><primary>markup tags</primary></indexterm>,
-or just <firstterm>tags</firstterm> for short.  They are the
-instructions to your formatter.</para>
+<para> Els "&lt;emphasis&gt;" i &lt;/emphasis&gt; en la línia de dalt
+s'anomenen <firstterm>etiquetes de marcatge
+</firstterm><indexterm><primary>etiquets de
+marcatge</primary></indexterm>, o
+senzillament <firstterm>etiquetes</firstterm>, per abreviar.  Són les
+instruccions per al seu formatejador.</para>
 
-<para>In a structural-markup language, the physical appearance of the
-final document would be controlled by a <firstterm>stylesheet</firstterm>
-<indexterm><primary>stylesheet</primary></indexterm>.  It is the
-stylesheet that would tell the formatter "render emphasis as a font
-change to boldface".  One advantage of structural-markup languages
-is that by changing a stylesheet you can globally change the
-presentation of the document (to use different fonts, for example)
-without having to hack all the the individual instances of (say)
-<markup>.B</markup> in the document itself.</para>
+<para>A un llenguatge de marcatge estructural, l'aparença física del document final es controlaria mitjançant un <firstterm>full d'estils</firstterm>
+<indexterm><primary>full d'estils</primary></indexterm>.  És el full
+d'estils qui li diria al formatejador "representa emphasis com a un
+canvi de font a negreta".  Un avantatge dels llenguatges de marcatge
+estructural és que que canviant el full d'estils vostè pot canviar
+globalment la presentació del document (per a utilitzar diferents
+fonts, per exemple) sense haver de canviar totes les instàncies
+individuals de (diguem) <markup>.B</markup> al propi document.</para>
 
 </sect1>
-<sect1><title>Document Type Definitions</title>
+<sect1><title>Definicions de Tipus de Document</title>
 
 <para>(Note: to keep the explanation simple, most of this
 section is going to tell some lies, mainly by omitting a lot of 
