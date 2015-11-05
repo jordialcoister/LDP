@@ -8,7 +8,7 @@
 ]>
 <article>
 <articleinfo>
-<title>The Linux Mail User HOWTO</title>
+<title>COM de l'Usuari de Correu de Linux</title>
 
 <author>
   <firstname>Eric</firstname>
@@ -28,74 +28,76 @@
 </copyright>
 
 <abstract>
-<para>This document is an introduction to the world of electronic
-mail<indexterm><primary>electronic mail</primary></indexterm>
-(email<indexterm><primary>email</primary></indexterm>) under Linux. It
-focuses on user-level issues and typical configurations for Linux home
-and small-business machines connected to the net via an ISP.</para>
+<para>Aquest document és una introducció al món del correu
+electrònic<indexterm><primary>correu electrònic</primary></indexterm>
+(email<indexterm><primary>email</primary></indexterm>) baix Linux. Es
+centra en temes de nivell d'usuari i configuracions típiques per a màquines
+SOHO connectades a la xarxa via un ISP.</para>
 
-<para>You need to read this if you plan to communicate locally or to
-remote sites via electronic mail.  You probably do
-<emphasis>not</emphasis> need to read this document if don't exchange
-electronic mail with other users on your system or with other
-sites.</para>
+<para>Vostè necessita llegir açò si planeja comunicar-se localment o amb
+llocs remots via correu electrònic.  Vostè probablement
+<emphasis>no</emphasis> necessite llegir aquest document si no intercanvia
+correu electrònic amb altres usuaris del seu sistema o amb altres
+llocs.</para>
 
-<para>For information on configuring and administering mail, see the
-Mail Administrator HOWTO.</para>
+<para>Per a informació sobre configuració i administració de correu, mire
+el Mail Administrator HOWTO.</para>
 </abstract>
 </articleinfo>
 
-<sect1 id="introduction"><title>Introduction</title>
+<sect1 id="introduction"><title>Introducció</title>
 
-<para>The intent of this document is to explain how email works, and answer
-some of the questions that appear to meet the definition of
-`frequently asked questions' about e-mail software under Linux.</para>
+<para>La intenció d'aquest document és explicar com funciona el correu, i
+contestar algunes de les preguntes que apareixen per a complir la definició
+de `preguntes d'ús frequent' sobre programari d'e-mail baix Linux.</para>
 
-<para>Modern Linux distributions give you a usable, preconfigured
-setup for electronic mail out of the box, usually featuring a late
-version of
-sendmail-v8<indexterm><primary>sendmail-v8</primary></indexterm>.
-This HOWTO will assume that you have such a setup and a working
-Internet connection.</para>
+<para>Les distribucions modernes de Linux li proporcionen una configuració
+de correu electrònic ja feta i completament funcional llesta per a
+utilitzar, habitualment presentant l'última versió de
+sendmail-v8<indexterm><primary>sendmail-v8</primary></indexterm>.  Aquest
+COM assumirà que vostè disposa d'aquesta configuració i una connexió a
+Internet en funcionament.</para>
 
-<para>(For information on how to set up a PPP or SLIP link to an ISP,
-see the <ulink
-url="http://metalab.unc.edu/LDP/HOWTO/ISP-Hookup-HOWTO.html">ISP
-Hookup HOWTO</ulink>.)</para>
+<para>(Per a informació sobre configuració d'un enllaç PPP o SLIP a un ISP,
+mire el <ulink
+url="http://metalab.unc.edu/LDP/HOWTO/ISP-Hookup-HOWTO.html">ISP Hookup
+HOWTO</ulink>.)</para>
 
-<para>Accordingly, unlike Vince Skahan's 1.x versions, this HOWTO focuses on
-user issues and architecture; most technical hair about UUCP, IDA
-sendmail and other formerly important topics has been dropped.</para>
+<para>En conseqüència, a diferència de les versions de Vince Skahan 1.x,
+aquest COM es centra en temes d'usuari i arquitectura; la majoria
+d'informació tècnica sobre UUCP, IDA sendmail i altres temes anteriorment
+importants s'han eliminat.</para>
 
-<sect2 id="newversions"><title>New versions of this document</title>
+<sect2 id="newversions"><title>Noves versions d'este document</title>
 
-<para>This document will be posted monthly to the newsgroup <ulink
-url="news:comp.os.linux.answers">comp.os.linux.answers</ulink> You
-should also be able to view the latest version of this HOWTO on the
-World Wide Web at <ulink
+<para>Aquest document serà publicat mensualment al grup de notícies <ulink
+url="news:comp.os.linux.answers">comp.os.linux.answers</ulink> Vostè hauria
+de poder veure la última versió d'estes COM a la World Wide Web a <ulink
 url="http://metalab.unc.edu/LDP/HOWTO/Mail-User-HOWTO.html">
 http://metalab.unc.edu/LDP/HOWTO/Mail-User-HOWTO.html</ulink>.</para>
 
 </sect2>
-<sect2 id="hardware"><title>Hardware requirements for email programs</title>
+<sect2 id="hardware"><title>Requeriments de Maquinari per als programes
+d'email</title>
 
-<para>There are no specific hardware requirements for mail under Linux.
-If you have the hardware necessary to connect to the Internet, it
-can support email over that link.</para>
+<para>No hi ha requeriments específics de maquinari per al correu baix
+Linux.  Si vostè té el maquinari necessari per a connectar-se a Internet,
+pot suportar correu electrònica sobre eixe enllaç.</para>
 
 </sect2>
-<sect2 id="sources"><title>Software sources for email programs</title>
+<sect2 id="sources"><title>Fonts de programari per a programes de
+correu</title>
 
-<para>The software you will need for email support is probably
-preinstalled in your Linux distribution.  You will find updates on the
-<ulink url="http://metalab.unc.edu/pub/Linux">Metalab Linux
-Archive</ulink>, especially in the <ulink
-url="http://metalab.unc.edu/pub/Linux/system/mail">mail
-subdirectory</ulink>.</para>
+<para>El programari que necessitarà per a suportar el correu electrònic
+probablement està instal·lat a la seua distribució de Linux.  Trobarà
+actualitzacions al <ulink url="http://metalab.unc.edu/pub/Linux">Metalab
+Linux Archive</ulink>, especialment al  <ulink
+url="http://metalab.unc.edu/pub/Linux/system/mail">subdirectori
+de correu</ulink>.</para>
 
 </sect2>
 </sect1>
-<sect1 id="mua"><title>Mail User Agents</title>
+<sect1 id="mua"><title>Agent d'Usuari de Correu</title>
 
 <para>This section contains information related to user agents, which means
 the software the user sees and uses.  This software relies on the
