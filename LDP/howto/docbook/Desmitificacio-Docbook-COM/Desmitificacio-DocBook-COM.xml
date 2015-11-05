@@ -6,7 +6,7 @@
 <!ENTITY home          "http://www.catb.org/~esr/">
 ]>
 
-<article>
+<article lang="CA_Valencia">
 <articleinfo>
   <title>COM de Desmitificació de DocBook</title>
 
@@ -52,7 +52,7 @@
 	<date>2004-02-27</date>
 	<authorinitials>esr</authorinitials>
 	<revremark>
-	   Afegits apuntadors a dos edit.
+	   Afegits apuntadors a dos editors.
 	</revremark>
      </revision>
      <revision>
@@ -61,7 +61,7 @@
 	<authorinitials>esr</authorinitials>
 	 <revremark>
 	   Reordenació per a ajornar referències a SGML fins després
-	   d'haver-lo introduit.
+	   d'haver-lo introduït.
 	</revremark>
      </revision>
      <revision>
@@ -95,18 +95,18 @@
   envolta el sistema d'etiquetatge DocBook i els ferraments que van
   amb ell.  Està adreçat a autors de documentació tècnica per a
   projectes de font oberta acollits a Linux, però hauria de resultar
-  útil també a persones que en componen documents d'altres tipus a
-  altres Unixos.
+  útil també a persones que componen documents d'altres tipus a altres
+  Unixos.
   </para></abstract>
 
 </articleinfo>
 
 <sect1 id="intro"><title>Introducció</title>
 
-<para>La immensa majoria de projectes de font oberta estàn convergint
-a DocBook com a format estàndar per a la seua documentació &mdash;
+<para>La immensa majoria de projectes de font oberta estan convergint
+a DocBook com a format estàndard per a la seua documentació &mdash;
 projectes incloent el nucli Linux, GNOME, KDE, Samba, i el Linux
-Documentation Project.  Els defensors de l'"etiquetatge estructurat"
+Documentation Project.  Els defensors de l'"etiquetatge estructurat" 
 bastat en XML (com a oposat al més vell estil d'"etiquetatge de
 presentació" exemplificat per troff, Tex, i Texinfo) sembla ser que
 han guanyat la batalla teòrica.  Vostè pot generar etiquetatge de
@@ -118,30 +118,30 @@ programes que el suporten.  Els seus devots parlen un argot què és
 dens i prohibitiu fins i tot per als estàndards de la informàtica, que
 es passeja entre acrònims que no tenen una relació òbvia amb les coses
 que vostè necessita fer per a escriure etiquetatge i fer-ne HTML o
-Postscript.  Els estàndards XML i els papers tècnics són notablement
+Post-script.  Els estàndards XML i els papers tècnics són notablement
 foscos.</para>
 
-<para>Este HOWTO intentarà aclarir els misteris principals que
+<para>Este S'ORTO intentarà aclarir els misteris principals que
 envolten DocBook i la seua aplicació per a documentació de font oberta
 &mdash; tant els tècnics com els polítics.  El nostre objectiu és
 equipar-lo per a que entenga no només allò que necessita per a fer
-documents, sinò per què el procés és tan complexe &mdash; i com
+documents, sinó per què el procés és tan complexe &mdash; i com
 s'espera que canvie a mesura que nous ferraments relacionats amb
 DocBook estiguen disponibles.</para>
 
 </sect1>
 <sect1><title>Per què preocupar-se de DocBook?</title>
 
-<para>Hi ha dos possibilitats que fan de Docbook algo realment
-interessant.  Una és la <emphasis>renderització multimodal</emphasis>
+<para>Hi ha dos possibilitats que fan de DocBook una cosa realment
+interessant.  Una és la <emphasis>renderització multimode</emphasis>
 i l'altra són les <emphasis>bases de dades consultables de
-documencaió</emphasis>.</para>
+documentació</emphasis>.</para>
 
-<para>La renderització multimodal és la possibilitat més senzilla i el
+<para>La renderització multimode és la possibilitat més senzilla i el
 terme més proper; és l'habilitat d'escriure un document en un únic
-format mestre que pot rendeitzar-se en moltíssims modes de
-visualització diferents (particulament ambdós, HTML per a la
-visualització en línia i Postscript per a eixida impresa d'alta
+format mestre que pot renderitzar-se en moltíssims modes de
+visualització diferents (particularment ambdós, HTML per a la
+visualització en línia i Post-script per a eixida impresa d'alta
 qualitat).  Aquesta capacitat està molt ben implementada ara.</para>
 
 <para><emphasis>Bases de dades consultables de documentació</emphasis>
@@ -152,8 +152,8 @@ hiperenllaçada i cross-indexed (malgrat estar dispersa en diferents
 formats a múltiples llocs com ho està ara).</para>
 
 <para>Idealment, cada vegada que vostè instal·la un paquet de
-programari a la seua màquina, engeristraria la seua documentació
-DocBook dins del catèleg del seu sistema.  HTML, adequadament indexat
+programari a la seua màquina, enregistraria la seua documentació
+DocBook dins del catàleg del seu sistema.  HTML, adequadament indexat
 i cross-linked a l'HTML en la resta del seu catàleg, seria generada.
 La documentació del nou paquet estaria aleshores disponible a través
 del seu navegador.  Tota la seua documentació seria consultable a
@@ -163,10 +163,10 @@ través d'una interfície semblant a un bon motor Web de cerca.</para>
 portar-nos a eixe món.  Per nomenar només una mancança, vostè no por
 declarar explícitament entrades d'índex en
 HTML. DocBook <emphasis>sí</emphasis> té la riquesa semàntica per a
-suportar bases de dades de documentació estructurada.  Fundamentalment
-aquesta és la raó per la que molts projectes l'estàn adoptant.</para>
+suportar bases de dades de documentació estructurada.  Fonamentalment
+aquesta és la raó per la que molts projectes l'estan adoptant.</para>
 
-<para>DocBook té el vicis que van amb les seves virtuds.  Algunes
+<para>DocBook té el vicis que van amb les seves virtuts.  Algunes
 persones el troben desagradable, pesant, i massa detallat com per a
 ser còmode com a format de composició.  Això està bé; mentre les eines
 d'etiquetatge que els agraden (coses com asciidoc, Perl POD o GNU
@@ -187,23 +187,23 @@ donaven eren sobre l'aparença i la maquetació física del text (canvis
 de font, canvis en el sagnat, aquesta mena de coses).</para>
 
 <para>L'etiquetatge de presentació era adequat mentre el teu únic
-objectiu era imprimir a un únic medi o tipus de dispositiu.
-Tanmateix, alcançaves els seus límits, quan volies etiquetar un
+objectiu fora imprimir en un únic medi o tipus de dispositiu.
+Tanmateix, alcançaves els seus límits quan volies etiquetar un
 document per a que (a) poguera ser formatat per a medis de
-visualització molt diferents (com impresió contra visualització Web),
-o (b) volíes que suportara consultes i indexar-lo segons la seua
-estructura (com probablement voldràs fer si, per exemple, estàs
+visualització molt diferents (com impressió contra visualització Web),
+o (b) volies que suportara consultes i indexar-lo segons la seua
+estructura (com probablement voldrà fer si, per exemple, està
 incorporant-lo a un sistema d'hipertext).</para>
 
 <para>Per a suportar aquestes capacitats adequadament, necessites un sistema 
-<firstterm>estiquetatge
+<firstterm>etiquetatge
 estructural</firstterm><indexterm><primary>etiquetatge
-estructural</primary></indexterm>.  A l'etiqeutatge estructural,
-descrius no l'aparença física del document, sinò les propietats
+estructural</primary></indexterm>.  A l'etiquetatge estructural,
+descrius no l'aparença física del document, sinó les propietats
 lògiques de les seues parts.</para>
 
-<para>A mode d'exemple: A un lleguatge d'etiquetatge de presentació,
-si vols emfatitzar una paraula, vostè podria instruir al formatejador
+<para>A mode d'exemple: A un llenguatge d'etiquetatge de presentació,
+si vols emfatitzar una paraula, vostè podria instruir al formatador
 per a que la pose en negreta.  A
 <citerefentry><refentrytitle>troff</refentrytitle><manvolnum>1</manvolnum></citerefentry>
 açò seria alguna cosa com:</para>
@@ -215,7 +215,7 @@ belong to us!
 </programlisting>
 
 <para>En un llenguatge de marques estructural, vostè li diria al
-formatejador que emfatitzara la paraula:</para>
+formatador que emfatitzara la paraula:</para>
 
 <programlisting>
 All your base &lt;emphasis&gt;are&lt;/emphasis&gt; belong to us!
@@ -223,14 +223,14 @@ All your base &lt;emphasis&gt;are&lt;/emphasis&gt; belong to us!
 
 <para> Els "&lt;emphasis&gt;" i &lt;/emphasis&gt; en la línia de dalt
 s'anomenen <firstterm>etiquetes de marcatge
-</firstterm><indexterm><primary>etiquets de
+</firstterm><indexterm><primary>etiquetes de
 marcatge</primary></indexterm>, o
 senzillament <firstterm>etiquetes</firstterm>, per abreviar.  Són les
-instruccions per al seu formatejador.</para>
+instruccions per al seu formatador.</para>
 
 <para>A un llenguatge de marcatge estructural, l'aparença física del document final es controlaria mitjançant un <firstterm>full d'estils</firstterm>
 <indexterm><primary>full d'estils</primary></indexterm>.  És el full
-d'estils qui li diria al formatejador "representa emphasis com a un
+d'estils qui li diria al formatador "representa emphasis com a un
 canvi de font a negreta".  Un avantatge dels llenguatges de marcatge
 estructural és que que canviant el full d'estils vostè pot canviar
 globalment la presentació del document (per a utilitzar diferents
@@ -240,92 +240,102 @@ individuals de (diguem) <markup>.B</markup> al propi document.</para>
 </sect1>
 <sect1><title>Definicions de Tipus de Document</title>
 
-<para>(Note: to keep the explanation simple, most of this
-section is going to tell some lies, mainly by omitting a lot of 
-history.  Truthfulness will be fully restored in a 
-<link linkend="sgml">following section</link>.)</para>
+<para>(Nota: per a mantindre la explicació senzilla, la majoria
+d'aquesta secció explicarà algunes mentides, principalment ometent
+molt història. La veracitat serà restaurada completament en una
+<link linkend="sgml">secció posterior</link>.)</para>
 
-<para>DocBook is a structural-level markup language.  Specifically, it
-is a dialect of XML.  A DocBook document is a hunk of XML that uses
-XML tags for structural markup.</para>
+<para>DocBook és un llenguatge d'etiquetatge de nivell estructural.
+Més específicament, és un dialecte d'XML.  Un document DocBook és un
+tros d'XML que utilitza etiquetes XML per a L'etiquetatge
+estructural.</para>
 
- <para>In order for a document formatter to apply a stylesheet to your
-document and make it look good, it needs to know things about the
-overall structure of your document.  For example, it needs to know
-that a book manuscript normally consists of front matter, a sequence
-of chapters, and back matter in order to physically format chapter
-headers properly.  In order for it to know this sort of thing, you
-need to give it a <firstterm>Document Type
-Definition</firstterm><indexterm><primary>Document Type
-Definition</primary><secondary>DTD</secondary></indexterm> or DTD. The
-DTD tells your formatter what sorts of elements can be in the document
-structure, and in what orders they can appear.</para>
+<para>Per a que el formatador de documents puga aplicar-li un full
+d'estils al seu document i fer que tinga una bona presència necessita
+saber algunes coses sobre la estructura global del mateix.  Per
+exemple, necessita saber que el manuscrit d'un llibre normalment
+consisteix en front matter, una seqüència de capítols, i back matter
+per a poder formatar les capçaleres físicament de manera adequada.
+Per a que puga sabera aquesta mena de coses, cal que li proporciones
+una <firstterm>Definició de Tipus de
+Document</firstterm><indexterm><primary>Definició de Tipus De
+Document</primary><secondary>DTD</secondary></indexterm> o DTD. La DTD
+li diu al seu formatador quina mena d'elements poden haver-hi en la
+estructura del document, i en quin ordre poden aparéixer.</para>
 
-<para>What we mean by calling DocBook an `application' of XML is
-actually that DocBook is a DTD &mdash; a rather large DTD, with
-somewhere around 400 tags in it.</para>
+<para>Quan diem que we mean by calling DocBook és una `aplicació'
+d'XML volem dir que, de fet, DocBook és una DTD &mdash; una DTD més
+aviat gran, amb al voltant de 400 etiquetes en ella.</para>
 
-<para>Lurking behind DocBook is a kind of program called a
-<firstterm>validating parser</firstterm><indexterm><primary>validating
-parser</primary></indexterm>.When you format a DocBook document, the
-first step is to pass it through a validating parser (the front end of
-the DocBook formatter).  This program checks your document against the
-DocBook DTD to make sure you aren't breaking any of the DTD's
-structural rules (otherwise the back end of the formatter, the part
-that applies your style sheet, might become quite confused).</para>
+<para>A l'aguait, darrere de DocBook hi ha una mena de programa anomenat 
+<firstterm>analitzador de
+validació</firstterm><indexterm><primary>analitzador de
+validació</primary></indexterm>. Quan vostè formata un document
+en DocBook, el primer pas és passar-lo a través d'un analitzador de
+validació (la cara visible <!--el front end--> del formatador
+DocBook).  Este programa comprova el seu document contra la DTD de
+DocBook per a assegurar-se de que vostè no està trencant cap de les
+regles estructurals de la DTD (d'una altra manera la cara oculta del
+formatador <!--back end-->, la part que aplica el seu full d'estils,
+podria arribar a estar bastant confús).</para>
 
-<para>The validating parser will either bomb out, giving you error
-messages about places where the document structure is broken, or translate
-the document into a stream of <firstterm>formatting events</firstterm>
-which the parser back end combines with the information in your stylesheet
-to produce formatted output</para>
+<para>El analitzador de validació o bé el bombardejarà a missatges
+d'error sobre llocs on la estructura del document està trencada, o
+traduirà el document en un flux d'<firstterm>successos de
+formatatge</firstterm> què la cara oculta de l'analitzador combinarà
+amb la informació al seu full d'estils per a produir eixida
+formatada</para>
 
-<para>Here is a diagram of the whole process:</para>
+<para>Ací hi ha una diagrama del procés complet:</para>
 
 <mediaobject>
 <imageobject> <imagedata fileref="figure1.png" format="PNG"/></imageobject>
 </mediaobject>
 
-<para>The part of the diagram inside the dotted box is your formatting
-software, or <firstterm>toolchain</firstterm>. Besides the obvious and
-visible input to the formatter (the document source) you'll need to
-keep the two `hidden' inputs of the formatter (DTD and stylesheet) in
-mind to understand what follows.</para>
+<para>La part del diagrama dins de la caixa puntejada és el seu
+programari de formatatge, o <firstterm>toolchain</firstterm>. Més enllà
+de la entrada òbvia i visible al formatador (la font del document)
+vostè necessita mantindre les dos entrades `ocultes' del formatador
+(la DTD i el full d'estils) en ment per a comprendre el que
+segueix.</para>
 </sect1>
-<sect1><title>Other DTDs</title>
+<sect1><title>Altres DTD</title>
 
-<para>A brief digression into other DTDs may help make clear what parts of
-the previous section were specific to DocBook and what parts are general to
-all structural-markup languages.</para>
+<para>Una breu digressió en altres DTD pot ajudar a aclarir quines
+parts de la secció anterior eren específiques de DocBook i quines eren
+generals a tots els llenguatges d'etiquetatge estructural.</para>
 
-<para><ulink url="http://www.tei-c.org/">TEI</ulink> (Text Encoding
-Initiative) is a large, elaborate DTD used primarily in academia for
-computer transcription of literary texts.  TEI's Unix-based toolchains
-use many of the same tools that are involved with DocBook, but with
-different stylesheets and (of course) a different DTD.</para>
+<para><ulink url="http://www.tei-c.org/">TEI</ulink> (de l'anglés Text
+Encoding Initiative, Iniciativa de Codificació de Textos) és una
+elaborada i gran DTD utilitzada principalment per acadèmics per a la
+transcripció mitjançant ordinador de textos literaris.  Els toolchains
+de TEI basats en Unix utilitzen molts dels mateixos ferraments del que
+estan involucrats en DocBook, però fulls d'estils diferents i
+(pressupost) una DTD diferent.</para>
 
-<para>XHTML, the latest version of HTML, is also an XML application
-described by a DTD, which explains the family resemblance between
-XHTML and DocBook tags. The XHTML toolchain consists of web browsers
-and a number of ad-hoc HTML-to-print utilities.</para>
+<para>XHTML, la última versió d'HTML, és també una aplicació XML
+descrita a una DTD, que explica semblança de família entre les
+etiquetes XHTML i DocBook. La toolchain XHTML consisteix en navegadors
+web i un nombre d'utilitats ad hoc HTML a impressió.</para>
 
-<para>Many other XML DTDs are maintained to help people exchange
-structured information in fields as diverse as bioinformatics and
-banking.  You can look at a <ulink
-url="http://www.xml.com/pub/rg/DTD_Repositories"> list of
-repositories</ulink> to get some idea of the variety out
-there.</para>
+<para>Moltes altres DTD d'XML són mantingudes per a ajudar a gent a
+intercanviar informació estructurada en camps tan diversos com
+bioinformàtica i banca.  Pot fer una ullada a
+la <ulink url="http://www.xml.com/pub/rg/DTD_Repositories"> llista de
+repositoris</ulink> per a fer-se una idea de la varietat que hi ha ahí
+fora.</para>
 
 </sect1>
-<sect1><title>The DocBook toolchain</title>
+<sect1><title>La toolchain de DocBook</title>
 
-<para>The easiest way to format and render XML-DocBook documents is to
-use the <application>xmlto</application> toolchain.  This ships with
-Red Hat; Debian users can get it with the command <command>apt-get
+<para>La manera més fàcil de formatar i analitzar documents
+XML DocBook és utilitzar la
+toolchain <application>xmlto</application>.  Açò s'inclou a Red Hat;
+els usuaris de Debian poden obtindre-ho amb la ordre <command>apt-get
 install xmlto</command>.</para>
 
-<para>Normally, what you'll do to make XHTML from your
-DocBook sources will look like this:</para>
+<para>Normalment, el que vostè farà per a obtindre XHTML a partir de
+les seues fonts DocBook serà alguna cosa com açò:</para>
 
 <screen>
 bash$ xmlto xhtml foo.xml
@@ -333,9 +343,10 @@ bash$ ls *.html
 ar01s02.html ar01s03.html ar01s04.html index.html
 </screen>
 
-<para>In this example, you converted an XML-Docbook  document named 
-<filename>foo.xml</filename> with three top-level sections into an
-index page and two parts.  Making one big page is just as easy:</para>
+<para>En este exemple, vostè ha convertit un document XML-Docbook anomenat 
+<filename>foo.xml</filename> en tres seccions de primer nivell dins
+d'una pàgina d'índex i dos parts.  Fer-ho en una pàgina gran és igual
+de fàcil:</para>
 
 <screen>
 bash$ xmlto xhtml-nochunks foo.xml
@@ -343,231 +354,246 @@ bash$ ls *.html
 foo.html
 </screen>
 
-<para>Finally, here is how you make PDF for printing:</para>
+<para>Per acabar, així és com vostè pot fer un PDF per a
+imprimir:</para>
 
 <screen>
-bash$ dblatex foo.xml       # To make PDF
+bash$ dblatex foo.xml       # Per a fer PDF
 bash$ ls *.pdf
 foo.pdf
 </screen>
 
-<para>Some older versions of <command>xmlto</command> may be 
-more verbose, emitting noise like "Converting to XHTML" and so forth.</para>
+<para>Algunes versions antigues de <command>xmlto</command> poder ser
+més detallades, emetent sorolls com "Converting to XHTML" i així
+successivament.</para>
 
-<para>To turn your documents into HTML or PDF, you need an
-engine that can apply the combination of DocBook DTD and 
-a suitable stylesheet to your document.  Here is how the 
-open-source tools for doing this fit together:</para>
+<para>Per a convertir els seus documents en HTML o PDF, vostè
+necessita un motor que puga aplicar la combinació de DTD DocBook i un
+full d'estils adequada al seu document.  Així és com ho fan les eines
+de font oberta per a encaixar totes les peces:</para>
 
 <mediaobject>
 <imageobject> <imagedata fileref="figure2.png" format="PNG"/></imageobject>
 <caption>
-  <para>Present-day XML-DocBook toolchain</para>
+  <para>Toolchain XML DocBook avui en dia</para>
 </caption>
 </mediaobject>
 
-<para>Parsing your document and applying the stylesheet transformation
-will be handled by one of three programs.  The most likely one is
-<application>xsltproc</application><indexterm><primary>xsltproc</primary></indexterm>.  The other
-possibilities are two Java programs,
+<para>Analitzar el teu document i aplicar la transformació del full
+d'estils serà manejat per un programa de tres. El més probable és
+<application>xsltproc</application><indexterm><primary>xsltproc</primary></indexterm>.
+Les altres possibilitats són dos programes Java,
 <application>Saxon</application><indexterm><primary>Saxon</primary></indexterm>
-and
+i
 <application>Xalan</application><indexterm><primary>Xalan</primary></indexterm>,</para>
 
-<para>It is relatively easy to generate high-quality XHTML from
-DocBook; the fact that XHTML is simply another XML DTD helps a lot.
-Translation to HTML is done by applying a rather simple stylesheet,
-and that's the end of the story.  RTF is also simple to generate in
-this way, and from XHTML or RTF it's easy to generate a flat ASCII
-text approximation in a pinch.</para>
+<para>És relativament fàcil generar XHTML d'alta qualitat a partir de
+DocBook; el fet de que XHTML és simplement una altra DTD d'XML ajuda
+molt.  La traducció a HTML es fa aplicant un full d'estils bastant
+senzill, i això és el final de la història.  RTF també és senzill de
+generar d'aquesta manera, i d'XHTML o RTF és fàcil generar una
+aproximació de text ASCII pla en un pessic.</para>
 
-<para>The awkward case is print.  Generating high-quality printed
-output (which means, in practice, Adobe's
-PDF<indexterm><primary>PDF</primary></indexterm> or Portable Document
-Format, a packaged form of PostScript) is difficult.  Doing it right
-requires algorithmically duplicating the delicate judgments of a human
-typesetter moving from content to presentation level.</para>
+<para>El cas incòmode és la impressió.  La generació d'eixida impresa
+d'alta qualitat (que en la pràctica significa, Adobe
+PDF<indexterm><primary>PDF</primary></indexterm> o Portable Document
+Format, una forma empaquetada de Post-Script) és difícil.  Fer-ho
+correctament requereix, algorítmicament parlant, duplicar els delicats
+judicis d'un maquetista humà movent-se del nivell de contingut al de
+presentació.</para>
 
-<para>So, first, a stylesheet translates Docbook's structural markup
-into another dialect of XML &mdash;
-FO<indexterm><primary>FO</primary></indexterm>
-(Formatting Objects).  FO markup is very much presentation-level; you
-can think of it as a sort of XML functional equivalent of troff.  It
-has to be translated to Postscript for packaging in a PDF.</para>
+<para>Així, primer, un full d'estils tradueix l'etiquetatge
+estructural de DocBook a un altre dialecte d'XML &mdash;
+FO<indexterm><primary>FO</primary></indexterm> (Formatting Objects).
+L'etiquetatge FO és molt del nivell de presentació; vostè pot pensar
+en ell com a una mena d'equivalent funcional XML de troff.  S'ha de
+traduir a Post-script per ser empaquetat en un PDF.</para>
 
-<para>In the toolchain shipped with most present-day Linux
-distributions, this job is best handled by a program called
+<para>En la toolchain entregada amb la majoria de distribucions de
+Linux actuals, aquesta feina es maneja millor per una programa
+anomenat
 <application>dblatex</application><indexterm><primary>dblatex</primary></indexterm>
-(this obsoletes the older passivetex package that previous versions of
-tis HOWTO described).</para>
+(açò deixa obsolet el paquet passivetex més antic descrit a versions
+anteriors d'aquest COM).</para>
 
-<para><command>dblatex</command> translates the formatting objects
-generated by <command>xsltproc</command> into Donald Knuth's TeX
-language.  TeX was one of the earliest open-source projects, an old
-but powerful presentation-level formatting language much beloved of
-mathematicians (to whom it provides particulaly elaborate facilities
-for describing mathematical notation).  TeX is also famously good at
-basic typesetting tasks like kerning, line filling, and hyphenating.
-TeX's output is then massaged into PDF.</para>
+<para><command>dblatex</command> tradueix els objectes de formatatge
+generats per <command>xsltproc</command> al llenguatge TeX de Donald
+Knuth's.  TeX fou un dels primers projectes de font oberta, un antic
+però potent llenguatge de formatatge de nivell de presentació molt
+estimat per matemàtics (per als qui hi proporciona facilitats
+particularment elaborades per a la descripció de notació matemàtica).
+TeX també is also famously good en tasques bàsiques de maquetació com
+espaiat manual, farciment de línia, i separació per síl·labes.
+L'eixida de TeX és aleshores empaquetada en PDF.</para>
 
-<para>If you think this bucket chain of XML to Tex macros to
-PDF sounds like an awkward kludge, you're right.  It clanks, it
-wheezes, and it has ugly warts.  Fonts are a significant problem,
-since XML and TeX and PDF have very different models of how fonts
-work; also, handling internationalization and localization is a
-nightmare. About the only thing this code path has going for it is
-that it works.</para>
+<para>Si vostè pensa que aquest cub cadena de macros d'XML a Tex a PDF
+sona com un nyap incòmode, està en lo cert.  Ressona, fa sibilànces, i
+té lletges berrugues  Les fonts són un problema important, donat que
+XML i TeX i PDF tenen models de funcionament de les fonts molt
+diferents; també, el maneig de la internacionalització i la
+localització és un malson. Pràcticament la única cosa que aquesta camí
+de codi té al seu favor és que funciona.</para>
 
-<para>The elegant way will be <ulink
-url="http://xmlgraphics.apache.org/fop/">
-FOP</ulink><indexterm><primary>FOP</primary></indexterm>, a direct
-FO-to-Postscript translator being developed by the Apache project.
-With FOP, the internationalization problem is, if not solved, at least
-well confined; XML tools handle Unicode all the way through to FOP.
-Glyph to font mapping is also strictly FOP's problem.  The only
-trouble with this approach is that it entirely doesn't work yet.  As
-of October 2010 FOP is at 1.0 and usable, but with rough edges and
-missing features. I recommed dblatex for production use.</para>
+<para>La manera elegant
+serà <ulink url="http://xmlgraphics.apache.org/fop/">
+FOP</ulink><indexterm><primary>FOP</primary></indexterm>, un traductor
+directe d'FO a Post-script desenvoulpat per l'Apache project.  Amb FOP, el
+problema de la internacionalització està, si no solucionat, com a
+mínim ben confinat; Eines XML manegen l'Unicode tot el camí a través
+de FOP.  La correspondència de glifs a mapeig de font també és un
+problema estrictament de FOP.  L'únic problema amb aquesta aproximació
+és que encara no funciona completament.  A l'octubre de 2010 FOP està
+en la versió 1.0 i és utilitzable, però amb arestes i manca de
+característiques. Per a utilitzar a producció, jo recomane
+dblatex.</para>
 
-<para>Here is what the FOP toolchain looks like:</para>
+<para>Així és la toolchain FOP:</para>
 
 <mediaobject>
 <imageobject> <imagedata fileref="figure3.png" format="PNG"/></imageobject>
 <caption>
-<para>Future XML-DocBook toolchain with FOP.</para>
+<para>Toolchain XML-DocBook futura amb FOP.</para>
 </caption>
 </mediaobject>
 
 </sect1>
 <sect1><title>asciidoc</title>
 
-<para>There is a relatively new tool called <ulink
-url="http://www.methods.co.nz/asciidoc/">asciidoc</ulink> that tackles
-several of the problems associated with DocBook rather effectively.</para>
+<para>Hi ha una eina relativament nova
+anomenada <ulink url="http://www.methods.co.nz/asciidoc/">asciidoc</ulink>
+que fa front a varis del problemes associats amb DocBook de manera
+prou efectiva.</para>
 
-<para>The <command>asciidoc</command> tool accepts a simple,
-lightweight syntax resembling wiki markups and turns it into various
-output formats using DocBook as an intermediate stage.  The asciidoc
-markup is easier to compose in than DocBook itself, and serves
-as its own best rendering in flat ASCII.</para>
+<para>La eina <command>asciidoc</command> accepta una simple i
+lleugera sintaxi semblant a l'etiquetatge wiki i la transforma en varis
+formats d'eixida utilitzant DocBook com a fase intermedia.
+L'etiquetatge asciidoc és més fàcil de compondre que el propi DocBook,
+i serveix com la seu propi millor renderització en ASCII pla.</para>
 
-<para>Printing support in <command>asciidoc</command> is through an 
-experimental LaTeX back end.  It is most useful for writing short
-to medium-length documents for World Wide Web distribution.</para>
+<para>El suport per a impressió d'<command>asciidoc</command> és fa a
+través d'un rerefons LaTeX experimental.  És majoritàriament útil per
+a escriure des de documents curts fins a documents de longitud mitjana
+per a distribució al World Wide Web.</para>
 
 </sect1>
-<sect1><title>Who are the projects and the players?</title>
+<sect1><title>Qui són els projectes i els jugadors?</title>
 
-<para>The DocBook DTD itself is maintained by the DocBook Technical
-Committee, headed by Norman Walsh.  Norm is the principal author of
-the DocBook stylesheets, a man who has focused remarkable energy and
-talent over many years on the extremely complex problems DocBook
-addresses.  He is as universally respected in the DocBook
-community as Linus Torvalds is in the Linux world.</para>
+<para>La DTD de DocBook en si és mantinguda pel DocBook Technical
+Committee, encapçalat per Norman Walsh.  Norm és l'autor principal
+dels fulls d'estils DocBook, un home que ha dedicat una notable
+quantitat d'energia i talent al llarg de molts anys en els problemes
+extremadament complexos que DocBook addresses.  Ell és tant respectat
+universalment a la comunitat DocBook com ho és Linus Torvalds al món
+Linux.</para>
 
-<para><ulink url="http://xmlsoft.org/XSLT/">libxslt</ulink> is a C
-library that interprets XSLT, applying stylesheets to XML documents.
-It includes a wrapper program, <command>xsltproc</command>, that can be
-used as an XML formatter.  The code was written by Daniel Veillard
-under the auspices of the GNOME project, but does not require any
-GNOME code to run.  I hear it's blazingly fast compared to the 
-Java alternatives, not a surprising claim.</para>
+<para><ulink url="http://xmlsoft.org/XSLT/">libxslt</ulink> és una
+llibreria de que interpreta XSLT, aplicant fulls d'estils a documents
+XML.  Inclou un programa embolcall, <command>xsltproc</command>, que
+pot utilitzar-se com un formatador XML.  El codi fou escrit per
+Daniel Veillard baix l'auspici del projecte GNOME, però no requereix
+cap codi GNOME per a funcionar.  He sentit que és extremadament ràpid
+en comparació a les alternatives Java alternatives, una afirmació gens
+sorprenent.</para>
 
-<para><ulink url="http://cyberelk.net/tim/xmlto/">xmlto</ulink> is the
-user interface of the XML toolchain that most Linuxes.  It's written
-and maintained by Tim Waugh.</para>
+<para><ulink url="http://cyberelk.net/tim/xmlto/">xmlto</ulink> és la
+interfície d'usuari de la Toolchain XML que utilitzen la majoria de
+Linuxos.  Està escrit i mantingut per Tim Waugh.</para>
 
 <para><ulink url="http://users.iclway.co.uk/mhkay/saxon/">Saxon</ulink>
-and <ulink url="http://xml.apache.org/xalan-j/">Xalan</ulink> are Java
-programs that interpret XSLT.  Saxon seems to be designed to work
-under Windows.  Xalan is part of the XML Apache project and native to
-Linux and BSD; it's designed to work with FOP.</para>
+i <ulink url="http://xml.apache.org/xalan-j/">Xalan</ulink> són
+programes Java que interpreten XSLT.  Saxon sembla estar dissenyat per
+a treballar baix Windows.  Xalan forma part del projecte XML Apache i
+és natiu a Linux i BSD; està dissenyat per a treballar amb FOP.</para>
 
-<para><ulink url="http://xml.apache.org/fop/">FOP</ulink> translates
-XML Formatting Objects to PDF.  It is part of the Apache XML project
-and is designed to work with Xalan.</para>
+<para><ulink url="http://xml.apache.org/fop/">FOP</ulink> tradueix els
+XML Formatting Objects a PDF.  És part del projecte Apache XML i està
+dissenyat per a treballar amb Xalan.</para>
 
-<para><ulink url="http://www.methods.co.nz/asciidoc/">asciidoc</ulink> 
-translates its own lightweight markup to DocBook, and thence to various
-output formats.</para>
+<para><ulink url="http://www.methods.co.nz/asciidoc/">asciidoc</ulink>
+tradueix el seu etiquetatge lleuger a DocBook, i a partir d'ahí a
+varis formats d'eixida.</para>
 
 </sect1>
-<sect1><title>Migration tools</title>
+<sect1><title>Eines de Migració</title>
 
-<para>The second biggest problem with DocBook is the effort needed to
-convert old-style presentation markup to DocBook markup.  Human beings
-can usually parse the presentation of a document into logical
-structure automatically, because (for example) they can tell from 
-context when an italic font means `emphasis' and when it means
-something else such as `this is a foreign phrase'.</para>
+<para>El segon major problema amb DocBook és l'esforç necessari per a
+convertir etiquetatge de presentació a l'antiga a etiquetatge DocBook.
+Els éssers humans poden normalment analitzar la presentació d'un
+document en una estructura lògica automàticament, perquè (per exemple)
+poden dir pel context quan una font cursiva significa `èmfasi' i quan
+significa alguna altra cosa com `esta és una expressió
+estrangera.</para>
 
-<para>Somehow, in converting documents to DocBook, those
-sorts of distinctions need to be made explicit.  Sometimes
-they're present in the old markup; often they are not, and the
-missing  structural information has to be either deduced by 
-clever heuristics or added by a human.</para>
+<para>D'alguna manera, en la conversió de documents a DocBook, eixa
+mena de distincions cal que es facen de manera explícita.  De vegades
+estan presents en l'antic etiquetatge; sovint no ho estan, i la manca
+de informació estructural o bé ha de deduir-se amb heurístiques
+enginyoses o l'ha d'afegir un humà.</para>
 
-<para>Here is a summary of the state of conversion tools from
-various other formats:</para>
+<para>A continuació hi ha un resum de l'estat de les eines de
+conversió des diversos formats:</para>
 
 <variablelist>
 <varlistentry>
 <term>GNU Texinfo</term>
 <listitem>
-<para>The Free Software Foundation has made a policy decision to
-support DocBook as an interchange format.  Texinfo has enough
-structure to make reasonably good automatic conversion possible, and
-the 4.x versions of <command>makeinfo</command> feature a
-<option>&#x2d;&#x2d;docbook</option> switch that generates DocBook.
-More at the <ulink
-url="http://www.gnu.org/directory/texinfo.html">makeinfo project
-page</ulink>.</para>
+<para>La Free Software Foundation va decidir adoptar una política de
+suport a DocBook com a format d'intercanvi.  Texinfo té la suficient
+estructura com per a fer possibles conversions automàtiques
+raonablement bones, i les versions 4.x de la
+característica <command>makeinfo</command> accepten el paràmetre
+<option>&#x2d;&#x2d;docbook</option> que genera DocBook.  Més
+informació a la plana del
+projecte <ulink url="http://www.gnu.org/directory/texinfo.html">makeinfo
+</ulink>.</para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
 <term>POD</term>
 <listitem>
-<para>There is a <ulink
-url="http://www.cpan.org/modules/by-module/Pod/">POD::DocBook</ulink>
-module that translates Plain Old Documentation markup to DocBook.  It
-claims to translate every POD tag except the L&lt;&gt; italic tag.
-The man page also says "Nested =over/=back lists are not supported
-within DocBook." but notes that the module has been heavily
-tested.</para>
+<para>Hi ha
+un <ulink url="http://www.cpan.org/modules/by-module/Pod/">POD::DocBook</ulink>
+mòdul que tradueix etiquetatge Plain Old Documentation a DocBook.
+Afirma que tradueix cada etiqueta POD excepte la etiqueta de cursiva
+L&lt;&gt;.  La pàgina man també diu "Nested =over/=back lists are not
+supported within DocBook." (les llistes niades =over /=back no estan
+suportades a DocBook.) però puntualitza que el mòdul no s'ha provat de
+manera intensiva.</para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
 <term>LaTeX</term>
 <listitem>
-<para>LaTeX is a (mostly) structural markup macro language built on
-top of the TeX formatter.  There is a project called <ulink
-url="http://www.lrz-muenchen.de/services/software/sonstiges/tex4ht/mn.html">
-TeX4ht</ulink> that (according to the author of PassiveTeX) can
-generate DocBook from LaTeX.</para>
+<para>LaTeX és un (majoritàriament) un macro llenguatge d'etiquetatge
+estructural construït dalt de tot del formatador TeX.  Hi ha un
+projecte
+anomenat <ulink url="http://www.lrz-muenchen.de/services/software/sonstiges/tex4ht/mn.html">
+TeX4ht</ulink> que (segons l'autor de PassiveTeX) pot generar DocBook
+a partir de LaTeX.</para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
-<term>man pages and other troff-based markups</term>
+<term>pàgines man i altres etiquetatges basats en troff</term>
 <listitem>
-<para>This is generally considered the biggest and nastiest conversion
-problem.  And indeed, the basic
+<para>Aquest és generalment considerat el major i més desagradable
+problema de conversió.  I de fet, l'etiquetatge bàsic de
 <citerefentry><refentrytitle>troff</refentrytitle>
-<manvolnum>1</manvolnum></citerefentry> markup is at too low a presentation
-level for automatic conversion tools to do much of any good.  However,
-the gloom in the picture lightens significantly if we consider
-translation from sources of documents written in macro packages like
+<manvolnum>1</manvolnum></citerefentry> està a un nivell de
+presentació tan baix per a les eines de conversió automàtica com per a
+que puguen fer res de bo.  Tanmateix, la foscor en la fotografia s'aclareix una significativament si considerem la traducció a partir de les fonts de documents escrits en paquets de macros com 
 <citerefentry><refentrytitle>man</refentrytitle>
-<manvolnum>7</manvolnum></citerefentry>.  These have enough structural
-features for automatic translation to get some traction.</para>
+<manvolnum>7</manvolnum></citerefentry>.  Aquests tenen suficients
+característiques estructurals com per a que la traducció automàtica
+tinga una miqueta de tracció.</para>
 
-<para>I wrote a tool to do this myself, because I couldn't find
-anything else that did a half-decent job of it (and the problem is
-interesting).  It's called <ulink
-url="&home;/doclifter/">doclifter</ulink>.  It will
-translate to either SGML or XML DocBook from
+<para>Jo mateix vaig escriure una eina per a fer-ho jo, perquè no
+aconseguia trobar res més que fes un treball mig decent al respecte (
+i el problema és interessant).
+S'anomena <ulink url="&home;/doclifter/">doclifter</ulink>.  Ell traduirà
+a SGML o a XML DocBook a partir de macros
 <citerefentry><refentrytitle>man</refentrytitle>
 <manvolnum>7</manvolnum></citerefentry>,
 <citerefentry><refentrytitle>mdoc</refentrytitle>
@@ -575,256 +601,275 @@ translate to either SGML or XML DocBook from
 <citerefentry><refentrytitle>ms</refentrytitle>
 <manvolnum>7</manvolnum></citerefentry>, or
 <citerefentry><refentrytitle>me</refentrytitle>
-<manvolnum>7</manvolnum></citerefentry> macros.  See the documentation
-for details.</para>
+<manvolnum>7</manvolnum></citerefentry>.  Mire la documentació si per
+als detalls.</para>
 </listitem>
 </varlistentry>
 </variablelist>
 
 </sect1>
-<sect1><title>Editing tools</title>
+<sect1><title>Eines d'edició</title>
 
-<para>Most people still hack DocBook tags by hand using either vi or
-emacs. There's an Nxml mode that ships with Emacs and is automatically
-invoked when the editor recognizes an XMl document. It has become
-pretty good; while it doesn't give GUI presentation, it does use its
-knowledge of XML to highlight out-of-balance tags.  Some alternative
-are summarized at the <ulink
-url="http://www.emacswiki.org/emacs/CategoryXML">Emacs CategoryXML
-page</ulink>.</para>
+<para>La majoria de la gent encara hack etiquetes DocBook a ma
+utilitzant ja siga vi o emacs. Hi ha un mode Nxml que ve amb Emacs que
+s'invoca automàticament quan l'editor reconeix un document XMl. Ha
+esdevingut molt bo; malgrat no oferir una presentació GUI, utilitza el
+seu coneixement d'XML per a etiquetes highlight out-of-balance.
+Algunes alternatives es resumeixen a
+la <ulink url="http://www.emacswiki.org/emacs/CategoryXML">pàgina
+Emacs CategoryXML</ulink>.</para>
 
-<para>There have been a number of attempts at GUI editors for DocBook, 
-often with the aim of being general editors for any markup with an XML or
-SGML schema.  EuroMath, MLView, Conglomerate, ThotBook are among them.
-Such projects tent to stall out in alpha stage; designing a decent
-UI for this task is extemely difficult.</para>
+<para>Ha hagut un nombre d'intents d'editors GUI per a DocBook, sovint
+amb l'objectiu de ser editors generals per a qualsevol etiquetatge amb
+un esquema XML o SGML.  EuroMath, MLView, Conglomerate, ThotBook estan
+entre ells.  Tals projectes tendeixen quedar-se en la fase alpha;
+dissenyar un IU decent per a aquesta tasca és extremadament
+difícil.</para>
 
-<para>Some attempts that have made it to production stage (if only
-barely, in many cases) can be found at the <ulink
-url="http://wiki.docbook.org/topic/DocBookAuthoringTools">DocBook
-Authoring Tools page</ulink>. I have not tried using any of these.</para> 
-
-</sect1>
-<sect1><title>Hints and tricks</title>
-
-<para>It is possible to generate an index by including an empty 
-&lt;index/&gt; tag at the point in your document where you wish
-it to appear.  Be warned that, as of early 2004, this facility is
-still somewhat primitive.  It won't merge ranges, and the output
-generated for PostScript is not yet production-quality.</para>
-
-<para>This space is reserved for more hints and tricks.</para>
+<para>Alguns intents que han aconseguit arribar a la fase de producció
+(amb prou feines, en la majoria de casos) es poden trobar a
+la <ulink url="http://wiki.docbook.org/topic/DocBookAuthoringTools">pàgina
+DocBook Authoring Tools</ulink>. Jo no he provat a utilitzar-ne cap
+d'aquests.</para>
 
 </sect1>
-<sect1><title>Related standards and practices</title>
+<sect1><title>Consells i trucs</title>
 
-<para>The tools are coming together, if slowly, to edit and format
-DocBook markup. But DocBook itself is a means, not an end.  We'll need
-other standards besides DocBook itself to accomplish the
-searchable-documentation-database objective I laid out at the
-beginning of this document. There are two big issues: document
-cataloguing and metadata.</para>
+<para>És possible generar un índex incloent-hi una etiqueta
+;index/&gt; buida en el punt del document on vulgues que aparega.
+Donat per avisat de que, a partir de començaments del 2004, aquesta
+funcionalitat és encara d'alguna manera primitiva.  No fusionarà
+rangs, i la eixida generada per a Postscript no està encara en
+qualitat de producció.</para>
 
-<para>The <ulink
-url="http://scrollkeeper.sourceforge.net/">Scrollkeeper</ulink>
-project aims directly to meet this need. It provides a simple set of
-script hooks that can be used by package install and uninstall
-productions to register and unregister their documentation into and
-out of a shared, searchable system-wide database.</para>
-
-<para>Scrollkeeper uses the <ulink
-url="http://www.ibiblio.org/osrt/omf/">Open Metadata Format</ulink>.
-This is a standard for indexing open-source documentation analogous to
-a library card-catalog system.  The idea is to support rich search
-facilities that use the card-catalog metadata as well as the source 
-text of the documentation itself.</para>
+<para>Aquest espai està reservat per a més consells i trucs.</para>
 
 </sect1>
-<sect1 id="sgml"><title>SGML and SGML-Tools</title>
+<sect1><title>Normes relacionades i pràctiques</title>
 
-<para>In previous sections, I have thrown away a lot of DocBook's
-history.  XML has an older brother,
-SGML<indexterm><primary>SGML</primary></indexterm> or Standard Generalized
-Markup Language.</para>
+<para>Les eines estan ajuntant-se, lentament, per a editar i
+formatar etiquetatge DocBook. Però DocBook en si és un mitjà, no una
+fi.  Necessitarem altres estàndards més enllà del propi DocBook per a
+alcançar l'objectiu de tindre bases de dades consultables de
+documentació que establia al començament d'este document. Hi ha dos
+grans problemes: la catalogació de documents i les metadades.</para>
 
-<para>Until mid-2002, no discussion of DocBook would have been
-complete without a long excursion into SGML, the differences between
-SGML and XML, and detailed descriptions of the SGML DocBook toolchain.
-Life can be simpler now; an XML DocBook toolchain is available in open
-source, works as well as the SGML toolchain ever did, and is much
-easier to use.  If you don't think you'll ever have to deal with old
-SGML-Docbook documents, you can skip the remainder of this
-section.</para>
+<para>El
+projecte <ulink url="http://scrollkeeper.sourceforge.net/">Scrollkeeper</ulink>
+tracta directament de satisfer aquesta necessitat. Proporciona un
+conjunt senzill de guions ganxo que es poden utilitzar per produccions
+d'instal·lació i desinstal·lació de paquets per a enregistrar i
+suprimir la seua documentació d'una base de dades de tot el sistema
+consultable i compartida.</para>
+
+<para>Scrollkeeper utilitza
+l'<ulink url="http://www.ibiblio.org/osrt/omf/">Open Metadata
+Format</ulink>.  Aquest és un estàndard per a la indexació de
+documentació de font oberta anàloga al sistema de catàleg de targetes
+de llibreria.  La idea és suportar uns equipaments de cerca rics que
+utilitzen les metadades del catàleg de targetes així com el text font
+de la pròpia documentació.</para>
+
+</sect1>
+<sect1 id="sgml"><title>SGML i les SGML-Tools</title>
+
+<para>A seccions prèvies, he llançat molta de la història de DocBook.
+XML té un germà major,
+SGML<indexterm><primary>SGML</primary></indexterm> o Standard
+Generalized Markup Language (Llenguatge d'Etiquetatge Generalitzat
+Estàndard).</para>
+
+<para>Fins a mitjans de 2002, cap discussió sobre DocBook hauria estat
+completa sense un llarga excursió dins d'SGML, les diferències entre
+SGML i XML, i descripcions detallades de la toolchain d'SGML DocBook.
+La vida pot ser més senzilla ara; una toolchain d'XML DocBook està
+disponible en font oberta, funciona tan bé com la toolchain d'SGML mai
+ho va fer, i és molt més senzilla d'utilitzar.  Si vostè creu que mai
+haurà de tractar amb documents antics SGML-Docbook, vostè pot
+saltar-se la resta d'aquesta secció.</para>
 
 <sect2><title>DocBook SGML</title>
 
-<para>DocBook was originally an SGML application, and there was an
-SGML-based DocBook toolchain that is now moribund.  There are minor
-differences between the DocBook SGML DTD and the DocBook XML DTD, but
-for an introductory discussion we can ignore them. The only one that's
-normally user-visible is that in SGML contentless tags did not need to
-have a trailing slash added to them before the closing &gt;.
-(Requiring the trailing / means XML parsers can be a lot simpler,
-because they don't have to know about the DTD to know which opening
-tags need closers.)</para>
+<para>DocBook era originalment un aplicació SGML, i hi havia una
+toolchain de DocBook basada en SGML que a hores d'ara està moribunda.
+Hi ha petites diferències entre la DTD DocBook SGML i la DTD DocBook
+XML, però per a una discussió introductòria poden ignorar-les. La
+única que normalment és visible per a l'usuari és que a SGML les
+etiquetes sense contingut no necessitaven que s'afegís una barra abans
+del &gt; de tancament.  (Requerir la barra de tancament / significa
+que els analitzadors XML poden ser molt més senzills, perquè no han de
+saber res sobre la DTD per a saber quines etiquetes d'obertura
+necessiten tancadores.)</para>
 
-<para>Versions of HTML up to 4.01 (before XHTML) were SGML
-applications.  TEI was originally an SGML application, too.  The
-groups managing all three DTDs jumped to XML for the same reason
-DocBook's developers did &mdash; it's drastically simpler.  SGML was
-extremely complex; unmanageably so, as it turns out.  The
-specification was a dense 150 pages and it is not reliably reported
-that any software ever fully implemented it.</para>
+<para>Les versions d'HTML fins a la 4.01 (abans d'XHTML) eren
+aplicacions SGML.  El TEI també fou originalment un aplicació SGML.
+Els grups que manejaven totes tres DTDs saltaren a XML per la mateixa
+raó que els desenvolupadors de DocBook &mdash; és dràsticament més
+senzill.  Com SGML era extremadament complexe; va resultar que era
+immanejable.  La especificació eren 150 denses pàgines i no s'ha
+reportat de manera confiable que cap programari l'haja implementat mai
+completament.</para>
 
-<para>The toolchain diagram I gave earlier was simplified; it
-only showed the XML toolchain.  Here is the historically
-correct version:</para>
+<para>El diagrama de la toolchain que vaig donar abans estava
+simplificat; només mostrava la toolchain d'XML.  Aquesta és la versió
+històricament correcta:</para>
 
 <mediaobject>
 <imageobject><imagedata fileref="figure4.png" format="PNG"/></imageobject>
 </mediaobject>
 
-<para>The DSSSL toolchain is what processed DocBook SGML.
-Under it, a document goes from DocBook format through one of two
-closely-related stylesheet engines called Jade and OpenJade.  These
-turn it into a TeX-macro markup, which is processed by a package called
-JadeTeX, into DVIs, which then get turned into Postscript.</para>
+<para>La toolchain de DSSSL és la que processava el DocBook SGML.
+Baix ella, un document anava del format DocBook a través d'un entre
+dos motors de fulls d'estils fortament relacionats anomenats Jade i
+OpenJade.  Açò ho transformava a etiquetatge TeX-macro, què es
+processava per un paquet anomenat JadeTeX, a DVIs, que aleshores eren
+transformades en Postscript.</para>
 
 </sect2>
-<sect2><title>SGML tools</title>
+<sect2><title>Les SGML tools</title>
 
-<para>The <ulink url="http://sources.redhat.com/docbook-tools/">
-docbook-tools</ulink> project provides open-source tools for
-converting SGML DocBook to HTML, Postscript, and other formats.  This
-package is shipped with Red Hat and other Linux distributions.  It is
-maintained by Mark Galassi.</para>
+<para>El
+projecte <ulink url="http://sources.redhat.com/docbook-tools/">
+docbook-tools</ulink> proporciona eines de font oberta per a convertir
+SGML DocBook a HTML, Postscript, i altres formats.  Aquets paquet
+s'entrega amb Red Hat i altres distribucions Linux.  És mantingut per
+Mark Galassi.</para>
 
-<para><ulink url="http://www.jclark.com/jade/">Jade</ulink> is an
-engine used to apply DSSSL stylesheets to SGML documents.  It is
-maintained by James Clark.</para>
+<para><ulink url="http://www.jclark.com/jade/">Jade</ulink> és un
+motor utilitzat per a aplicar fulls d'estils DSSSL a documents SGML.
+És mantingut per James Clark.</para>
 
 <para><ulink url="http://openjade.sourceforge.net/">OpenJade</ulink>
-is a community project undertaken because the founders thought James
-Clark's maintainance of Jade was spotty. The docbook-tools programs
-use OpenJade.</para>
+és un projecte comunitari portat a terme perquè els fundadors pensaren
+que el manteniment que feia James Clark de Jade era irregular. Els
+programes de les docbook-tools utilitzen OpenJade.</para>
 
-<para><ulink
-url="http://users.ox.ac.uk/~rahtz/passivetex/">PassiveTeX</ulink> the
-package of LaTeX macros that <application>xmlto</application> uses for
-producing DVI from XML-DocBook. <ulink
-url="http://jadetex.sourceforge.net/">JadeTex</ulink> is the package
-of LaTeX macros that OpenJade uses for producing DVI from
-SGML-DocBook.</para>
+<para><ulink url="http://users.ox.ac.uk/~rahtz/passivetex/">PassiveTeX</ulink>,
+el paquet de macros LaTeX que
+utilitza <application>xmlto</application> per a produir DVI a partir
+d'XML-DocBook. <ulink url="http://jadetex.sourceforge.net/">JadeTex</ulink>
+és el paquet de macros de LaTeX que OpenJade utilitza per a produir
+DVI a partir de SGML-DocBook.</para>
 
 </sect2>
-<sect2><title>Why SGML DocBook is dead</title>
+<sect2><title>Per què SGML DocBook està mort</title>
 
-<para>The DSSSL toolchain is, as far as new development goes,
-effectively dead.  The XSLT toolchain has reached production status in
-mid-2002; a working version shipped in Red Hat 7.3.  It's where
-DocBook developers are putting almost all of their effort.</para>
+<para>La toolchain DSSSL és, en la mesura en que el desenvolupament
+avança, efectivament mort.  La toolchain XSLT ha alcançat l'estat de
+producció a mitjans de 2002; una versió funcionant s'entregava amb Red
+Hat 7.3.  És on els desenvolupadors de DocBook estan posant quasi tot
+el seu esforç.</para>
 
-<para>The reason for the change to XML was threefold.  First,
-SGML turned out to be too complicated to use; then, DSSSL turned out
-to be too complicated to live with; then, significant parts of the
-DSSSL toolchain turned out to be weak and irredeemably messy.</para>
+<para>La raó per a canviar a XML fou triple.  Primer, SGML es va
+tornar massa complicat d'utilitzar; aleshores, es va tornar complicat
+viure amb DSSSL; aleshores, les parts significants de la toolchain
+DSSSL es van tornar dèbils i irremeiablement desordenades.</para>
 
-<para>Relative to SGML, XML has a reduced feature set that is
-sufficient for almost all purposes but much easier to understand and
-build parsers for.  SGML-processing tools (such as validating parsers) have
-to carry around support for a lot of features that DocBook and other
-text markup systems never actually used.  Removing these features
-made XML simpler and XML-processing tools faster.</para>
+<para>En relació a SGML, XML té un reduir conjunt que és suficient per
+a gairebé tots els propòsits, però és molt més fàcil de entendre i de
+construir-ne analitzadors.  Les eines de processament SGML (com
+analitzadors de validació) han de carregar amb el suport per a moltes
+característiques que DocBook i altres sistemes d'etiquetatge de fet
+mai ha utilitzat.  Eliminar aquestes característiques feia XML més
+simple i les eines de processament d'XML més ràpides.</para>
 
-<para>The language used to describe SGML DTDs is sufficiently spiky
-and forbidding that composing SGML DTDs was something of a black art.
-XML DTDs, on the other hand, can be described in a dialect of XML
-itself; there does not need to be a separate DTD language. An XML
-description of an XML DTD is called a
-<firstterm>schema</firstterm><indexterm><primary>schema</primary></indexterm>;
-the term DTD itself will probably pass out of use as the standards for
-schemas firm up.</para>
+<para>El llenguatge utilitzat per a descriure les DTD d'SGML és
+suficientment punxegut i oblidant que la composició de DTD d'SGML era
+una mena d'art negre.  Per contra, les DTD d'XML, es poden descriure
+en un dialecte del propi XML; no hi ha necessitat de tindre una
+llenguatge de DTD separat. Una descripció XML d'una DTD XML s'anomena
+<firstterm>esquema</firstterm><indexterm><primary>esquema</primary></indexterm>;
+el terme DTD en si probablement deixarà d'utilitzar-se mentre que els
+estàndards per a esquemes s'enfortiran</para>
 
-<para>But mostly the DSSSL toolchain is dead because DSSSL itself, the
-SGML stylesheet description language in that toolchain, proved just too
-arcane for most human beings, and made stylesheets too difficult to
-write and modify. (It was a dialect of Scheme.  Your humble editor, a
-LISP-head from way back, shakes his head in sad bemusement that
-this should drive people away.)</para>
+<para>Però la majoria de la toolchain DSSSL està morta per la pròpia
+DSSSL, el llenguatge de descripció de full d'estils SGML en eixa
+toolchain, es demostrà senzillament massa arcà per a la majoria
+d'éssers humans, i feia que els fulls d'estils foren massa difícils
+d'escriure i modificar. (Era un dialecte de Scheme.  El teu humil
+editor, a LISP-head from way back, sacseja el seu cap en trista
+confusió de que açò hauria d'expulsar a la gent.)</para>
 
-<para>XML fans like to sum up all these changes with <quote>XML:
-tastes great, less filling.</quote></para>
+<para>Als fanàtics d'XML els agrada resumir tots aquests canvis
+en <quote>XML: tastes sap molt bé, menys farciment.</quote></para>
 
 </sect2>
 <sect2><title>SGML-Tools</title>
 
-<para>SGML-Tools was the name of a DTD used by the <ulink
-url="http://www.linuxdoc.org">Linux Documentation Project</ulink>,
-developed a few years ago when today's DocBook toolchains didn't exist.
-SGML-Tools markup was simpler, but also much less flexible than
-DocBook.  The original SGML-Tools formatter/DTD/stylesheet(s)
-toolchain has been dead for some time now, but a successor called <ulink
-url="http://sourceforge.net/projects/sgmltools-lite/">SGML-tools
-Lite</ulink> is still maintained.</para>
+<para>SGML-Tools era el nom d'una DTD utilitzada
+pel <ulink url="http://www.linuxdoc.org">Linux Documentation
+Project</ulink>, desenvolupat fa alguns anys quan les toolchains de
+hui en dia encara no existien.  L'etiquetatge SGML-Tools era més
+senzill, però també molt menys flexible que DocBook.  La SGML-Tools
+formatador/DTD/fulls_d'estils(s) toolchain fa algun temps que està
+morta, però un successor
+anomenat <ulink url="http://sourceforge.net/projects/sgmltools-lite/">SGML-tools
+Lite</ulink> encara es manté.</para>
 
-<para>The LDP has been phasing out SGML-Tools in favor of DocBook, but
-it is still possible you might take over an old HOWTO.  These can be
-recognized by the identifying header "&lt;!doctype linuxdoc
-system&gt;". If this happens to you, convert the thing to XML DocBook
-and give the old version a quick burial.</para>
+<para>L'LDP ha estat extingint SGML-Tools en favor de DocBook, però
+encara és possible que vostè s'haja d'encarregar d'un antic HOWTO.
+Açò es pot reconèixer per la capçalera d'identificació "&lt;!doctype
+linuxdoc system&gt;". Si li ocorre açò, convertisca la cosa a XML
+DocBook i done-li a l'antiga versió un ràpid enterrament.</para>
 </sect2>
 </sect1>
 
-<sect1><title>References</title>
+<sect1><title>Referències</title>
 
-<para>One of the things that makes learning DocBook difficult is that
-the sites related to it tend to overwhelm the newbie with long lists
-of W3C standards, massive exercises in markup theology, and dense
-thickets of abstract terminology.  We're going to try to avoid that
-here by giving you just a few selected references to look at.</para>
+<para>Una de les coses que fa que fa difícil aprendre DocBook és que
+els llocs relacionats tendeixen a sobrepassar al principiant amb
+llargues llistes d'estàndards d'W3C, exercicis massius de teologia
+d'etiquetatge, i densos matollars de terminologia abstracta.
+Tractarem de evitar això ací proporcionant-li tan sols unes
+referencies seleccionades a consultar.</para>
 
-<para>Michael Smith's <ulink
-url="http://xml.oreilly.com/news/dontlearn_0701.html">
-Take My Advice: Don't Learn XML</ulink> surveys the XML world from
-an angle similar to this document.</para>
+<para>Michael
+Smith's <ulink url="http://xml.oreilly.com/news/dontlearn_0701.html">
+Take My Advice: Don't Learn XML</ulink> (Accepte el meu consell: No
+Aprenga XML) examina en detall el món XML des d'un angle similar al
+d'aquest document.</para>
 
 <para>Norman Walsh's <citetitle>DocBook: The Definitive
-Guide</citetitle> is available <ulink
-url="http://www.oreilly.com/catalog/docbook/">in print</ulink> and
-<ulink url="http://www.docbook.org/tdg/en/html/docbook.html">on the
-web</ulink>.  This is indeed the definitive reference, but as an
-introduction or tutorial it's a disaster.  Instead, read this:</para>
+Guide</citetitle> (DocBook: La Guia Definitiva) està disponible
+<ulink url="http://www.oreilly.com/catalog/docbook/">imprés</ulink> i
+<ulink url="http://www.docbook.org/tdg/en/html/docbook.html">a la
+web</ulink>.  Aquest és, de fet, la referència definitiva, però com a 
+introducció o tutorial és un desastre.  En canvi, llija açò:</para>
 
-<para><ulink url="http://opensource.bureau-cornavin.com/crash-course">Writing 
-Documentation Using DocBook: A Crash Course</ulink>.  This is an excellent
-tutorial.</para>
+<para><ulink url="http://opensource.bureau-cornavin.com/crash-course">Writing
+Documentation Using DocBook: A Crash Course</ulink> (Escriure
+Documentació Utilitzant DocBook: Un Curs Intensiu).  Aquest és un
+excel·lent tutorial.</para>
 
-<para>There is an excellent <ulink
-url="http://www.dpawson.co.uk/docbook/">DocBook FAQ</ulink> with a lot
-of material on styling HTML output.  There is also a DocBook <ulink
-url="http://docbook.org/wiki/moin.cgi">wiki</ulink>.</para>
+<para>Ací hi ha un
+excel·lent <ulink url="http://www.dpawson.co.uk/docbook/">DocBook
+FAQ</ulink> amb molt material material sobre estilització de l'eixida
+HTML.  Hi ha també
+un <ulink url="http://docbook.org/wiki/moin.cgi">wiki</ulink> de
+DocBook.</para>
 
-<para>If you're writing for the Linux Documentation Project, read the
+<para>Si vostè està escrivint per al Linux Documentation Project, llija la
 <ulink url="http://www.linuxdoc.org/LDP/LDP-Author-Guide/index.html">
-LDP Author Guide</ulink>.</para>
+LDP Author Guide</ulink> (Guia de l'Autor LDP).</para>
 
-<para>The best general introduction to SGML and XML that I've
-personally read all the way through is David Megginson's <ulink
-url="http://vig.pearsoned.com/store/product/0,,store-562_banner-0_isbn-0136422993,00.html">Structuring
-XML Documents</ulink> (Prentice-Hall, ISBN: 0-13-642299-3).</para>
+<para>La millor introducció a SGML i XML que personalment he llegit al
+llarg de tot el camí
+és <ulink url="http://vig.pearsoned.com/store/product/0,,store-562_banner-0_isbn-0136422993,00.html">Structuring
+XML Documents</ulink> (Estructurant Documents XML) de David Megginson
+(Prentice-Hall, ISBN: 0-13-642299-3) .</para>
 
-<para>For XML only, <ulink
-url="http://www.oreilly.com/catalog/xmlnut2/">XML In A
-Nutshell</ulink> by W. Scott Means and Elliotte <quote>Rusty</quote>
-Harold is very good.</para>
+<para>Només per a
+XML, <ulink url="http://www.oreilly.com/catalog/xmlnut2/">XML In A
+Nutshell</ulink> per W. Scott Means i Elliotte <quote>Rusty</quote>
+Harold és molt bo.</para>
 
 <para><ulink url="http://www.ibiblio.org/xml/books/bible/">The XML
-Bible</ulink> looks like a pretty comprehensive reference on XML and
-related standards (including Formatting Objects).</para>
+Bible</ulink> s'embla una referència prou completa sobre XML i els
+estàndards relacionats (incloent Formatting Objects).</para>
 
-<para>Finally, the <ulink url="http://xml.coverpages.org/">The XML
-Cover Pages</ulink> will take you into the jungle of XML standards
-if you really want to go there.</para>
+<para>Finalment, <ulink url="http://xml.coverpages.org/">The XML Cover
+Pages</ulink> el portarà dins de la jungla d'estàndards XML si
+realment vostè vol anar-hi.</para>
 
 </sect1>
 </article>
@@ -846,3 +891,5 @@ sgml-local-catalogs:nil
 sgml-local-ecat-files:nil
 End:
 -->
+<!-- Local IspellDict: ca-valencia -->
+<!-- Local IspellPersDict: ~/emacs/.ispell_valencia -->
