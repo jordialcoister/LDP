@@ -1,0 +1,546 @@
+<?xml version="1.0"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+"http://docbook.org/xml/4.1.2/docbook.dtd">
+
+<article lang="en">
+	<title>Mini-COM de Programació de Guions Gràfics d'Ordres amb
+	Tcl/Tk</title>
+<articleinfo>
+	<author>
+  	<firstname>Salvador</firstname>
+		<surname>Peralta</surname>
+		<othername role="mi">J.</othername>
+		<affiliation>
+			<address>
+				<email>speralta [a] willamette [punt] edu</email>
+			</address>
+		</affiliation>
+	</author>
+<revhistory>
+ <revision>
+	 <revnumber>alliberament 1.0</revnumber>
+	 <date>2003-08-19</date>
+	 <authorinitials>sjp</authorinitials>
+	 <revremark>
+	 Subtítol: Posar-li un careta gràfica a utilitats de línia
+	 d'ordres mitjançant Tcl i Tk.
+   </revremark>
+ </revision>
+</revhistory>
+<abstract>
+<para>
+Un dels aspectes més rics de Linux és l'abundància d'utilitats de
+línia d'ordres. La capacitat de proporcionar-ne ràpidament una façana
+gràfica per a fer-les disponibles per a usuaris sense coneixements
+tècnics pot ser una habilitat útil de posseir per a un desenvolupador
+o administrador.  Aquest article proporciona un tutorial d'introducció
+a l'estil llibre de receptes de Tcl i Tk, un llenguatge de guions i un
+conjunt d'eines gràfiques que foren dissenyats per a acomplir eixa
+tasca en concret.
+</para>
+</abstract>
+</articleinfo>
+<sect1 id="copyleft">
+<title>Copyright</title>
+<para>
+Copyright (c) 2003 Salvador Peralta
+</para>
+<para>
+Es permet la còpia, distribució i/o modificació d'aquest document baix
+el termes de la GNU Free Documentation License, Version 1.2 o
+posterior publicada per la Free Software Foundation; sense Secció
+Inalterable, Textos de Portada, ni Textos de Contraportada.
+</para>
+</sect1>
+
+<sect1 id="intro">
+<title>Introducció a Tcl i Tk</title>
+<para>
+El llenguatge d'eines d'ordres <!--The tool command language--> Tcl
+(pronunciat tíquel) és un llenguatge d'ordres interpretat, orientat a
+accions i orientat a cadenes.  Fou creat per John Ousterhaut a finals
+del anys 80 juntament amb el toolkit gràfic Tk.  Tcl i el toolkit Tk
+comprenen un dels primers entorns de programació de guions per a l'X
+Window System.  Encara que és venerable pels estàndards actuals,
+Tcl/Tk continua sent una eina útil per a desenvolupadors i
+administradors que volen construir ràpidament façanes gràfiques per a
+utilitats de línia d'ordres.
+</para>
+<para>
+Tcl i Tk venen inclosos amb la majoria de distribucions principals de
+Linux i els alliberaments de les fonts estan disponibles a
+tcl.sourceforge.net.  Si Tcl i Tk no estan instal·lats al seu sistema,
+els alliberaments de codis font estan disponibles al projecte Tcl de
+Sourceforge: http://tcl.sourceforge.net/.  Hi ha binaris disponibles
+per a la majoria de distribucions a rpmfind.net.  Un alliberament
+binari també està disponible per a Linux i altres plataformes des
+d'Active State a http://aspn.activestate.com/ASPN/Tcl.
+</para>
+</sect1>
+<sect1 id="basics">
+<title>Fonaments de Tcl i Tk</title>
+<para>
+Tcl és construeix a partir d'ordres que actuen sobre dades, i què
+accepten un cert nombre d'opcions que especifiquen com cadascuna
+d'aquestes ordres és executada.  Cada ordre consisteix en el nom de
+l'ordre seguit d'una o més paraules separades per un espai en blanc.
+Com que Tcl és interpretat, pot executar-se de forma interactiva a
+través de la seua ordre de shell, <command>tclsh</command>, o de forma
+no interactiva com un guió.  Quan Tcl és executat de forma interactiva, el
+sistema respon a cada ordre que és introduïda com s'il·lustra a
+l'exemple que ve a continuació.  Vostè pot experimentar amb tclsh
+simplement obrint un terminal i introduint l'ordre
+<command>tclsh</command>.
+</para>
+<screen>
+$ tclsh
+% set a 35
+35
+% expr 35 * $a
+1225
+% puts "35 * a és: [ expr 35 * $a ]"
+35 * a és: 1225
+% exit
+$
+</screen>
+<para>
+L'exemple anterior il·lustra varis aspectes del llenguatge Tcl.  La
+primera línia, <command>set a 35</command> assigna 35 a la variable
+<command>a</command> utilitzant l'ordre <command>set</command>.  La
+segona línia avalua el resultat de 35 vegades el valor de
+<command>a</command> utilitzant l'ordre <command>expr</command>.
+Fixe's en que Tcl, al igual que Perl i Bash requereix l'ús de
+l'operador dòlar per a obtindre el valor de la variable.  El claudàtor
+obert al voltant de la expressió <command>[ expr 35 * $a ]</command>
+instrueix a l'intèrpret a representar una ordre de substitució sobre
+la expressió, l'afig a la resta de la cadena i utilitza la ordre puts
+per a imprimir la cadena al canal d'eixida per defecte de Tcl.
+</para>
+<para>
+La shell de finestres de Tcl, <command>Wish</command>, és un intèrpret
+que llig ordres de l'entrada estàndard o d'un fitxer, els interpreta
+utilitzant el llenguatge Tcl, i construeix components gràfics del
+toolkit TK.  Com <command>tclsh</command>, pot executar-se de forma 
+interactiva.
+</para>
+<para>
+Per a invocar a Wish de forma interactiva, inicie X al seu sistema, òbriga
+un terminal, i teclege <command>wish</command> a la línia d'ordres.
+Si el seu entorn està configurat correctament, açò llançarà una
+finestra arrel buida i iniciarà el shell de finestres al seu terminal.
+L'exemple següent és un guió de dos línies que és un dels programes
+més simples que es poden crear amb <command>wish</command>:
+
+</para>
+<screen>
+$ wish
+% button .submit -text "Clique'm" -command { puts "\nHola Món" }
+.submit
+% pack .submit
+</screen>
+<para>
+Trenquem en dos aquestes dos línies de codi:
+</para>
+<para>
+<command>button .submit -text "Clique'm" -command { puts "\nHola Món" }</command>:
+</para>
+<para>
+La ordre <command>button</command> l'habilita a crear un botó i
+manipular l'andròmina button de Tk.  Com amb totes les andròmines Tk ,
+la sintaxi és <command>button</command> <command>.nom</command>
+<command>[-opció valor]</command> <command>[-opció valor]
+...</command>.  Les claus al voltant de la ordre
+<command>puts</command> li permeten niar la cadena de text, "Hola
+Món", dins de l'ordre sense realitzat cap substitució de variable.
+Altres andròmines bàsiques inclouen les següents: label, checkbutton,
+radiobutton, command, separator, entry, i frame.  Faça clic al botó
+unes quantes vegades per a verificar que funciona.
+</para>
+<para>
+<command>pack .submit</command>
+</para>
+<para>
+La ordre <command>pack</command> li diu al gestor d'empaquetat
+geomètric de Tk que empaquete el nom de la finestra com a finestra
+esclava de la finestra mestra <command>.</command> què es referencia
+sempre pel caràcter <command>.</command>.  De la mateixa manera que
+amb les altres ordres d'andròmina de Tk que veurem, la sintaxi és
+<command>pack .nom [-opció valor] [-opció valor]</command>.
+</para>
+<para>
+Mentre que els exemples previs eren molt simples, se'n poden construir
+més avançats d'una manera quasi tan fàcil.  Fem una ullada al següent
+guió que crea una façana simple per a apachectl (per favor, tinga en
+compte que aquest exemple està pensat per a ser executat com un guió
+enlloc de de forma interactiva des del shell.  Caldrà que vostè
+establisca els permisos d'execució per al guió i que l'execute com a
+un usuari amb privilegis per a iniciar i detindre apache ):
+
+<screen>
+set apachectl "/usr/local/apache/bin/apachectl"
+global apachectl
+
+proc start {} {
+  global apachectl
+  exec $apachectl start &amp; 
+}
+
+proc stop {} {
+  global apachectl
+  exec $apachectl stop &amp;
+}
+
+proc restart {} {
+  global apachectl
+  exec $apachectl restart &amp;
+}
+
+proc screen {} {
+  frame .top -borderwidth 10
+  pack .top -fill x	
+  button .top.start -text "Start" -command start
+  button .top.stop -text "Stop" -command stop
+  button .top.restart -text "Restart" -command restart
+  pack .top.start .top.stop .top.restart -side left -padx 0p -pady 0
+}
+screen
+</screen>
+</para>
+<para>
+Aquest guió introdueix uns pocs conceptes nous.  Vejam alguns d'ells
+línia per línia:
+</para>
+<screen>
+set apachectl "/usr/local/apache/bin/apachectl"
+global apachectl
+</screen>
+<para>
+Com hem dit abans, la ordre <command>set</command> s'utilitza per a
+assignar un valor a una variable.  Com als exemples previs, la sintaxi
+és simple: <command>set nom_variable valor</command>.  Per a fer que
+la variables estiga disponible per als procediments que estem creant
+en aquest programa, necessitem importar la variable apachectl dins de
+cadascun d'ells. Açò s'acompleix utilitzant l'ordre
+<command>global</command> que afig una variable citada a l'espai de
+noms local d'un procediment donat. La ordre <command>global</command>
+accepta una o més variable com a arguments i assigna les variables
+citades a cada procediment utilitzat al programa.  Global també
+s'utilitza per a exportar variables que estan declarades dins de
+l'espai de noms local d'un procediment.
+</para>
+<screen>
+proc start {} {
+  global apachectl
+	  exec $apachectl start &amp;
+}
+</screen>
+<para>
+Els procediments a Tcl són creats amb l'ordre <command>proc</command>.
+La ordre <command>proc</command> pren la següent forma: <command>proc
+nom {args} {cos}</command> on nom és el nom del procediment.  Args són
+els arguments formals acceptats pel procediment, i body és el codi
+principal del procediment.  Els procediments són executats de la
+mateixa manera que qualsevol altra ordre a Tcl.
+</para>
+<para>
+El guió sobre el que estem treballant ara consisteix de 4
+procediments. Els 3 primers ( start, stop, restart ), simplement
+importen la variable apachectl dins de l'espai de noms i executen les
+ordres bàsiques d'apachectl com a processos al rerefons mentre que el
+quart procediment, "<command>screen</command>", utilitza
+l'empaquetador per a construir la pantalla bàsica i cridar a cadascuna
+de les funcions.
+</para>
+<para>
+Observem més detingudament el procediment <command>screen</command>:
+</para>
+<screen>  
+proc screen {} {
+  frame .top -borderwidth 10
+  pack .top -fill x	
+  button .top.start -text "Start" -command start
+  button .top.stop -text "Stop" -command stop
+  button .top.restart -text "Restart" -command restart
+  pack .top.start .top.stop .top.restart -side left -padx 0p -pady 0
+}
+</screen>
+
+<para>
+El procediment <command>screen</command> comença utilitzant l'ordre
+<command>frame</command> per a construir el marc bàsic que contindrà
+els botons especificats més avall en el procediment.  Com aquest
+exemple il·lustra, les andròmines esclaves s'especifiquen
+preposant-les amb el nom del seu mestre seguit d'un ".".  El mestre ja
+ha d'estar empaquetat obligatòriament abans de que l'esclau puga
+utilitzar-lo, així, empaquetem el marc .top abans d'especificar la
+ordre <command>button</command> i dir-li que es farcisca al llarg de
+l'eix x.
+</para>
+<para>
+Per últim, utilitzem la ordre <command>button</command> per a crear 3
+botons esclaus de <command>.top</command>, passant-hi el procediment
+apropiat per a executar quan el botó es prema, i afegint una etiqueta
+textual utilitzant respectivament els arguments
+<command>-command</command> i <command>-text</command>.
+</para>
+</sect1>
+<sect1 id="advanced"> 
+<title>Afegint Característiques</title>
+<para>
+Proporcionar múltiples botons per a controlar una única aplicació
+potser és una miqueta exagerat, com ho és crear procediments separats
+per a cada acció.  Un altre problema és que apachectl imprimeix un
+missatge per l'eixida estàndard per a indicar com l'ordre ha
+actuat. L'aplicació podria ser millorada incloent-hi una andròmina de
+text per a mostrar-ne la eixida.
+</para>
+<para>
+Al següent guió, redissenyem l'aplicació per a que utilitze una
+selecció amb botons d'opció i un únic botó modificant el procediment
+<command>screen</command>, i construïm una andròmina de text a un nou
+marc. També eliminem els procediments start, stop, i restart i en
+creem 2 nous.  El primer, <command>init</command>, manejarà les
+condicionals creades pel botó de selecció, el segon,
+<command>put_text</command>, llançarà Apache i imprimirà la eixida
+d'apachectl a una andròmina de text:
+</para>
+<screen>
+#!/usr/bin/wish
+
+set apachectl "/usr/local/apache_new/bin/apachectl"
+
+proc screen {} {
+  frame .top -borderwidth 10
+  pack .top -fill x
+  radiobutton .top.start -text "start" -variable mode -value start
+  radiobutton .top.stop  -text "stop" -variable mode -value stop
+  radiobutton .top.restart -text "restart" -variable mode -value restart
+  button .top.submit -text execute -command init 
+  pack .top.start .top.stop .top.restart .top.submit -side left -padx 0p -pady 0 -anchor n
+  frame .bottom
+  pack .bottom -fill x
+  text .bottom.main -relief sunken -bd 2 -yscrollcommand ".bottom.scroll set"
+  scrollbar .bottom.scroll -command ".bottom.main yview"
+  pack .bottom.main -side left -fill y
+  pack .bottom.scroll -side right -fill y
+}
+
+proc init { } {
+ global mode action
+ switch $mode {
+    stop     {set action "stop"}
+    restart  {set action "restart"}
+    default  {set action "start"}
+  }
+	put_text
+}
+
+proc put_text {} {
+  global action apachectl
+  set f [ open "| $apachectl $action" r]
+  while {[gets $f x] >= 0} {
+    .bottom.main insert 1.0 "$x\n"
+  }
+  catch {close $f}
+}
+screen
+</screen>
+<para>
+Primer, observem el procediment <command>screen</command>.  La ordre
+<command>radiobutton</command> funciona de la mateixa manera que el
+radiobutton d'html.  El paràmetre <command>-variable</command> accepta
+el nom de la variable com a argument. El paràmetre
+<command>-value</command> accepta el valor de la variable com a
+paràmetre.  El botó, .top.submit utilitza el paràmetre
+<command>-command</command> per a cridar al procediment init definit
+més tard al guió.  Aquests botons són aleshores empaquetats dins del
+marc top (dalt) i un segon frame anomenat bottom (baix) és creat.
+</para>
+<para>
+El marc bottom frame està compost per una andròmina de text i una
+barra de scroll.  Les andròmines de text es creen amb la ordre
+<command>text</command> que pren diverses opcions.  En aquest cas, hem
+utilitzat la opció <command>-relief</command> que especifica l'efecte
+$d per al camp (altres valors per a -relief inclouen raised, flat,
+ridge, solid, groove); la opció <command>-bd</command> que
+n'especifica l'ample de les vores; i la
+<command>yscrollcommand</command> que especifica el nom de la barra de
+desplaçament que estarà associada amb el camp de text. La nostra
+andròmina de barra de scroll pren una opció,
+<command>-command</command> que n'especifica el comportament quan el
+text es desplaça més enllà de la pantalla de l'andròmina de text amb
+què està interactuant.
+</para>
+<para>
+El procediment <command>init</command> carrega la variable mode dins
+del seu espai de noms utilitzant la ordre <command>global</command> i
+utilitza una sentència<command>switch</command> per a establir el
+valor de la variable global <command>action</command>.
+</para>
+<para>
+En aquest exemple, la ordre <command>switch</command> comprova si
+"$mode" coincideix amb la primera paraula a cada línia de la llista, i
+realitza la acció especificada per la segona paraula .  El valor per
+defecte s'especifica al final de la llista i defineix l'acció a
+realitzar si no es troba cap coincidència.  Switch accepta 4 opcions:
+<command>-exact</command>, que requereix sensibilitat a
+majúscules/minúscules, <command>-glob</command>, que utilitza
+coincidències de patrons estil englobat, <command>-regexp</command>,
+que realitza coincidències estil expressions regulars, i
+<command>--</command>, que indica la fi de les opcions, i és
+típicament utilitzat si el patró buscat comença per "-".
+</para>
+<para>
+Nota: Podríem haver utilitzat una cadena de condicionals
+if-elseif-else enlloc de la sentència switch:
+</para>
+<para>
+El procediment <command>put_text</command> llig el valor d'action que
+fou establit al procediment init, executa apachectl amb l'argument
+apropiat com s'especifica a action, i imprimeix la eixida d'apache a
+l'andròmina de text .bottom.main.
+</para>
+<screen>
+proc put_text {} {
+ 	global action apachectl
+ 	set f [ open "| $apachectl $action" r]
+	while {[gets $f x] >= 0} {
+ 		.bottom.main insert 1.0 "$x\n"
+	}
+}
+</screen>
+<para>
+El procediment <command>put_text</command> introdueix 3 noves ordres:
+</para>
+<para>
+Primer, estableix el valor d'una variable, f, a la eixida de la ordre
+open.  <command>Open</command> pot utilitzar-se per a obrir un fitxer,
+entubar un flux o port sèrie i retornar un identificador que puga
+ser utilitzat per a la lectura, escriptura o tancament d'un flux
+Com el primer caràcter a continuació d'<command>open</command> és una
+canonada "|", <command>$apachectl $action</command> és tractat com una
+ordre, i és executat com si s'haguera proporcionat un
+<command>exec</command>.  La <command>r</command> especifica que el
+flux és de només lectura.  Altres paràmetres són els següents:
+</para>
+<screen>
+r només lectura
+r+  lectura i escriptura si el fitxer existeix
+w només escriptura
+w+  lectura i escriptura si el fitxer existeix
+a només escriptura.  Crea un fitxer nou si no n'existeix cap.
+a+  lectura i escriptura. Crea un nou fitxer si no n'existeix cap.
+</screen>
+<para>
+La segona ordre nova és <command>while</command>.  While és el típic
+bucle `mentre' que executa un cos d'arguments fins que la condició es
+dóna. En este cas, <command>while</command> llegirà una línia
+d'entrada i la gravarà a la variable <command>x</command> fins que no
+quede res per llegir.  La ordre insert insereix cada línia d'entrada
+al caràcter número zero de la línia 1 (1.0) de l'andròmina de text
+.bottom.main.
+</para>
+</sect1>
+<sect1 id="concl">
+<title>Conclusions</title>
+<para>
+Aquesta ha sigut una introducció amb exemples prou ràpida i bruta a la
+creació d'interfícies gràfiques d'usuari per a aplicacions de línia
+d'ordres amb Tcl i Tk.  Addicionalment a la sintaxi bàsica del
+llenguatge, hem aprés sobre procediments, alguns dels conjunts
+d'andròmines bàsiques, control del flux de programa, alguna cosa
+d'operadors lògics de Tcl, i els fonaments de com inserir text dins
+d'una andròmina textual.
+</para>
+<para>
+La simplicitat de la sintaxi de Tcl el converteix en un llenguatge
+molt fàcil d'aprendre i implementar-ne.  El nostre exemple final es va
+implementar en menys de 40 línies de codi.  Si vostè vol anar més
+enllà dels conceptes bàsics descrits ací, la finestra mallada
+proporciona un mecanisme més avançat de construcció de geometries de
+finestra que l'empaquetador què hem utilitzat per a aquest tutorial. A
+més, Tcl pot utilitzar-se per a més que per a interfícies gràfiques
+d'usuari per a guions.  Per exemple, el llenguatge de programació
+expect de Don Libes, que proporciona facilitats per a construir un
+diàleg programat amb programes interactius, fou escrit en Tcl i C.  La
+següent secció discuteix on anar a continuació a buscar més recursos
+sobre Tcl i Tk.
+</para>
+
+</sect1>
+<sect1 id="further">
+<title>Lectures Complementàries</title>
+<para>Als lectors interessats en aprendre més sobre Tcl i Tk se'ls
+convida a seguir aquest article amb alguns dels recursos llistat a
+continuació:</para>
+<orderedlist>
+	<listitem>
+		<para>
+		Tcl ve amb un excel·lent manual del sistema en
+		línia. Tcl i el shell de Tcl, tclsh, són descrits amb
+		"man Tcl" i "man tclsh" respectivament.  Totes les
+		ordres que formen part de l'entorn bàsic de Tcl estan
+		descrits a la secció "n" del manual. Els lectors
+		interessats en aprendre més sobre els paràmetres
+		opcionals de les ordres de Tcl estan convidats s fer ús
+		de la pàgina man "options".
+		</para>
+	</listitem>
+	<listitem>
+		<para>
+		"Tcl and the Tk Toolkit" de John Ousterhaut va per la
+		14a edició, i és un text clàssic de programació.  A
+		més de proporcionar els conceptes bàsics de la
+		programació de guions amb Tcl i Tk, "Tcl and the Tk
+		Toolkit" també proporciona gran quantitat d'informació
+		sobre com estendre Tcl i Tk amb el llenguatge de
+		programació C.
+		</para>
+	</listitem>
+	<listitem>
+		<para>
+		"Practical Programming in Tcl and Tk" de Brent Welch
+		és en el moment d'escriure açò en la seua quarta
+		edició i és una molt bona referència complementària al
+		llibre de Ousterhaut.
+		</para>
+	</listitem>
+	<listitem>
+		<para>
+		comp.os.lang.tcl és el grup de notícies principal per
+		a la gent que utilitza Tcl i Tk.
+		</para>
+	</listitem>
+	<listitem>
+		<para>
+		Scriptics.com és el principal recurs per a la
+		comunitat de desenvolupadors de Tcl/Tk.
+		</para>
+	</listitem>
+	<listitem>
+		<para>
+		Cameron Laird manté un excel·lent recurs de tutorials
+		en línia de Tcl i Tk a <ulink
+		url="http://phaseit.net/claird/comp.lang.tcl/tcl_tutorials.html">http://phaseit.net/claird/comp.lang.tcl/tcl_tutorials.html.</ulink>
+		</para>
+	</listitem>
+	
+</orderedlist>
+</sect1>
+<sect1 id="about">
+<title>Sobre l'autor</title>
+<para>
+Salvador Peralta és l'Administrador de Sistemes de la Mark O. Hatfield
+Library a la Willamette University.  És un col·laborador regular del
+Linux Documentation Project i viu a Oregon amb la seua dona i dos
+gossos.  Salvador agraeix les preguntes i comentaris via correu
+electrònic a speralta [at] willamette [dot] edu.
+</para>
+</sect1>
+</article>
+
+<!-- Local IspellDict: ca-valencia -->
+<!-- Local IspellPersDict: ~/.emacs/.ispell-valencia -->
+
+
+
