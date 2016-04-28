@@ -2,7 +2,7 @@
 <article>
 <artheader>
    
-   <title>DHCP mini-HOWTO</title>
+   <title>Mini-COM sobre DHCP</title>
 
    <author>
       <firstname>Vladimir</firstname>
@@ -17,90 +17,92 @@
    <revhistory>
       <revision>
          <revnumber>v4.12</revnumber>
-         <date>October 22, 2000</date>
+         <date>22 d'octubre del 2000</date>
          <authorinitials>vv</authorinitials>
       </revision>
    </revhistory>
 
    <abstract>
       <para>
-      This document attempts to answer basic questions on how to
-      set up your Linux box to serve as a DHCP server or a DHCP
-      client.
+      Aquest document intenta donar resposta a preguntes basiques
+      sobre la configuració del seu ordinador amb Linux per a fer de
+      servidor DHCP o client.
       </para>
    </abstract>
 
 </artheader>
 
 <sect1> 
-<title>Introduction</title>
+<title>Introducció</title>
 
 <sect2> 
-<title>Standard Disclaimer</title>
+<title>Descàrrec de Responsabilitats Estandard</title>
 <para>
-No liability for the contents of this documents can be accepted.
-Use the concepts, examples and other content at your own risk.
-As this is a new edition of this document, there may be errors
-and inaccuracies, that may of course be damaging to your system.
-Proceed with caution, and although this is highly unlikely,
-I don't take any responsibility for that.
+No s'acceptarà cap càrrec de resposabilitats sobre els continguts
+d'aquests document.  Utilitze el conceptes, exemples i d'altres
+continguts baix el seu propi risc.  Com aquesta és una nova edició
+d'aquest document, podrien haver-hi errors i imprecisions, pel que
+existeix la possibilitat de que aixó puga ser perjudicial per al seu
+Sistema. Procedisca amb pecaució, malgrat ser altament improbable no
+em responsabilitzaré en tal cas
 </para>
 <para>
-Also bear in mind that this is <emphasis>NOT</emphasis> official information.
-Much content in this document are assumptions, which appear to
-work for people. Use the information at your own risk.
+Tinga en compte, a més a més que aquesta
+informació <emphasis>NO</emphasis> és oficial.  Molts dels continguts
+en aquest document són assumpcions, que sembla que a la gent li
+funcionen.  Utilitze aquesta informació baix el seu risc.
 </para>
 </sect2>
 
 <sect2> 
-<title>New Versions of this Document</title>
+<title>Noves Versions d'Aquest Document</title>
 <para>
-New versions of this document are available from
+Noves versions d'aquest document estan disponibles a 
 </para>
 <para>
 <ulink
 url="http://www.oswg.org/oswg-nightly/DHCP.html">http://www.oswg.org/oswg-nightly/DHCP.html</ulink>
 </para>
 <para>
-Following translations of the DHCP mini-HOWTO are available:
+Les seguents traduccions del mini-COM sobre DHCP estan disponibles:
 </para>
 
 <itemizedlist>
-<listitem><para>Chinese - <ulink
+<listitem><para>Xinés - <ulink
 url="http://www.linux.org.tw/CLDP/mini/DHCP.html">http://www.linux.org.tw/CLDP/mini/DHCP.html</ulink></para></listitem>
-<listitem><para>Japanese - <ulink
+<listitem><para>Japonés - <ulink
 url="http://www.linux.or.jp/JF/JFdocs/DHCP.html">http://www.linux.or.jp/JF/JFdocs/DHCP.html</ulink></para></listitem>
-<listitem><para>Spanish - <ulink
+<listitem><para>Espanyol - <ulink
 url="ftp://cuates.pue.upaep.mx/pub/linux/LuCAS/DHCP-mini-Como/">ftp://cuates.pue.upaep.mx/pub/linux/LuCAS/DHCP-mini-Como/</ulink></para></listitem>
 </itemizedlist>
 
 <para>
-Permission is hereby granted to all individuals who want to translate
-the document into their own language. I would only ask that you provide
-a link back to this document and inform me of a URL to your translation
-so I can include a link to it.
+Es garanteix el permis a totes aquelles persones que vullgen traduir
+aquest document a la seua propia llengua. Només els hi demanaria que
+proporcionessin un enllaç a aquest document i que m'informessin de la
+URL de la traducció per a poder afegi-ne un enllaç
 </para>
 
 </sect2>
 
 <sect2> 
-<title>Feedback</title>
+<title>Aportacions</title>
 <para>
-Feedback is most certaintly welcome for this document. 
-Without your submissions and input, this document wouldn't 
-exist. So, please post your additions, comments and 
-criticisms to <email>vuksan-feedback@veus.hr</email>.
+Les aportacions a aquest document són majoritàriament benvingudes.
+Sense les seues submissions i input, aquest document no
+existiria. Així que, per favor, envien les seues addicions, comentaris
+i crítiques a <email>vuksan-feedback@veus.hr</email>.
 </para>
 </sect2>
 
 <sect2> 
-<title>Contributors</title>
+<title>Contribucions</title>
 <para>
-This document has been modified from the original version
-by Paul Makeev.
+La versió original d'aquest document ha sigut modificada per Paul
+Makeev.
 </para>
 <para>
-The following people have contributed to this mini-HOWTO.
+Les següents persones han contribuit a aquest mini-COM.
 </para>
 
 <itemizedlist>
@@ -116,11 +118,11 @@ The following people have contributed to this mini-HOWTO.
 </sect2>
 
 <sect2> 
-<title>Copyright Information</title>
+<title>Informació de Copyright</title>
 <para>
-This document is copyrighted (c) 1998 Vladimir Vuksan and
-distributed under the terms of the OpenContent License (OPL). Full
-text of the license can be found at
+El copyright d'aquest document és propietat de (c) 1998 Vladimir
+Vuksan i es distribueix baix el termes de la OpenContent License
+(OPL). El text complet de la llicència es pot trobar a:
 </para>
 <para> 
 <ulink
@@ -131,44 +133,47 @@ url="http://www.opencontent.org/opl.shtml">http://www.opencontent.org/opl.shtml<
 </sect1>
 
 <sect1>
-<title>DHCP protocol</title>
+<title>El protocol DHCP</title>
 <para>
-DHCP is Dynamic Host Configuration Protocol. It is used to 
-control vital networking parameters of hosts (running clients)
-with the help of a server. DHCP is backward compatible with 
-BOOTP. For more information see RFC 2131 (old RFC 1541) and 
-other. (See Internet Resources section at the end of the 
-document). You can also read 
+DHCP són les sigles de Dynamic Host Configuration Protocol. S'utilitza
+per a controlar els paràmetres vitals de configuració de xarxa de
+hosts (clients en execució) amb l'ajuda d'un servidor. DHCP és
+compatible enrere amb BOOTP. Per a més informació mire la RFC 2131
+(l'antiga RFC 1541) i altres. (Mire la secció Recursos d'Internet al
+final de document). També pot llegir
 <ulink
 url="http://web.syr.edu/~jmwobus/comfaqs/dhcp.faq.html">http://web.syr.edu/~jmwobus/comfaqs/dhcp.faq.html</ulink>.
 </para>
 <para>
-This mini-HOWTO covers both the DHCP _SERVER_ daemon as well as DHCP
-_CLIENT_ daemon. Most people need the client daemon which is used by
-workstations to obtain network information from a remote server. The server
-daemon is used by system administrators to distribute network information
-to clients so if you are just a regular user you need the _CLIENT_ daemon.
+Aquest mini-COM cobreis tant el dimoni _SERVIDOR_ DHCP com el dimoni
+DHCP _CLIENT_. La majoria de la gent necessita el dimoni client què és
+l'utilitzat per les les estacions de treball per a obtindre la
+informació de xarxa des d'un servidor remot. El dimoni servidor és
+utilitzat per l'administrador del sistema per a distribuir informació
+de configuració de xarxa als clients pel que si vostè és un usuari
+típic necessita el dimoni _CLIENT_.
 </para>
 </sect1>
 
 <sect1>
-<title>Client Setup</title>
+<title>Configuració del Client</title>
 <para>
-Currently there are three different DHCP client programs for Linux, dhcpcd,
-pump and dhclient. This mini-HOWTO deals primarily with dhcpcd.
+Actualment hi ha tres programes client DHCP per a Linux, dhcpcd, pump
+i dhclient. Aquest mini-HOWTO tracta sobretot amb dhcpcd.
 </para>
 
 <sect2>
-<title>Downloading the client daemon (dhcpcd)</title>
+<title>Descarregar el dimoni client (dhcpcd)</title>
 <para>
-Depending on your distribution you might have to download the 
-DHCP client daemon. If you want to compile it from the source you
-package you need is called dhcpcd and the current version is 1.3.18. 
-It is maintained by Sergei Viznyuk <email>sergei@phystech.com</email> and
-today it comes as a binary package with most distributions.
+Depent de la seua distribució potser vostè ha de descarregar el dimoni
+client DHCP. Si vostè vol compilar-lo a partir dels fonts el seu
+paquet cal que es diga dhcpd i la versió actual és la 1.3.18. Es
+matingut per Sergei Viznyuk <email>sergei@phystech.com</email> i avuí
+dia s'inclou en forma de paquet binari en la majoria de distribucions.
 </para>
 <para>
-dhcpcd source can be downloaded from following locations
+el codi font de dhcpcd pot descarregar-se des de les següent
+localitzacions:
 </para>
 
 <itemizedlist>
@@ -179,15 +184,15 @@ url="http://www.cps.msu.edu/~dunham/out/">http://www.cps.msu.edu/~dunham/out/</u
 </itemizedlist>
 
 <para>
-Then follow the instructions below. They should be the same.
+Llavors seguisca les instruccions següents. Haurien de ser les mateixes.
 </para>
 </sect2>
 
 <sect2 id="slackware">
 <title id="slackware.title">Slackware</title>
 <para>
-You can download the latest copy of the DHCPcd from any Metalab mirror
-or following:
+Pot descarregar la darrera versió de DHCPcd de qualsevol del espills
+de Metalab o des de:
 </para>
 
 <itemizedlist>
@@ -198,14 +203,14 @@ url="ftp://ftp.phystech.com/pub/">ftp://ftp.phystech.com/pub/</ulink> (Primary s
 </itemizedlist>
 
 <para>
-Download the latest version of <filename>dhcpcd.tar.gz</filename>. 
+Descarregue la darrera versió de <filename>dhcpcd.tar.gz</filename>. 
 </para>
 
 <itemizedlist>
 
 <listitem>
 <para>
-Unpack it
+Desempaquete-la
 </para>
 <para>
 <command>tar -zxvf dhcpcd-1.3.18pl1.tar.gz</command>
@@ -214,7 +219,7 @@ Unpack it
 
 <listitem>
 <para>
-cd into the directory and make dhcpcd
+cd dins del directori i make dhcpcd
 </para>
 <para>
 <command>cd dhcpcd-1.3.18pl1</command>
@@ -226,7 +231,7 @@ cd into the directory and make dhcpcd
 
 <listitem>
 <para>
-Install it (you have to run the following command as root)
+Instal·le-ho (vostè ha d'executar la següent ordre com a root)
 </para>
 <para>
 <command>make install</command>
@@ -236,12 +241,12 @@ Install it (you have to run the following command as root)
 </itemizedlist>
 
 <para>
-This will create the directory /etc/dhcpc where DHCPcd will store the
-DHCP information and dhcpcd file will be copied into /usr/sbin.
+Açò crearà el directori /etc/dhcpc on DHCPcd emmagatzemarà la
+informació de DHCP i un fitxer dhcpcd serà copiada a /usr/sbin.
 </para>
 
 <para>
-In order to make the system initialize using DHCP during boot type:
+Per a fer que el sistema inicialitze utilitzant DHCP durant l'arranc teclege:
 </para>
 
 <para>
@@ -253,10 +258,10 @@ In order to make the system initialize using DHCP during boot type:
 </para>
 
 <para>
-This will move the old network initialization script into
+Això mourà l'antic guió d'inicialització de la xarxa a 
 <filename>rc.inet1.OLD</filename>.
-You now need to create the new <filename>rc.inet1</filename> script.
-Following code is all you need:
+Ara caldrà que cree el nou guió <filename>rc.inet1</filename>.
+El codi següent és tot el que vostè necessita:
 </para>
 
 <programlisting>
@@ -279,49 +284,51 @@ HOSTNAME=`cat /etc/HOSTNAME` #This is probably not necessary but I
 </programlisting>
 
 <para>
-Save it and reboot your computer.
+Graveu-ho i reinicie l'ordinador.
 </para>
 
 <para>
-When you are finished go the <link linkend=nameserver>last step</link>.
+Quan haja acabat vaja al <link linkend=nameserver>darrer pas</link>.
 </para>
 
 </sect2>
 
 <sect2 id="redhat6">
-<title id="redhat6.title">RedHat 6.x and Mandrake 6.x</title>
+<title id="redhat6.title">RedHat 6.x i Mandrake 6.x</title>
 <para>
-DHCPcd configuration under RedHat 6.0+ is really easy. All you need to do
-is start the Control Panel by typing <command>control-panel</command>.
+La configuració de DHCPcd baix RedHat 6.0+ és realment fàcil. Tot el
+que necessita fer és iniciar el Panell de Control teclejant
+ <command>control-panel</command>.
 </para>
  
 <itemizedlist>
-<listitem><para>Select "Network Configuration"</para></listitem>
-<listitem><para>Click on Interfaces</para></listitem>
-<listitem><para>Click Add</para></listitem>
-<listitem><para>Select Ethernet</para></listitem>
-<listitem><para>In the Edit Ethernet/Bus Interface select "Activate
-interface at boot time" as well as select "DHCP" as "Interface
-configuration protocol"</para></listitem>
+<listitem><para>Seleccione "Network Configuration"</para></listitem>
+<listitem><para>Clique a Interfaces</para></listitem>
+<listitem><para>Clique Add</para></listitem>
+<listitem><para>Sel·leccione Ethernet</para></listitem>
+<listitem><para>A Edit Ethernet/Bus Interface sel·leccione "Activate
+interface at boot time" així com "DHCP" com a "Interface configuration
+protocol"</para></listitem>
 </itemizedlist>
 
 <para>
-Please note that in RedHat 6.x Redhat as default includes a DHCP client called 
-pump instead of above mentioned dhcpcd. CD-ROM does include dhcpcd RPM so if you
-have no luck with pump try with dhcpcd. After you install dhcpcd 
-(e.g. <command>rpm -i dhcpcd-1.3.17pl2-1.i386.rpm</command>)  you
-will have to make some <link linkend=linuxppc-rh6>changes</link>.
+Per favor, tinga present que a RedHat 6.x Redhat inclou per defecte un
+client DHCP anomenat pump enlloc de l'ades mentat dhcpcd. El CD-ROM
+inclou el RPM dhcpcd així que si no té sort amb pump prove amb
+dhcpcd. Una vegada instal·lat dhcpcd (p.ex. <command>rpm -i
+dhcpcd-1.3.17pl2-1.i386.rpm</command>) haurà de fer
+alguns <link linkend=linuxppc-rh6>canvis</link>.
 </para>
 
 <para>
-Additional notes from Alexander Stevenson
+Notes additionals d'Alexander Stevenson
 <email>alexander.stevenson@home.com</email>:
 </para>
 
 <para>
-I had no luck with DHCPcd. What finally worked for me was "pump", which
-comes with Linux Mandrake 6.0 (and so I assume it is included with
-RedHat as well). The command I used was:
+No he tingut sort amb DHCPcd. El que finalment em funcionà va ser
+"pump", que ve amb Linux Mandrake 6.0 (i per això assumisc que ve
+inclòs amb RedHat també). La ordre que he utilitzat és:
 </para>
 
 <para>
@@ -329,22 +336,22 @@ RedHat as well). The command I used was:
 </para>
 
 <para>
-It didn't matter what "hostname" was, but without it the server would
-not respond.
+No m'importa quin era el "hostname", però sense ell el servidor no
+respondria.
 </para>
 
 <para>
-I then changed the line in my <filename
-class="directory">/sbin/ifup</filename> script to reflect the change;
-the default version does not have the -h switch, and so didn't work for
-me.
+Llavors vaig canviar la línia al meu
+guió <filename class="directory">/sbin/ifup</filename> per a reflectir
+el canvi; la versió per defecte no té el paràmetre -h, així que a mi
+no em va funcionar.
 </para>
 
 <para>
-Basically, if you're using linuxconf, and after setting the adapter to
-"DHCP" it still doesn't work, try adding a "<command>-h
-hostname</command>" to the pump line in the
-<filename>/sbin/ifup</filename> script. My script now looks like this:
+Bàsicament, si utilitza linuxconf, i després d'establir l'adaptador a
+"DHCP" continua sense funcionar, prove afegint un "<command>-h
+hostname</command>" a la línia pump del guió
+<filename>/sbin/ifup</filename>. El meu guió es veu així:
 </para>
 
 <programlisting>
@@ -361,13 +368,14 @@ else ...
 </programlisting>
 
 <para>
-Another more elegant way to add hostname field is provided by Aad van der Klaauw:
+Una altra forma elegant d'afegir un camp hostname la proporciona Aad van der Klaauw:
 </para>
 
-<para>Currently i'm configuring a gateway system at home, needed to set the
-MAC address and use the '-h hostname' workaround. So I decided to
-*not* change the script but to use the configure file.
-In my /etc/sysconfig/network-scripts/ifcfg-eth0 I have added the following
+<para>A hores d'ara estic configurant un sistema gateway a casa,
+necessitava establira l'adreça MAC i utilitzar el '-h hostname'
+workaround. Així que he decidit *no* modificar el guió, sinó utilitzar
+el fitxer de configuració.  He afegit al meu
+/etc/sysconfig/network-scripts/ifcfg-eth0 les següents línies
 </para>
 
 <programlisting>
@@ -377,12 +385,14 @@ DHCP_HOSTNAME="trigger_for_terayon"
 </programlisting>
 
 <para>
-Which will survive upgrades, and is imho a "cleaner" way.
+Això sobreviurà a actualitzacions, i és, en la meua sinzera opinió,
+una manera "més neta" de fer-ho.
 </para>
 
 
 <para>
-That is it. Reboot your machine or type <command>/sbin/ifup eth0</command> on the command line.
+Això és tot. Reinicie la màquina o tecleje <command>/sbin/ifup
+eth0</command> a la línia d'ordres.
 </para>
 
 </sect2>
@@ -390,32 +400,33 @@ That is it. Reboot your machine or type <command>/sbin/ifup eth0</command> on th
 <sect2>
 <title>RedHat 5.x</title>
 <para>
-DHCPcd configuration under RedHat 5.0+ is really easy. All you need to do
-is start the Control Panel by typing <command>control-panel</command>.
+La configuració de DHCPcd baix RedHat 5.0+ és realment fàcil. Tot el
+que necessita fer és iniciar el Control Panel
+teclejant <command>control-panel</command>.
 </para>
 
 <itemizedlist>
-<listitem><para>Select "Network Configuration"</para></listitem>
-<listitem><para>Click on Interfaces</para></listitem>
-<listitem><para>Click Add</para></listitem>
-<listitem><para>Select Ethernet</para></listitem>
-<listitem><para>In the Edit Ethernet/Bus Interface select "Activate
-interface at boot time" as well as select "DHCP" as "Interface
-configuration protocol"</para></listitem>
+<listitem><para>Sel·leccione "Network Configuration"</para></listitem>
+<listitem><para>Clique a Interfaces</para></listitem>
+<listitem><para>Clique Add</para></listitem>
+<listitem><para>Sel·leccione Ethernet</para></listitem>
+<listitem><para>A Edit Ethernet/Bus Interface sel·leccione "Activate
+interface at boot time" així com "DHCP" com a "Interface configuration
+protocol"</para></listitem>
 </itemizedlist>
 
 <para>
-When you are finished go the <link linkend=nameserver>last step</link>. 
+Quan hagi acabat vaja al <link linkend=nameserver>darrer pas</link>.
 </para>
 </sect2>
 
 
 <sect2>
-<title>RedHat 4.x and Caldera OpenLinux 1.1/1.2</title>
+<title>RedHat 4.x i Caldera OpenLinux 1.1/1.2</title>
 <para>
-DHCPcd is included in the standard RedHat distribution as an RPM and
-you can find it on your distribution's CD-ROM in RPMS directory or you can
-download it from:
+DHCPcd està inclòs a la distribució RedHat estàndard com un RPM i ho
+pot trobar al CD de la seua distribució al directori RPMS o el pot
+descarregar des de:
 </para>
 
 <para>
@@ -424,46 +435,47 @@ url="ftp://ftp.redhat.com/pub/redhat/redhat-4.2/i386/RedHat/RPMS/dhcpcd-0.6-2.i3
 </para>
 
 <para>
-Install it with <command>rpm -i dhcpcd-0.6-2.i386.rpm</command>.
+Instal·le'l amb <command>rpm -i dhcpcd-0.6-2.i386.rpm</command>.
 </para>
 
 <para>
-Alternatively you can compile your own version by following the steps
-outlined in the <link linkend=slackware
+Alternativament por compilar la seua pròpia versió seguint els passos
+següents dibuixats al <link linkend=slackware
 endterm="slackware.title"></link>.
 </para>
 
 <para>
-The following information was provided to me by nothing
+La següent informació me la va proporicionar nothing
 <email>nothing@cc.gatech.edu</email>.
 </para>
 
 <blockquote>
 <para>
-Removed my static ip and name from
-<filename>/etc/resolv.conf</filename>. However, I did leave in the
-search line and my two nameserver lines (for some reason my dhcpcd never
-creates a <filename>/etc/dhcpc/resolv.conf</filename>, so I have to use
-a static <filename>/etc/resolv.conf</filename>).
+He eliminat la meua ip estàtica i nom de
+<filename>/etc/resolv.conf</filename>. Tanmateix, l'he deixat a la
+línia de cerca i les meues dues línies de nameserver (per alguna raó
+el meu dhcpcd mai crea un <filename>/etc/dhcpc/resolv.conf</filename>,
+així que he d'utilitzar un <filename>/etc/resolv.conf</filename>
+estàtic).
 </para>
 <para>
-In <filename>/etc/sysconfig/network</filename> I removed the HOSTNAME
-and GATEWAY entries. I left the other entries as is (NETWORKING,
-DOMAINNAME, GATEWAYDEV).
+A <filename>/etc/sysconfig/network</filename> he eliminat les entrades
+HOSTNAME i GATEWAY. He deixat les altres entrades tal qual
+(NETWORKING, DOMAINNAME, GATEWAYDEV).
 </para>
 <para>
-In <filename>/etc/sysconfig/network-scripts/ifcfg-eth0</filename> I
-removed the IPADDR, NETMASK, NETWORK, and BROADCAST entries. I left
-DEVICE and ONBOOT as is.  I changed the BOOTPROTO line to
+A <filename>/etc/sysconfig/network-scripts/ifcfg-eth0</filename> he
+eliminat les entrades IPADDR, NETMASK, NETWORK, i BROADCAST. He deixat
+DEVICE i ONBOOT tal qual.  He canviat la línia BOOTPROTO a
 BOOTPROTO=dhcp.
 </para>
 <para>
-Save the file. Reboot your computer.
+Grave el fitxer. Reincie l'ordinador.
 </para>
 </blockquote>
 
 <para>
-When you are finished go the <link linkend=nameserver>last step</link>. 
+Quan haja acabat vaja al <link linkend=nameserver>darrer pas</link>. 
 </para>
 
 </sect2>
@@ -471,7 +483,7 @@ When you are finished go the <link linkend=nameserver>last step</link>.
 <sect2 id="debian">
 <title id="debian.title">Debian</title>
 <para>
-There is a deb package of DHCPcd (make sure it starts with dhcpcd) at:
+Hi ha un paquet de  DHCPcd (assegure's de que inicia amb dhcpcd) a:
 </para>
 
 <para>
@@ -480,69 +492,76 @@ url="http://ftp.debian.org/debian/dists/slink/main/binary-i386/net/">http://ftp.
 </para>
 
 <para>
-Or, follow the <link linkend=slackware endterm="slackware.title"></link> installation instructions. 
+O, seguisca les instruccions d'insta·lació a <link linkend=slackware endterm="slackware.title"></link>. 
 </para>
 
 <para>
-To unpack the deb package type <command>dpkg -i /where/ever/your/debian/packages/are/dhcpcd*deb</command>.
+Per a desempaquetar el paquet deb teclege <command>dpkg -i
+/where/ever/your/debian/packages/are/dhcpcd*deb</command>.
 </para>
 
 <para>
-It appears that there isn't a need for any DHCPcd configuration because:
+Sembla ser que no hi ha cap necessitat de fer cap configuració del
+DHCPcd perque:
 </para>
 
 <blockquote>
 <attribution>From: Heiko Schlittermann
 <email>heiko@os.inf.tu-dresden.de</email></attribution>
 <para>
-The dhcpcd package installs it's startup script as usual for debian
-packages in
+El paquet dhcpcd isntal·la el seu guió d'inicialització de la manera
+habitual per als paquets de debian a
 <filename>/etc/init.d/<replaceable>package_name</replaceable></filename>,
-here as <filename>/etc/init.d/dhcpcd</filename>,
-and links this to the various <filename
-class="directory">/etc/rc?.d/</filename> directories.  
+ací com a <filename>/etc/init.d/dhcpcd</filename>, i ho enllaça amb
+els diferents
+directoris <filename class="directory">/etc/rc?.d/</filename>.
 </para>
 </blockquote>
 
 <para>
-The contents of the <filename class="directory">/etc/rc?.d/</filename> dirs is then executed at boot time.
+El contingut dels
+directoris <filename class="directory">/etc/rc?.d/</filename> és
+llavors executat durant l'inici.
 </para>
 
 <para>
-If you don't reboot after installing you should consider starting
-the daemon manually: <command>/etc/init.d/dhcpcd start</command>.
+SI vostè no reinicia després de instal·lar hauria de considerar
+iniciar el dimoni manualment: <command>/etc/init.d/dhcpcd
+start</command>.
 </para>
 
 <para>
-When you are finished go the <link linkend=nameserver>last step</link>. 
+Quan vostè haja acabat vaja al <link linkend=nameserver>darrer pas</link>. 
 </para>
 
 </sect2>
 
 <sect2>
-<title>LinuxPPC and MkLinux</title>
+<title>LinuxPPC i MkLinux</title>
 <para>
-Following section has been written by R. Shapiro 
+La següent secció ha estat escrita per R. Shapiro
 </para>
 
 <para>
-As of the "1999" (R5) release, Linuxppc is now almost completely
-compatible with Redhat 6, with one caveat (see below).  In general the
-instructions are exactly the same as for the current release of
+A partir de l'alliberament de "1999" (R5), Linuxppc és quasi
+completament compatible amb Redhat 6, amb només una advertència (mire
+baix).  En general les instruccions són exactament les mateixes que
+per a l'actual alliberament de
 <link linkend=redhat6 endterm="redhat6.title"></link>.
 </para>
 
 <para>
-The remaining problem is that Redhat 6 uses the 'pump' client for dhcp
-by default, and 'pump' doesn't work reliably in Linuxppc.  <anchor
-id="linuxppc-rh6">To get around this, you should install the latest
-dhcpcd from Sergei Viznyuk, and then edit
-<filename>/sbin/ifup</filename> to use <command>dhcpcd</command>
-instead of <command>pump</command>. 
+El problema resilent és que Redhat 6 utilitza el client 'pump' per a
+dhcp per defecte, i 'pump' no funciona confiablement a
+Linuxppc.  <anchor id="linuxppc-rh6"> Per a bordejar el problema,
+vostè hauria d'instal·lar el darrer dhcpcd de Sergei Viznyuk, i
+llavors editar
+<filename>/sbin/ifup</filename> per a que
+utilitze <command>dhcpcd</command> enlloc de <command>pump</command>.
 </para>
 
 <para>
-Change
+Canvie
 </para>
 
 <programlisting>
@@ -554,7 +573,7 @@ if [ "$BOOTPROTO" = bootp -o "$BOOTPROTO" = dhcp ]; then
 </programlisting>
 
 <para>
-with
+per
 </para>
 
 <programlisting>
@@ -573,7 +592,7 @@ with
 </programlisting>
 
 <para>
-and a coresponding changes for <command>ifdown</command>. Change
+i els canvis corresponents per a <command>ifdown</command>. Canvie
 </para>
 
 <programlisting>
@@ -583,7 +602,7 @@ fi
 </programlisting>
 
 <para>
-with
+per
 </para>
 
 <programlisting>
@@ -599,25 +618,24 @@ fi
 </programlisting>
 
 <para>
-A working ppc rpm for dhcpcd is included on the Linuxppc 1999 cd; a
-slightly later rpm is available in the contrib directory on
+Un rpm per a ppc funcional s'inclou al cd de Linuxppc1999; un rpm
+lleugerament posterior està disponible al directori contrib a
 <ulink url="ftp://ftp.linuxppc.org/">ftp://ftp.linuxppc.org/</ulink>.
-Sources, which compile out of the box in Linuxppc 1999, are available
-from <ulink
-url="ftp://ftp.phystech.com/pub/dhcpcd-1.3.17-pl9.tar.gz">ftp://ftp.phystech.com/pub/dhcpcd-1.3.17-pl9.tar.gz</ulink>.
+Fonts que compilen directament a Linuxppc 1999, estan disponibles a
+ <ulink url="ftp://ftp.phystech.com/pub/dhcpcd-1.3.17-pl9.tar.gz">ftp://ftp.phystech.com/pub/dhcpcd-1.3.17-pl9.tar.gz</ulink>.
 </para>
 
 </sect2>
 
 <sect2 id="nameserver">
-<title id="nameserver.title">Tying it all together</title>
+<title id="nameserver.title">Ajuntant-ho tot</title>
 <para>
-After your machine reboots your network interface should be configured.
-Type: <command>ifconfig</command>.
+Després de reinciar la màquina la seua interfície de xarxa hauria
+d'estar configurada.  Teclege: <command>ifconfig</command>.
 </para>
 
 <para>
-You should get something like this:
+Hauria de veure alguna cosa així:
 </para>
 
 <programlisting>
@@ -637,61 +655,64 @@ eth0      Link encap:Ethernet  HWaddr 00:20:AF:EE:05:45
 </programlisting>
 
 <para>
-If you have some normal number under <literal>inet addr</literal> you are set. If you see
-0.0.0.0 don't despair, it is a temporary setting before
-<command>dhcpcd</command> acquires
-the IP address. If even after few minutes you are seeing 0.0.0.0 please
-check out  <link linkend=troubleshooting
-endterm="troubleshooting.title"></link>.  DHCPcd is a daemon and will
-stay running as long as you have your machine on. Every three hours it
-will contact the DHCP server and try to renew the IP address lease. It
-will log all the messages in the syslog (on Slackware
-<filename>/var/adm/syslog</filename>, RedHat/OpenLinux
-<filename>/var/log/syslog</filename>).
+Si obté algun nombre normal baix <literal>inet addr</literal> ja
+estarà llest. Si veu 0.0.0.0 no desespere, és una configuració
+temporal abans de que
+<command>dhcpcd</command> adquirisca l'adreça IP. Si fins i tot
+passats uns minuts continúes veient 0.0.0.0 per favor,
+revise <link linkend=troubleshooting
+endterm="troubleshooting.title"></link>.  DHCPcd és una dimoni i
+s'excutarà mentre tinga la seua màquina encesa. Cada tres hores
+contactarà amb el servidor DHCP in intentarà renovar la concessió
+d'adreça IP. Entergistrarà tots els missatges al syslog
+(a <filename>/var/adm/syslog</filename> en Slackware, a 
+<filename>/var/log/syslog</filename> en RedHat/OpenLinux).
 </para>
 
 <para>
-One final thing. You need to specify your nameservers. There are two ways to do
-it, you can either ask your provider to provide you with the addresses of your
-name server and then put those in the
-<filename>/etc/resolv.conf</filename> or DHCPcd will obtain
-the list from the DHCP server and will build a
-<filename>resolv.conf</filename> in <filename
+Un detall per acabar. Cal que vostè especifique els seus servidors de
+noms. Hi ha dues maneres de fer-ho, vostè pot demanar-li al seu
+proveïdor que li proprcioni les adreces del seu servidor de noms i
+llavors posar-les al <filename>/etc/resolv.conf</filename> o DHCPcd
+obtindrà la llista del servidor DHCP i construirà un
+<filename>resolv.conf</filename> a <filename
 class="directory">/etc/dhcpc</filename>.
 </para>
 <para>
-I decided to use DHCPcd's <filename>resolv.conf</filename> by doing the following:
+Jo vaig decidir utilitzar el <filename>resolv.conf</filename> de
+DHCPcd fent les següents accions:
 </para>
 
 <para>
-Back up your old <filename>/etc/resolv.conf</filename>: <command>mv /etc/resolv.conf
-/etc/resolv.conf.OLD</command>
+Realitze una còpia de seguretat del seu
+vell <filename>/etc/resolv.conf</filename>: <command>mv
+/etc/resolv.conf /etc/resolv.conf.OLD</command>
 </para>
 
 <para>
-If directory <filename class="directory">/etc/dhcpc</filename> doesn't
-exist create it: <command>mkdir /etc/dhcpc</command>
+Si el directori <filename class="directory">/etc/dhcpc</filename> no
+existeix, cree'l: <command>mkdir /etc/dhcpc</command>
 </para>
 
 <para>
-Make a link from <filename>/etc/dhcpc/resolv.conf</filename> to
+Cree un enllaç de <filename>/etc/dhcpc/resolv.conf</filename> a
 <filename>/etc/resolv.conf</filename>: <command>ln -s
 /etc/dhcpc/resolv.conf /etc/resolv.conf</command>
 </para>
 
 <para>
-If that doesn't work try this (fix suggested by
-<email>nothing@cc.gatech.edu</email> with a little amendment by Henrik
-Stoerner): 
+Si això no funciona prove açò (correcció suggerida per
+<email>nothing@cc.gatech.edu</email> amb una xicoteta esmena de Henrik
+Stoerner):
 </para> 
 
 <anchor id="error3">
 <para>
-This last step I had to perform only because my dhcpcd doesn't
-create an <filename>/etc/dhcpc/resolv.conf</filename>.  In <filename
-class="directory">/etc/sysconfig/network-scripts/ifup</filename> I
-made the following changes (which are a very poor hack, but they work
-for me): 
+Aquest darrer pas el vaig haver de realitzar només perquè el meu
+dhcpcd no va crear un <filename>/etc/dhcpc/resolv.conf</filename>.
+A <filename class="directory">/etc/sysconfig/network-scripts/ifup</filename>
+vaig fer els següents canvis (què representen un pirateig molt pobre,
+pero a mi em va funcionar):
 </para>
 
 <programlisting>
@@ -707,7 +728,7 @@ elif [ "$BOOTPROTO" = dhcp -a "$ISALIAS" = no ]; then
 </programlisting>
 
 <para>
-I changed to:
+Ho vaig canviar per:
 </para>
 
 <programlisting>
@@ -724,33 +745,35 @@ elif [ "$BOOTPROTO" = dhcp -a "$ISALIAS" = no ]; then
 
 <note>
 <para>
-Notice the ! (bang) in <literal>if [ ! -f
+Nixe's en el ! (bang) a <literal>if [ ! -f
 /var/run/dhcp-wait-${DEVICE}.pid ];</literal>
 </para>
 </note>
 
 <para>
-Now sit back and enjoy :-). 
+Ara recolze's a la cadira i disfrute :-). 
 </para>
 
 </sect2>
 
 
 <sect2>
-<title>Various notes</title>
+<title>Notes diverses</title>
 <para>
-Following step(s) are not necessary but might be useful to some people:
+Les següents passes no són necessàries però poder resultar-li
+d'utilitat a algunes persones:
 </para>
 
 <orderedlist numeration="loweralpha">
 <listitem>
 <para>
-If you need network connectivity only occasionally you can
-start <command>dhcpcd</command> from the command line (you have to be
-root to do this) with: <command>/usr/sbin/dhcpcd</command>.
+Si vostè necessita connexió de xarxa de forma ocasional vostè pot
+iniciar <command>dhcpcd</command> des de la línia d'ordres (vostè ha
+de ser root per a poder-ho fer)
+amb: <command>/usr/sbin/dhcpcd</command>.
 </para>
 <para>
-When you need to down (turn off) the network type
+Quan vostè necessite desconnectar-se de la xarxa teclege
 <command>/usr/sbin/dhcpcd -k</command>.
 </para>
 </listitem>
@@ -760,16 +783,18 @@ When you need to down (turn off) the network type
 
 
 <sect2 id="troubleshooting">
-<title id="troubleshooting.title">Troubleshooting</title>
+<title id="troubleshooting.title">Correcció d'errors</title>
 <para>
-If you have followed the steps outlined above and you are unable to access
-the network there are several possible explanations:
+Si vostè ha seguit les passes outlined abans i vostè és incapaç
+d'accedir a la xarxa hi ha algunes explicacions possibles:
 </para>
 
 <sect3>
-<title>Your network card is not configured properly</title>
+<title>La seua targeta de xarxa no està correctament
+configurada</title>
 <para>
-During the boot up process your Linux will probe your network card and should say something along these lines:
+Durant el procés d'arrancada, el seu Linux provarà la targeta de xarxa
+i hauria de dir alguna cosa semblant a les següents línies:
 </para>
 
 <programlisting>
@@ -778,78 +803,85 @@ eth0: 3c509 at 0x300 tag 1, 10baseT port, address  00 20 af ee 11 11, IRQ 10.
 </programlisting>
 
 <para>
-If a message like this doesn't appear your ethernet card might not be recognized
-by your Linux system. If you have a generic ethernet card (a NE2000 clone) you
-should have received a disk with DOS utilities that you can use to set up
-the card. Try playing with IRQs until Linux recognizes your card (IRQ
-9,10,12 are usually good).
+Si no apareix un missatge com aquest, la seua targeta de xarxa podría
+no estar reconeguda pel seu sistema Linux. Si té una targeta ethernet
+genèrica (un clon de NE2000) hauria d'haver rebut un disquet amb
+utilitats DOS que pot utilitzar per a configurar la targeta. Prove a
+jugar amb diferents IRQ fins que Linux reconega la targeta (les IRQ
+9,10 i 12 són normalment bones).
 </para>
 </sect3>
 
 <sect3>
-<title>Your DHCP server supports RFC 1541/My DHCP server is Windows
-NT</title>
+<title>El seu servidor DHCP suporta RFC 1541/El meu servidor DHCP és
+un Windows NT</title>
 <para>
-Try running <command>dhcpcd</command> by typing <command>dhcpcd -r</command>.
+Prove a executar <command>dhcpcd</command> teclejant <command>dhcpcd -r</command>.
 </para>
 
 <para>
-Use <command>ifconfig</command> to check if your network interface is
-configured (wait few seconds for the configuration process, initally it
-will say <literal>Inet.addr=0.0.0.0</literal>)
+Utilitze <command>ifconfig</command> per a comprovar si la seua
+interfície de xarxa està configurada (espere uns segons a que acabe el
+procés de configuració, inicialment
+dirà <literal>Inet.addr=0.0.0.0</literal>)
 </para>
 
 <para>
-If this solves your problem add the "-r" flag to the boot up scripts,
-ie: instead of <command>/sbin/dhcpcd</command> you will have
+Si això resol el seu problema afija la bandera "-r" als guions
+d'arrancada, és a dir, enlloc de <command>/sbin/dhcpcd</command> vostè
+tindrà
 <command>/sbin/dhcpcd -r</command>.
 </para>
 
 <para>
-For example under RedHat edit script
+Per exemple baix RedHat edite el guió
 <filename>/etc/sysconfig/network-scripts/ifup</filename>
-and change the following:
+i realitze el següent canvi:
 </para>
 
 <programlisting>
         IFNAME=$[ {DEVICE} \
-        "/sbin/dhcpcd -r -c /etc/"- etc etc.    
+        "/sbin/dhcpcd -r -c /etc/"- etc, etc...    
 </programlisting>
 </sect3>
 
 <sect3>
-<title>During bootup I get error message "Using DHCP for eth0 ...
-failed" but my system works fine.</title>
+<title>Durant l'arrancada rebo el missatge d'error "Using DHCP for
+eth0 ...  failed" però el meu sistema funciona correctament.</title>
 <para>
-You are most likely using RedHat and you haven't followed instructions
-carefully :-). You are missing the ! (bang) in one of the if statements.
-Jump <link linkend=error3>here</link> and check how to fix it.
+El més probable és que vostè estiga utilitzant RedHat i no ha seguit
+les instruccions curosament :-). A vostè li falta el ! (bang) a una de
+les sentències if.  Bote <link linkend=error3>ací</link> i revise com
+arreglar-ho.
 </para>
 </sect3>
 
 <sect3>
-<title>My network works for few minutes and then stops
-responding</title>
+<title>La meua xarxa funciona durant uns minuts i llavors deixa de
+respondre </title>
 <para>
-There are some reports of gated (gateway daemon) screwing up routing on
-Linux boxes which results in problem described above. Check if gated is
-running with: <command>ps -auxww | grep gate</command>.
+Hi ha alguns informes de gated (gateway daemon) screwing up
+l'enrutament a caixes Linux que resulten en el problema descrit
+adès. Comprove si gated està corrent amb: <command>ps -auxww | grep
+gate</command>.
 </para>
 
 <para>
-If it is try removing it with RedHat's RPM manager or removing the entry
-in <filename class="directory">/etc/rc.d/</filename>.
+Si ho està intente eliminar-lo amb el gestor de RPM de RedHat o
+eliminant l'entrada a
+<filename class="directory">/etc/rc.d/</filename>.
 </para>
 </sect3>
 
 <sect3>
-<title>My ethernet card is recognized during boot up but I still get "NO
-DHCPOFFER" message in my logs. I also happen to have a PCMCIA ethernet
-card.</title>
+<title>La meua targeta ethernet es reconeix durant l'arrancada però
+encara rebo un missatge "NO DHCPOFFER" als meus logs. També succeeix
+que tinc un targeta ethernet PCMCIA.</title>
 <para>
-You need to make sure that you have the 10BaseT port ("phone" plug) on
-your network card activated. Best way to verify it is to check what kind
-of connector your card is configured for during bootup e.g.
+Vostè necessita assegurar-se de que té el port 10BaseT (endoll
+"telèfon") a la seua targeta de xarxa activat. La millor manera de
+fer-ho és revisar per a quina classe de conector està configurada la
+seua targeta durant l'arrencada p.ex.
 </para>
 
 <programlisting>
@@ -859,53 +891,54 @@ eth0: 3c509 at 0x300 tag 1, 10baseT port, address  00 20 af ee 11 11, IRQ 10.
 </programlisting>
 
 <para>
-I have received reports of laptop users having this kind of problems due
-to the PCMCIA utilities (specifically ifport) that would set the
-connector type to 10Base2 (thinnet). You have to make sure you use 10BaseT
-for your connection. If you are not reconfigure the card and restart the
-computer.
+He rebut informes d'usuaris de portàtil tenint aquesta mena de
+problemes causa per les utilitats PCMCIA (especificament ifport) que
+establiria el tipus de connector a 10Base2 (thinnet). Vostè s'ha
+d'assegurar d'utilitzar 10BaseT per a la seua connexió. Si no ho està
+reconfigure la targeta i reincie l'ordinador.
 </para>
 </sect3>
 
 <sect3>
-<title>My DHCP client broadcasts requests but no one answers
-(Contributed by Peter Amstutz)</title>
+<title>El meu client DHCP broadcasts peticions pero ningú contesta
+(Contribució de Peter Amstutz)</title>
 <para>
-On some systems, you need to include some hostname for your machine as
-part of the request.  With dhcpcd, do this with <command>dhcpcd -h
-<replaceable>foohost</replaceable></command>
-Probably the hostname wanted will be your account username on the network. 
+A alguns sistemes, cal incloure algún nom de màquina com a part de la
+petició.  Amb dhcpcd, faça açò amb <command>dhcpcd -h
+<replaceable>foohost</replaceable></command> Probablement el nom de
+màquina serà el seu nom d'usuari del seu compte a la xarxa.
 </para>
 </sect3>
 
 <sect3>
-<title>I have followed all the steps but still my machine is not able to
-connect</title>
+<title>Malgrat seguit totes les passes, la meua màquina no és capaç de
+connectar</title>
 <para>
-The cable modem will usually memorize the ethernet address of your
-network card so if you connect a new computer or switch network cards you
-will somehow have to "teach" your cable modem to recognize the new
-computer/card. Usually you can turn of the modem and bring it back up
-while computer is on or you will have to call tech support and tell them
-that you have changed a network card in the computer.
+El cable modem habitualment memoritzarà l'adreça ethernet de la seua
+targeta de xarxa així que si connecta un nou ordinador o intercanvia
+targetes de xarxa hauràs de d'alguna manera ensenyar-li a reconéixer
+el nou ordinador/targeta. Normalment vostè pot apagar el cable modem i
+tornar-lo a encendre mentre l'ordinador està encés o cridar al servei
+técnic i dir-los que ha canviat la targeta de xarxa a l'ordinador.
 </para>
 
 <para>
-You have firewall rules (ipfwadm rules) that disallow port 67/68
-traffic used by DHCP to distribute configuration info. Check your firewall
-rules carefully.
+Vostè té regles de tallafocs (regles ipfwadm) que no permeten el
+trànsit als ports 67/68 utilitzats per DHCP per a distribuir
+informació de configuració. Revise amb atenció les regles del
+tallafocs.
 </para>
 </sect3>
 
 <sect3>
-<title>I have MediaOne Express service and I still can't
-connect.</title>
+<title>Tinc contractat el servei MediaOne Express i així i tot no puc
+connectar.</title>
 <para>
-It appears that MediaOne has been using adding some things to DHCP that
-shouldn't be there. Supposedly this is not a problem anymore but if you
-experience outages check for these things. If you are (un)lucky to have 
-Windows NT on your machine if you go into Event Viewer you will see a
-warning like this:
+Sembla que MediaOne ha estat afegint algunes coses a DHCP que no
+haurien d'estar ahí. Suposadament açò ha deixat de ser un problema,
+però si vostè experimenta aturades del servei comprove aquestes
+coses. Si (des)afortunadament vostè té Windows NT al seu ordinador i
+vostè accedeix a l'Event Viewer, veurà una advertència com aquesta:
 </para>
 <programlisting>
 DHCP received an unknown option 067 of length 005. The raw option data is 
@@ -915,45 +948,44 @@ given  below.
 </programlisting>
 
 <para>
-If this is the problem go to
-<ulink
-url="ftp://vanbuer.ddns.org/pub/">ftp://vanbuer.ddns.org/pub/</ulink>
-and either download a binary or get the source for the change.
+Si aquest és el problema vaja a 
+<ulink url="ftp://vanbuer.ddns.org/pub/">ftp://vanbuer.ddns.org/pub/</ulink>
+i descarregue un binari o el codi font per al canvi.
 </para>
 </sect3>
 </sect2>
 
 <sect2>
-<title>Alternative DHCP client (ISC dhclient)</title>
+<title>Client DHCP alternatiy (ISC dhclient)</title>
 <para>
-If you have not had success getting your Linux connection running with
-the dhcpcd you might want to try ISC dhclient. dhclient comes with
-the DHCP distribution from ISC which includes both a DHCP client
-and a DHCP server. Instructions on how to get and compile 
-the DHCP distribution can be found <link linkend=dhcpserver>here</link>. 
-When you are done with it please return to this section to configure
-the client.
+Si no ha tingut èxit tractant d'aconseguir que la seua connexió Linux
+funcione amb dhcpcd potser voldria provar ISC dhclient. dhclient
+s'inclou amb la distribució de DHCP d'ISC què inclou tant un client
+DHCP com un servidor. Les instruccions sobre com compilar la
+distribució DHCP es poden trobar <link linkend=dhcpserver>ací</link>.
+Quan haja acabat amb això per favor, torne a aquesta secció per a
+configurar el client.
 </para>
 
 <note>
 <para>
-Following information has been provided by 
+La informació següent l'ha proporcionada 
 Ted Lemon <email>mellon@isc.org</email>
-one of the authors of dhclient.
+un dels autors de dhclient.
 </para>
 </note>
 
 <para>
-With the current version of the DHCP client,
-you don't actually need a <filename>dhclient.conf</filename>. All you
-have to do is invoke dhclient e.g.: <command>/sbin/dhclient</command>.
+Amb la versió actual del client DHCP, de fet vostè no necessitarà
+un <filename>dhclient.conf</filename>. Tot el que ha de fer és invocar
+a dhclient e.g.: <command>/sbin/dhclient</command>.
 </para>
 
 <para>
-This will configure all broadcast interfaces. If this doesn't
-work or you want to specify only one interface create a
-<filename>/etc/dhclient.conf</filename> file with this example
-configuration.
+Açò configurarà totes les interfícies de broadcast. Si això no
+funciona o vol especificar només una interfície cree un fitxer
+<filename>/etc/dhclient.conf</filename> amb aquest exemple de
+configuració.
 </para>
 
 <programlisting>
@@ -964,25 +996,26 @@ interface "eth0" {
 </programlisting>
 
 <para>
-Here we assume that the ethernet interface is eth0. If not
-change accordingly. Also replace xx:xx:xx:xx:xx with your ethernet 
-address. This dhclient.conf makes the client look more 
-like a Win95 client.
+Ací estem assumint que l'interfície ethernet és eth0. De no ser així
+modifique-ho apropiadament. També reemplaçe xx:xx:xx:xx:xx amb la seua
+adreça ethernet. Aquest dhclient.conf fa que el client es parega més
+al client de Win95.
 </para>
 
 </sect2>
 </sect1>
 
 <sect1>
-<title>DHCP Server Setup</title>
+<title>Configuració de Servidor DHCP</title>
 
 <sect2 id="dhcpserver">
-<title id="dhcpserver.title">DHCP server for UNIX</title>
+<title id="dhcpserver.title">Servidor DHCP per a UNIX</title>
 <para>
-There are several DHCP servers available for U*X-like OSes,
-both commercial and free. One of the more popular free DHCP servers
-is Paul Vixie/ISC DHCPd. Currently the latest version is 2.0 (suggested
-for most users) but 3.0 is in beta testing.  You can get them from 
+Hi ha diversos servidors DHCP disponibles per a sistemes operatius
+tipus-U*X, tant comercials com lliures. Un dels servidors DHCP lliures
+més populars és el DHCPd de Paul Vixie/ISC DHCPd. Actualment la
+darrera versió és la 2.0.0 (suggerida per a la majoria d'usuaris), la
+3.0 està en versió beta testing.  Vostè la pot obtindre a
 </para>
 
 <para>
@@ -991,26 +1024,28 @@ url="ftp://ftp.isc.org/isc/dhcp/">ftp://ftp.isc.org/isc/dhcp/</ulink>
 </para>
 
 <para>
-Some of the distributions provide binary packages for dhcpd so
-skip the following section if you got it installed that way.
+Algunes de les distribucions proporcionen paquets binàris per a dhcpd
+així que ometa la següent secció si vostè ja el té instal·lat
+d'aquesta manera.
 </para>
 
 <para>
-After you download unpack it. After you do cd into the
-distribution directory and type: <command>./configure</command>
+Una vegada descarregat i desempaquetat, canvir al directori de
+distribució i teclege: <command>./configure</command>
 </para>
 
 <para>
-It will take some time to configure the settings. After it is done type:
-<command>make</command> and <command>make install</command>.
+La configuració dels paràmetres prendrà un cert temps. Una vegada
+estiga fet, teclege:
+<command>make</command> i <command>make install</command>.
 </para>
 </sect2>
 
 <sect2>
-<title>DHCP server configuration</title>
+<title>Configuració del servidor DHCP</title>
 <para>
-When done with installation type <command>ifconfig -a</command>. You
-should see something like this:
+Una vegada la configuració haja finalitzat teclege <command>ifconfig
+-a</command>. Vostè hauria de veure alguna cosa com açò:
 </para>
 
 <programlisting>
@@ -1023,13 +1058,14 @@ eth0      Link encap:10Mbps Ethernet  HWaddr 00:C0:4F:D3:C4:62
 </programlisting>
 
 <para>
-If it doesn't say MULTICAST you should reconfigure your
-kernel and add multicast support. On most systems you will not 
-need to do this.
+Si no diguera MULTICAST hauria de reconfigurar el seu nucli per a
+afegir suport per a multicast. En la majoria de sistemes no
+necessitarà fer-ho.
 </para>
 
 <para>
-Next step is to add route for 255.255.255.255. Quoted from DHCPd README:
+El següent pas és afegir una ruta per a 255.255.255.255. Citat del
+README de DHCPd:
 </para>
 
 <blockquote>
@@ -1047,13 +1083,13 @@ not to see DHCPOFFER messages from the server."
 </blockquote>
 
 <para>
-Type: <command>route add -host 255.255.255.255 dev eth0</command>
+Teclege: <command>route add -host 255.255.255.255 dev eth0</command>
 </para>
 
 <para>
-If you get a message "<literal>255.255.255.255: Unknown host</literal>",
-you should try adding the following entry to your
-<filename>/etc/hosts</filename> file:
+Si votè rep un missatge "<literal>255.255.255.255: Unknown
+host</literal>", hauria de provar a afegir la següent entrada al seu
+fitxer <filename>/etc/hosts</filename>:
 </para>
 
 <programlisting>
@@ -1061,7 +1097,7 @@ you should try adding the following entry to your
 </programlisting>
 
 <para>
-Then, try:
+Llavors, prove:
 </para>
 
 <programlisting>
@@ -1069,7 +1105,7 @@ route add -host all-ones dev eth0
 </programlisting>
 
 <para>
-or
+o
 </para>
 
 <programlisting>
@@ -1077,22 +1113,22 @@ route add 255.255.255.0 dev eth0
 </programlisting>
 
 <para>
-<literal>eth0</literal> is of course the name of the network device you
-are using.  If it differs change appropriately.
+<literal>eth0</literal> és pressupost el nom del dispositiu de xarxa
+que vostè estiga utilitzant.  Si és diferent canvie-ho apropiadament.
 </para>
 
 </sect2>
 
 <sect2>
-<title>Options for DHCPd</title>
+<title>Opcions per a DHCPd</title>
 <para>
-Now you need to configure DHCPd. In order to do this you
-will have to create or edit <filename>/etc/dhcpd.conf</filename>. There
-is a graphical interface for dhcpd configuration under KDE ( <ulink
-url="http://www.kde.org/">http://www.kde.org/</ulink> ) called kcmdhcpd
-that is very similar to the DHCP configurator on Windows NT. When KDE
-2.0 comes out it should come with kcmdhcpd or you could get it directly
-from:
+Ara caldrà que configure DHCPd. Per a realitzar aquesta tasca vostè
+haurà de crear o editar <filename>/etc/dhcpd.conf</filename>. Hi ha
+una interfíce gràfica per a la configuració de dhcpd baix KDE
+( <ulink url="http://www.kde.org/">http://www.kde.org/</ulink> )
+anomenada kcmdhcpd qué resulta molt similar al configurador de DHCP a
+Windows NT. Normlament KDE hauria de vindre amb kcmdhcpd o vostè el
+pot obtindre directament de:
 </para>
 
 <para>
@@ -1101,12 +1137,14 @@ url="ftp://ftp.us.kde.org/pub/kde/unstable/apps/network/">ftp://ftp.us.kde.org/p
 </para>
 
 <para>
-If you want to configure it by hand follow instructions below.
+Si vostè vol configurar-lo a ma seguisca les instruccions que venen a
+continuació.
 </para>
 
 <para>
-Most commonly what you want to do is assign IP addresses randomly. This
-can be done with settings as follows:
+Majoritàriament allò que vol fer vostè és assignar adreces IP
+aleatòriament. Això pot fer-se amb uns paràmetres de configuració com
+els següents:
 </para>
 
 <programlisting>
@@ -1127,19 +1165,22 @@ subnet 192.168.1.0 netmask 255.255.255.0 {
 </programlisting>
 
 <para>
-This will result in DHCP server giving a client an IP address
-from the range 192.168.1.10-192.168.1.100 or 
-192.168.1.150-192.168.1.200. It will lease an IP address for
-600 seconds if the client doesn't ask for specific time
-frame. Otherwise the maximum (allowed) lease will be 7200 seconds. The
-server will also "advise" the client that it should use 255.255.255.0 as
-its subnet mask,  192.168.1.255 as its broadcast address, 192.168.1.254 as
-the router/gateway and 192.168.1.1 and 192.168.1.2 as its DNS servers.
+Açò dóna com a resultat un servidor DHCP proporcionant-li als clients
+una adreça IP en el rang 192.168.1.10-192.168.1.100 o
+192.168.1.150-192.168.1.200. Arrendarà una adreça IP durant 600
+seconds si el client no sol·licita un marc de temps específic. En
+qualsevol altre cas el màxim arrendament (permés) serà de 7200
+segons. El servidor també "aconsellarà" al client que utilitze
+255.255.255.0 com la seua mascara de subxarxa, 192.168.1.255 com la
+seua adreça de broadcast, 192.168.1.254 com la de
+l'encaminador/gateway i 192.168.1.1 i 192.168.1.2 com a servidor de
+DNS.
 </para>
 
 <para>
-If you need to specify a WINS server for your Windows clients you
-will need to include the <literal>netbios-name-servers</literal> option e.g.
+Si vostè necessita especificar un servidor WINS per als seus clients
+Windows potser necessita incloure la
+opció <literal>netbios-name-servers</literal> p. ex.
 </para>
 
 <programlisting>
@@ -1147,8 +1188,8 @@ option netbios-name-servers 192.168.1.1;
 </programlisting>
 
 <para>
-You can also assign specific IP addresses based on clients
-ethernet address e.g. 
+També pot assignar adreces IP específiques segons l'adreça ethernet
+dels clients p. ex.
 </para>
 
 <programlisting>
@@ -1159,17 +1200,18 @@ host haagen {
 </programlisting>
 
 <para>
-This will assign IP address 192.168.1.222 to a client with ethernet
-address 08:00:2b:4c:59:23.
+Això assignarà l'adreça IP 192.168.1.222 al client amb adreça ethernet
+ 08:00:2b:4c:59:23.
 </para>
 
 <para>
-You can also mix and match e.g. you can have certain clients getting
-"static" IP addresses (e.g. servers) and others being alloted
-dynamic IPs (e.g. mobile users with laptops). There are a number of other
-options e.g. nis server addresses, time server addresses etc., if you
-need any of those options please read the
-<filename>dhcpd.conf</filename> man page.
+També pot barrejar les dues opcions, p. ex. pot tindre determinats
+clients obtenint adreces IP "estàtiques" (p. ex. servidors) i altres
+mentre que altres being alloted dynamic IPs (p. ex. usuaris mòbils amb
+portàtiles). Hi ha altres opcions p. ex. adreces de servidor nis,
+adreces de servidor de temps etc., si vostpe necessita alguna
+d'aquestes opcions per favor, llija la pàgina man
+de <filename>dhcpd.conf</filename>.
 </para>
 
 </sect2>
@@ -1177,13 +1219,15 @@ need any of those options please read the
 
 
 <sect2>
-<title>Starting the server</title>
+<title>Iniciant el servidor</title>
 <para>
-There is only one thing to do before starting the server. In most cases
-DHCP installation doesn't create a <filename>dhcpd.leases</filename>
-files. This file is used by DHCPd to store information about current
-leases. It is in the plain text form so you can view it during the
-operation of DHCPd. To create <filename>dhcpd.leases</filename> type: 
+Només hi ha una cosa que fer abans d'iniciar el servidor. En la
+majoria de casos la instal·lació de DHCP no crea un
+fitxer <filename>dhcpd.leases</filename> . Aquest fitxer s'utilitza
+per DHCPd per a emmagatzemar informació sobre els arrendaments
+actuals. Éstà en forma de text pla pel que vostè pot visualitzar-lo
+mentre opera el DHCPd. Per a crear <filename>dhcpd.leases</filename>
+escriga:
 
 <programlisting>
 touch /var/state/dhcp/dhcpd.leases
@@ -1192,17 +1236,17 @@ touch /var/state/dhcp/dhcpd.leases
 </para>
 
 <para>
-This will create an empty file (file size = 0).
-Some of the older version of dhcpd 2.0 placed the file in
-<filename>/etc/dhcpd.leases</filename>.  You do not need to make any
-changes to the leases file it will be manipulated by the dhcpd.  If you
-get a message saying that file exists simply ignore it and go to the
-next step.
+Açò crearà un fitxer buit  (mida del fitxer = 0).
+Algunes de les verions més antigues de  dhcpd 2.0 deixaven el fitxer a
+<filename>/etc/dhcpd.leases</filename>.  No cal que faça cap canvi al
+fitxer d'arrendaments, aquest serà manipulat pel dhcpd.  Si rep un
+missatge dient que el fitxer ja existeix, senzillament ingnore'l i
+continue amb el següent pas.
 </para>
 
 <para>
-You can now invoke the DHCP server. Simply type (or include in the bootup
-scripts)
+Vostè pot invocar al servidor DHCP. Simplement escriga (o incloga als
+guions d'inici)
 </para>
 
 <programlisting>
@@ -1210,8 +1254,8 @@ scripts)
 </programlisting>
 
 <para>
-This will invoke dhcpd on eth0 device. If you want to invoke it
-on another device simply supply it on the command line e.g.
+Això invocarà dhcpd al dispositiu eth0. Si vostè vol invocar-lo sobre
+un altre dispositiu, simplement indique-li-ho a la línia d'ordres p. ex.
 </para>
 
 <programlisting>
@@ -1219,9 +1263,9 @@ on another device simply supply it on the command line e.g.
 </programlisting>
 
 <para>
-To verify that everything is working fine you
-should first turn on the debugging mode and put the server
-in foreground. You can do this by typing
+Per a verificar que tot està funcionant correctament vostè hauria
+d'activar el mode de correcció d'errors i posar el servidor en primer
+pla. Pot fer-ho escrivint
 </para>
 
 <programlisting>
@@ -1229,11 +1273,12 @@ in foreground. You can do this by typing
 </programlisting>
 
 <para>
-Then boot up one of your clients and check out the console of your server. 
-You will see a number of debugging messages come up. If everything works out
-fine you are done :-). Quit dhcpd and start it without the
-<command>-d</command> <command>-f</command> and arguments. If you want
-dhcpd to start at boot-up include dhcpd in e.g.
+Llavors arranque un dels seus clients i revise la consola del
+servidor.  Veurà apareixer un cert nombre de missatges de correcció
+d'errors. Si tot funciona correctament, de meravella, ja ha acabat
+:-). Isca de dhcpd i inicie'l amb els arguments
+<command>-d</command> i <command>-f</command>. Si vostè vol que dhcpd
+s'inicie durant l'arranc incloga dhcpd per exemple a
 </para>
 
 <programlisting>
@@ -1243,12 +1288,13 @@ dhcpd to start at boot-up include dhcpd in e.g.
 </sect2>
 
 <sect2>
-<title>Other interesting documents</title>
+<title>Altres documents interessants</title>
 <para>
-Linux Magazine has a pretty good article in their April issue called
+Linux Magazine té un article bastant bo al seu número d'Abril del 2000
+anomenat
 <ulink url="http://www.linux-mag.com/2000-04/networknirvana_01.html">Network
-Nirvana: How to make Network Configuration as easy as DHCP</ulink> that
-discusses the set up for DHCP.
+Nirvana: How to make Network Configuration as easy as DHCP</ulink> que
+discuteix la posada en marxa de DHCP.
 </para>
 
 </sect2>
