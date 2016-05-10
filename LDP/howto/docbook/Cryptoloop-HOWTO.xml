@@ -6,7 +6,7 @@
 
 <articleinfo>
 
-    <title>Cryptoloop HOWTO</title>
+    <title>COM sobre Cryptoloop</title>
 
     <author>
         <firstname>Ralf</firstname>
@@ -23,60 +23,72 @@
 	    <revnumber>1.2</revnumber>
 	    <date>2004-03-12</date>
 	    <authorinitials>rh</authorinitials>
-	    <revremark>Added information on dm-crypt, updated loop-AES info, added more info on security</revremark>
+	    <revremark>S'afig informació sobre dm-crypt, s'actualitza
+	    la informació de loop-AES, s'afig més informació sobre
+	    seguretat</revremark>
 	</revision>
         <revision>
 	    <revnumber>1.1</revnumber>
 	    <date>2004-01-24</date>
 	    <authorinitials>rh</authorinitials>
-	    <revremark>Updated information on patching util-linux, Loop-AES, Best Crypt</revremark>
+	    <revremark>S'actualitza informació sobre l'aplicació de tapats a util-linux, Loop-AES i Best Crypt</revremark>
 	</revision>
         <revision>
 	    <revnumber>1.0</revnumber>
 	    <date>2004-01-17</date>
 	    <authorinitials>rh</authorinitials>
-	    <revremark>Initial release, reviewed by TM at LDP.</revremark>
+	    <revremark>Alliberament inicial, revisat per TM at LDP.</revremark>
 	</revision>
 
         <revision>
             <revnumber>v0.9</revnumber>
             <date>2004-01-15</date>
             <authorinitials>rh</authorinitials>
-            <revremark>Updated and converted to DocBook XML.</revremark>
+            <revremark>Actualitzat i convertit a DocBook XML.</revremark>
         </revision>
 
     </revhistory>
 
     <abstract>
         <para>
-        This document explains how to create encrypted file systems using the Cryptoloop functionality. Cryptoloop is part of the CryptoAPI in the 2.6 Linux kernel series.
+        Aquest document explica com crear sistemes de fitxers xifrats
+        utilitzant la funcionalitat Cryptoloop. Cryptoloop forma part
+        de CryptoAPI a la sèrie 2.6 del nucli Linux.
         </para>
     </abstract>
 
 </articleinfo>
 
 <sect1 id="about">
-    <title>About this document</title>
+    <title>Sobre aquest document</title>
 
         <para>
-  This HOWTO describes how to use the Cryptoloop loop device encryption in the 2.6 Linux kernel series. Cryptoloop
-  makes it possible to create encrypted file systems within a partition or another file in the file system. These encrypted files
-  can the be moved to a CD, DVD, USB memory stick, etc. Cryptoloop makes
-  use of the loop device. This device is a pseudo-device which serves as a <quote>loop</quote> through which each call to a the file system
-  has to pass. This way, data can be processed in order to encrypt and decrypt it. Since kernel 2.6, the
-  Crypto API has been integrated into the main kernel, and setting up an encrypted file system has become much easier. No
-  additional kernel patches are required. An update of some userspace utilities is necessary. Unfortunately, the
-  use of Cryptoloop is not very well-documented so far. This HOWTO is an attempt to make it easy everyone
-  to create an encrypted file system using the standard Cryptoloop functionality.
+  Aquest HOWTO descriu com utilitzar el xifrat de dispositiu de bucle
+  Cryptoloop a la sèrie 2.6 del nucli Linux. Cryptoloop fa possible la
+  creació de sistemes de fitxers xifrats dins d'una partició o d'un
+  altre fitxer en el sistema de fitxers. Aquests fitxers xifrats es
+  poden moure a un CD, DVD, llàpis de memòria USB, etc. Cryptoloop
+  utilitza el dispositiu loop. Aquest és un pseudo-dispositiu que
+  serveix com a <quote>bucle</quote> a través del qual ha de passar
+  cada crida al sistema de fitxers. D'aquesta manera, les dades poden
+  ser processades en ordre per a ser xifrades i desxifrades. Des de la
+  versió 2.6, la Crypto API ha sigut integrada dins del nucli
+  principal, i crear una sistema de fitxers xifrat és molt més
+  fàcil. No es requereixen tapats addicionals. Desgraciadament, la
+  utilització de Cryptoloop no està gens ben documentada. Aquest COM
+  és un intent de facilitar-li a tothom la creació d'un sistema de
+  fitxers xifrat utilitzant la funcionalitat estàndar de Cryptoloop.
 
-  Cryptoloop is based on the Crypto API in the 2.6 Linux kernel. It should not be confused with Loop-AES, which is a completely
-  separate project. Cryptoloop is similar to the Crypto API that was available as a separate patch for the 2.4 kernel series. The
-  new version is not compatible with the older one.
+  Cryptoloop es basa en la Crypto API del nucli 2.6 de Linux. No hauria
+  de confondre's amb Loop-AES, què és un projecte completament
+  separat. Cryptoloop és similar a la Crypto API que estava disponible
+  com a tapat separat per a la serie 2.4 del nucli. La nova versió no
+  és compatible amb l'antiga.
         </para>
 
 <!-- Legal Sections -->
 <sect2 id="copyright">
-<title>Copyright and License</title>
+<title>Copyright i Llicència</title>
 
 <para>
 This document, <emphasis>Cryptoloop HOWTO</emphasis>,
@@ -116,10 +128,11 @@ brands should not be seen as endorsements.
 </sect2>
 
 <sect2 id="credits">
-<title>Credits / Contributors</title>
+<title>Crèdits / Col·laboradors</title>
 
 <para>
-I'd like to thank the following people who helped me improve this HOWTO: 
+Voldria agraïr-li a les següents persones què em van ajudar a millorar
+aquest COM:
 </para>
 <itemizedlist>
 <listitem> 
@@ -142,11 +155,11 @@ I'd like to thank the following people who helped me improve this HOWTO:
 
 <!-- Feedback -->
 <sect2 id="feedback">
-<title>Feedback</title>
+<title>Aportacions</title>
 <para>
-Feedback is most certainly welcome for this document. Send
-your additions, comments and criticisms to the following
-email address : <email>cryptoloop@ralfhoelzer.com</email>.
+Les aportacions per a aquest document són realment benvingudes. Envie
+les seues addicions, comentaris i crítiques a la següent adreça de
+correu: <email>cryptoloop@ralfhoelzer.com</email>.
 </para>
 </sect2>
 
@@ -154,48 +167,81 @@ email address : <email>cryptoloop@ralfhoelzer.com</email>.
 
 
 <sect1 id="cryptoloop-introduction">
-    <title>Introduction</title>
+    <title>Introducció</title>
     <para>
-    There are currently a few alternatives to using Cryptoloop. Loop-AES (<ulink url="http://loop-aes.sourceforge.net">http://loop-aes.sourceforge.net</ulink>)
-    is probably the most well-known. It provides very similar functionality to Cryptoloop. Aes-loop
-    is currently more mature than Cryptoloop and it is also faster (about twice as fast, according to the author of loop-AES), because it uses a highly 
-    optimized assembler implementation for
-    AES. This doesn't mean that Cryptoloop is slow. I have not noticed any significant speed differences between a Cryptoloop-encrypted
-    partition and a non-encrypted partition during everyday work with normal amounts of I/O. Unless I/O performance is
-    extremely important to you, Cryptoloop should do just fine. Loop-AES offers some additional features that are not yet present in the kernel
-    implementation of Cryptoloop. Loop-AES requires modified userspace tools (mount, losetup) and these modifications are incompatible with
-    Cryptoloop. You will not be able to use Cryptoloop and Loop-AES at the same time.
+    Hi ha algunes alternatives a l'us de Cryptoloop. Loop-AES (<ulink
+    url="http://loop-aes.sourceforge.net">http://loop-aes.sourceforge.net</ulink>)
+    potser siga la més ben coneguda. Hi proporciona una funcionalitat
+    molt similar a Cryptoloop. Aes-loop és actualment més madur que
+    Cryptoloop i a més a més és més ràpid (aproximadament el doble de
+    ràpid, segons l'autor de loop-AES), perquè utilitza una
+    implementació en assemblador de l'AES altament optimitzada. Açò no
+    significa que Cryptoloop siga lent. Jo no he notat cap diferència
+    significativa de velocitat entre una partició xifrada amb
+    Cryptoloop i una sense xifrar en el meu treball diàri amb
+    quantitats normals de E/E. Mentre el rendiment d'E/E no siga
+    extremadament important per a vostè, Cryptoloop hauria d'anar-li
+    bé. Loop-AES ofereix algunes característiques addicionals que
+    encara no estàn presents a la implementació de nucli de
+    Cryptoloop. Loop-AES requereix eines d'espai d'usuari modificades
+    (mount, losetup) i aquestes modificacions són incompatibles amb
+    Cryptoloop. Vostè no podrà utilitzar Cryptoloop i Loop-AES alhora.
     </para>
     <para>
-    In terms of security, Cryptoloop is doing ok. The key is usually generated from a password and its hash is used as the key to AES. This leads
-    to the possibility of a <ulink url="http://lwn.net/Articles/67216/">known-plaintext attack</ulink>. 
-    Loop-AES is superior in this regard, because it generates a random key and encrypts this
-    key separately, making a known-plaintext attack more difficult. Loop-AES also supports a multi-key mode, where sectors are encrypted with
-    64 separate AES keys. In general, a brute-force attack on your password can be very effective, if you choose a weak password. To be on
-    the safe side, your password should be at least 20 characters long. Otherwise a brute-force attack on the password will be much easier
-    than trying to brute-force the AES encryption directly.
+    En termes de seguretat, Cryptoloop ho està fent bé. La clau és
+    normalment generada a partir d'una contrasenya i la seua suma de
+    comprovació (hash) és utilitzada com a clau d'AES. Açò condueix a
+    la possibilitat d'un <ulink
+    url="http://lwn.net/Articles/67216/">known-plaintext
+    attack</ulink>.  Loop-AES és superior en aquesta questió, perquè
+    genera una clau aleatòria i xifra la clau separadament, fent que
+    un atac known-plaintext siga molt més difícil. Loop-AES també
+    suporta un mode multi-clau, on els sectors són xifrats amb 64
+    claus AES diferents. Generalment, un atac de força bruta sobre la
+    seua contrasenya pot resultar molt efectiu, si vostè tria una
+    contrasenya dèbil. Per a estar en la banda segura, la seua
+    contrasenya hauria de tindre almenys 20 caràcters de
+    longitud. D'una altra manera un atac de força bruta sobre la
+    contrasenya seria molt més senzill que intentar un atac de força
+    bruta sobre el xifrat AES directament.
     </para>
     <para>
-    The Cryptoloop functionality in the standard kernel provides a stable and clean implementation without the need for extra patches. Since it
-    is still fairly new, it may not have gotten the necessary amount of review in terms of security. You have to decide for yourself what
-    is suitable for you.
+    La funcionalitatat Cryptoloop al nucli estàndard proporciona una
+    implementació neta i estable sense necessitat de tapats
+    addicionals. Com que és bastant nou, podria no haver rebut la
+    quantitat necessària de revisions en termes de seguretat. Vostè
+    mateix ha de decidir què s'ajusta a les seues necessitats.
     </para>
     <para>
-    IMPORTANT: Cryptoloop has been marked deprecated in the latest 2.6 kernel. This means that it will no longer be maintained actively. The
-    successor to Cryptoloop will be <ulink url="http://www.saout.de/misc/dm-crypt/">dm-crypt</ulink>. Dm-crypt is available in the main kernel
-    since 2.6.4. Cryptoloop will still be available in the main kernel for a long time, but dm-crypt will be the method of choice for disk
-    encryption in the future. Dm-crypt is based on the device mapper and offers pretty much the same functionality as Cryptoloop. It is still
-    very new and there are no easy-to-use userspace tools available yet. Dm-crypt is considered to be much cleaner code than Cryptoloop, but
-    there are some important differences. For example, creating an ecrypted filesystem within a file will still require to go through a loop
-    device, but this support is still in development. 
+    IMPORTANT: Cryptoloop ha estat marcat com a deprecated en el
+    darrer nucli 2.6. Això significa que ja no es seguirà mantenint
+    activament. El successo de Cryptoloop serà <ulink
+    url="http://www.saout.de/misc/dm-crypt/">dm-crypt</ulink>. Dm-crypt
+    està disponible en el nucli des de la versió 2.6.4. Cryptoloop
+    estarà disponible en el nucli principal durant un llarg període de
+    temps, però dm-crypt serà el mètode a escollir per al xifrat en el
+    futur. Dm-crypt està basat en el mapejador de disposiius i ofereix
+    bàsicament la mateixa funcionalitat que Cryptoloop. Encara és
+    bastant nou i no encara no hi han eines d'usuari fàcils
+    d'utilitzar. Es considera Dm-crypt té un codi molt més net que
+    Cryptoloop, però hi ha algunes diferències importants. Per
+    exemple, la creació d'un sistema de fitxers xifrat al llarg d'un
+    fitxer encara requereix travessar un dispositiu de bucle, però
+    aquest suport encara està en desenvolupament.
     </para>
     <para>
-    There are other tools which allow you to create an encrypted file system. BestCrypt is a commercial product from Jetico. It allows you to
-    create encrypted containers and has a large choice of ciphers. It also offers some nifty features such as hidden containers. It is available
-    for Windows and Linux, which makes it suitable for interchanging encrypted containers between Windows and Linux. BestCrypt now compiles
-    on 2.6 kernels as well. Cryptoloop can also create containers that can be moved around, by creating the encrypted file system
-    within a file as described below. I don't know of a way to access the Cryptoloop-encrypted files from other operating systems such as Windows. In
-    this case, BestCrypt may be your only choice.
+    Hi han altres eines que li permeten crear un sistema de
+    fitxers. BestCrypt és un producte comercial de Jetico. Li permet
+    crear contenidors xifrats i disposa d'una gran quantitat de
+    xifradors per a triar. També ofereix algunes característiques It also offers some nifty features such as
+    hidden containers. It is available for Windows and Linux, which
+    makes it suitable for interchanging encrypted containers between
+    Windows and Linux. BestCrypt now compiles on 2.6 kernels as
+    well. Cryptoloop can also create containers that can be moved
+    around, by creating the encrypted file system within a file as
+    described below. I don't know of a way to access the
+    Cryptoloop-encrypted files from other operating systems such as
+    Windows. In this case, BestCrypt may be your only choice.
     </para>
     <para>
     There are other commercial disk encryption tools such as PGP disk, but to my knowledge there is no Linux support for them.
